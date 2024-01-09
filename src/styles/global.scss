@@ -1,3 +1,6 @@
+@import './variables';
+@import './themes';
+
 * {
     margin: 0;
     padding: 0;
@@ -13,3 +16,14 @@ html, body {
     height: 100%;
 }
 
+body {
+    @include light-mode;
+
+    &.dark-mode {
+        @include dark-mode;
+    }
+}
+
+body {
+    background-color: var(--background-primary);
+}

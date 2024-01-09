@@ -1,0 +1,10 @@
+$background-primary-light: hsl(0, 0%, 100%);
+$background-primary-dark: hsl(0, 0%, 10%);
+
+@mixin light-mode {
+    --background-primary: #{$background-primary-light};
+}
+
+@mixin dark-mode {
+    --background-primary: #{$background-primary-dark};
+}
