@@ -1,3 +1,7 @@
 <nav>
-    <p>navbar works!</p>
+    <div class="logo">
+        <img src="assets/logo.svg" alt="logo">
+    </div>
+
+    <button class="theme-switch" [class.dark-mode]="darkMode" (click)="switchMode()"> </button>
 </nav>
