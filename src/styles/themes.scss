@@ -1,10 +1,15 @@
 $background-primary-light: hsl(0, 0%, 100%);
 $background-primary-dark: hsl(0, 0%, 10%);
 
+$text-primary-light: hsl(0, 0%, 100%);
+$text-primary-dark: hsl(0, 0%, 10%);
+
 @mixin light-mode {
     --background-primary: #{$background-primary-light};
+    --text-primary: #{$text-primary-light};
 }
 
 @mixin dark-mode {
     --background-primary: #{$background-primary-dark};
+    --text-primary: #{$text-primary-dark};
 }
