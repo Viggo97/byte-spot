@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+import { Theme } from '../../services/theme/theme.enum';
+import { ThemeService } from '../../services/theme/theme.service';
+
 @Component({
     selector: 'bsa-navbar',
     standalone: true,
@@ -8,10 +11,14 @@ import { Component } from '@angular/core';
     styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
-    darkMode = false;
+    darkTheme: boolean = false;
 
-    switchMode(): void {
-        this.darkMode = !this.darkMode;
-        document.body.classList.toggle('dark-mode');
+    constructor(private themeService: ThemeService) {
+        this.darkTheme = themeService.theme === Theme.DARK;
+    }
+    switchTheme(): void {
+        this.darkTheme = !this.darkTheme;
+        this.themeService.theme = this.darkTheme ? Theme.DARK : Theme.LIGHT;
+        document.body.classList.toggle('dark-theme');
     }
 }

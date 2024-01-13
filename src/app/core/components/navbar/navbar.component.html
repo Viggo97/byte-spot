@@ -3,5 +3,8 @@
         <img src="assets/logo.svg" alt="logo">
     </div>
 
-    <button class="theme-switch" [class.dark-mode]="darkMode" (click)="switchMode()"> </button>
+    <button class="theme-switch"
+            [class.dark-theme]="darkTheme"
+            (click)="switchTheme()">
+    </button>
 </nav>
