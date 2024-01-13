@@ -17,10 +17,10 @@ html, body {
 }
 
 body {
-    @include light-mode;
+    @include light-theme;
 
-    &.dark-mode {
-        @include dark-mode;
+    &.dark-theme {
+        @include dark-theme;
     }
 }
 
