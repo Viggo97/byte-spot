@@ -4,12 +4,12 @@ $background-primary-dark: hsl(0, 0%, 10%);
 $text-primary-light: hsl(0, 0%, 100%);
 $text-primary-dark: hsl(0, 0%, 10%);
 
-@mixin light-mode {
+@mixin light-theme {
     --background-primary: #{$background-primary-light};
     --text-primary: #{$text-primary-light};
 }
 
-@mixin dark-mode {
+@mixin dark-theme {
     --background-primary: #{$background-primary-dark};
     --text-primary: #{$text-primary-dark};
 }
