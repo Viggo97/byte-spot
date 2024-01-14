@@ -1,15 +1,25 @@
 $background-primary-light: hsl(0, 0%, 100%);
-$background-primary-dark: hsl(0, 0%, 10%);
+$background-primary-dark: hsl(240, 10%, 4%);
 
-$text-primary-light: hsl(0, 0%, 100%);
-$text-primary-dark: hsl(0, 0%, 10%);
+$border-primary-light: hsl(240, 6%, 90%);
+$border-primary-dark: hsl(240, 4%, 16%);
+
+$hover-primary-light: hsl(240, 4%, 96%);
+$hover-primary-dark: hsl(240, 4%, 16%);
+
+$text-primary-light: hsl(240, 10%, 4%);
+$text-primary-dark: hsl(0, 0%, 100%);
 
 @mixin light-theme {
     --background-primary: #{$background-primary-light};
+    --border-primary: #{$border-primary-light};
     --text-primary: #{$text-primary-light};
+    --hover-primary: #{$hover-primary-light};
 }
 
 @mixin dark-theme {
     --background-primary: #{$background-primary-dark};
+    --border-primary: #{$border-primary-dark};
     --text-primary: #{$text-primary-dark};
+    --hover-primary: #{$hover-primary-dark};
 }
