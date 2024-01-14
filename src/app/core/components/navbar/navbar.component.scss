@@ -1,23 +1,32 @@
 nav {
     height: 48px;
-    border-bottom: 1px solid hsl(0 ,0% , 90%);
+    border-bottom: 1px solid var(--border-primary);
     display: flex;
     align-items: center;
+    justify-content: space-between;
 
     .logo {
         margin-left: 20px;
     }
 
-    .theme-switch {
-        background-color: transparent;
-        border: none;
-        background-image: url("/assets/theme-icon-light.svg");
-        width: 32px;
-        height: 32px;
-        cursor: pointer;
+    .icons-container {
+        margin-right: 20px;
 
-        &.dark-theme {
-            background-image: url("/assets/theme-icon-dark.svg");
+        .theme-switch {
+            width: 36px;
+            height: 36px;
+            border: none;
+            border-radius: 50%;
+            background: transparent url("/assets/theme-icon-light.svg") no-repeat center center / 28px 28px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: var(--hover-primary);
+            }
+
+            &.dark-theme {
+                background-image: url("/assets/theme-icon-dark.svg");
+            }
         }
     }
 }
