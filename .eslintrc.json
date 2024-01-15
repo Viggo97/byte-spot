@@ -33,6 +33,7 @@
           { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
         ],
         "max-len": ["error", 120],
+        "class-methods-use-this": "off",
         "@typescript-eslint/indent": ["error", 4],
         "@typescript-eslint/lines-between-class-members": "off",
         "@typescript-eslint/no-explicit-any": 0,
