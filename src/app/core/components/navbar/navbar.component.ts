@@ -14,11 +14,11 @@ export class NavbarComponent {
     darkTheme: boolean = false;
 
     constructor(private themeService: ThemeService) {
-        this.darkTheme = themeService.theme === Theme.DARK;
+        this.themeService.theme$.subscribe((theme) => {
+            this.darkTheme = theme === Theme.DARK;
+        });
     }
     switchTheme(): void {
-        this.darkTheme = !this.darkTheme;
-        this.themeService.theme = this.darkTheme ? Theme.DARK : Theme.LIGHT;
-        document.body.classList.toggle('dark-theme');
+        this.themeService.switchTheme();
     }
 }
