@@ -1,0 +1,31 @@
+@font-face {
+    font-family: 'Custom-Icons';
+    src: url('/assets/fonts/Custom-Icons.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    font-family: 'Custom-Icons', sans-serif !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-language:before {
+    content: "\e900";
+}
+.icon-moon:before {
+    content: "\e901";
+}
+.icon-sun:before {
+    content: "\e902";
+}
