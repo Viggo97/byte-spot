@@ -4,9 +4,7 @@
     </div>
 
     <div class="icons-container">
-        <button class="theme-switch"
-                [class.dark-theme]="darkTheme"
-                (click)="switchTheme()">
-        </button>
+        <button class="button-icon" [ngClass]="darkTheme ? 'icon-moon' : 'icon-sun'" (click)="switchTheme()"> </button>
+        <button class="button-icon icon-language"> </button>
     </div>
 </nav>

@@ -11,22 +11,13 @@ nav {
 
     .icons-container {
         margin-right: 20px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        gap: 12px;
 
-        .theme-switch {
-            width: 36px;
-            height: 36px;
-            border: none;
-            border-radius: 50%;
-            background: transparent url("/assets/theme-icon-light.svg") no-repeat center center / 28px 28px;
-            cursor: pointer;
-
-            &:hover {
-                background-color: var(--hover-primary);
-            }
-
-            &.dark-theme {
-                background-image: url("/assets/theme-icon-dark.svg");
-            }
+        button {
+            font-size: 28px;
         }
     }
 }

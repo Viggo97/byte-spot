@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 
 import { Theme } from '../../services/theme/theme.enum';
@@ -6,7 +7,7 @@ import { ThemeService } from '../../services/theme/theme.service';
 @Component({
     selector: 'bsa-navbar',
     standalone: true,
-    imports: [],
+    imports: [NgClass],
     templateUrl: './navbar.component.html',
     styleUrl: './navbar.component.scss',
 })
