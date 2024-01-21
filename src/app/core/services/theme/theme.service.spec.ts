@@ -1,16 +1,37 @@
 import { TestBed } from '@angular/core/testing';
 
+import { Theme } from './theme.enum';
 import { ThemeService } from './theme.service';
 
 describe('ThemeService', () => {
-    let service: ThemeService;
+    let themeService: ThemeService;
 
     beforeEach(() => {
         TestBed.configureTestingModule({});
-        service = TestBed.inject(ThemeService);
+        themeService = TestBed.inject(ThemeService);
     });
 
-    it('should be created', () => {
-        expect(service).toBeTruthy();
+    it('should use light theme as default', () => {
+        let theme;
+        themeService.theme$.subscribe((t) => {
+            theme = t;
+        });
+        expect(theme).toEqual(Theme.LIGHT);
+    });
+
+    it('should set theme base on value from local storage', () => {
+
+    });
+
+    it('should skip incorrect value from local storage', () => {
+
+    });
+
+    it('should set theme base on preferred color scheme', () => {
+
+    });
+
+    it('should switch theme', () => {
+
     });
 });
