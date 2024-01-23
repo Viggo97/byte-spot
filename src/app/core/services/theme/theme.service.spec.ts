@@ -6,32 +6,40 @@ import { ThemeService } from './theme.service';
 describe('ThemeService', () => {
     let themeService: ThemeService;
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({});
-        themeService = TestBed.inject(ThemeService);
+    const getMediaQueryListMock = (matches: boolean): MediaQueryList => ({
+        matches,
+        media: '(prefers-color-scheme: dark)',
+        addListener: () => {},
+        removeListener: () => {},
+        addEventListener: () => {},
+        removeEventListener: () => {},
+        onchange: () => {},
+        dispatchEvent: () => false,
     });
 
-    it('should use light theme as default', () => {
-        let theme;
+    beforeEach(() => {
+        TestBed.configureTestingModule({});
+    });
+
+    it('should set light theme as default', () => {
+        spyOn(window, 'matchMedia').and.returnValue(getMediaQueryListMock(false));
+        themeService = TestBed.inject(ThemeService);
+        let theme: Theme | undefined;
         themeService.theme$.subscribe((t) => {
             theme = t;
         });
-        expect(theme).toEqual(Theme.LIGHT);
+
+        expect(theme).toBe(Theme.LIGHT);
     });
 
-    it('should set theme base on value from local storage', () => {
+    it('should set dark theme based on preferred scheme', () => {
+        spyOn(window, 'matchMedia').and.returnValue(getMediaQueryListMock(true));
+        themeService = TestBed.inject(ThemeService);
+        let theme: Theme | undefined;
+        themeService.theme$.subscribe((t) => {
+            theme = t;
+        });
 
-    });
-
-    it('should skip incorrect value from local storage', () => {
-
-    });
-
-    it('should set theme base on preferred color scheme', () => {
-
-    });
-
-    it('should switch theme', () => {
-
+        expect(theme).toBe(Theme.DARK);
     });
 });
