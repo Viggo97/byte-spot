@@ -18,6 +18,7 @@ describe('ThemeService', () => {
     });
 
     beforeEach(() => {
+        localStorage.clear();
         TestBed.configureTestingModule({});
     });
 
@@ -41,5 +42,28 @@ describe('ThemeService', () => {
         });
 
         expect(theme).toBe(Theme.DARK);
+    });
+
+    it('should set theme base on value from local storage', () => {
+        spyOn(localStorage, 'getItem').and.returnValue('light');
+        themeService = TestBed.inject(ThemeService);
+        let theme: Theme | undefined;
+        themeService.theme$.subscribe((t) => {
+            theme = t;
+        });
+
+        expect(theme).toBe(Theme.LIGHT);
+    });
+
+    it('should skip incorrect value from local storage', () => {
+        spyOn(window, 'matchMedia').and.returnValue(getMediaQueryListMock(false));
+        spyOn(localStorage, 'getItem').and.returnValue('incorrect value');
+        themeService = TestBed.inject(ThemeService);
+        let theme: Theme | undefined;
+        themeService.theme$.subscribe((t) => {
+            theme = t;
+        });
+
+        expect(theme).toBe(Theme.LIGHT);
     });
 });
