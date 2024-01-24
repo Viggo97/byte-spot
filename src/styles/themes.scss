@@ -15,6 +15,8 @@ $text-primary-dark: hsl(0, 0%, 100%);
     --border-primary: #{$border-primary-light};
     --text-primary: #{$text-primary-light};
     --hover-primary: #{$hover-primary-light};
+
+    --backdrop-background: hsl(0, 0%, 0%, 0.2)
 }
 
 @mixin dark-theme {
@@ -22,4 +24,6 @@ $text-primary-dark: hsl(0, 0%, 100%);
     --border-primary: #{$border-primary-dark};
     --text-primary: #{$text-primary-dark};
     --hover-primary: #{$hover-primary-dark};
+
+    --backdrop-background: hsl(0, 0%, 0%, 0.2)
 }
