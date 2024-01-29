@@ -3,6 +3,7 @@ import {
 } from '@angular/core';
 
 import { ComponentInputs } from '../../models/component-inputs';
+import { ContentPosition } from '../../models/content-position';
 import { OverlayOptions } from '../../models/overlay-options';
 
 @Injectable({
@@ -27,11 +28,12 @@ export class OverlayService<T> {
         this.showOverlayContainer();
         this.createBackdrop(options?.background, options?.closeOnBackdropClick);
 
-        const overlayContent = this.createOverlayContent();
+        const overlayContent = this.createOverlayContent(options?.contentPosition);
         this.componentRef = createComponent<T>(component, {
             environmentInjector: this.applicationRef.injector,
             hostElement: overlayContent,
         });
+
         this.setInputs(this.componentRef, options?.componentInputs);
         this.applicationRef.attachView(this.componentRef.hostView);
         this.componentRef.changeDetectorRef.detectChanges();
@@ -44,9 +46,21 @@ export class OverlayService<T> {
         this.componentRef = null;
     }
 
-    private createOverlayContent(): HTMLDivElement {
+    private createOverlayContent(contentPosition: ContentPosition | undefined): HTMLDivElement {
         const overlayContent = document.createElement('div');
         overlayContent.classList.add('overlay-content');
+
+        if (contentPosition) {
+            overlayContent.style.top = `${contentPosition?.top}px`;
+            overlayContent.style.bottom = `${contentPosition?.bottom}px`;
+            overlayContent.style.left = `${contentPosition?.left}px`;
+            overlayContent.style.right = `${contentPosition?.right}px`;
+            overlayContent.style.width = `${contentPosition?.width}px`;
+            overlayContent.style.height = `${contentPosition?.height}px`;
+        } else {
+            overlayContent.classList.add('overlay-content-center');
+        }
+
         this.overlay.appendChild(overlayContent);
         return overlayContent;
     }
@@ -74,7 +88,9 @@ export class OverlayService<T> {
         }
 
         if (closeOnBackdropClick) {
-            this.backdropListener = this.renderer.listen(this.backdrop, 'click', () => {});
+            this.backdropListener = this.renderer.listen(this.backdrop, 'click', () => {
+                this.hide();
+            });
         }
 
         this.overlay.appendChild(this.backdrop);
