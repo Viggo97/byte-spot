@@ -1,9 +1,34 @@
 import { ComponentInputs } from './component-inputs';
-import { ContentPosition } from './content-position';
 
-export interface OverlayOptions {
+export type OverlayOptions =
+    BaseOptions & {
+        directPosition?: DirectPosition;
+        relativePosition?: never;
+    } |
+    BaseOptions & {
+        directPosition?: never;
+        relativePosition?: RelativePosition;
+    };
+
+type BaseOptions = {
     componentInputs?: ComponentInputs[];
     background?: boolean;
     closeOnBackdropClick?: boolean;
-    contentPosition?: ContentPosition
-}
+};
+
+type DirectPosition = {
+    top?: number;
+    bottom?: number;
+    left?: number;
+    right?: number;
+    width?: number;
+    height?: number;
+};
+
+type RelativePosition = {
+    relativeElement?: Element;
+    offsetX?: number;
+    offsetY?: number;
+    width?: number;
+    height?: number;
+};
