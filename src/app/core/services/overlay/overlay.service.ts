@@ -38,7 +38,7 @@ export class OverlayService<T> {
         this.componentRef.changeDetectorRef.detectChanges();
     }
 
-    hide(): void {
+    close(): void {
         this.hideOverlayContainer();
         this.removeBackdrop();
         this.applicationRef.detachView(this.componentRef!.hostView);
@@ -97,7 +97,7 @@ export class OverlayService<T> {
 
         if (closeOnBackdropClick) {
             this.backdropListener = this.renderer.listen(this.backdrop, 'click', () => {
-                this.hide();
+                this.close();
             });
         }
 
