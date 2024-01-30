@@ -3,7 +3,6 @@ import {
 } from '@angular/core';
 
 import { ComponentInputs } from '../../models/component-inputs';
-import { ContentPosition } from '../../models/content-position';
 import { OverlayOptions } from '../../models/overlay-options';
 
 @Injectable({
@@ -28,7 +27,7 @@ export class OverlayService<T> {
         this.showOverlayContainer();
         this.createBackdrop(options?.background, options?.closeOnBackdropClick);
 
-        const overlayContent = this.createOverlayContent(options?.contentPosition);
+        const overlayContent = this.createOverlayContent(options);
         this.componentRef = createComponent<T>(component, {
             environmentInjector: this.applicationRef.injector,
             hostElement: overlayContent,
@@ -46,17 +45,26 @@ export class OverlayService<T> {
         this.componentRef = null;
     }
 
-    private createOverlayContent(contentPosition: ContentPosition | undefined): HTMLDivElement {
+    private createOverlayContent(options: OverlayOptions | undefined): HTMLDivElement {
         const overlayContent = document.createElement('div');
         overlayContent.classList.add('overlay-content');
 
-        if (contentPosition) {
-            overlayContent.style.top = `${contentPosition?.top}px`;
-            overlayContent.style.bottom = `${contentPosition?.bottom}px`;
-            overlayContent.style.left = `${contentPosition?.left}px`;
-            overlayContent.style.right = `${contentPosition?.right}px`;
-            overlayContent.style.width = `${contentPosition?.width}px`;
-            overlayContent.style.height = `${contentPosition?.height}px`;
+        if (options?.directPosition) {
+            overlayContent.style.top = `${options.directPosition?.top}px`;
+            overlayContent.style.bottom = `${options.directPosition?.bottom}px`;
+            overlayContent.style.left = `${options.directPosition?.left}px`;
+            overlayContent.style.right = `${options.directPosition?.right}px`;
+            overlayContent.style.width = `${options.directPosition?.width}px`;
+            overlayContent.style.height = `${options.directPosition?.height}px`;
+        } else if (options?.relativePosition) {
+            const top = Math.round(options.relativePosition.relativeElement?.getBoundingClientRect().top || 0);
+            const left = Math.round(options.relativePosition.relativeElement?.getBoundingClientRect().left || 0);
+            const offsetY = options?.relativePosition.offsetY || 0;
+            const offsetX = options?.relativePosition.offsetX || 0;
+            overlayContent.style.top = `${top + offsetY}px`;
+            overlayContent.style.left = `${left + offsetX}px`;
+            overlayContent.style.width = `${options.relativePosition?.width}px`;
+            overlayContent.style.height = `${options.relativePosition?.height}px`;
         } else {
             overlayContent.classList.add('overlay-content-center');
         }
