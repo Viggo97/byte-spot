@@ -1,6 +1,7 @@
 import {
     ApplicationRef, ComponentRef, createComponent, Injectable, NgZone, Renderer2, RendererFactory2, Type,
 } from '@angular/core';
+import { Subject } from 'rxjs';
 
 import { ComponentInputs } from '../../models/component-inputs';
 import { OverlayOptions } from '../../models/overlay-options';
@@ -15,6 +16,7 @@ export class OverlayService<T> {
     private disposeBackdropListener: (() => void) | null = null;
     private disposeResizeListener: (() => void) | null = null;
     private componentRef: ComponentRef<T> | null = null;
+    onClose$ = new Subject<void>();
     private renderer: Renderer2;
 
     constructor(
@@ -38,6 +40,7 @@ export class OverlayService<T> {
         this.cleanOverlayContent();
         this.cleanBackdrop();
         this.hideOverlayContainer();
+        this.onClose$.next();
     }
 
     private showOverlayContainer(): void {
