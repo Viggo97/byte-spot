@@ -10,14 +10,15 @@ import { OverlayOptions } from '../../models/overlay-options';
     providedIn: 'root',
 })
 export class OverlayService<T> {
+    private renderer: Renderer2;
     private overlay: HTMLDivElement;
     private overlayContent: HTMLDivElement | null = null;
     private backdrop: HTMLDivElement | null = null;
     private disposeBackdropListener: (() => void) | null = null;
     private disposeResizeListener: (() => void) | null = null;
     private componentRef: ComponentRef<T> | null = null;
+    private open = false;
     onClose$ = new Subject<void>();
-    private renderer: Renderer2;
 
     constructor(
         private applicationRef: ApplicationRef,
@@ -29,13 +30,18 @@ export class OverlayService<T> {
     }
 
     show(component: Type<T>, options?: OverlayOptions): void {
+        if (this.open) {
+            return;
+        }
         this.showOverlayContainer();
         this.createBackdrop(options?.background, options?.closeOnBackdropClick);
         this.createOverlayContent(options);
         this.createComponent(component, options);
+        this.open = true;
     }
 
     close(): void {
+        this.open = false;
         this.removeComponent();
         this.cleanOverlayContent();
         this.cleanBackdrop();
