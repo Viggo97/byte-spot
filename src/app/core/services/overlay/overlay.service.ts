@@ -78,7 +78,7 @@ export class OverlayService<T> {
         this.componentRef = null;
     }
 
-    createBackdrop(background = true, closeOnBackdropClick = true): void {
+    private createBackdrop(background = true, closeOnBackdropClick = true): void {
         this.backdrop = document.createElement('div');
         this.backdrop.classList.add('backdrop');
 
