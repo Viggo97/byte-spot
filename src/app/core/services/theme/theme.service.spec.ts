@@ -86,5 +86,11 @@ describe('ThemeService', () => {
         expect(theme).toBe(Theme.LIGHT);
         expect(localStorage.getItem('theme')).toBe('light');
         expect(document.body).not.toHaveClass('dark-theme');
+
+        themeService.switchTheme();
+
+        expect(theme).toBe(Theme.DARK);
+        expect(localStorage.getItem('theme')).toBe('dark');
+        expect(document.body).toHaveClass('dark-theme');
     });
 });
