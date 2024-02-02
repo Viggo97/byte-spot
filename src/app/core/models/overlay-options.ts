@@ -26,7 +26,7 @@ type DirectPosition = {
 };
 
 type RelativePosition = {
-    relativeElement?: Element;
+    relativeElement: Element;
     offsetX?: number;
     offsetY?: number;
     width?: number;

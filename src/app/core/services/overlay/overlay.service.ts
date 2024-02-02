@@ -29,15 +29,16 @@ export class OverlayService<T> {
         this.overlay = document.getElementsByClassName('overlay-container')[0] as HTMLDivElement;
     }
 
-    show(component: Type<T>, options?: OverlayOptions): void {
+    show(component: Type<T>, options?: OverlayOptions): ComponentRef<T> | null {
         if (this.open) {
-            return;
+            return null;
         }
         this.showOverlayContainer();
         this.createBackdrop(options?.background, options?.closeOnBackdropClick);
         this.createOverlayContent(options);
         this.createComponent(component, options);
         this.open = true;
+        return this.componentRef;
     }
 
     close(): void {
@@ -136,10 +137,10 @@ export class OverlayService<T> {
 
     private setOverlayRelativePosition(options: OverlayOptions): void {
         if (this.overlayContent) {
-            const top = Math.round(options.relativePosition?.relativeElement?.getBoundingClientRect().top || 0);
-            const left = Math.round(options.relativePosition?.relativeElement?.getBoundingClientRect().left || 0);
-            const offsetY = options?.relativePosition?.offsetY || 0;
-            const offsetX = options?.relativePosition?.offsetX || 0;
+            const top = Math.round(options.relativePosition!.relativeElement.getBoundingClientRect().top);
+            const left = Math.round(options.relativePosition!.relativeElement.getBoundingClientRect().left);
+            const offsetY = options?.relativePosition!.offsetY || 0;
+            const offsetX = options?.relativePosition!.offsetX || 0;
             this.overlayContent.style.top = `${top + offsetY}px`;
             this.overlayContent.style.left = `${left + offsetX}px`;
             this.overlayContent.style.width = `${options.relativePosition?.width}px`;
