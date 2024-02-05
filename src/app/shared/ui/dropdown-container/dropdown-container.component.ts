@@ -3,7 +3,8 @@ import {
     ChangeDetectionStrategy, Component, EventEmitter, Input, Output,
 } from '@angular/core';
 
-type DropdownOption = { key: string, value: string };
+import { DropdownOption } from './model/dropdown-option';
+
 @Component({
     selector: 'bsa-dropdown-container',
     standalone: true,
