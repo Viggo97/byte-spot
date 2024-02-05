@@ -1,0 +1,21 @@
+.dropdown-container {
+    width: fit-content;
+    padding: 4px;
+    border: 1px solid var(--border-primary);
+    border-radius: 6px;
+    list-style-type: none;
+
+    .dropdown-item {
+        padding: 6px 8px;
+        min-width: 128px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-primary);
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--hover-primary);
+        }
+    }
+}

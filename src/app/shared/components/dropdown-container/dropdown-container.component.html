@@ -1,1 +1,7 @@
-<p>dropdown-container works!</p>
+<ul class="dropdown-container">
+    <li *ngFor="let item of items"
+        class="dropdown-item"
+        (click)="onSelectItem(item)">
+        <span>{{ item.value }}</span>
+    </li>
+</ul>
