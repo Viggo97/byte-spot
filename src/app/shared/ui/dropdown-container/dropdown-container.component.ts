@@ -22,13 +22,13 @@ export class DropdownContainerComponent {
         this.items = Array.from(options, ([key, value]) => ({ key, value }));
     }
 
-    items: DropdownOption[] = [];
+    private items: DropdownOption[] = [];
 
     @Output() selectItem = new EventEmitter<DropdownOption>();
 
     @ViewChildren('itemRef') itemsRef: QueryList<ElementRef> = new QueryList<ElementRef>();
 
-    index = 0;
+    private index = 0;
 
     onSelectItem(event: MouseEvent, item: DropdownOption): void {
         event.preventDefault();
