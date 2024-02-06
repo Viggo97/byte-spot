@@ -22,7 +22,7 @@ export class DropdownContainerComponent {
         this.items = Array.from(options, ([key, value]) => ({ key, value }));
     }
 
-    private items: DropdownOption[] = [];
+    items: DropdownOption[] = [];
 
     @Output() selectItem = new EventEmitter<DropdownOption>();
 
