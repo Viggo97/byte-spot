@@ -4,6 +4,7 @@
     border: 1px solid var(--border-primary);
     border-radius: 6px;
     list-style-type: none;
+    overflow: auto;
 
     .dropdown-item {
         padding: 6px 8px;

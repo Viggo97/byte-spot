@@ -1,7 +1,10 @@
 <ul class="dropdown-container">
+    <!--    eslint-disable-next-line @angular-eslint/template/click-events-have-key-events-->
     <li *ngFor="let item of items"
+        #itemRef
         class="dropdown-item"
-        (click)="onSelectItem(item)">
+        [tabindex]="tabIndex"
+        (click)="onSelectItem($event, item)">
         <span>{{ item.value }}</span>
     </li>
 </ul>
