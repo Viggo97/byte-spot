@@ -28,13 +28,21 @@ export class DropdownContainerComponent {
 
     @ViewChildren('itemRef') itemsRef: QueryList<ElementRef> = new QueryList<ElementRef>();
 
-    private index = 0;
+    private index = -1;
 
     onSelectItem(event: MouseEvent, item: DropdownOption): void {
         event.preventDefault();
         event.stopPropagation();
         this.index = this.items.indexOf(item);
         this.selectItem.emit(item);
+    }
+
+    @HostListener('focusin', ['$event'])
+    onFocusInHost(event: FocusEvent): void {
+        if (this.index === -1) {
+            const node = event.target as HTMLLIElement;
+            this.index = Array.prototype.indexOf.call(node?.parentNode?.childNodes, node);
+        }
     }
 
     @HostListener('keydown', ['$event'])
