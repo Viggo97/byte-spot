@@ -1,4 +1,4 @@
-import { NgForOf } from '@angular/common';
+import { NgForOf, NgStyle } from '@angular/common';
 import {
     ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, Output, QueryList, ViewChildren,
 } from '@angular/core';
@@ -11,6 +11,7 @@ import { DropdownOption } from './model/dropdown-option';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         NgForOf,
+        NgStyle,
     ],
     templateUrl: './dropdown-container.component.html',
     styleUrl: './dropdown-container.component.scss',
@@ -23,6 +24,12 @@ export class DropdownContainerComponent {
     }
 
     items: DropdownOption[] = [];
+
+    @Input() set maxDropdownHeight(value: number) {
+        this.maxHeight = `${value}px`;
+    }
+
+    maxHeight = '256px';
 
     @Output() selectItem = new EventEmitter<DropdownOption>();
 
