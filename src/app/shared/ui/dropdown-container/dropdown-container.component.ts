@@ -18,8 +18,7 @@ import { DropdownOption } from './model/dropdown-option';
 })
 export class DropdownContainerComponent {
     @Input() tabIndex: number = 0;
-    @Input({ required: true })
-    set options(options: Map<string, string>) {
+    @Input({ required: true }) set options(options: Map<string, string>) {
         this.items = Array.from(options, ([key, value]) => ({ key, value }));
     }
     @Input() set numberOfVisibleOptions(value: number) {
