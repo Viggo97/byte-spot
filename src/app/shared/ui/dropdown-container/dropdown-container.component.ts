@@ -22,20 +22,20 @@ export class DropdownContainerComponent {
     set options(options: Map<string, string>) {
         this.items = Array.from(options, ([key, value]) => ({ key, value }));
     }
-
-    items: DropdownOption[] = [];
-
-    @Input() set maxDropdownHeight(value: number) {
-        this.maxHeight = `${value}px`;
+    @Input() set numberOfVisibleOptions(value: number) {
+        this.maxHeight = `${value * this.ITEM_HEIGHT + 2 * this.INNER_CONTAINER_PADDING + 2 * this.BORDER_WIDTH}px`;
     }
-
-    maxHeight = '256px';
 
     @Output() selectItem = new EventEmitter<DropdownOption>();
 
     @ViewChildren('itemRef') itemsRef: QueryList<ElementRef> = new QueryList<ElementRef>();
 
+    private readonly ITEM_HEIGHT = 32;
+    private readonly INNER_CONTAINER_PADDING = 4;
+    private readonly BORDER_WIDTH = 1;
     private index = -1;
+    items: DropdownOption[] = [];
+    maxHeight = `${5 * this.ITEM_HEIGHT + 2 * this.INNER_CONTAINER_PADDING + 2 * this.BORDER_WIDTH}px`;
 
     onSelectItem(event: MouseEvent, item: DropdownOption): void {
         event.preventDefault();
@@ -45,11 +45,16 @@ export class DropdownContainerComponent {
     }
 
     @HostListener('focusin', ['$event'])
-    onFocusInHost(event: FocusEvent): void {
+    onFocusIn(event: FocusEvent): void {
         if (this.index === -1) {
             const node = event.target as HTMLLIElement;
             this.index = Array.prototype.indexOf.call(node?.parentNode?.childNodes, node);
         }
+    }
+
+    @HostListener('focusout')
+    onFocusOut(): void {
+        this.index = -1;
     }
 
     @HostListener('keydown', ['$event'])
@@ -129,11 +134,11 @@ export class DropdownContainerComponent {
     }
 
     private focusItem(): void {
-        this.itemsRef.get(this.index)?.nativeElement.focus();
-        this.itemsRef.get(this.index)?.nativeElement.scrollIntoView({
-            behavior: 'auto',
-            block: 'center',
-            inline: 'center',
+        const item = this.itemsRef.get(this.index)?.nativeElement;
+        item.focus({ preventScroll: true });
+        item.scrollIntoView({
+            behavior: 'instant',
+            block: 'nearest',
         });
     }
 }
