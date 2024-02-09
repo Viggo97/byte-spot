@@ -40,6 +40,7 @@ describe('DropdownContainerComponent', () => {
     it('should render items in container', () => {
         const container = fixture.debugElement.query(By.css('.dropdown-container'));
         const items = fixture.debugElement.queryAll(By.css('.dropdown-item'));
+
         expect(container).toBeTruthy();
         expect(items).toHaveSize(5);
         expect(items[0].nativeElement.getAttribute('tabindex')).toEqual('1000');
@@ -78,5 +79,33 @@ describe('DropdownContainerComponent', () => {
         expect(firstItemFocusSpy).toHaveBeenCalledTimes(3);
         expect(lastItemFocusSpy).toHaveBeenCalledTimes(2);
         expect(firstItem).toEqual(document.activeElement);
+    });
+
+    it('should select item by click', () => {
+        const items = fixture.debugElement.queryAll(By.css('.dropdown-item'));
+        const onSelectItemSpy = spyOn(component, 'onSelectItem').and.callThrough();
+        const selectItemSpy = spyOn(component.selectItem, 'emit').and.callThrough();
+
+        items[0].nativeElement.click();
+
+        expect(onSelectItemSpy).toHaveBeenCalled();
+        expect(selectItemSpy).toHaveBeenCalled();
+    });
+
+    it('should select item by keyboard', () => {
+        const arrowDownEvent = new KeyboardEvent('keydown', { code: 'ArrowDown' });
+        const enterEvent = new KeyboardEvent('keyup', { code: 'Enter' });
+        const spaceEvent = new KeyboardEvent('keyup', { code: 'Space' });
+        const selectItemSpy = spyOn(component.selectItem, 'emit').and.callThrough();
+
+        dispatchEvent(arrowDownEvent, 1);
+        dispatchEvent(enterEvent, 1);
+
+        expect(selectItemSpy).toHaveBeenCalledTimes(1);
+
+        dispatchEvent(arrowDownEvent, 1);
+        dispatchEvent(spaceEvent, 1);
+
+        expect(selectItemSpy).toHaveBeenCalledTimes(2);
     });
 });
