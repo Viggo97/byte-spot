@@ -14,7 +14,7 @@ describe('DropdownContainerComponent', () => {
     let component: DropdownContainerComponent;
     let fixture: ComponentFixture<DropdownContainerComponent>;
 
-    const dispatchEvent = (event: KeyboardEvent, times: number = 7) => {
+    const dispatchEvent = (event: KeyboardEvent | FocusEvent, times: number = 7) => {
         for (let i = 0; i < times; i += 1) {
             fixture.nativeElement.dispatchEvent(event);
         }
@@ -44,6 +44,13 @@ describe('DropdownContainerComponent', () => {
         expect(container).toBeTruthy();
         expect(items).toHaveSize(5);
         expect(items[0].nativeElement.getAttribute('tabindex')).toEqual('1000');
+    });
+
+    it('should set custom number of visible options', () => {
+        component.numberOfVisibleOptions = 3;
+        const container = fixture.debugElement.query(By.css('.dropdown-container'));
+
+        expect(container.nativeElement.style.maxHeight).toEqual('170px');
     });
 
     it('should navigate through items by arrows and tab', () => {
@@ -107,5 +114,29 @@ describe('DropdownContainerComponent', () => {
         dispatchEvent(spaceEvent, 1);
 
         expect(selectItemSpy).toHaveBeenCalledTimes(2);
+    });
+
+    it('should NOT trigger any action by other keys', () => {
+        const keydownEvent = new KeyboardEvent('keydown', { code: 'ArrowLeft' });
+        const keyupEvent = new KeyboardEvent('keyup', { code: 'Delete' });
+        const selectItemSpy = spyOn(component.selectItem, 'emit').and.callThrough();
+
+        dispatchEvent(keydownEvent, 1);
+        dispatchEvent(keyupEvent, 1);
+
+        expect(selectItemSpy).not.toHaveBeenCalled();
+    });
+
+    it('should set and handle focus in and out', () => {
+        const onFocusInSpy = spyOn(component, 'onFocusIn').and.callThrough();
+        const onFocusOutSpy = spyOn(component, 'onFocusOut').and.callThrough();
+        const focusinEvent = new FocusEvent('focusin');
+        const focusoutEvent = new FocusEvent('focusout');
+
+        dispatchEvent(focusinEvent);
+        dispatchEvent(focusoutEvent);
+
+        expect(onFocusInSpy).toHaveBeenCalled();
+        expect(onFocusOutSpy).toHaveBeenCalled();
     });
 });
