@@ -30,7 +30,7 @@ describe('NavbarComponent', () => {
     });
 
     it('should switch theme', () => {
-        const spy = spyOn(component, 'switchTheme').and.callThrough();
+        const spy = spyOn(component, 'onSwitchTheme').and.callThrough();
         const switchThemeButton = fixture.nativeElement.querySelector('#switch-theme-button') as HTMLButtonElement;
 
         expect(component.darkTheme).toBeFalse();
