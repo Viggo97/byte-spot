@@ -19,7 +19,11 @@ export class NavbarComponent {
             this.darkTheme = theme === Theme.DARK;
         });
     }
-    switchTheme(): void {
+
+    onSwitchTheme(): void {
         this.themeService.switchTheme();
+    }
+
+    onChangeLanguage(): void {
     }
 }
