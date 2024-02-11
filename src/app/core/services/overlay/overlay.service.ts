@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 
 import { ComponentInputs } from '../../models/component-inputs';
 import { OverlayOptions } from '../../models/overlay-options';
+import { EdgeX, EdgeY } from '../../models/relative-position-edge';
 
 @Injectable({
     providedIn: 'root',
@@ -136,15 +137,65 @@ export class OverlayService<T> {
     }
 
     private setOverlayRelativePosition(options: OverlayOptions): void {
-        if (this.overlayContent) {
-            const top = Math.round(options.relativePosition!.relativeElement.getBoundingClientRect().top);
-            const left = Math.round(options.relativePosition!.relativeElement.getBoundingClientRect().left);
-            const offsetY = options?.relativePosition!.offsetY || 0;
-            const offsetX = options?.relativePosition!.offsetX || 0;
-            this.overlayContent.style.top = `${top + offsetY}px`;
-            this.overlayContent.style.left = `${left + offsetX}px`;
-            this.overlayContent.style.width = `${options.relativePosition?.width}px`;
-            this.overlayContent.style.height = `${options.relativePosition?.height}px`;
+        if (this.overlayContent && options.relativePosition) {
+            const { relativeElement } = options.relativePosition;
+            const { offsetX = 0, offsetY = 0 } = options.relativePosition;
+
+            if (options.relativePosition.edgePositionX) {
+                const { relativeEdge, contentEdge } = options.relativePosition.edgePositionX;
+                this.setOverlayRelativePositionX(relativeElement, offsetX, relativeEdge, contentEdge);
+            } else {
+                const relativeElementLeft = Math.round(relativeElement.getBoundingClientRect().left);
+                this.overlayContent.style.left = `${relativeElementLeft + offsetX}px`;
+            }
+
+            if (options.relativePosition.edgePositionY) {
+                const { relativeEdge, contentEdge } = options.relativePosition.edgePositionY;
+                this.setOverlayRelativePositionY(relativeElement, offsetY, relativeEdge, contentEdge);
+            } else {
+                const relativeElementTop = Math.round(relativeElement.getBoundingClientRect().top);
+                this.overlayContent.style.top = `${relativeElementTop + offsetX}px`;
+            }
+        }
+    }
+
+    private setOverlayRelativePositionX(
+        relativeElement: Element,
+        offset: number,
+        relativeEdge: EdgeX,
+        contentEdge: EdgeX,
+    ): void {
+        const relativeElementLeft = Math.round(relativeElement.getBoundingClientRect().left);
+        const relativeElementRight = Math.round(relativeElement.getBoundingClientRect().right);
+
+        if (relativeEdge === EdgeX.LEFT && contentEdge === EdgeX.LEFT) {
+            this.overlayContent!.style.left = `${relativeElementLeft + offset}px`;
+        } else if (relativeEdge === EdgeX.LEFT && contentEdge === EdgeX.RIGHT) {
+            this.overlayContent!.style.right = `${window.innerWidth - relativeElementLeft + offset}px`;
+        } else if (relativeEdge === EdgeX.RIGHT && contentEdge === EdgeX.LEFT) {
+            this.overlayContent!.style.left = `${relativeElementRight + offset}px`;
+        } else {
+            this.overlayContent!.style.right = `${window.innerWidth - relativeElementRight + offset}px`;
+        }
+    }
+
+    private setOverlayRelativePositionY(
+        relativeElement: Element,
+        offset: number,
+        relativeEdge: EdgeY,
+        contentEdge: EdgeY,
+    ): void {
+        const relativeElementTop = Math.round(relativeElement.getBoundingClientRect().top);
+        const relativeElementBottom = Math.round(relativeElement.getBoundingClientRect().bottom);
+
+        if (relativeEdge === EdgeY.TOP && contentEdge === EdgeY.TOP) {
+            this.overlayContent!.style.top = `${relativeElementTop + offset}px`;
+        } else if (relativeEdge === EdgeY.TOP && contentEdge === EdgeY.BOTTOM) {
+            this.overlayContent!.style.bottom = `${window.innerHeight - relativeElementTop + offset}px`;
+        } else if (relativeEdge === EdgeY.BOTTOM && contentEdge === EdgeY.TOP) {
+            this.overlayContent!.style.top = `${relativeElementBottom + offset}px`;
+        } else {
+            this.overlayContent!.style.bottom = `${window.innerHeight - relativeElementBottom + offset}px`;
         }
     }
 
