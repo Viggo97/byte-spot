@@ -76,6 +76,7 @@ export class OverlayService<T> {
     }
 
     private removeComponent(): void {
+        this.componentRef?.destroy();
         this.applicationRef.detachView(this.componentRef!.hostView);
         this.componentRef = null;
     }
