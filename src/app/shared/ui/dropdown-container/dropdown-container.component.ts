@@ -1,6 +1,14 @@
 import { NgForOf, NgStyle } from '@angular/common';
 import {
-    ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, Output, QueryList, ViewChildren,
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    EventEmitter,
+    HostListener,
+    Input,
+    Output,
+    QueryList,
+    ViewChildren,
 } from '@angular/core';
 
 import { DropdownOption } from './model/dropdown-option';
@@ -25,7 +33,7 @@ export class DropdownContainerComponent {
         this.maxHeight = `${value * this.ITEM_HEIGHT + 2 * this.INNER_CONTAINER_PADDING + 2 * this.BORDER_WIDTH}px`;
     }
 
-    @Output() selectItem = new EventEmitter<DropdownOption>();
+    @Output() selectOption = new EventEmitter<DropdownOption>();
 
     @ViewChildren('itemRef') itemsRef: QueryList<ElementRef> = new QueryList<ElementRef>();
 
@@ -40,23 +48,13 @@ export class DropdownContainerComponent {
         event.preventDefault();
         event.stopPropagation();
         this.index = this.items.indexOf(item);
-        this.selectItem.emit(item);
+        this.selectOption.emit(item);
     }
 
-    @HostListener('focusin', ['$event'])
-    onFocusIn(event: FocusEvent): void {
-        if (this.index === -1) {
-            const node = event.target as HTMLLIElement;
-            this.index = Array.prototype.indexOf.call(node?.parentNode?.childNodes, node);
-        }
+    constructor(private elementRef: ElementRef) {
     }
 
-    @HostListener('focusout')
-    onFocusOut(): void {
-        this.index = -1;
-    }
-
-    @HostListener('keydown', ['$event'])
+    @HostListener('window:keydown', ['$event'])
     onKeyboardNavigation(event: KeyboardEvent): void {
         event.preventDefault();
         event.stopPropagation();
@@ -97,9 +95,16 @@ export class DropdownContainerComponent {
         }
     }
 
+    @HostListener('window:click', ['$event'])
+    onClick(event: MouseEvent): void {
+        if (!this.elementRef.nativeElement.contains(event.target)) {
+            this.index = -1;
+        }
+    }
+
     private handleSelectItemByKeyboard(): void {
         const selectedItem = this.items[this.index];
-        this.selectItem.emit(selectedItem);
+        this.selectOption.emit(selectedItem);
     }
 
     private moveIndexAhead(): void {
@@ -110,6 +115,10 @@ export class DropdownContainerComponent {
     }
 
     private moveIndexBack(): void {
+        if (this.index === -1) {
+            this.index = this.items.length;
+        }
+
         if (!this.isFirstIndex) {
             this.index -= 1;
             this.focusItem();
