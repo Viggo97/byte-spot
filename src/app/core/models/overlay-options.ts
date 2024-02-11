@@ -1,4 +1,5 @@
 import { ComponentInputs } from './component-inputs';
+import { EdgeX, EdgeY } from './relative-position-edge';
 
 export type OverlayOptions =
     BaseOptions & {
@@ -29,6 +30,14 @@ type RelativePosition = {
     relativeElement: Element;
     offsetX?: number;
     offsetY?: number;
+    edgePositionX?: {
+        relativeEdge: EdgeX,
+        contentEdge: EdgeX,
+    }
+    edgePositionY?: {
+        relativeEdge: EdgeY,
+        contentEdge: EdgeY,
+    }
     width?: number;
     height?: number;
 };
