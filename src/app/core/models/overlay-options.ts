@@ -2,16 +2,16 @@ import { ComponentInputs } from './component-inputs';
 import { EdgeX, EdgeY } from './relative-position-edge';
 
 export type OverlayOptions =
-    BaseOptions & {
+    BaseOverlayOptions & {
         directPosition?: DirectPosition;
         relativePosition?: never;
     } |
-    BaseOptions & {
+    BaseOverlayOptions & {
         directPosition?: never;
         relativePosition?: RelativePosition;
     };
 
-type BaseOptions = {
+type BaseOverlayOptions = {
     componentInputs?: ComponentInputs[];
     background?: boolean;
     closeOnBackdropClick?: boolean;
