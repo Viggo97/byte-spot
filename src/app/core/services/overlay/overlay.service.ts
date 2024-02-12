@@ -4,7 +4,7 @@ import {
 import { Subject } from 'rxjs';
 
 import { ComponentInputs } from '../../models/component-inputs';
-import { OverlayOptions } from '../../models/overlay-options';
+import { OverlayBackdropOptions, OverlayOptions } from '../../models/overlay-options';
 import { EdgeX, EdgeY } from '../../models/relative-position-edge';
 
 @Injectable({
@@ -15,7 +15,8 @@ export class OverlayService<T> {
     private overlay: HTMLDivElement;
     private overlayContent: HTMLDivElement | null = null;
     private backdrop: HTMLDivElement | null = null;
-    private disposeBackdropListener: (() => void) | null = null;
+    private disposeBackdropClickListener: (() => void) | null = null;
+    private disposeBackdropEscapeListener: (() => void) | null = null;
     private disposeResizeListener: (() => void) | null = null;
     private componentRef: ComponentRef<T> | null = null;
     private lastFocusedElement: HTMLElement | null = null;
@@ -37,7 +38,7 @@ export class OverlayService<T> {
         }
         this.setLastFocusedElement();
         this.showOverlayContainer();
-        this.createBackdrop(options?.background, options?.closeOnBackdropClick);
+        this.createBackdrop(options?.backdrop);
         this.createOverlayContent(options);
         this.createComponent(component, options);
         this.open = true;
@@ -93,7 +94,11 @@ export class OverlayService<T> {
         this.componentRef = null;
     }
 
-    private createBackdrop(background = true, closeOnBackdropClick = true): void {
+    private createBackdrop(options?: OverlayBackdropOptions): void {
+        const background = options?.background !== undefined ? options?.background : true;
+        const closeOnBackdropClick = options?.closeOnBackdropClick !== undefined ? options?.closeOnBackdropClick : true;
+        const closeOnEscape = options?.closeOnEscape !== undefined ? options?.closeOnEscape : true;
+
         this.backdrop = document.createElement('div');
         this.backdrop.classList.add('backdrop');
 
@@ -102,8 +107,16 @@ export class OverlayService<T> {
         }
 
         if (closeOnBackdropClick) {
-            this.disposeBackdropListener = this.renderer.listen(this.backdrop, 'click', () => {
+            this.disposeBackdropClickListener = this.renderer.listen(this.backdrop, 'click', () => {
                 this.close();
+            });
+        }
+
+        if (closeOnEscape) {
+            this.disposeBackdropEscapeListener = this.renderer.listen(window, 'keyup', (event: KeyboardEvent) => {
+                if (event.code === 'Escape') {
+                    this.close();
+                }
             });
         }
 
@@ -111,10 +124,14 @@ export class OverlayService<T> {
     }
 
     private cleanBackdrop(): void {
-        if (this.disposeBackdropListener) {
-            this.disposeBackdropListener();
+        if (this.disposeBackdropClickListener) {
+            this.disposeBackdropClickListener();
         }
-        this.disposeBackdropListener = null;
+        if (this.disposeBackdropEscapeListener) {
+            this.disposeBackdropEscapeListener();
+        }
+        this.disposeBackdropClickListener = null;
+        this.disposeBackdropEscapeListener = null;
         this.backdrop?.remove();
     }
 

@@ -3,21 +3,26 @@ import { EdgeX, EdgeY } from './relative-position-edge';
 
 export type OverlayOptions =
     BaseOverlayOptions & {
-        directPosition?: DirectPosition;
+        directPosition?: OverlayDirectContentPosition;
         relativePosition?: never;
     } |
     BaseOverlayOptions & {
         directPosition?: never;
-        relativePosition?: RelativePosition;
+        relativePosition?: OverlayRelativeContentPosition;
     };
 
 type BaseOverlayOptions = {
     componentInputs?: ComponentInputs[];
-    background?: boolean;
-    closeOnBackdropClick?: boolean;
+    backdrop?: OverlayBackdropOptions;
 };
 
-type DirectPosition = {
+export type OverlayBackdropOptions = {
+    background?: boolean;
+    closeOnBackdropClick?: boolean;
+    closeOnEscape?: boolean;
+};
+
+type OverlayDirectContentPosition = {
     top?: number;
     bottom?: number;
     left?: number;
@@ -26,7 +31,7 @@ type DirectPosition = {
     height?: number;
 };
 
-type RelativePosition = {
+type OverlayRelativeContentPosition = {
     relativeElement: Element;
     offsetX?: number;
     offsetY?: number;
