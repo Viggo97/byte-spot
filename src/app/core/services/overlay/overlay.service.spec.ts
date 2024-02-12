@@ -34,6 +34,7 @@ describe('OverlayService', () => {
         service.show(MockComponent);
         const componentContent = document.getElementById('mock-component');
         const overlayContent = document.querySelector('.overlay-container');
+
         expect(componentContent).toBeTruthy();
         expect(overlayContent).toHaveClass('overlay-container-show');
     });
@@ -41,13 +42,15 @@ describe('OverlayService', () => {
     it('should add backdrop background', () => {
         service.show(MockComponent);
         const backdrop = document.querySelector('.backdrop');
+
         expect(backdrop).toBeTruthy();
         expect(backdrop).toHaveClass('backdrop-background');
     });
 
     it('should NOT add backdrop background', () => {
-        service.show(MockComponent, { background: false });
+        service.show(MockComponent, { backdrop: { background: false } });
         const backdrop = document.querySelector('.backdrop');
+
         expect(backdrop).toBeTruthy();
         expect(backdrop).not.toHaveClass('backdrop-background');
     });
@@ -56,16 +59,44 @@ describe('OverlayService', () => {
         const spy = spyOn(service, 'close');
         service.show(MockComponent);
         const backdrop = document.querySelector('.backdrop') as HTMLDivElement;
+
         backdrop.click();
+
         expect(backdrop).toBeTruthy();
         expect(spy).toHaveBeenCalled();
     });
 
     it('should NOT add backdrop close action on click', () => {
         const spy = spyOn(service, 'close');
-        service.show(MockComponent, { closeOnBackdropClick: false });
+        service.show(MockComponent, { backdrop: { closeOnBackdropClick: false } });
         const backdrop = document.querySelector('.backdrop') as HTMLDivElement;
+
         backdrop.click();
+
+        expect(backdrop).toBeTruthy();
+        expect(spy).not.toHaveBeenCalled();
+    });
+
+    it('should add backdrop close action on Escape', () => {
+        const spy = spyOn(service, 'close');
+        const escapeEvent = new KeyboardEvent('keyup', { code: 'Escape' });
+        service.show(MockComponent);
+        const backdrop = document.querySelector('.backdrop') as HTMLDivElement;
+
+        window.dispatchEvent(escapeEvent);
+
+        expect(backdrop).toBeTruthy();
+        expect(spy).toHaveBeenCalled();
+    });
+
+    it('should NOT add backdrop close action on Escape', () => {
+        const spy = spyOn(service, 'close');
+        const escapeEvent = new KeyboardEvent('keyup', { code: 'Escape' });
+        service.show(MockComponent, { backdrop: { closeOnEscape: false } });
+        const backdrop = document.querySelector('.backdrop') as HTMLDivElement;
+
+        window.dispatchEvent(escapeEvent);
+
         expect(backdrop).toBeTruthy();
         expect(spy).not.toHaveBeenCalled();
     });
