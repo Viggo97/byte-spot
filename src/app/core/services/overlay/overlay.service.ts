@@ -18,6 +18,7 @@ export class OverlayService<T> {
     private disposeBackdropListener: (() => void) | null = null;
     private disposeResizeListener: (() => void) | null = null;
     private componentRef: ComponentRef<T> | null = null;
+    private lastFocusedElement: HTMLElement | null = null;
     private open = false;
     onClose$ = new Subject<void>();
 
@@ -34,6 +35,7 @@ export class OverlayService<T> {
         if (this.open) {
             return null;
         }
+        this.setLastFocusedElement();
         this.showOverlayContainer();
         this.createBackdrop(options?.background, options?.closeOnBackdropClick);
         this.createOverlayContent(options);
@@ -48,7 +50,17 @@ export class OverlayService<T> {
         this.cleanOverlayContent();
         this.cleanBackdrop();
         this.hideOverlayContainer();
+        this.restoreFocusToPrimaryElement();
         this.onClose$.next();
+    }
+
+    private setLastFocusedElement(): void {
+        this.lastFocusedElement = (document.activeElement as HTMLElement);
+    }
+
+    private restoreFocusToPrimaryElement(): void {
+        this.lastFocusedElement?.focus();
+        this.lastFocusedElement?.blur();
     }
 
     private showOverlayContainer(): void {
