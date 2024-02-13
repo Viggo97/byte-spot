@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
+import { EdgeX, EdgeY } from '../../models/relative-position-edge';
 import { OverlayService } from './overlay.service';
 
 @Component({
@@ -10,6 +11,32 @@ import { OverlayService } from './overlay.service';
 class MockComponent {
     @Input() testInput: string = '';
 }
+
+const setupEnvForRelativePositionTests = () => {
+    // overwrite karma-jasmine default styles
+    document.body.style.marginLeft = '0';
+    document.body.style.marginRight = '0';
+    document.body.style.overflow = 'hidden';
+    document.body.style.width = '100vw';
+    document.body.style.height = '100vh';
+
+    const relativeElement = document.createElement('div');
+    relativeElement.style.width = '100px';
+    relativeElement.style.height = '100px';
+    relativeElement.style.position = 'absolute';
+    relativeElement.style.top = '200px';
+    relativeElement.style.left = '200px';
+    relativeElement.style.backgroundColor = 'blue';
+    document.body.appendChild(relativeElement);
+
+    return relativeElement;
+};
+
+const setupOverlayContent = () => {
+    const overlayContent = document.querySelector('.overlay-content') as HTMLDivElement;
+    overlayContent.style.position = 'absolute';
+    return overlayContent;
+};
 
 describe('OverlayService', () => {
     let service: OverlayService<MockComponent>;
@@ -108,7 +135,7 @@ describe('OverlayService', () => {
         expect(overlayContent.style.left).toBe('20px');
     });
 
-    it('should set component position based on relativePosition options', () => {
+    it('should set component position based on relativePosition default options', () => {
         const relativeElement = document.createElement('div');
         relativeElement.style.width = '100px';
         relativeElement.style.height = '100px';
@@ -130,7 +157,7 @@ describe('OverlayService', () => {
         relativeElement.remove();
     });
 
-    it('should set component position based on relativePosition options (with custom offsets)', () => {
+    it('should set component position based on relativePosition options with custom offsets', () => {
         const relativeElement = document.createElement('div');
         relativeElement.style.width = '100px';
         relativeElement.style.height = '100px';
@@ -157,6 +184,126 @@ describe('OverlayService', () => {
 
         expect(overlayContentTop - relativeElementTop).toEqual(10);
         expect(overlayContentLeft - relativeElementLeft).toEqual(20);
+
+        service.close();
+        relativeElement.remove();
+    });
+
+    it('should set component position based on relativePosition options with custom edges LL-TT', () => {
+        const relativeElement = setupEnvForRelativePositionTests();
+
+        service.show(MockComponent, {
+            relativePosition: {
+                relativeElement,
+                edgePositionX: {
+                    relativeEdge: EdgeX.LEFT,
+                    contentEdge: EdgeX.LEFT,
+                },
+                edgePositionY: {
+                    relativeEdge: EdgeY.TOP,
+                    contentEdge: EdgeY.TOP,
+                },
+            },
+        });
+
+        const overlayContent = setupOverlayContent();
+        const relativeElementTop = relativeElement.getBoundingClientRect().top;
+        const relativeElementLeft = relativeElement.getBoundingClientRect().left;
+        const overlayContentTop = overlayContent.getBoundingClientRect().top;
+        const overlayContentLeft = overlayContent.getBoundingClientRect().left;
+
+        expect(overlayContentTop - relativeElementTop).toEqual(0);
+        expect(overlayContentLeft - relativeElementLeft).toEqual(0);
+
+        service.close();
+        relativeElement.remove();
+    });
+
+    it('should set component position based on relativePosition options with custom edges LR-TB', () => {
+        const relativeElement = setupEnvForRelativePositionTests();
+
+        service.show(MockComponent, {
+            relativePosition: {
+                relativeElement,
+                edgePositionX: {
+                    relativeEdge: EdgeX.LEFT,
+                    contentEdge: EdgeX.RIGHT,
+                },
+                edgePositionY: {
+                    relativeEdge: EdgeY.TOP,
+                    contentEdge: EdgeY.BOTTOM,
+                },
+            },
+        });
+
+        const overlayContent = setupOverlayContent();
+        const relativeElementTop = relativeElement.getBoundingClientRect().top;
+        const relativeElementLeft = relativeElement.getBoundingClientRect().left;
+        const overlayContentBottom = overlayContent.getBoundingClientRect().bottom;
+        const overlayContentRight = overlayContent.getBoundingClientRect().right;
+
+        expect(overlayContentBottom - relativeElementTop).toEqual(0);
+        expect(overlayContentRight - relativeElementLeft).toEqual(0);
+
+        service.close();
+        relativeElement.remove();
+    });
+
+    it('should set component position based on relativePosition options with custom edges RL-BT', () => {
+        const relativeElement = setupEnvForRelativePositionTests();
+
+        service.show(MockComponent, {
+            relativePosition: {
+                relativeElement,
+                edgePositionX: {
+                    relativeEdge: EdgeX.RIGHT,
+                    contentEdge: EdgeX.LEFT,
+                },
+                edgePositionY: {
+                    relativeEdge: EdgeY.BOTTOM,
+                    contentEdge: EdgeY.TOP,
+                },
+            },
+        });
+
+        const overlayContent = setupOverlayContent();
+        const relativeElementRight = relativeElement.getBoundingClientRect().right;
+        const relativeElementBottom = relativeElement.getBoundingClientRect().bottom;
+        const overlayContentLeft = overlayContent.getBoundingClientRect().left;
+        const overlayContentTop = overlayContent.getBoundingClientRect().top;
+
+        expect(overlayContentTop - relativeElementBottom).toEqual(0);
+        expect(overlayContentLeft - relativeElementRight).toEqual(0);
+
+        service.close();
+        relativeElement.remove();
+    });
+
+    it('should set component position based on relativePosition options with custom edges RR-BB', () => {
+        const relativeElement = setupEnvForRelativePositionTests();
+
+        service.show(MockComponent, {
+            relativePosition: {
+                relativeElement,
+                edgePositionX: {
+                    relativeEdge: EdgeX.RIGHT,
+                    contentEdge: EdgeX.RIGHT,
+                },
+                edgePositionY: {
+                    relativeEdge: EdgeY.BOTTOM,
+                    contentEdge: EdgeY.BOTTOM,
+                },
+            },
+        });
+
+        const overlayContent = setupOverlayContent();
+        const relativeElementBottom = relativeElement.getBoundingClientRect().bottom;
+        const relativeElementRight = relativeElement.getBoundingClientRect().right;
+        const overlayContentBottom = overlayContent.getBoundingClientRect().bottom;
+        const overlayContentRight = overlayContent.getBoundingClientRect().right;
+
+        expect(overlayContentBottom - relativeElementBottom).toEqual(0);
+        expect(overlayContentRight - relativeElementRight).toEqual(0);
 
         service.close();
         relativeElement.remove();
