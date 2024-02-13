@@ -184,7 +184,7 @@ export class OverlayService<T> {
                 this.setOverlayRelativePositionY(relativeElement, offsetY, relativeEdge, contentEdge);
             } else {
                 const relativeElementTop = Math.round(relativeElement.getBoundingClientRect().top);
-                this.overlayContent.style.top = `${relativeElementTop + offsetX}px`;
+                this.overlayContent.style.top = `${relativeElementTop + offsetY}px`;
             }
         }
     }
@@ -201,11 +201,11 @@ export class OverlayService<T> {
         if (relativeEdge === EdgeX.LEFT && contentEdge === EdgeX.LEFT) {
             this.overlayContent!.style.left = `${relativeElementLeft + offset}px`;
         } else if (relativeEdge === EdgeX.LEFT && contentEdge === EdgeX.RIGHT) {
-            this.overlayContent!.style.right = `${window.innerWidth - relativeElementLeft + offset}px`;
+            this.overlayContent!.style.right = `${document.body.offsetWidth - relativeElementLeft + offset}px`;
         } else if (relativeEdge === EdgeX.RIGHT && contentEdge === EdgeX.LEFT) {
             this.overlayContent!.style.left = `${relativeElementRight + offset}px`;
         } else {
-            this.overlayContent!.style.right = `${window.innerWidth - relativeElementRight + offset}px`;
+            this.overlayContent!.style.right = `${document.body.offsetWidth - relativeElementRight + offset}px`;
         }
     }
 
@@ -221,11 +221,11 @@ export class OverlayService<T> {
         if (relativeEdge === EdgeY.TOP && contentEdge === EdgeY.TOP) {
             this.overlayContent!.style.top = `${relativeElementTop + offset}px`;
         } else if (relativeEdge === EdgeY.TOP && contentEdge === EdgeY.BOTTOM) {
-            this.overlayContent!.style.bottom = `${window.innerHeight - relativeElementTop + offset}px`;
+            this.overlayContent!.style.bottom = `${document.body.clientHeight - relativeElementTop + offset}px`;
         } else if (relativeEdge === EdgeY.BOTTOM && contentEdge === EdgeY.TOP) {
             this.overlayContent!.style.top = `${relativeElementBottom + offset}px`;
         } else {
-            this.overlayContent!.style.bottom = `${window.innerHeight - relativeElementBottom + offset}px`;
+            this.overlayContent!.style.bottom = `${document.body.clientHeight - relativeElementBottom + offset}px`;
         }
     }
 
