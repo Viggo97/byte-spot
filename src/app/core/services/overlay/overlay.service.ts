@@ -1,7 +1,15 @@
 import {
-    ApplicationRef, ComponentRef, createComponent, Injectable, NgZone, Renderer2, RendererFactory2, Type,
+    ApplicationRef,
+    Component,
+    ComponentRef,
+    createComponent, EventEmitter,
+    Injectable,
+    NgZone,
+    Renderer2,
+    RendererFactory2,
+    Type,
 } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 import { ComponentInputs } from '../../models/component-inputs';
 import { OverlayBackdropOptions, OverlayOptions } from '../../models/overlay-options';
@@ -20,7 +28,9 @@ export class OverlayService<T> {
     private disposeResizeListener: (() => void) | null = null;
     private componentRef: ComponentRef<T> | null = null;
     private lastFocusedElement: HTMLElement | null = null;
+    private unsubscribeOutputs$ = new Subject<void>();
     private open = false;
+    outputChange$ = new Subject<{ name: string, value: any }>();
     onClose$ = new Subject<void>();
 
     constructor(
@@ -78,8 +88,16 @@ export class OverlayService<T> {
             hostElement: this.overlayContent!,
         });
         this.setComponentInputs(options?.componentInputs);
+        this.setComponentOutputs();
         this.applicationRef.attachView(this.componentRef.hostView);
         this.componentRef.changeDetectorRef.detectChanges();
+    }
+
+    private removeComponent(): void {
+        this.cleanOutputs();
+        this.componentRef?.destroy();
+        this.applicationRef.detachView(this.componentRef!.hostView);
+        this.componentRef = null;
     }
 
     private setComponentInputs(inputs: ComponentInputs[] | undefined): void {
@@ -88,10 +106,28 @@ export class OverlayService<T> {
         });
     }
 
-    private removeComponent(): void {
-        this.componentRef?.destroy();
-        this.applicationRef.detachView(this.componentRef!.hostView);
-        this.componentRef = null;
+    private setComponentOutputs(): void {
+        this.outputChange$ = new Subject();
+        const component = this.componentRef!.instance as Component;
+
+        const eventEmitters: { [p: string]: EventEmitter<any> } = Object.fromEntries(
+            Object
+                .entries(component)
+                .filter((entry) => entry[1] instanceof EventEmitter),
+        );
+
+        Object.keys(eventEmitters).forEach((eventName) => {
+            eventEmitters[eventName]
+                .pipe(takeUntil(this.unsubscribeOutputs$))
+                .subscribe((value) => {
+                    this.outputChange$.next({ name: eventName, value });
+                });
+        });
+    }
+
+    private cleanOutputs(): void {
+        this.outputChange$.complete();
+        this.unsubscribeOutputs$.next();
     }
 
     private createBackdrop(options?: OverlayBackdropOptions): void {
