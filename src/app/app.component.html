@@ -1,2 +1,8 @@
 <bsa-navbar></bsa-navbar>
 <router-outlet></router-outlet>
+@if ((lang | async) === 'EN') {
+    <p>Hi 🙂, thanks for being here :). Someday it will be an aplication with job offers, but for now I'm at the beginning of the road. There is almost no functionality other than changing theme and language, but please take a look at the code - maybe there will be something there that will interest you at this stage of app development.</p>
+} 
+@else {
+    <p>Cześć 🙂, dzięki, że tutaj jesteś :). Kiedyś to będzie aplikacja z ofertami pracy, ale na razie jestem na początku drogi. Nie ma prawie żadnych funkcjonalności poza zmianą motywu i języka, ale zajrzyj proszę do kodu - może znajdzie się tam coś, co Cię zainteresuje na tym etapie rozwoju aplikacji.</p>
+}

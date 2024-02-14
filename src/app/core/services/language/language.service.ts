@@ -4,12 +4,15 @@ import { DropdownContainerComponent } from '../../../shared/ui/dropdown-containe
 import { DropdownOption } from '../../../shared/ui/dropdown-container/model/dropdown-option';
 import { EdgeX, EdgeY } from '../../models/relative-position-edge';
 import { OverlayService } from '../overlay/overlay.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
 })
 export class LanguageService {
-    language: string = 'EN';
+    // Needs improvement :)
+    private language: string = 'EN';
+    lang = new BehaviorSubject<string>('EN');
 
     constructor(private overlayService: OverlayService<DropdownContainerComponent>) { }
 
@@ -40,6 +43,7 @@ export class LanguageService {
         this.overlayService.outputChange$.subscribe((output) => {
             this.language = (output.value as DropdownOption).key;
             this.overlayService.close();
+            this.lang.next(this.language);
         });
     }
 }
