@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import {
+    Component, EventEmitter, Input, Output,
+} from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
 import { EdgeX, EdgeY } from '../../models/relative-position-edge';
@@ -10,6 +12,7 @@ import { OverlayService } from './overlay.service';
 })
 class MockComponent {
     @Input() testInput: string = '';
+    @Output() testOutput = new EventEmitter<string>();
 }
 
 const setupEnvForRelativePositionTests = () => {
@@ -331,6 +334,15 @@ describe('OverlayService', () => {
         const componentContent = document.getElementById('mock-component') as HTMLDivElement;
         expect(componentRef?.instance.testInput).toBe('input value');
         expect(componentContent.innerText).toContain('input value');
+    });
+
+    it('should subscribe on output changes', () => {
+        const componentRef = service.show(MockComponent);
+        componentRef?.instance.testOutput.emit('output value');
+        service.outputChange$.subscribe((value) => {
+            expect(value.name).toEqual('testOutput');
+            expect(value.value).toEqual('output value');
+        });
     });
 
     it('should close overlay', () => {
