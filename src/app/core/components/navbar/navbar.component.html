@@ -9,7 +9,8 @@
             class="button-icon" [ngClass]="darkTheme ? 'icon-moon' : 'icon-sun'"
             (click)="onSwitchTheme()">
         </button>
-        <button id="switch-language-button"
+        <button #languageButton
+                id="switch-language-button"
                 class="button-icon icon-language"
                 (click)="onChangeLanguage()">
         </button>
