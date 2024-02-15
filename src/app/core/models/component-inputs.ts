@@ -1,4 +1,4 @@
-export interface ComponentInputs {
+export type ComponentInputs = {
     name: string;
     value: unknown;
-}
+};
