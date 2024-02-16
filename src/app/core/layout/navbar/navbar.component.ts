@@ -1,10 +1,10 @@
 import { NgClass } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 
-import { DropdownContainerComponent } from '../../../shared/ui/dropdown-container/dropdown-container.component';
-import { LanguageService } from '../../services/language/language.service';
-import { Theme } from '../../services/theme/theme.enum';
-import { ThemeService } from '../../services/theme/theme.service';
+import { DropdownContainerComponent } from '../../../shared/dropdown-container/dropdown-container.component';
+import { LanguageService } from '../../language/language.service';
+import { Theme } from '../../theme/theme.enum';
+import { ThemeService } from '../../theme/theme.service';
 
 @Component({
     selector: 'bsa-navbar',

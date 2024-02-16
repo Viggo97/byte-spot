@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { DropdownContainerComponent } from '../../../shared/ui/dropdown-container/dropdown-container.component';
-import { DropdownOption } from '../../../shared/ui/dropdown-container/model/dropdown-option';
-import { EdgeX, EdgeY } from '../../models/relative-position-edge';
+import { DropdownContainerComponent } from '../../shared/dropdown-container/dropdown-container.component';
+import { DropdownOption } from '../../shared/dropdown-container/model/dropdown-option';
+import { EdgeX, EdgeY } from '../overlay/model/relative-position-edge.enum';
 import { OverlayService } from '../overlay/overlay.service';
 
 @Injectable({

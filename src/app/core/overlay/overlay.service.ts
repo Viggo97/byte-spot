@@ -11,9 +11,9 @@ import {
 } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 
-import { ComponentInputs } from '../../models/component-inputs';
-import { OverlayBackdropOptions, OverlayOptions } from '../../models/overlay-options';
-import { EdgeX, EdgeY } from '../../models/relative-position-edge';
+import { ComponentInputs } from './model/component-inputs.model';
+import { OverlayBackdropOptions, OverlayOptions } from './model/overlay-options.model';
+import { EdgeX, EdgeY } from './model/relative-position-edge.enum';
 
 @Injectable({
     providedIn: 'root',
