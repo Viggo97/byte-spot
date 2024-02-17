@@ -3,6 +3,7 @@ import {
 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
+import { Keycodes } from '../../../shared/enums/keycodes/keycodes.enum';
 import { EdgeX, EdgeY } from '../../enums/overlay/relative-position-edge.enum';
 import { OverlayService } from './overlay.service';
 
@@ -109,7 +110,7 @@ describe('OverlayService', () => {
 
     it('should add backdrop close action on Escape', () => {
         const spy = spyOn(service, 'close');
-        const escapeEvent = new KeyboardEvent('keyup', { code: 'Escape' });
+        const escapeEvent = new KeyboardEvent('keyup', { code: Keycodes.ESCAPE });
         service.show(MockComponent);
         const backdrop = document.querySelector('.backdrop') as HTMLDivElement;
 
@@ -121,7 +122,7 @@ describe('OverlayService', () => {
 
     it('should NOT add backdrop close action on Escape', () => {
         const spy = spyOn(service, 'close');
-        const escapeEvent = new KeyboardEvent('keyup', { code: 'Escape' });
+        const escapeEvent = new KeyboardEvent('keyup', { code: Keycodes.ESCAPE });
         service.show(MockComponent, { backdrop: { closeOnEscape: false } });
         const backdrop = document.querySelector('.backdrop') as HTMLDivElement;
 

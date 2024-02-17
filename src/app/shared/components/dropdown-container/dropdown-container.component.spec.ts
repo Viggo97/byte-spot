@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
+import { Keycodes } from '../../enums/keycodes/keycodes.enum';
 import { DropdownContainerComponent } from './dropdown-container.component';
 
 const options = new Map()
@@ -54,10 +55,10 @@ describe('DropdownContainerComponent', () => {
     });
 
     it('should navigate through items by arrows and tab', () => {
-        const arrowDownEvent = new KeyboardEvent('keydown', { code: 'ArrowDown' });
-        const arrowUpEvent = new KeyboardEvent('keydown', { code: 'ArrowUp' });
-        const tabEvent = new KeyboardEvent('keydown', { code: 'Tab' });
-        const tabShiftEvent = new KeyboardEvent('keydown', { code: 'Tab', shiftKey: true });
+        const arrowDownEvent = new KeyboardEvent('keydown', { code: Keycodes.ARROW_DOWN });
+        const arrowUpEvent = new KeyboardEvent('keydown', { code: Keycodes.ARROW_UP });
+        const tabEvent = new KeyboardEvent('keydown', { code: Keycodes.TAB });
+        const tabShiftEvent = new KeyboardEvent('keydown', { code: Keycodes.TAB, shiftKey: true });
         const firstItem = fixture.debugElement.queryAll(By.css('.dropdown-item'))[0].nativeElement;
         const lastItem = fixture.debugElement.queryAll(By.css('.dropdown-item'))[4].nativeElement;
         const firstItemFocusSpy = spyOn(firstItem, 'focus').and.callThrough();
@@ -100,9 +101,9 @@ describe('DropdownContainerComponent', () => {
     });
 
     it('should select item by keyboard', () => {
-        const arrowDownEvent = new KeyboardEvent('keydown', { code: 'ArrowDown' });
-        const enterEvent = new KeyboardEvent('keyup', { code: 'Enter' });
-        const spaceEvent = new KeyboardEvent('keyup', { code: 'Space' });
+        const arrowDownEvent = new KeyboardEvent('keydown', { code: Keycodes.ARROW_DOWN });
+        const enterEvent = new KeyboardEvent('keyup', { code: Keycodes.ENTER });
+        const spaceEvent = new KeyboardEvent('keyup', { code: Keycodes.SPACE });
         const selectItemSpy = spyOn(component.selectOption, 'emit').and.callThrough();
 
         dispatchEvent(window, arrowDownEvent, 1);
@@ -117,7 +118,7 @@ describe('DropdownContainerComponent', () => {
     });
 
     it('should NOT trigger any action by other keys', () => {
-        const keydownEvent = new KeyboardEvent('keydown', { code: 'ArrowLeft' });
+        const keydownEvent = new KeyboardEvent('keydown', { code: Keycodes.ARROW_LEFT });
         const keyupEvent = new KeyboardEvent('keyup', { code: 'Delete' });
         const selectItemSpy = spyOn(component.selectOption, 'emit').and.callThrough();
 
@@ -128,7 +129,7 @@ describe('DropdownContainerComponent', () => {
     });
 
     it('should set reset tabindex', () => {
-        const keydownEvent = new KeyboardEvent('keydown', { code: 'ArrowDown' });
+        const keydownEvent = new KeyboardEvent('keydown', { code: Keycodes.ARROW_DOWN });
         const clickEvent = new MouseEvent('click');
         const firstItem = fixture.debugElement.queryAll(By.css('.dropdown-item'))[0].nativeElement;
         const thirdItem = fixture.debugElement.queryAll(By.css('.dropdown-item'))[2].nativeElement;
@@ -144,7 +145,7 @@ describe('DropdownContainerComponent', () => {
     });
 
     it('should navigate through items starting from end', () => {
-        const keyupEvent = new KeyboardEvent('keydown', { code: 'ArrowUp' });
+        const keyupEvent = new KeyboardEvent('keydown', { code: Keycodes.ARROW_UP });
         const lastItem = fixture.debugElement.queryAll(By.css('.dropdown-item'))[4].nativeElement;
 
         dispatchEvent(window, keyupEvent, 1);
