@@ -11,7 +11,7 @@ import {
     ViewChildren,
 } from '@angular/core';
 
-import { DropdownOption } from './model/dropdown-option';
+import { DropdownOption } from '../../models/dropdown-container/dropdown-option';
 
 @Component({
     selector: 'bsa-dropdown-container',

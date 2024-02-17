@@ -3,7 +3,7 @@ import {
 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
-import { EdgeX, EdgeY } from './model/relative-position-edge.enum';
+import { EdgeX, EdgeY } from '../../enums/overlay/relative-position-edge.enum';
 import { OverlayService } from './overlay.service';
 
 @Component({

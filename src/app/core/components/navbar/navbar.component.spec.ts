@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BehaviorSubject } from 'rxjs';
 
-import { Theme } from '../../theme/theme.enum';
-import { ThemeService } from '../../theme/theme.service';
+import { Theme } from '../../enums/theme/theme.enum';
+import { ThemeService } from '../../services/theme/theme.service';
 import { NavbarComponent } from './navbar.component';
 
 class ThemeServiceStub {
