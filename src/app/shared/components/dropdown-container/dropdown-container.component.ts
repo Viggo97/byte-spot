@@ -11,6 +11,7 @@ import {
     ViewChildren,
 } from '@angular/core';
 
+import { Keycodes } from '../../enums/keycodes/keycodes.enum';
 import { DropdownOption } from '../../models/dropdown-container/dropdown-option';
 
 @Component({
@@ -62,13 +63,13 @@ export class DropdownContainerComponent {
         const { code } = event;
 
         switch (code) {
-            case 'ArrowDown':
+            case Keycodes.ARROW_DOWN:
                 this.moveIndexAhead();
                 break;
-            case 'ArrowUp':
+            case Keycodes.ARROW_UP:
                 this.moveIndexBack();
                 break;
-            case 'Tab':
+            case Keycodes.TAB:
                 this.onTab(event);
                 break;
             default:
@@ -84,10 +85,10 @@ export class DropdownContainerComponent {
         const { code } = event;
 
         switch (code) {
-            case 'Enter':
+            case Keycodes.ENTER:
                 this.handleSelectItemByKeyboard();
                 break;
-            case 'Space':
+            case Keycodes.SPACE:
                 this.handleSelectItemByKeyboard();
                 break;
             default:

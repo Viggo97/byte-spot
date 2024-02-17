@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 
+import { Keycodes } from '../../../shared/enums/keycodes/keycodes.enum';
 import { EdgeX, EdgeY } from '../../enums/overlay/relative-position-edge.enum';
 import { ComponentInputs } from '../../models/overlay/component-inputs.model';
 import { OverlayBackdropOptions, OverlayOptions } from '../../models/overlay/overlay-options.model';
@@ -150,7 +151,7 @@ export class OverlayService<T> {
 
         if (closeOnEscape) {
             this.disposeBackdropEscapeListener = this.renderer.listen(window, 'keyup', (event: KeyboardEvent) => {
-                if (event.code === 'Escape') {
+                if (event.code === Keycodes.ESCAPE) {
                     this.close();
                 }
             });
