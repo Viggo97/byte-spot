@@ -10,7 +10,7 @@ import { OverlayService } from '../overlay/overlay.service';
     providedIn: 'root',
 })
 export class LanguageService {
-    language: string = Language.ENGLISH;
+    language = Language.ENGLISH;
 
     constructor(private overlayService: OverlayService<DropdownContainerComponent>) { }
 
@@ -40,7 +40,7 @@ export class LanguageService {
         });
 
         this.overlayService.outputChange$.subscribe((output) => {
-            this.language = (output.value as DropdownOption).key;
+            this.language = ((output.value as DropdownOption).key) as Language;
             this.overlayService.close();
         });
     }
