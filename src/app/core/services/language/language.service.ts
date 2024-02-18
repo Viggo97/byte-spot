@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { DropdownContainerComponent } from '../../../shared/components/dropdown-container/dropdown-container.component';
 import { DropdownOption } from '../../../shared/models/dropdown-container/dropdown-option';
+import { Language } from '../../enums/language/language.enum';
 import { EdgeX, EdgeY } from '../../enums/overlay/relative-position-edge.enum';
 import { OverlayService } from '../overlay/overlay.service';
 
@@ -9,14 +10,15 @@ import { OverlayService } from '../overlay/overlay.service';
     providedIn: 'root',
 })
 export class LanguageService {
-    language: string = 'EN';
+    language: string = Language.ENGLISH;
 
     constructor(private overlayService: OverlayService<DropdownContainerComponent>) { }
 
     openLanguageSelection(relativeElement: HTMLButtonElement): void {
         const languageOptions = new Map<string, string>()
-            .set('EN', 'English')
-            .set('PL', 'Polish');
+            .set(Language.ENGLISH, 'English')
+            .set(Language.POLISH, 'Polish');
+
         this.overlayService.show(DropdownContainerComponent, {
             componentInputs: [
                 { name: 'options', value: languageOptions },
