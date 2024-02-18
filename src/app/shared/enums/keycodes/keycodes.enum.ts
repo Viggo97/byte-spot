@@ -5,6 +5,6 @@ export enum Keycodes {
     TAB = 'Tab',
     ARROW_UP = 'ArrowUp',
     ARROW_DOWN = 'ArrowDown',
-    ARROW_LEFT = 'ArrowDown',
-    ARROW_RIGHT = 'ArrowDown',
+    ARROW_LEFT = 'ArrowLeft',
+    ARROW_RIGHT = 'ArrowRight',
 }
