@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import { i18nEnglish } from '../../../../assets/i18n/i18n-english';
+import { i18nPolish } from '../../../../assets/i18n/i18n-polish';
+import { Language } from '../../enums/language/language.enum';
 import { I18N } from '../../models/translate/i18n.model';
+import { LanguageService } from '../language/language.service';
 
 @Injectable({
     providedIn: 'root',
@@ -9,8 +12,10 @@ import { I18N } from '../../models/translate/i18n.model';
 export class TranslateService {
     private i18n!: I18N;
 
-    constructor() {
-        this.i18n = i18nEnglish;
+    constructor(private languageService: LanguageService) {
+        this.languageService.language$.subscribe((value) => {
+            this.i18n = value === Language.ENGLISH ? i18nEnglish : i18nPolish;
+        });
     }
 
     translate(key: string): string {
