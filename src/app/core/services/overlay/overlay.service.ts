@@ -1,15 +1,14 @@
 import {
     ApplicationRef,
-    Component,
     ComponentRef,
-    createComponent, EventEmitter,
+    createComponent,
     Injectable,
     NgZone,
     Renderer2,
     RendererFactory2,
     Type,
 } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
 
 import { Keycodes } from '../../../shared/enums/keycodes/keycodes.enum';
 import { EdgeX, EdgeY } from '../../enums/overlay/relative-position-edge.enum';
@@ -29,10 +28,9 @@ export class OverlayService<T> {
     private disposeResizeListener: (() => void) | null = null;
     private componentRef: ComponentRef<T> | null = null;
     private lastFocusedElement: HTMLElement | null = null;
-    private unsubscribeOutputs$ = new Subject<void>();
     private open = false;
-    outputChange$ = new Subject<{ name: string, value: any }>();
-    onClose$ = new Subject<void>();
+    private closeSource = new Subject<void>();
+    close$ = this.closeSource.asObservable();
 
     constructor(
         private applicationRef: ApplicationRef,
@@ -63,7 +61,7 @@ export class OverlayService<T> {
         this.cleanBackdrop();
         this.hideOverlayContainer();
         this.restoreFocusToPrimaryElement();
-        this.onClose$.next();
+        this.closeSource.next();
     }
 
     private setLastFocusedElement(): void {
@@ -89,13 +87,11 @@ export class OverlayService<T> {
             hostElement: this.overlayContent!,
         });
         this.setComponentInputs(options?.componentInputs);
-        this.setComponentOutputs();
         this.applicationRef.attachView(this.componentRef.hostView);
         this.componentRef.changeDetectorRef.detectChanges();
     }
 
     private removeComponent(): void {
-        this.cleanOutputs();
         this.componentRef?.destroy();
         this.applicationRef.detachView(this.componentRef!.hostView);
         this.componentRef = null;
@@ -105,30 +101,6 @@ export class OverlayService<T> {
         inputs?.forEach((i) => {
             this.componentRef!.setInput(i.name, i.value);
         });
-    }
-
-    private setComponentOutputs(): void {
-        this.outputChange$ = new Subject();
-        const component = this.componentRef!.instance as Component;
-
-        const eventEmitters: { [p: string]: EventEmitter<any> } = Object.fromEntries(
-            Object
-                .entries(component)
-                .filter((entry) => entry[1] instanceof EventEmitter),
-        );
-
-        Object.keys(eventEmitters).forEach((eventName) => {
-            eventEmitters[eventName]
-                .pipe(takeUntil(this.unsubscribeOutputs$))
-                .subscribe((value) => {
-                    this.outputChange$.next({ name: eventName, value });
-                });
-        });
-    }
-
-    private cleanOutputs(): void {
-        this.outputChange$.complete();
-        this.unsubscribeOutputs$.next();
     }
 
     private createBackdrop(options?: OverlayBackdropOptions): void {

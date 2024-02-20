@@ -337,21 +337,12 @@ describe('OverlayService', () => {
         expect(componentContent.innerText).toContain('input value');
     });
 
-    it('should subscribe on output changes', () => {
-        const componentRef = service.show(MockComponent);
-        componentRef?.instance.testOutput.emit('output value');
-        service.outputChange$.subscribe((value) => {
-            expect(value.name).toEqual('testOutput');
-            expect(value.value).toEqual('output value');
-        });
-    });
-
     it('should close overlay', () => {
         const spy = spyOn(service, 'close').and.callThrough();
         let counter = 0;
 
         service.show(MockComponent);
-        service.onClose$.subscribe(() => {
+        service.close$.subscribe(() => {
             counter += 1;
         });
         service.close();

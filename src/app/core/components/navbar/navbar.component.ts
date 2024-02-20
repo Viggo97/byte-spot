@@ -1,5 +1,6 @@
 import { NgClass } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { takeUntil } from 'rxjs';
 
 import { DropdownContainerComponent } from '../../../shared/components/dropdown-container/dropdown-container.component';
 import { Language } from '../../enums/language/language.enum';
@@ -42,7 +43,7 @@ export class NavbarComponent {
             .set(Language.ENGLISH, this.translateService.translate('global.languageEN'))
             .set(Language.POLISH, this.translateService.translate('global.languagePL'));
 
-        this.overlayService.show(DropdownContainerComponent, {
+        const dropdownContainerRef = this.overlayService.show(DropdownContainerComponent, {
             componentInputs: [
                 { name: 'options', value: languageOptions },
             ],
@@ -62,9 +63,11 @@ export class NavbarComponent {
             },
         });
 
-        this.overlayService.outputChange$.subscribe((output) => {
-            this.languageService.setLanguage(output.value.key as Language);
-            this.overlayService.close();
-        });
+        dropdownContainerRef?.instance.selectOption
+            .pipe(takeUntil(this.overlayService.close$))
+            .subscribe((value) => {
+                this.languageService.setLanguage(value.key as Language);
+                this.overlayService.close();
+            });
     }
 }
