@@ -13,6 +13,9 @@ describe('TranslateService', () => {
     });
 
     it('should translate correct key in English', () => {
+        const languageService = TestBed.inject(LanguageService);
+        languageService.setLanguage(Language.ENGLISH);
+
         const value = service.translate('global.languageEN');
         expect(value).toEqual('English');
     });
