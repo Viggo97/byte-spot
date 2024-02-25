@@ -1,4 +1,7 @@
+import { EventEmitter } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { LanguageService } from '@app/core/services/language/language.service';
+import { OverlayService } from '@app/core/services/overlay/overlay.service';
 import { BehaviorSubject } from 'rxjs';
 
 import { Theme } from '../../enums/theme/theme.enum';
@@ -17,14 +20,20 @@ class ThemeServiceStub {
 describe('NavbarComponent', () => {
     let component: NavbarComponent;
     let fixture: ComponentFixture<NavbarComponent>;
+    let overlayService: any;
+    let languageService: LanguageService;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [NavbarComponent],
-            providers: [{ provide: ThemeService, useClass: ThemeServiceStub }],
+            providers: [
+                { provide: ThemeService, useClass: ThemeServiceStub },
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(NavbarComponent);
+        overlayService = TestBed.inject(OverlayService);
+        languageService = TestBed.inject(LanguageService);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
@@ -42,5 +51,24 @@ describe('NavbarComponent', () => {
         expect(component.darkTheme).toBeTrue();
         expect(switchThemeButton).toHaveClass('icon-moon');
         expect(spy).toHaveBeenCalled();
+    });
+
+    it('should change language', () => {
+        const changeLanguageSpy = spyOn(component, 'onChangeLanguage').and.callThrough();
+        const setLanguageSpy = spyOn(languageService, 'setLanguage').and.callThrough();
+        const outputStub = new EventEmitter<any>();
+        const showOverlaySpy = spyOn(overlayService, 'show')
+            .and.returnValue({ instance: { selectOption: outputStub } });
+        const closeOverlaySpy = spyOn(overlayService, 'close').and.returnValue(null);
+        const changeLanguageButton = fixture.nativeElement
+            .querySelector('#change-language-button') as HTMLButtonElement;
+
+        changeLanguageButton.click();
+        outputStub.emit('en-US');
+
+        expect(changeLanguageSpy).toHaveBeenCalled();
+        expect(setLanguageSpy).toHaveBeenCalled();
+        expect(showOverlaySpy).toHaveBeenCalled();
+        expect(closeOverlaySpy).toHaveBeenCalled();
     });
 });
