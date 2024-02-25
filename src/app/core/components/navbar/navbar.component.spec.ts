@@ -1,12 +1,11 @@
 import { EventEmitter } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NavbarComponent } from '@app/core/components/navbar/navbar.component';
+import { Theme } from '@app/core/enums/theme/theme.enum';
 import { LanguageService } from '@app/core/services/language/language.service';
 import { OverlayService } from '@app/core/services/overlay/overlay.service';
+import { ThemeService } from '@app/core/services/theme/theme.service';
 import { BehaviorSubject } from 'rxjs';
-
-import { Theme } from '../../enums/theme/theme.enum';
-import { ThemeService } from '../../services/theme/theme.service';
-import { NavbarComponent } from './navbar.component';
 
 class ThemeServiceStub {
     theme = new BehaviorSubject<Theme>(Theme.LIGHT);

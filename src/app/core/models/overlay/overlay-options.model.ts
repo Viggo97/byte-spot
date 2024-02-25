@@ -1,5 +1,5 @@
-import { EdgeX, EdgeY } from '../../enums/overlay/relative-position-edge.enum';
-import { ComponentInputs } from './component-inputs.model';
+import { EdgeX, EdgeY } from '@app/core/enums/overlay/relative-position-edge.enum';
+import { ComponentInputs } from '@app/core/models/overlay/component-inputs.model';
 
 export type OverlayOptions =
     BaseOverlayOptions & {

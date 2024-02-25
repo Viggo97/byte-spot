@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-
-import { Language } from '../../enums/language/language.enum';
-import { LanguageService } from './language.service';
+import { Language } from '@app/core/enums/language/language.enum';
+import { LanguageService } from '@app/core/services/language/language.service';
 
 describe('LanguageService', () => {
     let service: LanguageService;

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Language } from '@app/core/enums/language/language.enum';
+import { I18N } from '@app/core/models/translate/i18n.model';
+import { LanguageService } from '@app/core/services/language/language.service';
 
 import { i18nEnglish } from '../../../../assets/i18n/i18n-english';
 import { i18nPolish } from '../../../../assets/i18n/i18n-polish';
-import { Language } from '../../enums/language/language.enum';
-import { I18N } from '../../models/translate/i18n.model';
-import { LanguageService } from '../language/language.service';
 
 @Injectable({
     providedIn: 'root',

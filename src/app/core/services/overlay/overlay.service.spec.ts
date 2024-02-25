@@ -2,10 +2,9 @@ import {
     Component, EventEmitter, Input, Output,
 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-
-import { Keycodes } from '../../../shared/enums/keycodes/keycodes.enum';
-import { EdgeX, EdgeY } from '../../enums/overlay/relative-position-edge.enum';
-import { OverlayService } from './overlay.service';
+import { EdgeX, EdgeY } from '@app/core/enums/overlay/relative-position-edge.enum';
+import { OverlayService } from '@app/core/services/overlay/overlay.service';
+import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
 
 @Component({
     selector: 'bsa-mock-component',

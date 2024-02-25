@@ -8,12 +8,11 @@ import {
     RendererFactory2,
     Type,
 } from '@angular/core';
+import { EdgeX, EdgeY } from '@app/core/enums/overlay/relative-position-edge.enum';
+import { ComponentInputs } from '@app/core/models/overlay/component-inputs.model';
+import { OverlayBackdropOptions, OverlayOptions } from '@app/core/models/overlay/overlay-options.model';
+import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
 import { Subject } from 'rxjs';
-
-import { Keycodes } from '../../../shared/enums/keycodes/keycodes.enum';
-import { EdgeX, EdgeY } from '../../enums/overlay/relative-position-edge.enum';
-import { ComponentInputs } from '../../models/overlay/component-inputs.model';
-import { OverlayBackdropOptions, OverlayOptions } from '../../models/overlay/overlay-options.model';
 
 @Injectable({
     providedIn: 'root',
