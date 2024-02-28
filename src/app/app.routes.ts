@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { OffersComponent } from '@app/features/pages/offers/offers.component';
+import { OffersOverviewComponent } from '@app/features/offers-overview/offers-overview.component';
 
 export const routes: Routes = [
     {
         path: 'offers',
-        component: OffersComponent,
+        component: OffersOverviewComponent,
     },
     {
         path: '',
