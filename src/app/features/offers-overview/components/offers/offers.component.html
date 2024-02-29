@@ -1,3 +1,5 @@
-@for (offer of offers; track offer.id) {
-    <bsa-offer [offer]="offer"></bsa-offer>
-}
+<div class="offers-container">
+    @for (offer of offers; track offer.id) {
+        <bsa-offer [offer]="offer"></bsa-offer>
+    }
+</div>
