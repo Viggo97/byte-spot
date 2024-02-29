@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { OffersComponent } from '@app/features/components/offers/offers.component';
+import { OffersComponent } from '@app/features/offers-overview/components/offers/offers.component';
 
 @Component({
     selector: 'bsa-offers-overview',
