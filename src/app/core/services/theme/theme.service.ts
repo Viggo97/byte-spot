@@ -34,7 +34,11 @@ export class ThemeService {
     }
 
     private setThemeClass(theme: Theme): void {
+        document.body.classList.add('transition-disabled');
         document.body.classList.toggle('dark-theme', theme === Theme.DARK);
+        setTimeout(() => {
+            document.body.classList.remove('transition-disabled');
+        });
     }
 
     private themeValid(theme: string): boolean {

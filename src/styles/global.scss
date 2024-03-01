@@ -26,4 +26,10 @@ body {
 
 body {
     background-color: var(--background-primary);
+
+    &.transition-disabled {
+        * {
+            transition: none !important;
+        }
+    }
 }
