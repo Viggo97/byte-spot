@@ -1,3 +1,5 @@
+@import "breakpoints";
+
 a {
     padding: 12px;
     display: flex;
@@ -8,5 +10,41 @@ a {
 
     &:hover {
         background-color: var(--hover-primary);
+    }
+
+    aside {
+        flex-shrink: 0;
+        width: 64px;
+        height: 64px;
+        padding: 16px;
+        background-color: gray;
+    }
+
+    section {
+        margin-left: 16px;
+        flex: 1;
+        overflow: hidden;
+
+        .title-salary-container {
+            display: flex;
+            flex-direction: column;
+            font-size: 16px;
+
+            @include md {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .salary {
+                font-weight: 500;
+                color: var(--success);
+                white-space: nowrap;
+
+                @include md {
+                    margin-left: 16px;
+                }
+            }
+        }
     }
 }

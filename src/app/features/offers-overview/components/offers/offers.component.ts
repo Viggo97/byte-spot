@@ -15,7 +15,7 @@ export class OffersComponent {
     offers: Offer[] = [
         {
             id: 'o1',
-            title: 'Senior Java Developer',
+            title: 'Senior Java Developer but now the title is much more longer than somebody can suppose',
             companyId: 'c1',
             companyName: 'Oracle',
             location: 'San Francisco',
