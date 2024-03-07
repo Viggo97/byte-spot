@@ -37,14 +37,39 @@ a {
             }
 
             .salary {
+                margin-top: 8px;
                 font-weight: 500;
                 color: var(--success);
                 white-space: nowrap;
 
                 @include md {
+                    margin-top: 0;
                     margin-left: 16px;
                 }
             }
+        }
+
+        .job-details {
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+
+            .icon-company {
+                margin-right: 8px;
+            }
+
+            .company-name {
+                margin-right: 12px;
+            }
+
+            .icon-location {
+                margin-right: 4px;
+            }
+        }
+
+        .labels {
+            margin-top: 8px;
         }
     }
 }
