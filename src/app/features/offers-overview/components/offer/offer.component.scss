@@ -3,6 +3,7 @@
 a {
     padding: 12px;
     display: flex;
+    align-items: center;
     border: 1px solid var(--border-primary);
     border-radius: 8px;
     color: var(--text-primary);
@@ -23,7 +24,7 @@ a {
     section {
         margin-left: 16px;
         flex: 1;
-        overflow: hidden;
+        min-width: 0;
 
         .title-salary-container {
             display: flex;
@@ -70,6 +71,17 @@ a {
 
         .labels {
             margin-top: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+
+            .tech-label {
+                padding: 4px 10px;
+                border: 1px solid var(--border-primary);
+                border-radius: 4px;
+                font-size: 12px;
+                font-weight: 500;
+            }
         }
     }
 }

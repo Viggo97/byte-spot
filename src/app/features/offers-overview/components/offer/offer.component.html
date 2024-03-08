@@ -7,12 +7,14 @@
         </div>
         <div class="job-details">
             <span class="icon-company"></span>
-            <span class="company-name">{{offer.companyName}}</span>
+            <span class="company-name text-ellipsis">{{offer.companyName}}</span>
             <span class="icon-location"></span>
-            <span class="company-location">{{offer.location}}</span>
+            <span class="company-location text-ellipsis">{{offer.location}}</span>
         </div>
         <div class="labels">
-            Labels
+            @for (label of offer.technologyLabels; track $index) {
+                <span class="tech-label text-ellipsis">{{label}}</span>
+            }
         </div>
     </section>
 </a>
