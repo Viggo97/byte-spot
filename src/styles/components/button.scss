@@ -13,8 +13,13 @@ button {
     cursor: pointer;
     transition: background-color 150ms cubic-bezier(.4, 0, .2, 1);
 
-    &:hover {
+    &:hover:not(:disabled) {
         background-color: var(--hover-primary);
+    }
+
+    &:disabled {
+        opacity: .5;
+        cursor: default;
     }
 
     &.button-icon {
