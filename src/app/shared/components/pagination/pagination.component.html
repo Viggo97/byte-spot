@@ -1,0 +1,25 @@
+<div class="page-info">Page {{ page }} of {{ pages }}</div>
+
+<button type="button"
+        class="button-icon icon-arrow-left-double"
+        [disabled]="page === 1"
+        (click)="onFirstPage()">
+</button>
+
+<button type="button"
+        class="button-icon icon-arrow-left"
+        [disabled]="page === 1"
+        (click)="onPreviousPage()">
+</button>
+
+<button type="button"
+        class="button-icon icon-arrow-right"
+        [disabled]="page === pages"
+        (click)="onNextPage()">
+</button>
+
+<button type="button"
+        class="button-icon icon-arrow-right-double"
+        [disabled]="page === pages"
+        (click)="onLastPage()">
+</button>

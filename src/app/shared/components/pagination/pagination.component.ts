@@ -1,0 +1,40 @@
+import {
+    Component, EventEmitter, Input, OnInit, Output,
+} from '@angular/core';
+
+@Component({
+    selector: 'bsa-pagination',
+    standalone: true,
+    imports: [],
+    templateUrl: './pagination.component.html',
+    styleUrl: './pagination.component.scss',
+})
+export class PaginationComponent implements OnInit {
+    @Input({ required: true }) total!: number;
+    @Input({ required: true }) perPage!: number;
+
+    @Input() set currentPage(value: number) {
+        this.page = value;
+    }
+
+    @Output() pageChange = new EventEmitter<number>();
+
+    page = 1;
+    pages = 1;
+
+    ngOnInit(): void {
+        this.pages = this.total / this.perPage;
+    }
+
+    onNextPage(): void {
+    }
+
+    onPreviousPage(): void {
+    }
+
+    onFirstPage(): void {
+    }
+
+    onLastPage(): void {
+    }
+}
