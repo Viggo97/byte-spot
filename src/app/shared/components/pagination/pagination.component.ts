@@ -27,14 +27,30 @@ export class PaginationComponent implements OnInit {
     }
 
     onNextPage(): void {
+        if (this.page < this.pages) {
+            this.page += 1;
+            this.emitPage();
+        }
     }
 
     onPreviousPage(): void {
+        if (this.page > 1) {
+            this.page -= 1;
+            this.emitPage();
+        }
     }
 
     onFirstPage(): void {
+        this.page = 1;
+        this.emitPage();
     }
 
     onLastPage(): void {
+        this.page = this.pages;
+        this.emitPage();
+    }
+
+    private emitPage(): void {
+        this.pageChange.emit(this.page);
     }
 }

@@ -1,9 +1,15 @@
+@import "breakpoints";
+
 :host {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 16px;
     gap: 12px;
+
+    @include md {
+        justify-content: flex-end;
+    }
 
     .page-info {
         margin-right: 4px;
