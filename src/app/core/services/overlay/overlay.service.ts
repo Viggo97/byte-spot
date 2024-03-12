@@ -194,6 +194,14 @@ export class OverlayService<T> {
                 const relativeElementTop = Math.round(relativeElement.getBoundingClientRect().top);
                 this.overlayContent.style.top = `${relativeElementTop + offsetY}px`;
             }
+
+            if (options.relativePosition.width) {
+                this.overlayContent.style.width = `${options.relativePosition.width}px`;
+            }
+
+            if (options.relativePosition.height) {
+                this.overlayContent.style.height = `${options.relativePosition.height}px`;
+            }
         }
     }
 
