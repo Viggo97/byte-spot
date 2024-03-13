@@ -57,10 +57,12 @@ export class DropdownContainerComponent {
 
     @HostListener('window:keydown', ['$event'])
     onKeyboardNavigation(event: KeyboardEvent): void {
-        event.preventDefault();
-        event.stopPropagation();
-
         const { code } = event;
+
+        if (code !== Keycodes.ESCAPE) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
 
         switch (code) {
             case Keycodes.ARROW_DOWN:
@@ -79,10 +81,12 @@ export class DropdownContainerComponent {
 
     @HostListener('keyup', ['$event'])
     onKeyboardAction(event: KeyboardEvent): void {
-        event.preventDefault();
-        event.stopPropagation();
-
         const { code } = event;
+
+        if (code !== Keycodes.ESCAPE) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
 
         switch (code) {
             case Keycodes.ENTER:
