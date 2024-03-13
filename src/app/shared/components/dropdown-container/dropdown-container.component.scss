@@ -3,7 +3,7 @@
     --container-border-width: 1px;
     --item-height: 32px;
 
-    width: fit-content;
+    width: 100%;
     padding: var( --container-padding);
     border: var(--container-border-width) solid var(--border-primary);
     border-radius: 6px;
@@ -13,7 +13,6 @@
 
     .dropdown-item {
         padding: 6px 8px;
-        min-width: 128px;
         height: var(--item-height);
         border-radius: 4px;
         font-size: 14px;
