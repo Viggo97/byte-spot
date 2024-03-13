@@ -59,6 +59,7 @@ export class NavbarComponent {
                     relativeEdge: EdgeY.BOTTOM,
                     contentEdge: EdgeY.TOP,
                 },
+                width: 128,
             },
         });
 
