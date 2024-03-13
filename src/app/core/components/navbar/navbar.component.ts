@@ -52,7 +52,7 @@ export class NavbarComponent {
             relativePosition: {
                 relativeElement: this.languageButton!.nativeElement,
                 edgePositionX: {
-                    relativeEdge: EdgeX.LEFT,
+                    relativeEdge: EdgeX.RIGHT,
                     contentEdge: EdgeX.RIGHT,
                 },
                 edgePositionY: {
