@@ -42,7 +42,7 @@ export class NavbarComponent {
             .set(Language.ENGLISH, this.translateService.translate('global.languageEN'))
             .set(Language.POLISH, this.translateService.translate('global.languagePL'));
 
-        const dropdownContainerRef = this.overlayService.show(DropdownContainerComponent, {
+        const overlayConfig = {
             componentInputs: [
                 { name: 'options', value: languageOptions },
             ],
@@ -61,10 +61,12 @@ export class NavbarComponent {
                 },
                 width: 128,
             },
-        });
+        };
+
+        const [dropdownContainerRef, close$] = this.overlayService.show(DropdownContainerComponent, overlayConfig);
 
         dropdownContainerRef?.instance.selectOption
-            .pipe(takeUntil(this.overlayService.close$))
+            .pipe(takeUntil(close$))
             .subscribe((value) => {
                 this.languageService.setLanguage(value.key as Language);
                 this.overlayService.close();
