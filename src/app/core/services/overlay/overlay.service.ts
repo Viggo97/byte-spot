@@ -12,7 +12,7 @@ import { EdgeX, EdgeY } from '@app/core/enums/overlay/relative-position-edge.enu
 import { ComponentInputs } from '@app/core/models/overlay/component-inputs.model';
 import { OverlayBackdropOptions, OverlayOptions } from '@app/core/models/overlay/overlay-options.model';
 import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -28,8 +28,8 @@ export class OverlayService<T> {
     private componentRef: ComponentRef<T> | null = null;
     private lastFocusedElement: HTMLElement | null = null;
     private open = false;
-    private closeSource = new Subject<void>();
-    close$ = this.closeSource.asObservable();
+    private closeSource: Subject<void> | null = null;
+    private close$: Observable<void> | null = null;
 
     constructor(
         private applicationRef: ApplicationRef,
@@ -40,17 +40,18 @@ export class OverlayService<T> {
         this.overlay = document.getElementsByClassName('overlay-container')[0] as HTMLDivElement;
     }
 
-    show(component: Type<T>, options?: OverlayOptions): ComponentRef<T> | null {
+    show(component: Type<T>, options?: OverlayOptions): [ComponentRef<T>, Observable<void>] {
         if (this.open) {
-            return null;
+            throw Error('Overlay has already been opened');
         }
         this.setLastFocusedElement();
         this.showOverlayContainer();
         this.createBackdrop(options?.backdrop);
         this.createOverlayContent(options);
         this.createComponent(component, options);
+        this.setCloseNotifier();
         this.open = true;
-        return this.componentRef;
+        return [this.componentRef!, this.close$!];
     }
 
     close(): void {
@@ -60,7 +61,8 @@ export class OverlayService<T> {
         this.cleanBackdrop();
         this.hideOverlayContainer();
         this.restoreFocusToPrimaryElement();
-        this.closeSource.next();
+        this.closeSource?.next();
+        this.cleanCloseNotifier();
     }
 
     private setLastFocusedElement(): void {
@@ -69,7 +71,6 @@ export class OverlayService<T> {
 
     private restoreFocusToPrimaryElement(): void {
         this.lastFocusedElement?.focus();
-        this.lastFocusedElement?.blur();
     }
 
     private showOverlayContainer(): void {
@@ -251,5 +252,16 @@ export class OverlayService<T> {
             this.disposeResizeListener();
         }
         this.disposeResizeListener = null;
+    }
+
+    private setCloseNotifier(): void {
+        this.closeSource = new Subject<void>();
+        this.close$ = this.closeSource.asObservable();
+    }
+
+    private cleanCloseNotifier(): void {
+        this.closeSource?.complete();
+        this.closeSource = null;
+        this.close$ = null;
     }
 }
