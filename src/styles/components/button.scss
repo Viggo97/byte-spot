@@ -13,8 +13,10 @@ button {
     cursor: pointer;
     transition: background-color 150ms cubic-bezier(.4, 0, .2, 1);
 
-    &:hover:not(:disabled) {
-        background-color: var(--hover-primary);
+    @media (hover: hover) {
+        &:hover:not(:disabled) {
+            background-color: var(--hover-primary);
+        }
     }
 
     &:disabled {
