@@ -1,1 +1,12 @@
+button {
+    height: 32px;
 
+    .select-value {
+        min-width: 36px;
+    }
+
+    .icon-arrows-up-down {
+        margin-left: 8px;
+        font-size: 16px;
+    }
+}
