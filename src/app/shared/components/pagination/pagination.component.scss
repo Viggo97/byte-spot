@@ -2,23 +2,20 @@
 
 :host {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    font-size: 16px;
-    gap: 12px;
+    gap: 24px;
+    font-size: 14px;
+    color: var(--text-primary);
 
     @include md {
         justify-content: flex-end;
     }
 
-    .page-info {
-        margin-right: 4px;
-        font-size: 14px;
-        color: var(--text-primary);
-    }
-
-    button {
-        font-size: 16px;
-        border: 1px solid var(--border-primary)
+    .pages-select, .pages-switch {
+        display: flex;
+        align-items: center;
+        gap: 12px;
     }
 }
