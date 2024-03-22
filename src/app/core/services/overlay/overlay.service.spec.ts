@@ -166,7 +166,16 @@ describe('OverlayService', () => {
         relativeElement.style.height = '100px';
         document.body.appendChild(relativeElement);
 
-        service.show(MockComponent, { relativePosition: { relativeElement, offsetY: 10, offsetX: 20 } });
+        service.show(MockComponent, {
+            relativePosition:
+                {
+                    relativeElement,
+                    offsetY: 10,
+                    offsetX: 20,
+                    width: 100,
+                    height: 100,
+                },
+        });
 
         const overlayContent = document.querySelector('.overlay-content') as HTMLDivElement;
         overlayContent.style.position = 'absolute';
@@ -174,9 +183,13 @@ describe('OverlayService', () => {
         let relativeElementLeft = relativeElement.getBoundingClientRect().left;
         let overlayContentTop = overlayContent.getBoundingClientRect().top;
         let overlayContentLeft = overlayContent.getBoundingClientRect().left;
+        const overlayContentWidth = overlayContent.getBoundingClientRect().width;
+        const overlayContentHeight = overlayContent.getBoundingClientRect().height;
 
         expect(overlayContentTop - relativeElementTop).toEqual(10);
         expect(overlayContentLeft - relativeElementLeft).toEqual(20);
+        expect(overlayContentWidth).toEqual(100);
+        expect(overlayContentHeight).toEqual(100);
 
         window.dispatchEvent(new Event('resize'));
 
@@ -319,16 +332,14 @@ describe('OverlayService', () => {
     });
 
     it('should prevent double call show method', () => {
-        const componentRef1 = service.show(MockComponent);
-        const componentRef2 = service.show(MockComponent);
+        service.show(MockComponent);
+        expect(() => service.show(MockComponent)).toThrowError('Overlay has already been opened');
         const overlayContainers = document.querySelectorAll('.overlay-container');
-        expect(componentRef1).not.toBe(null);
-        expect(componentRef2).toBe(null);
         expect(overlayContainers).toHaveSize(1);
     });
 
     it('should set input in component', () => {
-        const componentRef = service.show(MockComponent, {
+        const [componentRef] = service.show(MockComponent, {
             componentInputs: [{ name: 'testInput', value: 'input value' }],
         });
         const componentContent = document.getElementById('mock-component') as HTMLDivElement;
@@ -340,13 +351,14 @@ describe('OverlayService', () => {
         const spy = spyOn(service, 'close').and.callThrough();
         let counter = 0;
 
-        service.show(MockComponent);
-        service.close$.subscribe(() => {
+        const [componentRef, close$] = service.show(MockComponent);
+        close$.subscribe(() => {
             counter += 1;
         });
         service.close();
-        expect(counter).toEqual(1);
 
+        expect(componentRef).toBeTruthy();
+        expect(counter).toEqual(1);
         expect(spy).toHaveBeenCalled();
     });
 });
