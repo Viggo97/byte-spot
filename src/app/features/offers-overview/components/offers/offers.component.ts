@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
 import { OfferComponent } from '@app/features/offers-overview/components/offer/offer.component';
 import { Offer } from '@app/features/offers-overview/model/offer.model';
+import { PaginationComponent } from '@app/shared/components/pagination/pagination.component';
+import { SelectComponent } from '@app/shared/components/select/select.component';
 
 @Component({
     selector: 'bsa-offers',
     standalone: true,
     imports: [
         OfferComponent,
+        PaginationComponent,
+        SelectComponent,
     ],
     templateUrl: './offers.component.html',
     styleUrl: './offers.component.scss',

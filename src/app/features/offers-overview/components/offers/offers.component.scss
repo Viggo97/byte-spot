@@ -1,5 +1,11 @@
+@import "breakpoints";
+
 .offers-container {
     display: flex;
     flex-direction: column;
     row-gap: 8px;
+}
+
+bsa-pagination {
+    margin-top: 20px;
 }
