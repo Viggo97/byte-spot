@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { OfferComponent } from '@app/features/offers-overview/components/offer/offer.component';
+import { SearchComponent } from '@app/features/offers-overview/components/search/search.component';
 import { Offer } from '@app/features/offers-overview/model/offer.model';
 import { PaginationComponent } from '@app/shared/components/pagination/pagination.component';
 import { SelectComponent } from '@app/shared/components/select/select.component';
@@ -11,6 +12,7 @@ import { SelectComponent } from '@app/shared/components/select/select.component'
         OfferComponent,
         PaginationComponent,
         SelectComponent,
+        SearchComponent,
     ],
     templateUrl: './offers.component.html',
     styleUrl: './offers.component.scss',
