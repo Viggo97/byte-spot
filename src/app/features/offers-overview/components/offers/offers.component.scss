@@ -1,5 +1,10 @@
 @import "breakpoints";
 
+.filters-container {
+    margin-bottom: 24px;
+    display: flex;
+}
+
 .offers-container {
     display: flex;
     flex-direction: column;
