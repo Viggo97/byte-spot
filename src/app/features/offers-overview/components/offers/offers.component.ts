@@ -50,4 +50,8 @@ export class OffersComponent {
             technologyLabels: ['JavaScript', 'Angular', 'TypeScript', 'HTML', 'Node.js'],
         },
     ];
+
+    onSearchOpen(): void {
+
+    }
 }
