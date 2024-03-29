@@ -3,7 +3,6 @@ import { OfferComponent } from '@app/features/offers-overview/components/offer/o
 import { SearchComponent } from '@app/features/offers-overview/components/search/search.component';
 import { Offer } from '@app/features/offers-overview/model/offer.model';
 import { PaginationComponent } from '@app/shared/components/pagination/pagination.component';
-import { SelectComponent } from '@app/shared/components/select/select.component';
 
 @Component({
     selector: 'bsa-offers',
@@ -11,7 +10,6 @@ import { SelectComponent } from '@app/shared/components/select/select.component'
     imports: [
         OfferComponent,
         PaginationComponent,
-        SelectComponent,
         SearchComponent,
     ],
     templateUrl: './offers.component.html',
