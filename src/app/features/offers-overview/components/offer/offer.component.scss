@@ -1,10 +1,11 @@
-@import "breakpoints";
+@import 'breakpoints';
+@import 'variables';
 
 a {
     padding: 12px;
     display: flex;
     align-items: center;
-    border: 1px solid var(--border-primary);
+    border: $border-base;
     border-radius: 8px;
     color: var(--text-primary);
     cursor: pointer;
@@ -77,7 +78,7 @@ a {
 
             .tech-label {
                 padding: 4px 10px;
-                border: 1px solid var(--border-primary);
+                border: $border-base;
                 border-radius: 4px;
                 font-size: 12px;
                 font-weight: 500;

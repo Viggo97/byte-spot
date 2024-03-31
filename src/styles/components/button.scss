@@ -1,14 +1,15 @@
+@import 'variables.scss';
+
 button {
     padding: 8px 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--background-primary);
-    border: 1px solid var(--border-primary);
+    border: $border-base;
     border-radius: 6px;
     color: var(--text-primary);
-    font-family: Inter, sans-serif;
-    font-size: 14px;
+    font: $font-md;
     font-weight: 500;
     cursor: pointer;
     transition: background-color 150ms cubic-bezier(.4, 0, .2, 1);
@@ -25,9 +26,7 @@ button {
     }
 
     &.button-icon {
-        width: 32px;
-        height: 32px;
-        padding: 0;
+        padding: 8px;
     }
 
     &.button-border-none {
