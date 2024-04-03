@@ -1,21 +1,21 @@
+@import 'variables';
+
 .dropdown-container {
-    --container-padding: 4px;
-    --container-border-width: 1px;
-    --item-height: 32px;
 
     width: 100%;
-    padding: var( --container-padding);
-    border: var(--container-border-width) solid var(--border-primary);
+    padding: 4px;
+    border: $border-base;
     border-radius: 6px;
     background-color: var(--background-primary);
     list-style-type: none;
     overflow: auto;
 
     .dropdown-item {
+        display: flex;
+        align-items: center;
         padding: 6px 8px;
-        height: var(--item-height);
         border-radius: 4px;
-        font-size: 14px;
+        font: $font-md;
         font-weight: 500;
         color: var(--text-primary);
         cursor: pointer;
