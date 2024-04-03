@@ -1,4 +1,5 @@
-@import "breakpoints";
+@import 'breakpoints';
+@import 'variables';
 
 :host {
     display: flex;
@@ -6,7 +7,7 @@
     justify-content: center;
     align-items: center;
     gap: 24px;
-    font-size: 14px;
+    font: $font-md;
     color: var(--text-primary);
 
     @include md {
