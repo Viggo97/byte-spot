@@ -1,4 +1,6 @@
-<button type="button"
-        class="button-icon icon-search"
-        (click)="onSearchOpen()">
-</button>
+@if (filterButtonsVisible) {
+    <button type="button"
+            class="button-icon icon-search"
+            (click)="onSearchOpen()">
+    </button>
+}
