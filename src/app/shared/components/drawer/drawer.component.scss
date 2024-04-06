@@ -1,0 +1,13 @@
+@import 'variables';
+
+.drawer-content {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    min-height: 5rem;
+    background-color: var(--background-primary);
+    border: $border-base;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
