@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Breakpoints } from '@app/core/enums/breakpoints/breakpoints.enum';
+import { DrawerService } from '@app/shared/services/drawer/drawer.service';
 import { fromEvent, Subject, takeUntil } from 'rxjs';
 
 @Component({
@@ -15,6 +16,9 @@ export class FiltersComponent implements OnInit, OnDestroy {
 
     private destroy$ = new Subject<void>();
 
+    constructor(private drawerService: DrawerService) {
+    }
+
     ngOnInit(): void {
         this.initFilterIconsHandling();
     }
@@ -27,8 +31,8 @@ export class FiltersComponent implements OnInit, OnDestroy {
             });
     }
 
-    onSearchOpen(): void {
-
+    onDrawerSearchOpen(): void {
+        this.drawerService.openDrawer();
     }
 
     ngOnDestroy(): void {

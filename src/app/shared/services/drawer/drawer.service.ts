@@ -7,4 +7,8 @@ import { DrawerComponent } from '@app/shared/components/drawer/drawer.component'
 })
 export class DrawerService {
     constructor(private overlayService: OverlayService<DrawerComponent>) { }
+
+    openDrawer(): void {
+        this.overlayService.show(DrawerComponent);
+    }
 }
