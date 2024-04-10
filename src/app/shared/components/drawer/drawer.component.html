@@ -1,3 +1,4 @@
-<div class="drawer-content">
+<div @drawerTrigger class="drawer-content">
+    <button (click)="onCloseDrawer()">X</button>
     <ng-content></ng-content>
 </div>
