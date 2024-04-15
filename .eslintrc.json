@@ -42,7 +42,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "app",
+            "prefix": "bsa",
             "style": "camelCase"
           }
         ],
