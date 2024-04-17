@@ -1,12 +1,18 @@
 import {
     animate, style, transition, trigger,
 } from '@angular/animations';
-import { Component, EventEmitter } from '@angular/core';
+import { NgComponentOutlet } from '@angular/common';
+import {
+    Component, EventEmitter, Input, Type,
+} from '@angular/core';
+import { ComponentInputs } from '@app/core/models/overlay/component-inputs.model';
 
 @Component({
     selector: 'bsa-drawer',
     standalone: true,
-    imports: [],
+    imports: [
+        NgComponentOutlet,
+    ],
     templateUrl: './drawer.component.html',
     styleUrl: './drawer.component.scss',
     animations: [
@@ -21,7 +27,20 @@ import { Component, EventEmitter } from '@angular/core';
         ]),
     ],
 })
-export class DrawerComponent {
+export class DrawerComponent<T> {
+    @Input({ required: true }) component!: Type<T>;
+    @Input() set inputs(inputs: ComponentInputs[]) {
+        inputs.forEach((input) => {
+            this.componentInputs[input.name] = input.value;
+        });
+    }
+
+    get inputs(): Record<string, any> {
+        return this.componentInputs;
+    }
+
+    private componentInputs: Record<string, any> = {};
+
     closeDrawer = new EventEmitter<void>();
 
     onCloseDrawer(): void {

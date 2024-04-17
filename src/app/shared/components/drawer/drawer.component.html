@@ -2,5 +2,5 @@
     <button class="button-icon icon-xmark close-button"
             (click)="onCloseDrawer()">
     </button>
-    <ng-content></ng-content>
+    <ng-container *ngComponentOutlet="component; inputs: inputs" />
 </div>
