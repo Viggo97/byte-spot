@@ -10,6 +10,9 @@ $hover-primary-dark: hsl(240, 4%, 10%);
 $text-primary-light: hsl(240, 10%, 4%);
 $text-primary-dark: hsl(0, 0%, 100%);
 
+$text-secondary-light: hsl(0, 0%, 44%);
+$text-secondary-dark: hsl(240, 5%, 64%);
+
 $success-light: hsl(120, 64%, 46%);
 $success-dark: hsl(142 64% 46%);
 
@@ -20,6 +23,7 @@ $backdrop-dark: hsl(0, 0%, 0%, 0.2);
     --background-primary: #{$background-primary-light};
     --border-primary: #{$border-primary-light};
     --text-primary: #{$text-primary-light};
+    --text-secondary: #{$text-secondary-light};
     --hover-primary: #{$hover-primary-light};
     --success: #{$success-light};
     --backdrop-background: #{$backdrop-light};
@@ -29,6 +33,7 @@ $backdrop-dark: hsl(0, 0%, 0%, 0.2);
     --background-primary: #{$background-primary-dark};
     --border-primary: #{$border-primary-dark};
     --text-primary: #{$text-primary-dark};
+    --text-secondary: #{$text-secondary-dark};
     --hover-primary: #{$hover-primary-dark};
     --success: #{$success-dark};
     --backdrop-background: #{$backdrop-dark};
