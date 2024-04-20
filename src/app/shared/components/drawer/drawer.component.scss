@@ -1,19 +1,28 @@
 @import 'variables';
 
-.drawer-content {
+:host {
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--background-primary);
-    border: $border-base;
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
+    max-height: 95vh;
+    height: 100%;
 
-    .close-button {
-        margin-left: auto;
+    .drawer-container {
+        height: 100%;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        background-color: var(--background-primary);
+        border: $border-base;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+
+        header {
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+        }
     }
 }

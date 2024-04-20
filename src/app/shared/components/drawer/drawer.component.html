@@ -1,6 +1,11 @@
-<div @drawerTrigger class="drawer-content">
-    <button class="button-icon icon-xmark close-button"
-            (click)="onCloseDrawer()">
-    </button>
-    <ng-container *ngComponentOutlet="component; inputs: inputs" />
+<div @drawerTrigger class="drawer-container">
+    <header>
+        <h2>{{title}}</h2>
+        <button class="button-icon icon-xmark close-button"
+                (click)="onCloseDrawer()">
+        </button>
+    </header>
+    <div class="drawer-content">
+        <ng-content></ng-content>
+    </div>
 </div>
