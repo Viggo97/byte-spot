@@ -55,6 +55,9 @@ export class OverlayService<T> {
     }
 
     close(): void {
+        if (!this.open) {
+            return;
+        }
         this.open = false;
         this.removeComponent();
         this.cleanOverlayContent();
