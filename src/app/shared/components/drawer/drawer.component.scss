@@ -13,7 +13,6 @@
         padding: 24px;
         display: flex;
         flex-direction: column;
-        overflow-y: auto;
         background-color: var(--background-primary);
         border: $border-base;
         border-top-left-radius: 1rem;
@@ -23,6 +22,10 @@
             margin-bottom: 1rem;
             display: flex;
             justify-content: space-between;
+        }
+
+        .drawer-content {
+            overflow-y: auto;
         }
     }
 }
