@@ -1,2 +1,17 @@
-<span class="icon-search"></span>
-<input type="text">
+<div class="search-container">
+    <span class="icon-search"></span>
+    <input type="text">
+</div>
+
+<div class="suggestions-container">
+    @for (suggestionGroup of suggestionGroups; track suggestionGroup) {
+        <div class="suggestions-group">
+            <h3>{{ suggestionGroup.group }}</h3>
+            <ul>
+                @for (suggestion of suggestionGroup.suggestions; track suggestion) {
+                    <li>{{ suggestion }}</li>
+                }
+            </ul>
+        </div>
+    }
+</div>
