@@ -1,69 +1,44 @@
-import { Component } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { OffersService } from '@app/features/offers-overview/components/offers/offers.service';
+import { SuggestionsGroup } from '@app/features/offers-overview/model/suggestions-group.model';
+import {
+    debounceTime, distinctUntilChanged, Observable, switchMap,
+} from 'rxjs';
 
 @Component({
     selector: 'bsa-search',
     standalone: true,
-    imports: [],
+    imports: [
+        ReactiveFormsModule,
+        AsyncPipe,
+    ],
     templateUrl: './search.component.html',
     styleUrl: './search.component.scss',
 })
-export class SearchComponent {
-    suggestionGroups: { group: string, suggestions: string[] }[] = [
-        {
-            group: 'Group A',
-            suggestions: [
-                'suggestion A1',
-                'suggestion A2',
-                'suggestion A3',
-            ],
-        },
-        {
-            group: 'Group B',
-            suggestions: [
-                'suggestion B1',
-                'suggestion B2',
-                'suggestion B3',
-            ],
-        },
-        {
-            group: 'Group C',
-            suggestions: [
-                'suggestion C1',
-                'suggestion C2',
-                'suggestion C3',
-            ],
-        },
-        {
-            group: 'Group D',
-            suggestions: [
-                'suggestion D1',
-                'suggestion D2',
-                'suggestion D3',
-            ],
-        },
-        {
-            group: 'Group E',
-            suggestions: [
-                'suggestion E1',
-                'suggestion E2',
-                'suggestion E3',
-            ],
-        },
-        {
-            group: 'Group F',
-            suggestions: [
-                'suggestion F1',
-                'suggestion F2',
-                'suggestion F3',
-            ],
-        },
-        {
-            group: 'Group G',
-            suggestions: [
-                'suggestion G1',
-                'suggestion G2',
-                'suggestion G3',
-            ],
-        },
-    ];
+export class SearchComponent implements OnInit {
+    suggestionsVisible = false;
+    form = new FormControl<string>('');
+    suggestions$!: Observable<SuggestionsGroup[]>;
+
+    constructor(private offersService: OffersService) {
+    }
+
+    ngOnInit(): void {
+        this.suggestions$ = this.form.valueChanges
+            .pipe(
+                debounceTime(500),
+                distinctUntilChanged(),
+                switchMap((searchTerm) => this.offersService.getSearchSuggestions(searchTerm)),
+            );
+    }
+
+    onFocus(): void {
+        this.suggestionsVisible = true;
+    }
+
+    onBlur(): void {
+        this.suggestionsVisible = false;
+    }
 }

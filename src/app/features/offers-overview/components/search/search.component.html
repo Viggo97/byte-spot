@@ -1,17 +1,27 @@
 <div class="search-container">
     <span class="icon-search"></span>
-    <input type="text">
+    <input type="text"
+           [formControl]="form"
+           (focus)="onFocus()"
+           (blur)="onBlur()"
+    >
 </div>
 
-<div class="suggestions-container">
-    @for (suggestionGroup of suggestionGroups; track suggestionGroup) {
-        <div class="suggestions-group">
-            <h3>{{ suggestionGroup.group }}</h3>
-            <ul>
-                @for (suggestion of suggestionGroup.suggestions; track suggestion) {
-                    <li>{{ suggestion }}</li>
-                }
-            </ul>
-        </div>
-    }
-</div>
+@if (suggestionsVisible) {
+    <div class="suggestions-container">
+        @if (suggestions$ | async; as suggestions) {
+            @for (suggestionsGroup of suggestions; track suggestionsGroup.category) {
+                <div class="suggestions-group">
+                    <h3>{{ suggestionsGroup.category }}</h3>
+                    <ul>
+                        @for (suggestion of suggestionsGroup.suggestions; track suggestion) {
+                            <li>{{ suggestion }}</li>
+                        }
+                    </ul>
+                </div>
+            }
+        } @else {
+            Nothing found
+        }
+    </div>
+}
