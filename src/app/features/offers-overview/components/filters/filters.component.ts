@@ -1,12 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Breakpoints } from '@app/core/enums/breakpoints/breakpoints.enum';
+import { SearchComponent } from '@app/features/offers-overview/components/search/search.component';
+import { SearchDrawerComponent } from '@app/features/offers-overview/components/search-drawer/search-drawer.component';
 import { DrawerService } from '@app/shared/services/drawer/drawer.service';
 import { fromEvent, Subject, takeUntil } from 'rxjs';
 
 @Component({
     selector: 'bsa-filters',
     standalone: true,
-    imports: [],
+    imports: [
+        SearchComponent,
+    ],
     templateUrl: './filters.component.html',
     styleUrl: './filters.component.scss',
 })
@@ -28,12 +32,19 @@ export class FiltersComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe(() => {
                 this.filterButtonsVisible = window.innerWidth < Breakpoints.SM;
+                if (window.innerWidth > Breakpoints.SM) {
+                    this.drawerService.closeDrawer();
+                }
             });
     }
 
-    onDrawerSearchOpen(): void {
-        this.drawerService.openDrawer();
+    onSearchDrawerOpen(): void {
+        this.drawerService.openDrawer(SearchDrawerComponent);
     }
+
+    onTechnologyDrawerOpen(): void {}
+
+    onFiltersDrawerOpen(): void {}
 
     ngOnDestroy(): void {
         this.destroy$.next();

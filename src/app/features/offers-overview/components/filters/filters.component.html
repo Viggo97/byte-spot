@@ -1,6 +1,18 @@
 @if (filterButtonsVisible) {
     <button type="button"
             class="button-icon icon-search"
-            (click)="onDrawerSearchOpen()">
+            (click)="onSearchDrawerOpen()">
     </button>
+
+    <button type="button"
+            class="button-icon icon-gear"
+            (click)="onTechnologyDrawerOpen()">
+    </button>
+
+    <button type="button"
+            class="button-icon icon-filter"
+            (click)="onFiltersDrawerOpen()">
+    </button>
+} @else {
+    <bsa-search></bsa-search>
 }
