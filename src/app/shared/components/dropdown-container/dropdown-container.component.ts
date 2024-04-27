@@ -3,7 +3,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
-    EventEmitter,
+    EventEmitter, HostBinding,
     HostListener,
     Input,
     Output,
@@ -30,20 +30,21 @@ export class DropdownContainerComponent {
     @Input({ required: true }) set options(options: Map<string, string>) {
         this.items = Array.from(options, ([key, value]) => ({ key, value }));
     }
+
     @Input() set numberOfVisibleOptions(value: number) {
         this.maxHeight = `${value * this.ITEM_HEIGHT + 2 * this.INNER_CONTAINER_PADDING + 2 * this.BORDER_WIDTH}px`;
     }
-
-    @Output() selectOption = new EventEmitter<DropdownOption>();
-
-    @ViewChildren('itemRef') itemsRef: QueryList<ElementRef> = new QueryList<ElementRef>();
-
     private readonly ITEM_HEIGHT = 32;
     private readonly INNER_CONTAINER_PADDING = 4;
     private readonly BORDER_WIDTH = 1;
+    @HostBinding('style.maxHeight')
+        maxHeight = `${5 * this.ITEM_HEIGHT + 2 * this.INNER_CONTAINER_PADDING + 2 * this.BORDER_WIDTH}px`;
+
+    protected items: DropdownOption[] = [];
+    @Output() selectOption = new EventEmitter<DropdownOption>();
+
+    @ViewChildren('itemRef') itemsRef: QueryList<ElementRef> = new QueryList<ElementRef>();
     private index = -1;
-    items: DropdownOption[] = [];
-    maxHeight = `${5 * this.ITEM_HEIGHT + 2 * this.INNER_CONTAINER_PADDING + 2 * this.BORDER_WIDTH}px`;
 
     onSelectItem(event: MouseEvent, item: DropdownOption): void {
         event.preventDefault();
