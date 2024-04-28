@@ -2,25 +2,28 @@
 
 :host {
     width: 100%;
-    padding: 4px;
-    border: $border-base;
-    border-radius: 6px;
-    background-color: var(--background-primary);
-    list-style-type: none;
-    overflow: auto;
 
-    .dropdown-item {
-        display: flex;
-        align-items: center;
-        padding: 6px 8px;
-        border-radius: 4px;
-        font: $font-md;
-        font-weight: 500;
-        color: var(--text-primary);
-        cursor: pointer;
+    .dropdown-container {
+        width: 100%;
+        padding: 4px;
+        border: $border-base;
+        border-radius: 6px;
+        background-color: var(--background-primary);
+        overflow: auto;
 
-        &:hover {
-            background-color: var(--hover-primary);
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 6px 8px;
+            border-radius: 4px;
+            font: $font-md;
+            font-weight: 500;
+            color: var(--text-primary);
+            cursor: pointer;
+
+            &:hover {
+                background-color: var(--hover-primary);
+            }
         }
     }
 }

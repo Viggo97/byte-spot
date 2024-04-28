@@ -1,15 +1,17 @@
+import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { NgForOf, NgStyle } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
-    EventEmitter, HostBinding,
+    EventEmitter,
     HostListener,
     Input,
     Output,
     QueryList,
     ViewChildren,
 } from '@angular/core';
+import { getRemValueInPixels } from '@app/core/utils/rem-value';
 
 import { Keycodes } from '../../enums/keycodes/keycodes.enum';
 import { DropdownOption } from '../../models/dropdown-container/dropdown-option';
@@ -21,49 +23,42 @@ import { DropdownOption } from '../../models/dropdown-container/dropdown-option'
     imports: [
         NgForOf,
         NgStyle,
+        CdkTrapFocus,
     ],
     templateUrl: './dropdown-container.component.html',
     styleUrl: './dropdown-container.component.scss',
 })
 export class DropdownContainerComponent {
-    @Input() tabIndex: number = 0;
     @Input({ required: true }) set options(options: Map<string, string>) {
         this.items = Array.from(options, ([key, value]) => ({ key, value }));
     }
 
+    @Input() tabIndex = 0;
+
     @Input() set numberOfVisibleOptions(value: number) {
-        this.maxHeight = `${value * this.ITEM_HEIGHT + 2 * this.INNER_CONTAINER_PADDING + 2 * this.BORDER_WIDTH}px`;
+        this.maxHeight = this.calculateMaxHeight(value);
     }
-    private readonly ITEM_HEIGHT = 32;
-    private readonly INNER_CONTAINER_PADDING = 4;
-    private readonly BORDER_WIDTH = 1;
-    @HostBinding('style.maxHeight')
-        maxHeight = `${5 * this.ITEM_HEIGHT + 2 * this.INNER_CONTAINER_PADDING + 2 * this.BORDER_WIDTH}px`;
+
+    maxHeight = this.calculateMaxHeight();
 
     protected items: DropdownOption[] = [];
+
     @Output() selectOption = new EventEmitter<DropdownOption>();
 
-    @ViewChildren('itemRef') itemsRef: QueryList<ElementRef> = new QueryList<ElementRef>();
-    private index = -1;
+    @ViewChildren('itemRef') itemsRef = new QueryList<ElementRef<HTMLDivElement>>();
 
-    onSelectItem(event: MouseEvent, item: DropdownOption): void {
-        event.preventDefault();
-        event.stopPropagation();
+    private index = 0;
+
+    onSelectItem(item: DropdownOption): void {
         this.index = this.items.indexOf(item);
         this.selectOption.emit(item);
     }
 
-    constructor(private elementRef: ElementRef) {
-    }
+    @HostListener('keydown', ['$event'])
+    onKeyboardAction(event: KeyboardEvent): void {
+        event.preventDefault();
 
-    @HostListener('window:keydown', ['$event'])
-    onKeyboardNavigation(event: KeyboardEvent): void {
         const { code } = event;
-
-        if (code !== Keycodes.ESCAPE) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
 
         switch (code) {
             case Keycodes.ARROW_DOWN:
@@ -75,21 +70,6 @@ export class DropdownContainerComponent {
             case Keycodes.TAB:
                 this.onTab(event);
                 break;
-            default:
-                break;
-        }
-    }
-
-    @HostListener('keyup', ['$event'])
-    onKeyboardAction(event: KeyboardEvent): void {
-        const { code } = event;
-
-        if (code !== Keycodes.ESCAPE) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-
-        switch (code) {
             case Keycodes.ENTER:
                 this.handleSelectItemByKeyboard();
                 break;
@@ -98,13 +78,6 @@ export class DropdownContainerComponent {
                 break;
             default:
                 break;
-        }
-    }
-
-    @HostListener('window:click', ['$event'])
-    onClick(event: MouseEvent): void {
-        if (!this.elementRef.nativeElement.contains(event.target)) {
-            this.index = -1;
         }
     }
 
@@ -121,10 +94,6 @@ export class DropdownContainerComponent {
     }
 
     private moveIndexBack(): void {
-        if (this.index === -1) {
-            this.index = this.items.length;
-        }
-
         if (!this.isFirstIndex) {
             this.index -= 1;
             this.focusItem();
@@ -149,10 +118,26 @@ export class DropdownContainerComponent {
 
     private focusItem(): void {
         const item = this.itemsRef.get(this.index)?.nativeElement;
-        item.focus({ preventScroll: true });
-        item.scrollIntoView({
+        item?.focus({ preventScroll: true });
+        item?.scrollIntoView({
             behavior: 'instant',
             block: 'nearest',
         });
+    }
+
+    private calculateMaxHeight(items?: number): string | null {
+        if (!items) {
+            return null;
+        }
+
+        const containerBorder = 1;
+        const containerPadding = 4;
+        const itemPadding = 6;
+        const lineHeight = 1.5;
+        return `${
+            items * (getRemValueInPixels(lineHeight) + 2 * itemPadding)
+            + 2 * containerPadding
+            + 2 * containerBorder
+        }px`;
     }
 }
