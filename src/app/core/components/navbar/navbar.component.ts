@@ -63,13 +63,12 @@ export class NavbarComponent {
             },
         };
 
-        const [dropdownContainerRef, close$] = this.overlayService.show(DropdownContainerComponent, overlayConfig);
-
-        dropdownContainerRef?.instance.selectOption
-            .pipe(takeUntil(close$))
+        const overlay = this.overlayService.show(DropdownContainerComponent, overlayConfig);
+        overlay.componentRef.instance.selectOption
+            .pipe(takeUntil(overlay.close$))
             .subscribe((value) => {
                 this.languageService.setLanguage(value.key as Language);
-                this.overlayService.close();
+                overlay.close();
             });
     }
 }
