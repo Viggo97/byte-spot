@@ -1,35 +1,18 @@
 import {
     ApplicationRef,
-    ComponentRef,
-    createComponent,
     Injectable,
     NgZone,
-    Renderer2,
-    RendererFactory2,
+    Renderer2, RendererFactory2,
     Type,
 } from '@angular/core';
-import { EdgeX, EdgeY } from '@app/core/enums/overlay/relative-position-edge.enum';
-import { ComponentInputs } from '@app/core/models/overlay/component-inputs.model';
-import { OverlayBackdropOptions, OverlayOptions } from '@app/core/models/overlay/overlay-options.model';
-import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
-import { Observable, Subject } from 'rxjs';
+import { OverlayOptions } from '@app/core/models/overlay/overlay-options.model';
+import { CustomOverlay } from '@app/core/services/overlay/custom-overlay';
 
 @Injectable({
     providedIn: 'root',
 })
 export class OverlayService<T> {
     private renderer: Renderer2;
-    private overlay: HTMLDivElement;
-    private overlayContent: HTMLDivElement | null = null;
-    private backdrop: HTMLDivElement | null = null;
-    private disposeBackdropClickListener: (() => void) | null = null;
-    private disposeBackdropEscapeListener: (() => void) | null = null;
-    private disposeResizeListener: (() => void) | null = null;
-    private componentRef: ComponentRef<T> | null = null;
-    private lastFocusedElement: HTMLElement | null = null;
-    private open = false;
-    private closeSource: Subject<void> | null = null;
-    private close$: Observable<void> | null = null;
 
     constructor(
         private applicationRef: ApplicationRef,
@@ -37,234 +20,13 @@ export class OverlayService<T> {
         private ngZone: NgZone,
     ) {
         this.renderer = this.rendererFactory.createRenderer(null, null);
-        this.overlay = document.getElementsByClassName('overlay-container')[0] as HTMLDivElement;
     }
 
-    show(component: Type<T>, options?: OverlayOptions): [ComponentRef<T>, Observable<void>] {
-        if (this.open) {
-            throw Error('Overlay has already been opened');
-        }
-        this.setLastFocusedElement();
-        this.showOverlayContainer();
-        this.createBackdrop(options?.backdrop);
-        this.createOverlayContent(options);
-        this.createComponent(component, options);
-        this.setCloseNotifier();
-        this.open = true;
-        return [this.componentRef!, this.close$!];
-    }
-
-    close(): void {
-        if (!this.open) {
-            return;
-        }
-        this.open = false;
-        this.removeComponent();
-        this.cleanOverlayContent();
-        this.cleanBackdrop();
-        this.hideOverlayContainer();
-        this.restoreFocusToPrimaryElement();
-        this.closeSource?.next();
-        this.cleanCloseNotifier();
-    }
-
-    private setLastFocusedElement(): void {
-        this.lastFocusedElement = (document.activeElement as HTMLElement);
-    }
-
-    private restoreFocusToPrimaryElement(): void {
-        this.lastFocusedElement?.focus();
-    }
-
-    private showOverlayContainer(): void {
-        this.overlay.classList.add('overlay-container-show');
-    }
-
-    private hideOverlayContainer(): void {
-        this.overlay.classList.remove('overlay-container-show');
-    }
-
-    private createComponent(component: Type<T>, options?: OverlayOptions): void {
-        this.componentRef = createComponent<T>(component, {
-            environmentInjector: this.applicationRef.injector,
-            hostElement: this.overlayContent!,
-        });
-        this.setComponentInputs(options?.componentInputs);
-        this.applicationRef.attachView(this.componentRef.hostView);
-        this.componentRef.changeDetectorRef.detectChanges();
-    }
-
-    private removeComponent(): void {
-        this.componentRef?.destroy();
-        this.applicationRef.detachView(this.componentRef!.hostView);
-        this.componentRef = null;
-    }
-
-    private setComponentInputs(inputs: ComponentInputs[] | undefined): void {
-        inputs?.forEach((i) => {
-            this.componentRef!.setInput(i.name, i.value);
-        });
-    }
-
-    private createBackdrop(options?: OverlayBackdropOptions): void {
-        const background = options?.background !== undefined ? options?.background : true;
-        const closeOnBackdropClick = options?.closeOnBackdropClick !== undefined ? options?.closeOnBackdropClick : true;
-        const closeOnEscape = options?.closeOnEscape !== undefined ? options?.closeOnEscape : true;
-
-        this.backdrop = document.createElement('div');
-        this.backdrop.classList.add('backdrop');
-
-        if (background) {
-            this.backdrop!.classList.add('backdrop-background');
-        }
-
-        if (closeOnBackdropClick) {
-            this.disposeBackdropClickListener = this.renderer.listen(this.backdrop, 'click', () => {
-                this.close();
-            });
-        }
-
-        if (closeOnEscape) {
-            this.disposeBackdropEscapeListener = this.renderer.listen(window, 'keyup', (event: KeyboardEvent) => {
-                if (event.code === Keycodes.ESCAPE) {
-                    this.close();
-                }
-            });
-        }
-
-        this.overlay.appendChild(this.backdrop);
-    }
-
-    private cleanBackdrop(): void {
-        if (this.disposeBackdropClickListener) {
-            this.disposeBackdropClickListener();
-        }
-        if (this.disposeBackdropEscapeListener) {
-            this.disposeBackdropEscapeListener();
-        }
-        this.disposeBackdropClickListener = null;
-        this.disposeBackdropEscapeListener = null;
-        this.backdrop?.remove();
-    }
-
-    private createOverlayContent(options: OverlayOptions | undefined): void {
-        this.overlayContent = document.createElement('div');
-        this.overlayContent.classList.add('overlay-content');
-
-        if (options?.directPosition) {
-            this.setOverlayDirectPosition(options);
-        } else if (options?.relativePosition) {
-            this.setOverlayRelativePosition(options);
-            this.ngZone.runOutsideAngular(() => {
-                this.disposeResizeListener = this.renderer.listen(window, 'resize', () => {
-                    this.setOverlayRelativePosition(options);
-                });
-            });
-        } else {
-            this.overlayContent.classList.add('overlay-content-center');
-        }
-
-        this.overlay.appendChild(this.overlayContent);
-    }
-
-    private setOverlayDirectPosition(options: OverlayOptions): void {
-        if (this.overlayContent) {
-            this.overlayContent.style.top = `${options.directPosition?.top}px`;
-            this.overlayContent.style.bottom = `${options.directPosition?.bottom}px`;
-            this.overlayContent.style.left = `${options.directPosition?.left}px`;
-            this.overlayContent.style.right = `${options.directPosition?.right}px`;
-            this.overlayContent.style.width = `${options.directPosition?.width}px`;
-            this.overlayContent.style.height = `${options.directPosition?.height}px`;
-        }
-    }
-
-    private setOverlayRelativePosition(options: OverlayOptions): void {
-        if (this.overlayContent && options.relativePosition) {
-            const { relativeElement } = options.relativePosition;
-            const { offsetX = 0, offsetY = 0 } = options.relativePosition;
-
-            if (options.relativePosition.edgePositionX) {
-                const { relativeEdge, contentEdge } = options.relativePosition.edgePositionX;
-                this.setOverlayRelativePositionX(relativeElement, offsetX, relativeEdge, contentEdge);
-            } else {
-                const relativeElementLeft = Math.round(relativeElement.getBoundingClientRect().left);
-                this.overlayContent.style.left = `${relativeElementLeft + offsetX}px`;
-            }
-
-            if (options.relativePosition.edgePositionY) {
-                const { relativeEdge, contentEdge } = options.relativePosition.edgePositionY;
-                this.setOverlayRelativePositionY(relativeElement, offsetY, relativeEdge, contentEdge);
-            } else {
-                const relativeElementTop = Math.round(relativeElement.getBoundingClientRect().top);
-                this.overlayContent.style.top = `${relativeElementTop + offsetY}px`;
-            }
-
-            if (options.relativePosition.width) {
-                this.overlayContent.style.width = `${options.relativePosition.width}px`;
-            }
-
-            if (options.relativePosition.height) {
-                this.overlayContent.style.height = `${options.relativePosition.height}px`;
-            }
-        }
-    }
-
-    private setOverlayRelativePositionX(
-        relativeElement: Element,
-        offset: number,
-        relativeEdge: EdgeX,
-        contentEdge: EdgeX,
-    ): void {
-        const relativeElementLeft = Math.round(relativeElement.getBoundingClientRect().left);
-        const relativeElementRight = Math.round(relativeElement.getBoundingClientRect().right);
-
-        if (relativeEdge === EdgeX.LEFT && contentEdge === EdgeX.LEFT) {
-            this.overlayContent!.style.left = `${relativeElementLeft + offset}px`;
-        } else if (relativeEdge === EdgeX.LEFT && contentEdge === EdgeX.RIGHT) {
-            this.overlayContent!.style.right = `${document.body.offsetWidth - relativeElementLeft + offset}px`;
-        } else if (relativeEdge === EdgeX.RIGHT && contentEdge === EdgeX.LEFT) {
-            this.overlayContent!.style.left = `${relativeElementRight + offset}px`;
-        } else {
-            this.overlayContent!.style.right = `${document.body.offsetWidth - relativeElementRight + offset}px`;
-        }
-    }
-
-    private setOverlayRelativePositionY(
-        relativeElement: Element,
-        offset: number,
-        relativeEdge: EdgeY,
-        contentEdge: EdgeY,
-    ): void {
-        const relativeElementTop = Math.round(relativeElement.getBoundingClientRect().top);
-        const relativeElementBottom = Math.round(relativeElement.getBoundingClientRect().bottom);
-
-        if (relativeEdge === EdgeY.TOP && contentEdge === EdgeY.TOP) {
-            this.overlayContent!.style.top = `${relativeElementTop + offset}px`;
-        } else if (relativeEdge === EdgeY.TOP && contentEdge === EdgeY.BOTTOM) {
-            this.overlayContent!.style.bottom = `${document.body.clientHeight - relativeElementTop + offset}px`;
-        } else if (relativeEdge === EdgeY.BOTTOM && contentEdge === EdgeY.TOP) {
-            this.overlayContent!.style.top = `${relativeElementBottom + offset}px`;
-        } else {
-            this.overlayContent!.style.bottom = `${document.body.clientHeight - relativeElementBottom + offset}px`;
-        }
-    }
-
-    private cleanOverlayContent(): void {
-        this.overlayContent = null;
-        if (this.disposeResizeListener) {
-            this.disposeResizeListener();
-        }
-        this.disposeResizeListener = null;
-    }
-
-    private setCloseNotifier(): void {
-        this.closeSource = new Subject<void>();
-        this.close$ = this.closeSource.asObservable();
-    }
-
-    private cleanCloseNotifier(): void {
-        this.closeSource?.complete();
-        this.closeSource = null;
-        this.close$ = null;
+    show(component: Type<T>, options?: OverlayOptions): CustomOverlay<T> {
+        return new CustomOverlay<T>(
+            this.applicationRef,
+            this.renderer,
+            this.ngZone,
+        ).create(component, options);
     }
 }
