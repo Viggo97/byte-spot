@@ -34,6 +34,10 @@ body {
     }
 }
 
+bsa-root {
+    isolation: isolate;
+}
+
 h2 {
     font: $font-xl;
     font-weight: 700;
