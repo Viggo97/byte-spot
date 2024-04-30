@@ -1,7 +1,7 @@
 <button type="button"
         #buttonTrigger
         cdkOverlayOrigin
-        (click)="onButtonClick()">
+        (click)="open = !open">
     <div class="select-value">{{value}}</div>
     <span class="button-icon icon-arrows-up-down"></span>
 </button>
@@ -12,7 +12,7 @@
     [cdkConnectedOverlayOpen]="open"
     [cdkConnectedOverlayWidth]="buttonTrigger.offsetWidth"
     (overlayOutsideClick)="onOutsideClick($event)"
-    (overlayKeydown)="onClose($event)">
+    (detach)="open = false">
     <bsa-dropdown-container
         [options]="options"
         (selectOption)="onSelectOption($event)">
