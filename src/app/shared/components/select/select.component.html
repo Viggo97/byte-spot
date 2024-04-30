@@ -1,8 +1,20 @@
 <button type="button"
-        #buttonRef
-        (click)="onSelectSwitch()">
+        #buttonTrigger
+        cdkOverlayOrigin
+        (click)="onButtonClick()">
     <div class="select-value">{{value}}</div>
     <span class="button-icon icon-arrows-up-down"></span>
 </button>
 
-
+<ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="buttonTrigger"
+    [cdkConnectedOverlayOpen]="open"
+    [cdkConnectedOverlayWidth]="buttonTrigger.offsetWidth"
+    (overlayOutsideClick)="onOutsideClick($event)"
+    (overlayKeydown)="onClose($event)">
+    <bsa-dropdown-container
+        [options]="options"
+        (selectOption)="onSelectOption($event)">
+    </bsa-dropdown-container>
+</ng-template>
