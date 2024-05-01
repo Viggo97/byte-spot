@@ -1,18 +1,35 @@
-@if (filterButtonsVisible) {
-    <button type="button"
+@if (!filterButtonsVisible) {
+    <bsa-search></bsa-search>
+} @else {
+    <button #searchButtonTrigger
+            cdkOverlayOrigin
+            type="button"
             class="button-icon icon-search"
-            (click)="onSearchDrawerOpen()">
+            (click)="searchOpen = !searchOpen">
     </button>
 
     <button type="button"
             class="button-icon icon-gear"
-            (click)="onTechnologyDrawerOpen()">
+            (click)="technologyOpen = !technologyOpen">
     </button>
 
     <button type="button"
             class="button-icon icon-filter"
-            (click)="onFiltersDrawerOpen()">
+            (click)="filtersOpen = !filtersOpen">
     </button>
-} @else {
-    <bsa-search></bsa-search>
+
+    <ng-template cdkConnectedOverlay
+                 [cdkConnectedOverlayOrigin]="searchButtonTrigger"
+                 [cdkConnectedOverlayOpen]="searchOpen"
+                 [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
+                 [cdkConnectedOverlayHasBackdrop]="true"
+                 cdkConnectedOverlayBackdropClass="cdk-custom-backdrop-background"
+                 (overlayOutsideClick)="searchDrawer.close()"
+                 (detach)="searchOpen = false">
+        <bsa-drawer #searchDrawer
+                    title="general.search"
+                    (closeDrawer)="searchOpen = false">
+            <bsa-search></bsa-search>
+        </bsa-drawer>
+    </ng-template>
 }
