@@ -8,6 +8,9 @@ import {
 import { OverlayOptions } from '@app/core/models/overlay/overlay-options.model';
 import { CustomOverlay } from '@app/core/services/overlay/custom-overlay';
 
+/**
+ * @deprecated Use CDK Overlay instead - it has more functionalities
+ */
 @Injectable({
     providedIn: 'root',
 })

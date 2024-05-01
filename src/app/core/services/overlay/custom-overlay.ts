@@ -66,10 +66,10 @@ export class CustomOverlay<T> {
         this.backdrop = {
             backdropRef: document.createElement('div'),
         };
-        this.backdrop.backdropRef.classList.add('backdrop');
+        this.backdrop.backdropRef.classList.add('overlay-backdrop');
 
         if (background) {
-            this.backdrop.backdropRef.classList.add('backdrop-background');
+            this.backdrop.backdropRef.classList.add('overlay-backdrop-background');
         }
 
         if (closeOnBackdropClick) {

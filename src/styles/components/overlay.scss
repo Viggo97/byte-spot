@@ -16,13 +16,13 @@
         }
     }
 
-    .backdrop {
+    .overlay-backdrop {
         position: absolute;
         width: 100%;
         height: 100%;
         background-color: transparent;
 
-        &.backdrop-background {
+        &.overlay-backdrop-background {
             background-color: hsl(0, 0%, 0%, 0.2);
         }
     }
