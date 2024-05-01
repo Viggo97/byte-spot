@@ -10,10 +10,24 @@
             [ngClass]="darkTheme ? 'icon-moon' : 'icon-sun'"
             (click)="onSwitchTheme()">
         </button>
-        <button #languageButton
+        <button cdkOverlayOrigin
+                #languageButton
                 id="change-language-button"
                 class="button-icon button-border-none icon-language"
-                (click)="onChangeLanguage()">
+                (click)="languageDropdownOpen = true">
         </button>
     </div>
 </nav>
+
+<ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="languageButton"
+    [cdkConnectedOverlayOpen]="languageDropdownOpen"
+    cdkConnectedOverlayWidth="8rem"
+    (overlayOutsideClick)="onOutsideClick($event)"
+    (detach)="languageDropdownOpen = false">
+    <bsa-dropdown-container
+        [options]="languageOptions"
+        (selectOption)="onSelectOption($event)">
+    </bsa-dropdown-container>
+</ng-template>
