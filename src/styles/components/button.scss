@@ -27,6 +27,11 @@ button {
 
     &.button-icon {
         padding: 8px;
+        font: $font-md;
+
+            &::before {
+                width: 1.5rem; //equal to line height
+            }
     }
 
     &.button-border-none {

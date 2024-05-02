@@ -11,7 +11,7 @@
     [cdkConnectedOverlayOrigin]="buttonTrigger"
     [cdkConnectedOverlayOpen]="open"
     [cdkConnectedOverlayWidth]="buttonTrigger.offsetWidth"
-    (overlayOutsideClick)="onOutsideClick($event)"
+    (overlayOutsideClick)="$event.stopPropagation(); open = false"
     (detach)="open = false">
     <bsa-dropdown-container
         [options]="options"
