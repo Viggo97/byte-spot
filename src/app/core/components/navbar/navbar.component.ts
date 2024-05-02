@@ -29,7 +29,6 @@ export class NavbarComponent {
         private languageService: LanguageService,
         private themeService: ThemeService,
         private translateService: TranslateService,
-        private elementRef: ElementRef,
     ) {
         this.themeService.theme$.subscribe((theme) => {
             this.darkTheme = theme === Theme.DARK;
@@ -40,15 +39,8 @@ export class NavbarComponent {
         this.themeService.switchTheme();
     }
 
-    protected onOutsideClick(event: MouseEvent): void {
-        if (this.elementRef.nativeElement.contains(event.target)) {
-            event.stopPropagation();
-        }
-
-        this.languageDropdownOpen = false;
-    }
-
     protected onSelectOption(value: DropdownOption): void {
         this.languageService.setLanguage(value.key as Language);
+        this.languageDropdownOpen = false;
     }
 }

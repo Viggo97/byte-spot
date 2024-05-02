@@ -14,7 +14,7 @@
                 #languageButton
                 id="change-language-button"
                 class="button-icon button-border-none icon-language"
-                (click)="languageDropdownOpen = true">
+                (click)="languageDropdownOpen = !languageDropdownOpen">
         </button>
     </div>
 </nav>
@@ -24,7 +24,7 @@
     [cdkConnectedOverlayOrigin]="languageButton"
     [cdkConnectedOverlayOpen]="languageDropdownOpen"
     cdkConnectedOverlayWidth="8rem"
-    (overlayOutsideClick)="onOutsideClick($event)"
+    (overlayOutsideClick)="$event.stopPropagation(); languageDropdownOpen = false"
     (detach)="languageDropdownOpen = false">
     <bsa-dropdown-container
         [options]="languageOptions"
