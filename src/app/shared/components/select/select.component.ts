@@ -21,6 +21,8 @@ import { DropdownOption } from '@app/shared/models/dropdown-container/dropdown-o
 export class SelectComponent {
     @Input({ required: true }) options!: Map<string, string>;
 
+    @Input() numberOfVisibleOptions?: number;
+
     protected value: string | null = '';
 
     protected open = false;

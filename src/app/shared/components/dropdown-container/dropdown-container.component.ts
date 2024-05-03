@@ -1,7 +1,6 @@
 import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { NgForOf, NgStyle } from '@angular/common';
 import {
-    ChangeDetectionStrategy,
     Component,
     ElementRef,
     EventEmitter,
@@ -19,7 +18,6 @@ import { DropdownOption } from '../../models/dropdown-container/dropdown-option'
 @Component({
     selector: 'bsa-dropdown-container',
     standalone: true,
-    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         NgForOf,
         NgStyle,
@@ -35,7 +33,7 @@ export class DropdownContainerComponent {
 
     @Input() tabIndex = 0;
 
-    @Input() set numberOfVisibleOptions(value: number) {
+    @Input() set numberOfVisibleOptions(value: number | undefined) {
         this.maxHeight = this.calculateMaxHeight(value);
     }
 
