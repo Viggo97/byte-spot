@@ -3,11 +3,10 @@
 :host {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 6px 8px;
+    gap: .5rem;
+    padding: .375rem .5rem;
     border-radius: 4px;
-    font: $font-md;
-    font-weight: 500;
+    font: $font-sm;
     color: var(--text-primary);
     cursor: pointer;
 
