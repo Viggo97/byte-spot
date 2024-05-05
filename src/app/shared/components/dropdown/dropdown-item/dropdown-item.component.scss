@@ -1,0 +1,17 @@
+@import 'variables';
+
+:host {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 6px 8px;
+    border-radius: 4px;
+    font: $font-md;
+    font-weight: 500;
+    color: var(--text-primary);
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--hover-primary);
+    }
+}
