@@ -1,11 +1,7 @@
 @import 'variables';
 
 :host {
-    &:not(:last-child) {
-        border-bottom: $border-base;
-    }
-
-    .group-title {
+     .group-title {
         padding: .375rem .5rem;
         font: $font-xs;
         color: var(--text-secondary);
