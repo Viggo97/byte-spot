@@ -1,0 +1,11 @@
+@import 'variables';
+
+:host {
+    width: 100%;
+    display: block;
+    padding: 4px;
+    border: $border-base;
+    border-radius: 6px;
+    background-color: var(--background-primary);
+    overflow: auto;
+}
