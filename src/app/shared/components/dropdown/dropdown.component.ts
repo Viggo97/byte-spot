@@ -79,4 +79,9 @@ export class DropdownComponent {
             block: 'nearest',
         });
     }
+
+    focusFirstElement(): void {
+        this.index = 0;
+        this.focusItem();
+    }
 }
