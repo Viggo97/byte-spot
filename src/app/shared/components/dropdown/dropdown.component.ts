@@ -1,6 +1,6 @@
 import { CdkTrapFocus } from '@angular/cdk/a11y';
 import {
-    Component, ContentChildren, ElementRef, HostListener, QueryList,
+    Component, ContentChildren, ElementRef, HostListener, Input, QueryList,
 } from '@angular/core';
 import { DropdownItemComponent } from '@app/shared/components/dropdown/dropdown-item/dropdown-item.component';
 import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
@@ -15,6 +15,8 @@ import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
     styleUrl: './dropdown.component.scss',
 })
 export class DropdownComponent {
+    @Input() disableTabNavigation = false;
+
     @ContentChildren(DropdownItemComponent, { descendants: true, read: ElementRef })
         items!: QueryList<ElementRef>;
 
@@ -56,6 +58,9 @@ export class DropdownComponent {
     }
 
     private onTab(event: KeyboardEvent): void {
+        if (this.disableTabNavigation) {
+            return;
+        }
         if (event.shiftKey) {
             this.moveIndexBack();
         } else {
