@@ -1,27 +1,36 @@
 <div class="search-container">
     <span class="icon-search"></span>
-    <input type="text"
+    <input cdkOverlayOrigin
+           #searchInput
+           type="text"
            [formControl]="form"
-           (focus)="onFocus()"
-           (blur)="onBlur()"
+           (focus)="suggestionsOpen = true"
+           (keydown)="onInputKeydown($event)"
     >
 </div>
 
-@if (suggestionsVisible) {
-    <div class="suggestions-container">
+<ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="searchInput"
+    [cdkConnectedOverlayOpen]="suggestionsOpen"
+    [cdkConnectedOverlayWidth]="searchInput.offsetWidth"
+    (overlayOutsideClick)="onOutsideClick($event)"
+    (detach)="onDetach()"
+    (overlayKeydown)="onOverlayKeydown($event)">
+    <bsa-dropdown [disableTabNavigation]="true">
         @if (suggestions$ | async; as suggestions) {
-            @for (suggestionsGroup of suggestions; track suggestionsGroup.category) {
-                <div class="suggestions-group">
-                    <h3>{{ suggestionsGroup.category }}</h3>
-                    <ul>
-                        @for (suggestion of suggestionsGroup.suggestions; track suggestion) {
-                            <li>{{ suggestion }}</li>
-                        }
-                    </ul>
-                </div>
+            @for (suggestionsGroup of suggestions; track suggestionsGroup.category; let last = $last) {
+                <bsa-dropdown-group [title]="suggestionsGroup.category">
+                    @for (suggestion of suggestionsGroup.suggestions; track suggestion) {
+                        <bsa-dropdown-item [item]="{key: suggestion, value: suggestion}"></bsa-dropdown-item>
+                    }
+                </bsa-dropdown-group>
+                @if (!last) {
+                    <bsa-dropdown-separator></bsa-dropdown-separator>
+                }
             }
         } @else {
             Nothing found
         }
-    </div>
-}
+    </bsa-dropdown>
+</ng-template>
