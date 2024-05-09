@@ -12,6 +12,7 @@ import { DropdownItemComponent } from '@app/shared/components/dropdown/dropdown-
 import {
     DropdownSeparatorComponent,
 } from '@app/shared/components/dropdown/dropdown-separator/dropdown-separator.component';
+import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
 import {
     debounceTime, distinctUntilChanged, Observable, switchMap,
 } from 'rxjs';
@@ -50,6 +51,9 @@ export class SearchComponent implements OnInit {
                 distinctUntilChanged(),
                 switchMap((searchTerm) => this.offersService.getSearchSuggestions(searchTerm)),
             );
+        this.form.valueChanges.subscribe(() => {
+            this.suggestionsOpen = true;
+        });
     }
 
     onOutsideClick($event: MouseEvent): void {
@@ -59,25 +63,25 @@ export class SearchComponent implements OnInit {
         this.suggestionsOpen = false;
     }
 
-    onInputKeydown(event: KeyboardEvent): void {
-        if (event.key === 'ArrowDown' && this.suggestionsOpen) {
-            event.preventDefault();
-            this.dropdown.focusFirstElement();
-        }
-    }
-
     onOverlayKeydown(event: KeyboardEvent): void {
-        if (event.key === 'Tab') {
-            if (document.activeElement === this.searchInput.nativeElement) {
-                this.suggestionsOpen = false;
-            } else {
+        if (event.key === Keycodes.TAB) {
+            if (document.activeElement !== this.searchInput.nativeElement) {
+                this.searchInput.nativeElement.focus();
+            }
+            this.suggestionsOpen = false;
+        }
+
+        if (event.key === Keycodes.ARROW_DOWN) {
+            event.preventDefault();
+            if (document.activeElement === this.searchInput.nativeElement && this.suggestionsOpen) {
+                this.dropdown.focusFirstElement();
+            }
+        }
+
+        if (event.key === Keycodes.ESCAPE) {
+            if (document.activeElement !== this.searchInput.nativeElement) {
                 this.searchInput.nativeElement.focus();
             }
         }
-    }
-
-    onDetach(): void {
-        this.suggestionsOpen = false;
-        this.searchInput.nativeElement.focus();
     }
 }

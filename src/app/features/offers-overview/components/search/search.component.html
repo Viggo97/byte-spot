@@ -4,8 +4,6 @@
            #searchInput
            type="text"
            [formControl]="form"
-           (focus)="suggestionsOpen = true"
-           (keydown)="onInputKeydown($event)"
     >
 </div>
 
@@ -15,9 +13,9 @@
     [cdkConnectedOverlayOpen]="suggestionsOpen"
     [cdkConnectedOverlayWidth]="searchInput.offsetWidth"
     (overlayOutsideClick)="onOutsideClick($event)"
-    (detach)="onDetach()"
+    (detach)="suggestionsOpen = false"
     (overlayKeydown)="onOverlayKeydown($event)">
-    <bsa-dropdown [disableTabNavigation]="true">
+    <bsa-dropdown>
         @if (suggestions$ | async; as suggestions) {
             @for (suggestionsGroup of suggestions; track suggestionsGroup.category; let last = $last) {
                 <bsa-dropdown-group [title]="suggestionsGroup.category">
