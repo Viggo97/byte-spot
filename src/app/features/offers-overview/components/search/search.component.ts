@@ -14,7 +14,7 @@ import {
 } from '@app/shared/components/dropdown/dropdown-separator/dropdown-separator.component';
 import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
 import {
-    debounceTime, distinctUntilChanged, Observable, switchMap,
+    debounceTime, distinctUntilChanged, switchMap,
 } from 'rxjs';
 
 @Component({
@@ -36,7 +36,7 @@ import {
 export class SearchComponent implements OnInit {
     suggestionsOpen = false;
     form = new FormControl<string>('');
-    suggestions$!: Observable<SuggestionsGroup[]>;
+    suggestions: SuggestionsGroup[] = [];
 
     @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
     @ViewChild(DropdownComponent) dropdown!: DropdownComponent;
@@ -45,15 +45,16 @@ export class SearchComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.suggestions$ = this.form.valueChanges
+        this.form.valueChanges
             .pipe(
                 debounceTime(300),
                 distinctUntilChanged(),
                 switchMap((searchTerm) => this.offersService.getSearchSuggestions(searchTerm)),
-            );
-        this.form.valueChanges.subscribe(() => {
-            this.suggestionsOpen = true;
-        });
+            )
+            .subscribe((value) => {
+                this.suggestionsOpen = true;
+                this.suggestions = value;
+            });
     }
 
     onOutsideClick($event: MouseEvent): void {

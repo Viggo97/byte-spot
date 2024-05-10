@@ -16,7 +16,7 @@
     (detach)="suggestionsOpen = false"
     (overlayKeydown)="onOverlayKeydown($event)">
     <bsa-dropdown>
-        @if (suggestions$ | async; as suggestions) {
+        @if (suggestions.length > 0) {
             @for (suggestionsGroup of suggestions; track suggestionsGroup.category; let last = $last) {
                 <bsa-dropdown-group [title]="suggestionsGroup.category">
                     @for (suggestion of suggestionsGroup.suggestions; track suggestion) {
