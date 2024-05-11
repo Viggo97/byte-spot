@@ -20,7 +20,9 @@
             @for (suggestionsGroup of suggestions; track suggestionsGroup.category; let last = $last) {
                 <bsa-dropdown-group [title]="suggestionsGroup.category">
                     @for (suggestion of suggestionsGroup.suggestions; track suggestion) {
-                        <bsa-dropdown-item [item]="{key: suggestion, value: suggestion}"></bsa-dropdown-item>
+                        <bsa-dropdown-item [item]="{key: suggestion, value: suggestion}"
+                                           (selectItem)="onSelectItem($event)">
+                        </bsa-dropdown-item>
                     }
                 </bsa-dropdown-group>
                 @if (!last) {

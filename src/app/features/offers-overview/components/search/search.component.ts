@@ -8,6 +8,7 @@ import { OffersService } from '@app/features/offers-overview/components/offers/o
 import { SuggestionsGroup } from '@app/features/offers-overview/model/suggestions-group.model';
 import { DropdownComponent } from '@app/shared/components/dropdown/dropdown.component';
 import { DropdownGroupComponent } from '@app/shared/components/dropdown/dropdown-group/dropdown-group.component';
+import { DropdownItem } from '@app/shared/components/dropdown/dropdown-item.model';
 import { DropdownItemComponent } from '@app/shared/components/dropdown/dropdown-item/dropdown-item.component';
 import {
     DropdownSeparatorComponent,
@@ -84,5 +85,9 @@ export class SearchComponent implements OnInit {
                 this.searchInput.nativeElement.focus();
             }
         }
+    }
+
+    onSelectItem(item: DropdownItem): void {
+        console.log(item);
     }
 }
