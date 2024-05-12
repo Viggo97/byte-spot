@@ -1,6 +1,6 @@
 import { NgClass } from '@angular/common';
 import {
-    Component, EventEmitter, HostBinding, Input, Output,
+    Component, EventEmitter, HostBinding, HostListener, Input, Output,
 } from '@angular/core';
 import { DropdownItem } from '@app/shared/components/dropdown/dropdown-item.model';
 
@@ -20,7 +20,7 @@ export class DropdownItemComponent {
 
     @HostBinding('tabindex') tabindex = 0;
 
-    @HostBinding('click')
+    @HostListener('click')
     onSelectItem(): void {
         this.selectItem.emit(this.item);
     }
