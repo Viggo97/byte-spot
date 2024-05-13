@@ -88,6 +88,6 @@ export class SearchComponent implements OnInit {
     }
 
     onSelectItem(item: DropdownItem): void {
-        console.log(item);
+        this.suggestionsOpen = false;
     }
 }
