@@ -15,7 +15,7 @@
     (overlayOutsideClick)="onOutsideClick($event)"
     (detach)="suggestionsOpen = false"
     (overlayKeydown)="onOverlayKeydown($event)">
-    <bsa-dropdown>
+    <bsa-dropdown [style]="{maxHeight: maxDropdownHeight}">
         @if (suggestions.length > 0) {
             @for (suggestionsGroup of suggestions; track suggestionsGroup.category; let last = $last) {
                 <bsa-dropdown-group [title]="suggestionsGroup.category">

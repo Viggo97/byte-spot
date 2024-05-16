@@ -66,6 +66,8 @@ export class SearchComponent implements OnInit {
     }
 
     onOverlayKeydown(event: KeyboardEvent): void {
+        // console.log(this.maxDropdownHeight);
+
         if (event.key === Keycodes.TAB) {
             if (document.activeElement !== this.searchInput.nativeElement) {
                 this.searchInput.nativeElement.focus();
@@ -89,5 +91,9 @@ export class SearchComponent implements OnInit {
 
     onSelectItem(item: DropdownItem): void {
         this.suggestionsOpen = false;
+    }
+
+    get maxDropdownHeight(): string {
+        return `${window.innerHeight - this.searchInput.nativeElement.getBoundingClientRect().bottom - 10}px`;
     }
 }
