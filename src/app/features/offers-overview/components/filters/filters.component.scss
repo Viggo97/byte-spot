@@ -3,3 +3,10 @@
     display: flex;
     gap: 0.5rem;
 }
+
+.search-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}

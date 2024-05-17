@@ -29,7 +29,10 @@
         <bsa-drawer #searchDrawer
                     title="general.search"
                     (closeDrawer)="searchOpen = false">
-            <bsa-search></bsa-search>
+            <div class="search-container">
+                <bsa-search></bsa-search>
+                <button>'global.find'</button>
+            </div>
         </bsa-drawer>
     </ng-template>
 }
