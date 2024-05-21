@@ -1,10 +1,12 @@
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
     Component, ElementRef, OnInit, ViewChild,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { InputComponent } from '@app/features/offers-overview/components/input/input.component';
 import { OffersService } from '@app/features/offers-overview/components/offers/offers.service';
+import { SuggestionsComponent } from '@app/features/offers-overview/components/suggestions/suggestions.component';
 import { SuggestionsGroup } from '@app/features/offers-overview/model/suggestions-group.model';
 import { DropdownComponent } from '@app/shared/components/dropdown/dropdown.component';
 import { DropdownGroupComponent } from '@app/shared/components/dropdown/dropdown-group/dropdown-group.component';
@@ -30,6 +32,9 @@ import {
         DropdownSeparatorComponent,
         CdkConnectedOverlay,
         CdkOverlayOrigin,
+        SuggestionsComponent,
+        NgTemplateOutlet,
+        InputComponent,
     ],
     templateUrl: './search.component.html',
     styleUrl: './search.component.scss',
