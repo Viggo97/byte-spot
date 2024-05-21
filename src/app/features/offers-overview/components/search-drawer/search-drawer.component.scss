@@ -1,0 +1,14 @@
+.search-drawer-container {
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    bsa-suggestions {
+        margin: .75rem 0;
+    }
+
+    button {
+        margin-top: auto;
+    }
+}
