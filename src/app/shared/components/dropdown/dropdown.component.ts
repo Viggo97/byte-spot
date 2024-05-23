@@ -1,8 +1,10 @@
 import { CdkTrapFocus } from '@angular/cdk/a11y';
 import {
-    Component, ContentChildren, ElementRef, HostListener, QueryList,
+    AfterViewInit,
+    Component, ContentChildren, ElementRef, HostListener, Input, QueryList,
 } from '@angular/core';
 import { DropdownItemComponent } from '@app/shared/components/dropdown/dropdown-item/dropdown-item.component';
+import { DropdownItemsReference } from '@app/shared/components/dropdown/dropdown-items-reference';
 import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
 
 @Component({
@@ -14,11 +16,19 @@ import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
     templateUrl: './dropdown.component.html',
     styleUrl: './dropdown.component.scss',
 })
-export class DropdownComponent {
+export class DropdownComponent implements AfterViewInit {
     @ContentChildren(DropdownItemComponent, { descendants: true, read: ElementRef })
         items!: QueryList<ElementRef>;
 
+    @Input() dropdownItemsReference?: DropdownItemsReference;
+
     private index = 0;
+
+    ngAfterViewInit() {
+        if (this.dropdownItemsReference) {
+            this.items = this.dropdownItemsReference.dropdownItems;
+        }
+    }
 
     @HostListener('keydown', ['$event'])
     onKeyboardAction(event: KeyboardEvent): void {
