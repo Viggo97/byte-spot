@@ -1,4 +1,3 @@
-import { EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { OffersService } from '@app/features/offers-overview/components/offers/offers.service';
 import { SuggestionsGroup } from '@app/features/offers-overview/model/suggestions-group.model';
@@ -11,8 +10,6 @@ export abstract class SearchBase {
     protected suggestions: SuggestionsGroup[] = [];
 
     protected destroy$ = new Subject<void>();
-
-    abstract closeDrawer: EventEmitter<void>;
 
     protected constructor(protected offersService: OffersService) {
     }
