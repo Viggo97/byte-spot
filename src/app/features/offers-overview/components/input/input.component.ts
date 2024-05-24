@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -16,6 +16,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     ],
 })
 export class InputComponent implements ControlValueAccessor {
+    @ViewChild('input') input!: ElementRef<HTMLInputElement>;
+
     private onChange!: (value: string) => void;
 
     onChangeInput(phrase: string): void {
