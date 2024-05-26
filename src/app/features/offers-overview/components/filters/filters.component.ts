@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 import { Breakpoints } from '@app/core/enums/breakpoints/breakpoints.enum';
 import { SearchComponent } from '@app/features/offers-overview/components/search/search.component';
-import { DrawerComponent } from '@app/shared/components/drawer/drawer.component';
+import { SearchDrawerComponent } from '@app/features/offers-overview/components/search-drawer/search-drawer.component';
 import { fromEvent, Subject, takeUntil } from 'rxjs';
 
 @Component({
@@ -12,9 +12,9 @@ import { fromEvent, Subject, takeUntil } from 'rxjs';
     standalone: true,
     imports: [
         SearchComponent,
-        DrawerComponent,
         CdkOverlayOrigin,
         CdkConnectedOverlay,
+        SearchDrawerComponent,
     ],
     templateUrl: './filters.component.html',
     styleUrl: './filters.component.scss',
@@ -28,7 +28,7 @@ export class FiltersComponent implements OnInit, OnDestroy {
     protected technologyOpen = false;
     protected filtersOpen = false;
 
-    @ViewChild('searchDrawer') searchDrawer!: DrawerComponent;
+    @ViewChild(SearchDrawerComponent) searchDrawer!: SearchDrawerComponent;
 
     private destroy$ = new Subject<void>();
 

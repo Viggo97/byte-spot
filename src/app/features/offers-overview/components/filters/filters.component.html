@@ -26,13 +26,6 @@
                  cdkConnectedOverlayBackdropClass="cdk-custom-backdrop-background"
                  (overlayOutsideClick)="searchDrawer.close()"
                  (detach)="searchOpen = false">
-        <bsa-drawer #searchDrawer
-                    title="general.search"
-                    (closeDrawer)="searchOpen = false">
-            <div class="search-container">
-                <bsa-search></bsa-search>
-                <button>'global.find'</button>
-            </div>
-        </bsa-drawer>
+        <bsa-search-drawer (closeDrawer)="searchOpen = false"></bsa-search-drawer>
     </ng-template>
 }
