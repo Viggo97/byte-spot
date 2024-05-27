@@ -1,104 +1,81 @@
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
-    Component, ElementRef, OnInit, ViewChild,
+    Component, OnDestroy, OnInit, ViewChild,
 } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { InputComponent } from '@app/features/offers-overview/components/input/input.component';
 import { OffersService } from '@app/features/offers-overview/components/offers/offers.service';
 import { SuggestionsComponent } from '@app/features/offers-overview/components/suggestions/suggestions.component';
-import { SuggestionsGroup } from '@app/features/offers-overview/model/suggestions-group.model';
+import { SearchBase } from '@app/features/offers-overview/model/search-base';
 import { DropdownComponent } from '@app/shared/components/dropdown/dropdown.component';
-import { DropdownGroupComponent } from '@app/shared/components/dropdown/dropdown-group/dropdown-group.component';
-import { DropdownItem } from '@app/shared/components/dropdown/dropdown-item.model';
-import { DropdownItemComponent } from '@app/shared/components/dropdown/dropdown-item/dropdown-item.component';
-import {
-    DropdownSeparatorComponent,
-} from '@app/shared/components/dropdown/dropdown-separator/dropdown-separator.component';
 import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
-import {
-    debounceTime, distinctUntilChanged, switchMap,
-} from 'rxjs';
 
 @Component({
     selector: 'bsa-search',
     standalone: true,
     imports: [
-        ReactiveFormsModule,
-        AsyncPipe,
-        DropdownComponent,
-        DropdownGroupComponent,
-        DropdownItemComponent,
-        DropdownSeparatorComponent,
         CdkConnectedOverlay,
         CdkOverlayOrigin,
-        SuggestionsComponent,
-        NgTemplateOutlet,
+        DropdownComponent,
         InputComponent,
+        ReactiveFormsModule,
+        SuggestionsComponent,
     ],
     templateUrl: './search.component.html',
     styleUrl: './search.component.scss',
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent extends SearchBase implements OnInit, OnDestroy {
     suggestionsOpen = false;
-    form = new FormControl<string>('');
-    suggestions: SuggestionsGroup[] = [];
 
-    @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
+    @ViewChild(InputComponent) searchInput!: InputComponent;
     @ViewChild(DropdownComponent) dropdown!: DropdownComponent;
 
-    constructor(private offersService: OffersService) {
+    constructor(offersService: OffersService) {
+        super(offersService);
     }
 
     ngOnInit(): void {
-        this.form.valueChanges
-            .pipe(
-                debounceTime(300),
-                distinctUntilChanged(),
-                switchMap((searchTerm) => this.offersService.getSearchSuggestions(searchTerm)),
-            )
-            .subscribe((value) => {
-                this.suggestionsOpen = true;
-                this.suggestions = value;
-            });
+        this.getInputValueChanges().subscribe((value) => {
+            this.suggestionsOpen = true;
+            this.suggestions = value;
+        });
     }
 
-    onOutsideClick($event: MouseEvent): void {
-        if ($event.target === this.searchInput.nativeElement) {
+    protected onOutsideClick($event: MouseEvent): void {
+        if ($event.target === this.searchInput.input.nativeElement) {
             return;
         }
         this.suggestionsOpen = false;
     }
 
-    onOverlayKeydown(event: KeyboardEvent): void {
-        // console.log(this.maxDropdownHeight);
-
+    protected onOverlayKeydown(event: KeyboardEvent): void {
         if (event.key === Keycodes.TAB) {
-            if (document.activeElement !== this.searchInput.nativeElement) {
-                this.searchInput.nativeElement.focus();
+            if (document.activeElement !== this.searchInput.input.nativeElement) {
+                this.searchInput.input.nativeElement.focus();
             }
             this.suggestionsOpen = false;
         }
 
         if (event.key === Keycodes.ARROW_DOWN) {
             event.preventDefault();
-            if (document.activeElement === this.searchInput.nativeElement && this.suggestionsOpen) {
+            if (document.activeElement === this.searchInput.input.nativeElement && this.suggestionsOpen) {
                 this.dropdown.focusFirstElement();
             }
         }
 
         if (event.key === Keycodes.ESCAPE) {
-            if (document.activeElement !== this.searchInput.nativeElement) {
-                this.searchInput.nativeElement.focus();
+            if (document.activeElement !== this.searchInput.input.nativeElement) {
+                this.searchInput.input.nativeElement.focus();
             }
         }
     }
 
-    onSelectItem(item: DropdownItem): void {
-        this.suggestionsOpen = false;
+    get maxDropdownHeight(): string {
+        return `${window.innerHeight - this.searchInput.input.nativeElement.getBoundingClientRect().bottom - 16}px`;
     }
 
-    get maxDropdownHeight(): string {
-        return `${window.innerHeight - this.searchInput.nativeElement.getBoundingClientRect().bottom - 10}px`;
+    ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 }

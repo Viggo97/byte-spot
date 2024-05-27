@@ -1,18 +1,21 @@
-<div #searchInput class="search-input-container">
+<div #searchInputContainer
+     class="search-input-container">
     <bsa-offers-search-input cdkOverlayOrigin
                              [formControl]="form">
     </bsa-offers-search-input>
 </div>
 
-<ng-template
-    cdkConnectedOverlay
-    [cdkConnectedOverlayOrigin]="searchInput"
-    [cdkConnectedOverlayOpen]="suggestionsOpen"
-    [cdkConnectedOverlayWidth]="searchInput.offsetWidth"
-    (overlayOutsideClick)="onOutsideClick($event)"
-    (detach)="suggestionsOpen = false"
-    (overlayKeydown)="onOverlayKeydown($event)">
-    <bsa-dropdown [style]="{maxHeight: maxDropdownHeight}">
-        <bsa-suggestions [suggestions]="suggestions"></bsa-suggestions>
+<ng-template cdkConnectedOverlay
+             [cdkConnectedOverlayOrigin]="searchInputContainer"
+             [cdkConnectedOverlayOpen]="suggestionsOpen"
+             [cdkConnectedOverlayWidth]="searchInputContainer.offsetWidth"
+             (overlayOutsideClick)="onOutsideClick($event)"
+             (detach)="suggestionsOpen = false"
+             (overlayKeydown)="onOverlayKeydown($event)">
+    <bsa-dropdown [style]="{maxHeight: maxDropdownHeight}"
+                  [dropdownItemsReference]="suggestionsRef">
+        <bsa-suggestions #suggestionsRef
+                         [suggestions]="suggestions">
+        </bsa-suggestions>
     </bsa-dropdown>
 </ng-template>
