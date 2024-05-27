@@ -13,11 +13,11 @@ import { DrawerComponent } from '@app/shared/components/drawer/drawer.component'
     selector: 'bsa-search-drawer',
     standalone: true,
     imports: [
+        DrawerComponent,
+        InputComponent,
         ReactiveFormsModule,
         SearchComponent,
-        DrawerComponent,
         SuggestionsComponent,
-        InputComponent,
     ],
     templateUrl: 'search-drawer.component.html',
     styleUrls: ['./search-drawer.component.scss'],
