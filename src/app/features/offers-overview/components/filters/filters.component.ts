@@ -3,6 +3,7 @@ import {
     Component, OnDestroy, OnInit, ViewChild,
 } from '@angular/core';
 import { Breakpoints } from '@app/core/enums/breakpoints/breakpoints.enum';
+import { LayoutService } from '@app/core/services/layout/layout.service';
 import { SearchComponent } from '@app/features/offers-overview/components/search/search.component';
 import { SearchDrawerComponent } from '@app/features/offers-overview/components/search-drawer/search-drawer.component';
 import { fromEvent, Subject, takeUntil } from 'rxjs';
@@ -11,9 +12,9 @@ import { fromEvent, Subject, takeUntil } from 'rxjs';
     selector: 'bsa-filters',
     standalone: true,
     imports: [
-        SearchComponent,
-        CdkOverlayOrigin,
         CdkConnectedOverlay,
+        CdkOverlayOrigin,
+        SearchComponent,
         SearchDrawerComponent,
     ],
     templateUrl: './filters.component.html',
@@ -32,7 +33,11 @@ export class FiltersComponent implements OnInit, OnDestroy {
 
     private destroy$ = new Subject<void>();
 
-    constructor(private overlay: Overlay) {
+    constructor(
+        private overlay: Overlay,
+        private layoutService: LayoutService,
+    ) {
+        this.layoutService.observe().subscribe((v) => console.log(v));
     }
 
     ngOnInit(): void {
@@ -40,7 +45,7 @@ export class FiltersComponent implements OnInit, OnDestroy {
     }
 
     private initFilterIconsHandling(): void {
-        this.resize$
+        this.layoutService.observe()
             .pipe(takeUntil(this.destroy$))
             .subscribe(() => {
                 this.filterButtonsVisible = window.innerWidth < Breakpoints.SM;
