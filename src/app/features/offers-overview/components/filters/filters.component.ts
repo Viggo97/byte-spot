@@ -6,7 +6,7 @@ import { Breakpoints } from '@app/core/enums/breakpoints/breakpoints.enum';
 import { LayoutService } from '@app/core/services/layout/layout.service';
 import { SearchComponent } from '@app/features/offers-overview/components/search/search.component';
 import { SearchDrawerComponent } from '@app/features/offers-overview/components/search-drawer/search-drawer.component';
-import { fromEvent, Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
     selector: 'bsa-filters',
@@ -22,7 +22,6 @@ import { fromEvent, Subject, takeUntil } from 'rxjs';
 })
 export class FiltersComponent implements OnInit, OnDestroy {
     protected scrollStrategy = this.overlay.scrollStrategies.block();
-    private resize$ = fromEvent(window, 'resize');
     protected filterButtonsVisible = window.innerWidth < Breakpoints.SM;
 
     protected searchOpen = false;
@@ -36,9 +35,7 @@ export class FiltersComponent implements OnInit, OnDestroy {
     constructor(
         private overlay: Overlay,
         private layoutService: LayoutService,
-    ) {
-        this.layoutService.observe().subscribe((v) => console.log(v));
-    }
+    ) {}
 
     ngOnInit(): void {
         this.initFilterIconsHandling();
