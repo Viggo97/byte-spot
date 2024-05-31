@@ -16,9 +16,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     ],
 })
 export class InputComponent implements ControlValueAccessor {
-    @ViewChild('input') input!: ElementRef<HTMLInputElement>;
-
+    protected value = '';
     private onChange!: (value: string) => void;
+
+    @ViewChild('input') input!: ElementRef<HTMLInputElement>;
 
     onChangeInput(phrase: string): void {
         this.onChange(phrase);
@@ -31,6 +32,7 @@ export class InputComponent implements ControlValueAccessor {
     registerOnTouched(): void {
     }
 
-    writeValue(): void {
+    writeValue(value: string): void {
+        this.value = value;
     }
 }
