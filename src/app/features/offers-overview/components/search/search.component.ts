@@ -1,6 +1,6 @@
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import {
-    Component, OnDestroy, OnInit, ViewChild,
+    Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild,
 } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputComponent } from '@app/features/offers-overview/components/input/input.component';
@@ -25,19 +25,24 @@ import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
     styleUrl: './search.component.scss',
 })
 export class SearchComponent extends SearchBase implements OnInit, OnDestroy {
-    suggestionsOpen = false;
+    @Input({ required: true }) searchValue!: string;
+
+    @Output() searchValueChanged = new EventEmitter<string>();
 
     @ViewChild(InputComponent) searchInput!: InputComponent;
     @ViewChild(DropdownComponent) dropdown!: DropdownComponent;
+
+    suggestionsOpen = false;
 
     constructor(offersService: OffersService) {
         super(offersService);
     }
 
     ngOnInit(): void {
-        this.getInputValueChanges().subscribe((value) => {
+        this.initForm(this.searchValue);
+        this.getInputValueChanges().subscribe((suggestions) => {
             this.suggestionsOpen = true;
-            this.suggestions = value;
+            this.suggestions = suggestions;
         });
     }
 
