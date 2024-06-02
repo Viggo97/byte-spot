@@ -1,5 +1,5 @@
 import {
-    Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild,
+    Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild,
 } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputComponent } from '@app/features/offers-overview/components/input/input.component';
@@ -23,15 +23,19 @@ import { DrawerComponent } from '@app/shared/components/drawer/drawer.component'
     styleUrls: ['./search-drawer.component.scss'],
 })
 export class SearchDrawerComponent extends SearchBase implements OnInit, OnDestroy {
-    @ViewChild(DrawerComponent) drawer!: DrawerComponent;
+    @Input({ required: true }) searchValue!: string;
 
+    @Output() searchValueChanged = new EventEmitter<string>();
     @Output() closeDrawer = new EventEmitter<void>();
+
+    @ViewChild(DrawerComponent) drawer!: DrawerComponent;
 
     constructor(offersService: OffersService) {
         super(offersService);
     }
 
     ngOnInit(): void {
+        this.initForm(this.searchValue);
         this.getInputValueChanges().subscribe((value) => {
             this.suggestions = value;
         });
