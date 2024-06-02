@@ -1,3 +1,4 @@
+import { EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { OffersService } from '@app/features/offers-overview/components/offers/offers.service';
 import { SuggestionsGroup } from '@app/features/offers-overview/model/suggestions-group.model';
@@ -6,12 +7,19 @@ import {
 } from 'rxjs';
 
 export abstract class SearchBase {
-    protected form = new FormControl<string>('');
+    protected form!: FormControl<string>;
     protected suggestions: SuggestionsGroup[] = [];
 
     protected destroy$ = new Subject<void>();
 
+    protected abstract searchValue: string;
+    protected abstract searchValueChanged: EventEmitter<string>;
+
     protected constructor(protected offersService: OffersService) {
+    }
+
+    protected initForm(initialValue: string): void {
+        this.form = new FormControl<string>(initialValue, { nonNullable: true });
     }
 
     protected getInputValueChanges(): Observable<any> {
