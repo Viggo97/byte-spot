@@ -1,5 +1,7 @@
 @if (!filterButtonsVisible) {
-    <bsa-search></bsa-search>
+    <bsa-search [searchValue]="searchValue"
+                (searchValueChanged)="onSearchValueChanged($event)">
+    </bsa-search>
 } @else {
     <button #searchButtonTrigger
             cdkOverlayOrigin
@@ -26,6 +28,9 @@
                  cdkConnectedOverlayBackdropClass="cdk-custom-backdrop-background"
                  (overlayOutsideClick)="searchDrawer.close()"
                  (detach)="searchOpen = false">
-        <bsa-search-drawer (closeDrawer)="searchOpen = false"></bsa-search-drawer>
+        <bsa-search-drawer [searchValue]="searchValue"
+                           (searchValueChanged)="onSearchValueChanged($event)"
+                           (closeDrawer)="searchOpen = false">
+        </bsa-search-drawer>
     </ng-template>
 }
