@@ -52,6 +52,7 @@
                 ],
                 "@typescript-eslint/lines-between-class-members": "off",
                 "@typescript-eslint/no-explicit-any": 0,
+                "@typescript-eslint/no-useless-constructor": "off",
                 "@angular-eslint/directive-selector": [
                     "error",
                     {
