@@ -1,5 +1,5 @@
 import {
-    Component, ElementRef, Input, QueryList, ViewChildren,
+    Component, ElementRef, EventEmitter, Input, Output, QueryList, ViewChildren,
 } from '@angular/core';
 import { SuggestionsGroup } from '@app/features/offers-overview/model/suggestions-group.model';
 import { DropdownGroupComponent } from '@app/shared/components/dropdown/dropdown-group/dropdown-group.component';
@@ -24,9 +24,12 @@ import {
 export class SuggestionsComponent implements DropdownItemsReference {
     @Input() suggestions: SuggestionsGroup[] = [];
 
+    @Output() suggestionSelected = new EventEmitter<DropdownItem>();
+
     @ViewChildren(DropdownItemComponent, { read: ElementRef })
         dropdownItems!: QueryList<ElementRef<DropdownItemComponent>>;
 
     onSelectItem(item: DropdownItem): void {
+        this.suggestionSelected.emit(item);
     }
 }
