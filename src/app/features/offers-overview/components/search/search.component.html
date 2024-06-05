@@ -15,7 +15,8 @@
     <bsa-dropdown [style]="{maxHeight: maxDropdownHeight}"
                   [dropdownItemsReference]="suggestionsRef">
         <bsa-suggestions #suggestionsRef
-                         [suggestions]="suggestions">
+                         [suggestions]="suggestions"
+                         (suggestionSelected)="onSuggestionSelected($event)">
         </bsa-suggestions>
     </bsa-dropdown>
 </ng-template>

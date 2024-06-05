@@ -8,6 +8,7 @@ import { OffersService } from '@app/features/offers-overview/components/offers/o
 import { SuggestionsComponent } from '@app/features/offers-overview/components/suggestions/suggestions.component';
 import { SearchBase } from '@app/features/offers-overview/model/search-base';
 import { DropdownComponent } from '@app/shared/components/dropdown/dropdown.component';
+import { DropdownItem } from '@app/shared/components/dropdown/dropdown-item.model';
 import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
 
 @Component({
@@ -44,6 +45,11 @@ export class SearchComponent extends SearchBase implements OnInit, OnDestroy {
             this.suggestionsOpen = true;
             this.suggestions = suggestions;
         });
+    }
+
+    onSuggestionSelected(item: DropdownItem): void {
+        this.searchValueChanged.emit(item.value);
+        this.suggestionsOpen = false;
     }
 
     protected onOutsideClick($event: MouseEvent): void {

@@ -8,6 +8,7 @@ import { SearchComponent } from '@app/features/offers-overview/components/search
 import { SuggestionsComponent } from '@app/features/offers-overview/components/suggestions/suggestions.component';
 import { SearchBase } from '@app/features/offers-overview/model/search-base';
 import { DrawerComponent } from '@app/shared/components/drawer/drawer.component';
+import { DropdownItem } from '@app/shared/components/dropdown/dropdown-item.model';
 
 @Component({
     selector: 'bsa-search-drawer',
@@ -39,6 +40,12 @@ export class SearchDrawerComponent extends SearchBase implements OnInit, OnDestr
         this.getInputValueChanges().subscribe((value) => {
             this.suggestions = value;
         });
+    }
+
+    onSuggestionSelected(item: DropdownItem): void {
+        this.searchValueChanged.emit(item.value);
+        // TODO
+        // Hide suggestions after select
     }
 
     onCloseDrawer(): void {
