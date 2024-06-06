@@ -26,9 +26,9 @@ import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
     styleUrl: './search.component.scss',
 })
 export class SearchComponent extends SearchBase implements OnInit, OnDestroy {
-    @Input({ required: true }) searchValue!: string;
+    @Input({ required: true }) searchPhrase!: string;
 
-    @Output() searchValueChanged = new EventEmitter<string>();
+    @Output() searchPhraseSelected = new EventEmitter<string>();
 
     @ViewChild(InputComponent) searchInput!: InputComponent;
     @ViewChild(DropdownComponent) dropdown!: DropdownComponent;
@@ -40,7 +40,7 @@ export class SearchComponent extends SearchBase implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.initForm(this.searchValue);
+        this.initForm(this.searchPhrase);
         this.getInputValueChanges().subscribe((suggestions) => {
             this.suggestionsOpen = true;
             this.suggestions = suggestions;
@@ -48,18 +48,20 @@ export class SearchComponent extends SearchBase implements OnInit, OnDestroy {
     }
 
     onSuggestionSelected(item: DropdownItem): void {
-        this.searchValueChanged.emit(item.value);
+        this.suggestions = [];
+        this.form.setValue(item.value, { emitEvent: false });
+        this.searchPhraseSelected.emit(item.value);
         this.suggestionsOpen = false;
     }
 
-    protected onOutsideClick($event: MouseEvent): void {
+    onOutsideClick($event: MouseEvent): void {
         if ($event.target === this.searchInput.input.nativeElement) {
             return;
         }
         this.suggestionsOpen = false;
     }
 
-    protected onOverlayKeydown(event: KeyboardEvent): void {
+    onOverlayKeydown(event: KeyboardEvent): void {
         if (event.key === Keycodes.TAB) {
             if (document.activeElement !== this.searchInput.input.nativeElement) {
                 this.searchInput.input.nativeElement.focus();

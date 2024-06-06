@@ -12,8 +12,8 @@ export abstract class SearchBase {
 
     protected destroy$ = new Subject<void>();
 
-    protected abstract searchValue: string;
-    protected abstract searchValueChanged: EventEmitter<string>;
+    protected abstract searchPhrase: string;
+    protected abstract searchPhraseSelected: EventEmitter<string>;
 
     protected constructor(protected offersService: OffersService) {
     }
@@ -22,7 +22,7 @@ export abstract class SearchBase {
         this.form = new FormControl<string>(initialValue, { nonNullable: true });
     }
 
-    protected getInputValueChanges(): Observable<any> {
+    protected getInputValueChanges(): Observable<SuggestionsGroup[]> {
         return this.form.valueChanges
             .pipe(
                 debounceTime(300),

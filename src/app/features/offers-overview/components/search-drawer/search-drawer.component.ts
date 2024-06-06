@@ -24,9 +24,9 @@ import { DropdownItem } from '@app/shared/components/dropdown/dropdown-item.mode
     styleUrls: ['./search-drawer.component.scss'],
 })
 export class SearchDrawerComponent extends SearchBase implements OnInit, OnDestroy {
-    @Input({ required: true }) searchValue!: string;
+    @Input({ required: true }) searchPhrase!: string;
 
-    @Output() searchValueChanged = new EventEmitter<string>();
+    @Output() searchPhraseSelected = new EventEmitter<string>();
     @Output() closeDrawer = new EventEmitter<void>();
 
     @ViewChild(DrawerComponent) drawer!: DrawerComponent;
@@ -36,16 +36,16 @@ export class SearchDrawerComponent extends SearchBase implements OnInit, OnDestr
     }
 
     ngOnInit(): void {
-        this.initForm(this.searchValue);
-        this.getInputValueChanges().subscribe((value) => {
-            this.suggestions = value;
+        this.initForm(this.searchPhrase);
+        this.getInputValueChanges().subscribe((suggestions) => {
+            this.suggestions = suggestions;
         });
     }
 
     onSuggestionSelected(item: DropdownItem): void {
-        this.searchValueChanged.emit(item.value);
-        // TODO
-        // Hide suggestions after select
+        this.suggestions = [];
+        this.form.setValue(item.value, { emitEvent: false });
+        this.searchPhraseSelected.emit(item.value);
     }
 
     onCloseDrawer(): void {
