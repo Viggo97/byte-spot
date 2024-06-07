@@ -28,7 +28,7 @@ export class FiltersComponent implements OnInit, OnDestroy {
     protected technologyOpen = false;
     protected filtersOpen = false;
 
-    protected searchValue = '';
+    protected searchPhrase = '';
 
     @ViewChild(SearchDrawerComponent) searchDrawer!: SearchDrawerComponent;
 
@@ -56,8 +56,8 @@ export class FiltersComponent implements OnInit, OnDestroy {
             });
     }
 
-    protected onSearchValueChanged(searchValue: string): void {
-        this.searchValue = searchValue;
+    onSearchPhraseSelected(searchPhrase: string): void {
+        this.searchPhrase = searchPhrase;
     }
 
     ngOnDestroy(): void {
