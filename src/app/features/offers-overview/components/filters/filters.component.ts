@@ -21,14 +21,14 @@ import { Subject, takeUntil } from 'rxjs';
     styleUrl: './filters.component.scss',
 })
 export class FiltersComponent implements OnInit, OnDestroy {
-    protected scrollStrategy = this.overlay.scrollStrategies.block();
-    protected filterButtonsVisible = window.innerWidth < Breakpoints.SM;
+    scrollStrategy = this.overlay.scrollStrategies.block();
+    filterButtonsVisible = window.innerWidth < Breakpoints.SM;
 
-    protected searchOpen = false;
-    protected technologyOpen = false;
-    protected filtersOpen = false;
+    searchOpen = false;
+    technologyOpen = false;
+    filtersOpen = false;
 
-    protected searchPhrase = '';
+    searchPhrase = '';
 
     @ViewChild(SearchDrawerComponent) searchDrawer!: SearchDrawerComponent;
 
