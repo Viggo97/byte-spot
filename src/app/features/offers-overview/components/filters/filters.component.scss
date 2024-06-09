@@ -1,12 +1,12 @@
+@import 'variables';
+
 :host {
     margin-bottom: 16px;
     display: flex;
     gap: 0.5rem;
-}
 
-.search-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+    button {
+        padding: 0.25rem 0.75rem;
+        font: $font-sm;
+    }
 }

@@ -2,6 +2,18 @@
     <bsa-search [searchPhrase]="searchPhrase"
                 (searchPhraseSelected)="onSearchPhraseSelected($event)">
     </bsa-search>
+
+    <button type="button"
+            class="button-icon icon-gear"
+            (click)="technologyOpen = !technologyOpen">
+        Technologies
+    </button>
+
+    <button type="button"
+            class="button-icon icon-filter"
+            (click)="technologyOpen = !technologyOpen">
+        Filters
+    </button>
 } @else {
     <button #searchButtonTrigger
             cdkOverlayOrigin
