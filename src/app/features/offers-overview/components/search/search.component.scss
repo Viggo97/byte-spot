@@ -4,21 +4,4 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-
-    .search-container {
-        position: relative;
-
-        .icon-search {
-            position: absolute;
-            top: 50%;
-            left: .5rem;
-            transform: translateY(-50%);
-            font: $font-md;
-            color: var(--text-secondary);
-        }
-
-        input {
-            padding: .25rem .75rem .25rem 2rem;
-        }
-    }
 }
