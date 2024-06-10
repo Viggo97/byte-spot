@@ -2,34 +2,12 @@
     <bsa-search [searchPhrase]="searchPhrase"
                 (searchPhraseSelected)="onSearchPhraseSelected($event)">
     </bsa-search>
-
-    <button type="button"
-            class="button-icon icon-gear"
-            (click)="technologyOpen = !technologyOpen">
-        Technologies
-    </button>
-
-    <button type="button"
-            class="button-icon icon-filter"
-            (click)="technologyOpen = !technologyOpen">
-        Filters
-    </button>
 } @else {
     <button #searchButtonTrigger
             cdkOverlayOrigin
             type="button"
             class="button-icon icon-search"
             (click)="searchOpen = !searchOpen">
-    </button>
-
-    <button type="button"
-            class="button-icon icon-gear"
-            (click)="technologyOpen = !technologyOpen">
-    </button>
-
-    <button type="button"
-            class="button-icon icon-filter"
-            (click)="filtersOpen = !filtersOpen">
     </button>
 
     <ng-template cdkConnectedOverlay
@@ -46,3 +24,15 @@
         </bsa-search-drawer>
     </ng-template>
 }
+
+<button type="button"
+        class="button-icon icon-gear"
+        (click)="technologyOpen = !technologyOpen">
+    <span>Technologies</span>
+</button>
+
+<button type="button"
+        class="button-icon icon-filter"
+        (click)="technologyOpen = !technologyOpen">
+    <span>Filters</span>
+</button>

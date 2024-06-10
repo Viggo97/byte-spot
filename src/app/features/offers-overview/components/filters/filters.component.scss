@@ -1,12 +1,21 @@
+@import 'breakpoints';
 @import 'variables';
 
 :host {
     margin-bottom: 16px;
     display: flex;
-    gap: 0.5rem;
+    gap: .5rem;
 
     button {
         padding: 0.25rem 0.75rem;
         font: $font-sm;
+
+        span {
+            display: none;
+
+            @include md {
+                display: inline;
+            }
+        }
     }
 }
