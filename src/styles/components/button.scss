@@ -1,16 +1,18 @@
 @import 'variables.scss';
 
 button {
-    padding: 8px 16px;
+    padding: .5rem 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: .25rem;
     background-color: var(--background-primary);
     border: $border-base;
     border-radius: 6px;
     color: var(--text-primary);
-    font: $font-md;
+    font: $font-sm;
     font-weight: 500;
+    line-height: $line-height-sm;
     cursor: pointer;
     transition: background-color 150ms cubic-bezier(.4, 0, .2, 1);
 
@@ -26,12 +28,17 @@ button {
     }
 
     &.button-icon {
-        padding: 8px;
-        font: $font-md;
+        padding: .5rem;
+        font: $font-sm;
+        line-height: $line-height-sm;
 
         &::before {
-            min-width: 1.5rem; //equal to line-height
+            min-width: 1.125rem; //equal to line-height
         }
+    }
+
+    &.button-icon-with-text {
+        padding: .5rem 1rem;
     }
 
     &.button-border-none {
