@@ -7,8 +7,10 @@
     gap: .5rem;
 
     button {
-        padding: 0.25rem 0.75rem;
-        font: $font-sm;
+
+        @include md {
+            padding: .5rem 1rem;
+        }
 
         span {
             display: none;
