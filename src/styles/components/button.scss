@@ -29,15 +29,15 @@ button {
 
     &.button-icon {
         padding: .5rem;
-        font: $font-sm;
-        line-height: $line-height-sm;
 
-        &::before {
+        span {
+            display: block;
             min-width: 1.125rem; //equal to line-height
+            line-height: inherit;
         }
     }
 
-    &.button-icon-with-text {
+    &.button-icon-text {
         padding: .5rem 1rem;
     }
 
