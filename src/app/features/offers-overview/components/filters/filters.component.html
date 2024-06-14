@@ -6,8 +6,9 @@
     <button #searchButtonTrigger
             cdkOverlayOrigin
             type="button"
-            class="button-icon icon-search"
+            class="button-icon"
             (click)="searchOpen = !searchOpen">
+        <span class="icon-search"></span>
     </button>
 
     <ng-template cdkConnectedOverlay
@@ -26,13 +27,15 @@
 }
 
 <button type="button"
-        class="button-icon icon-gear"
+        class="button-icon"
         (click)="technologyOpen = !technologyOpen">
+    <span class="icon-gear"></span>
     <span>Technologies</span>
 </button>
 
 <button type="button"
-        class="button-icon icon-filter"
+        class="button-icon"
         (click)="technologyOpen = !technologyOpen">
+    <span class="icon-filter"></span>
     <span>Filters</span>
 </button>
