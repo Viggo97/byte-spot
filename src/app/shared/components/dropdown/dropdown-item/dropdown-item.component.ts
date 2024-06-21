@@ -14,9 +14,9 @@ import { DropdownItem } from '@app/shared/components/dropdown/dropdown-item.mode
     styleUrl: './dropdown-item.component.scss',
 })
 export class DropdownItemComponent {
-    @Input({ required: true }) item!: DropdownItem;
+    @Input({ required: true }) item!: DropdownItem<unknown>;
 
-    @Output() selectItem = new EventEmitter<DropdownItem>();
+    @Output() selectItem = new EventEmitter<DropdownItem<unknown>>();
 
     @HostBinding('tabindex') tabindex = 0;
 
