@@ -1,5 +1,5 @@
 import { ElementRef, QueryList } from '@angular/core';
 
 export interface DropdownItemsReference {
-    dropdownItems: QueryList<ElementRef>
+    dropdownItems: QueryList<ElementRef<HTMLElement>>
 }
