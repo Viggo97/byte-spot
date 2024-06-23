@@ -13,9 +13,11 @@
     [cdkConnectedOverlayWidth]="buttonTrigger.offsetWidth"
     (overlayOutsideClick)="$event.stopPropagation(); open = false"
     (detach)="open = false">
-    <bsa-dropdown-container
-        [options]="options"
-        [numberOfVisibleOptions]="numberOfVisibleOptions"
-        (selectOption)="onSelectOption($event)">
-    </bsa-dropdown-container>
+    <bsa-dropdown>
+        @for (option of options; track option) {
+            <bsa-dropdown-item [item]="{key: option.key, value: option.value, label: option.label}"
+                               (selectItem)="onSelectItem($event)">
+            </bsa-dropdown-item>
+        }
+    </bsa-dropdown>
 </ng-template>
