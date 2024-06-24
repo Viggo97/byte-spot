@@ -18,7 +18,7 @@ import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
 })
 export class DropdownComponent implements AfterViewInit {
     @ContentChildren(DropdownItemComponent, { descendants: true, read: ElementRef })
-        items!: QueryList<ElementRef>;
+        items!: QueryList<ElementRef<HTMLElement>>;
 
     @Input() dropdownItemsReference?: DropdownItemsReference;
 
