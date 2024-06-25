@@ -28,7 +28,7 @@ export class SelectComponent<T> {
 
     @Output() selectOption = new EventEmitter<DropdownItem<T>>();
 
-    value: unknown = null;
+    value: T | null = null;
     open = false;
 
     protected onSelectItem(option: DropdownItem<T>): void {
