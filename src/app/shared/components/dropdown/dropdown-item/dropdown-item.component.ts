@@ -13,10 +13,10 @@ import { DropdownItem } from '@app/shared/components/dropdown/dropdown-item.mode
     templateUrl: './dropdown-item.component.html',
     styleUrl: './dropdown-item.component.scss',
 })
-export class DropdownItemComponent {
-    @Input({ required: true }) item!: DropdownItem<unknown>;
+export class DropdownItemComponent<T> {
+    @Input({ required: true }) item!: DropdownItem<T>;
 
-    @Output() selectItem = new EventEmitter<DropdownItem<unknown>>();
+    @Output() selectItem = new EventEmitter<DropdownItem<T>>();
 
     @HostBinding('tabindex') tabindex = 0;
 
