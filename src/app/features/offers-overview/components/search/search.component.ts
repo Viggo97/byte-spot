@@ -47,7 +47,7 @@ export class SearchComponent extends SearchBase implements OnInit, OnDestroy {
         });
     }
 
-    onSuggestionSelected(item: DropdownItem): void {
+    onSuggestionSelected(item: DropdownItem<string>): void {
         this.suggestions = [];
         this.form.setValue(item.value, { emitEvent: false });
         this.searchPhraseSelected.emit(item.value);

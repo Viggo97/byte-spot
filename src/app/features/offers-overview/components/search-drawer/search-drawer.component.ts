@@ -42,7 +42,7 @@ export class SearchDrawerComponent extends SearchBase implements OnInit, OnDestr
         });
     }
 
-    onSuggestionSelected(item: DropdownItem): void {
+    onSuggestionSelected(item: DropdownItem<string>): void {
         this.suggestions = [];
         this.form.setValue(item.value, { emitEvent: false });
         this.searchPhraseSelected.emit(item.value);
