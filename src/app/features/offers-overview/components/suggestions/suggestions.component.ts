@@ -24,12 +24,12 @@ import {
 export class SuggestionsComponent implements DropdownItemsReference {
     @Input() suggestions: SuggestionsGroup[] = [];
 
-    @Output() suggestionSelected = new EventEmitter<DropdownItem>();
+    @Output() suggestionSelected = new EventEmitter<DropdownItem<string>>();
 
     @ViewChildren(DropdownItemComponent, { read: ElementRef })
-        dropdownItems!: QueryList<ElementRef<DropdownItemComponent>>;
+        dropdownItems!: QueryList<ElementRef<HTMLElement>>;
 
-    onSelectItem(item: DropdownItem): void {
+    onSelectItem(item: DropdownItem<string>): void {
         this.suggestionSelected.emit(item);
     }
 }
