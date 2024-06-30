@@ -1,6 +1,7 @@
 import {
     Component, EventEmitter, Input, OnInit, Output,
 } from '@angular/core';
+import { DropdownItem } from '@app/shared/components/dropdown/dropdown-item.model';
 import { SelectComponent } from '@app/shared/components/select/select.component';
 
 @Component({
@@ -24,7 +25,7 @@ export class PagesManagerComponent implements OnInit {
 
     page = 1;
     pages = 1;
-    optionsMap = new Map<string, string>();
+    selectOptions: DropdownItem<number>[] = [];
 
     ngOnInit(): void {
         this.pages = this.total / this.perPage;
@@ -33,13 +34,24 @@ export class PagesManagerComponent implements OnInit {
 
     private setOptions(): void {
         if (this.options.length > 0) {
-            this.options.forEach((o) => this.optionsMap.set(o.toString(), o.toString()));
+            this.options.forEach((o) => {
+                this.selectOptions.push({
+                    key: o,
+                    value: o,
+                    label: o.toString(),
+                });
+            });
         } else {
-            this.optionsMap = new Map<string, string>()
-                .set('10', '10')
-                .set('20', '20')
-                .set('50', '50')
-                .set('100', '100');
+            this.selectOptions = [
+                { key: 10, value: 10, label: '10' },
+                { key: 20, value: 20, label: '20' },
+                { key: 50, value: 50, label: '50' },
+                { key: 100, value: 100, label: '100' },
+            ];
         }
+    }
+
+    onSelectOption(option: DropdownItem<number>): void {
+
     }
 }

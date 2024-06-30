@@ -1,5 +1,7 @@
 <div>Offers per page</div>
 
-<bsa-select [options]="optionsMap"></bsa-select>
+<bsa-select [options]="selectOptions"
+            (selectOption)="onSelectOption($event)">
+</bsa-select>
 
 <div>Page {{ page }} of {{ pages }}</div>
