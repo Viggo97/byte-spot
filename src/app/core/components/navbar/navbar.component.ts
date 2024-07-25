@@ -1,29 +1,42 @@
-import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { NgClass } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { Language } from '@app/core/enums/language/language.enum';
+import { NgClass } from '@angular/common';
+import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
+
 import { Theme } from '@app/core/enums/theme/theme.enum';
-import { LanguageService } from '@app/core/services/language/language.service';
 import { ThemeService } from '@app/core/services/theme/theme.service';
+
+import { DropdownComponent } from '@app/shared/components/dropdown/dropdown.component';
+import { DropdownItem } from '@app/shared/components/dropdown/dropdown-item.model';
+import { DropdownItemComponent } from '@app/shared/components/dropdown/dropdown-item/dropdown-item.component';
+import { Language } from '@app/core/enums/language/language.enum';
+import { LanguageService } from '@app/core/services/language/language.service';
 import { TranslateService } from '@app/core/services/translate/translate.service';
-import { DropdownContainerComponent } from '@app/shared/components/dropdown-container/dropdown-container.component';
-import { DropdownOption } from '@app/shared/models/dropdown-container/dropdown-option';
 
 @Component({
     selector: 'bsa-navbar',
     standalone: true,
-    imports: [NgClass, DropdownContainerComponent, CdkConnectedOverlay, CdkOverlayOrigin],
+    imports: [NgClass, CdkConnectedOverlay, CdkOverlayOrigin, DropdownComponent, DropdownItemComponent],
     templateUrl: './navbar.component.html',
     styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
     @ViewChild('languageButton') languageButton: ElementRef<HTMLButtonElement> | null = null;
 
-    protected darkTheme: boolean = false;
-    protected languageOptions = new Map<string, string>()
-        .set(Language.ENGLISH, this.translateService.translate('global.languageEN'))
-        .set(Language.POLISH, this.translateService.translate('global.languagePL'));
-    protected languageDropdownOpen = false;
+    darkTheme: boolean = false;
+    languageDropdownOpen = false;
+
+    languageOptions: DropdownItem<Language>[] = [
+        {
+            key: Language.ENGLISH,
+            value: Language.ENGLISH,
+            label: this.translateService.translate('global.languageEN'),
+        },
+        {
+            key: Language.POLISH,
+            value: Language.POLISH,
+            label: this.translateService.translate('global.languagePL'),
+        },
+    ];
 
     constructor(
         private languageService: LanguageService,
@@ -35,12 +48,12 @@ export class NavbarComponent {
         });
     }
 
-    protected onSwitchTheme(): void {
+    onSwitchTheme(): void {
         this.themeService.switchTheme();
     }
 
-    protected onSelectOption(value: DropdownOption): void {
-        this.languageService.setLanguage(value.key as Language);
+    onSelectOption(option: DropdownItem<Language>): void {
+        this.languageService.setLanguage(option.value);
         this.languageDropdownOpen = false;
     }
 }
