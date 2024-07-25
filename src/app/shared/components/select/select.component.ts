@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { DropdownComponent } from '@app/shared/components/dropdown/dropdown.component';
 import { DropdownItem } from '@app/shared/components/dropdown/dropdown-item.model';
 import { DropdownItemComponent } from '@app/shared/components/dropdown/dropdown-item/dropdown-item.component';
-import { DropdownContainerComponent } from '@app/shared/components/dropdown-container/dropdown-container.component';
 
 @Component({
     selector: 'bsa-select',
@@ -15,7 +14,6 @@ import { DropdownContainerComponent } from '@app/shared/components/dropdown-cont
         CdkConnectedOverlay,
         CdkOverlayOrigin,
         DropdownComponent,
-        DropdownContainerComponent,
         DropdownItemComponent,
         FormsModule,
     ],
