@@ -47,5 +47,6 @@ export class LanguageService {
         }
         localStorage.setItem(this.storageKey, value);
         this.language.next(value);
+        window.location.reload();
     }
 }
