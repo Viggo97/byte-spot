@@ -2,7 +2,7 @@ import {
     Component,
 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { OverlayService } from '@app/core/services/overlay/overlay.service';
+import { OverlayService } from '@app/core/overlay/overlay.service';
 
 @Component({
     selector: 'bsa-mock-component',

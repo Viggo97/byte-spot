@@ -6,7 +6,7 @@ import {
     Type,
 } from '@angular/core';
 import { OverlayOptions } from '@app/core/models/overlay/overlay-options.model';
-import { CustomOverlay } from '@app/core/services/overlay/custom-overlay';
+import { CustomOverlay } from '@app/core/overlay/custom-overlay';
 
 /**
  * @deprecated Use CDK Overlay instead - it has more functionalities
