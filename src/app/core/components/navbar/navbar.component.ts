@@ -2,8 +2,8 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 
-import { Theme } from '@app/core/enums/theme/theme.enum';
-import { ThemeService } from '@app/core/services/theme/theme.service';
+import { Theme } from '@app/core/theme/theme.enum';
+import { ThemeService } from '@app/core/theme/theme.service';
 
 import { DropdownComponent } from '@app/shared/components/dropdown/dropdown.component';
 import { DropdownItem } from '@app/shared/components/dropdown/dropdown-item.model';

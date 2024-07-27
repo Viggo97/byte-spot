@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Theme } from '@app/core/enums/theme/theme.enum';
+import { Theme } from '@app/core/theme/theme.enum';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({

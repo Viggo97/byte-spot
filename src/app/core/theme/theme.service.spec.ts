@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { Theme } from '@app/core/enums/theme/theme.enum';
-import { ThemeService } from '@app/core/services/theme/theme.service';
+import { Theme } from '@app/core/theme/theme.enum';
+import { ThemeService } from '@app/core/theme/theme.service';
 
 describe('ThemeService', () => {
     let themeService: ThemeService;
