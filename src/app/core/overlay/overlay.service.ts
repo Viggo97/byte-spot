@@ -5,7 +5,7 @@ import {
     Renderer2, RendererFactory2,
     Type,
 } from '@angular/core';
-import { OverlayOptions } from '@app/core/models/overlay/overlay-options.model';
+import { OverlayOptions } from '@app/core/overlay/model/overlay-options.model';
 import { CustomOverlay } from '@app/core/overlay/custom-overlay';
 
 /**

@@ -2,9 +2,9 @@ import {
     ApplicationRef, ComponentRef, createComponent,
     NgZone, Renderer2, Type,
 } from '@angular/core';
-import { EdgeX, EdgeY } from '@app/core/overlay/relative-position-edge.enum';
-import { ComponentInputs } from '@app/core/models/overlay/component-inputs.model';
-import { OverlayBackdropOptions, OverlayOptions } from '@app/core/models/overlay/overlay-options.model';
+import { EdgeX, EdgeY } from '@app/core/overlay/enum/relative-position-edge.enum';
+import { ComponentInputs } from '@app/core/overlay/model/component-inputs.model';
+import { OverlayBackdropOptions, OverlayOptions } from '@app/core/overlay/model/overlay-options.model';
 import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
 import { Subject } from 'rxjs';
 

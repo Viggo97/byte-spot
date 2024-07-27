@@ -2,7 +2,7 @@ import {
     Component, EventEmitter, Input, Output,
 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { EdgeX, EdgeY } from '@app/core/overlay/relative-position-edge.enum';
+import { EdgeX, EdgeY } from '@app/core/overlay/enum/relative-position-edge.enum';
 import { CustomOverlay } from '@app/core/overlay/custom-overlay';
 import { OverlayService } from '@app/core/overlay/overlay.service';
 import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
