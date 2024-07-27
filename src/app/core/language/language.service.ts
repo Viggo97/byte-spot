@@ -1,19 +1,28 @@
 import { Injectable } from '@angular/core';
-import { Language } from '@app/core/enums/language/language.enum';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Language } from '@app/core/language/language.enum';
 
 @Injectable({
     providedIn: 'root',
 })
 export class LanguageService {
     private readonly storageKey = 'language';
-    private language: BehaviorSubject<Language>;
-    language$: Observable<Language>;
+
+    private readonly _language: Language;
+
+    get language(): Language {
+        return this._language;
+    }
+
+    set language(value: Language) {
+        if (value === this._language) {
+            return;
+        }
+        localStorage.setItem(this.storageKey, value);
+        window.location.reload();
+    }
 
     constructor() {
-        const lang = this.getDefaultLanguage();
-        this.language = new BehaviorSubject<Language>(lang);
-        this.language$ = this.language.asObservable();
+        this._language = this.getDefaultLanguage();
     }
 
     private getDefaultLanguage(): Language {
@@ -39,14 +48,5 @@ export class LanguageService {
             return language as Language;
         }
         return null;
-    }
-
-    setLanguage(value: Language): void {
-        if (value === this.language.value) {
-            return;
-        }
-        localStorage.setItem(this.storageKey, value);
-        this.language.next(value);
-        window.location.reload();
     }
 }

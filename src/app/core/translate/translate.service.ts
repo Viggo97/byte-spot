@@ -1,21 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Language } from '@app/core/enums/language/language.enum';
-import { I18N } from '@app/core/models/translate/i18n.model';
-import { LanguageService } from '@app/core/services/language/language.service';
+import { Language } from '@app/core/language/language.enum';
+import { I18N } from '@app/core/translate/i18n.model';
+import { LanguageService } from '@app/core/language/language.service';
 
-import { i18nEnglish } from '../../../../assets/i18n/i18n-english';
-import { i18nPolish } from '../../../../assets/i18n/i18n-polish';
+import { i18nEnglish } from '../../../assets/i18n/i18n-english';
+import { i18nPolish } from '../../../assets/i18n/i18n-polish';
 
 @Injectable({
     providedIn: 'root',
 })
 export class TranslateService {
-    private i18n!: I18N;
+    private readonly i18n!: I18N;
 
     constructor(private languageService: LanguageService) {
-        this.languageService.language$.subscribe((value) => {
-            this.i18n = value === Language.ENGLISH ? i18nEnglish : i18nPolish;
-        });
+        const lang = this.languageService.language;
+        this.i18n = lang === Language.ENGLISH ? i18nEnglish : i18nPolish;
     }
 
     translate(key: string): string {

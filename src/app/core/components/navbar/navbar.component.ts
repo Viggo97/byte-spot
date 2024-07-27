@@ -8,9 +8,9 @@ import { ThemeService } from '@app/core/services/theme/theme.service';
 import { DropdownComponent } from '@app/shared/components/dropdown/dropdown.component';
 import { DropdownItem } from '@app/shared/components/dropdown/dropdown-item.model';
 import { DropdownItemComponent } from '@app/shared/components/dropdown/dropdown-item/dropdown-item.component';
-import { Language } from '@app/core/enums/language/language.enum';
-import { LanguageService } from '@app/core/services/language/language.service';
-import { TranslateService } from '@app/core/services/translate/translate.service';
+import { Language } from '@app/core/language/language.enum';
+import { LanguageService } from '@app/core/language/language.service';
+import { TranslateService } from '@app/core/translate/translate.service';
 
 @Component({
     selector: 'bsa-navbar',
@@ -53,7 +53,7 @@ export class NavbarComponent {
     }
 
     onSelectOption(option: DropdownItem<Language>): void {
-        this.languageService.setLanguage(option.value);
+        this.languageService.language = option.value;
         this.languageDropdownOpen = false;
     }
 }

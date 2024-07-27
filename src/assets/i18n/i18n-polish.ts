@@ -1,4 +1,4 @@
-import { I18N } from '@app/core/models/translate/i18n.model';
+import { I18N } from '@app/core/translate/i18n.model';
 
 import i18nPolishGlobal from './i18n-polish/i18n-polish-global.json';
 
