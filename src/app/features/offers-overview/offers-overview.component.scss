@@ -1,0 +1,21 @@
+:host {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+        "filters search"
+        "filters list";
+    grid-gap: 16px;
+}
+
+bsa-offer-filters {
+    grid-area: filters;
+}
+
+bsa-offer-search {
+    grid-area: search;
+}
+
+bsa-offer-list {
+    grid-area: list;
+}
