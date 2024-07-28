@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
 import { FiltersComponent } from '@app/features/offers-overview/components/filters/filters.component';
 import { OfferComponent } from '@app/features/offers-overview/components/offer/offer.component';
-import { SearchComponent } from '@app/features/offers-overview/components/search/search.component';
+import { OfferSearchDropdownComponent } from '@app/features/offers-overview/offer-search/offer-search-dropdown/offer-search-dropdown.component';
 import { Offer } from '@app/features/offers-overview/model/offer.model';
+import { DropdownComponent } from '@app/shared/components/dropdown/dropdown.component';
+import { DropdownGroupComponent } from '@app/shared/components/dropdown/dropdown-group/dropdown-group.component';
+import { DropdownItemComponent } from '@app/shared/components/dropdown/dropdown-item/dropdown-item.component';
+import { PagesManagerComponent } from '@app/shared/components/pages-manager/pages-manager.component';
 import { PaginationComponent } from '@app/shared/components/pagination/pagination.component';
+import { SelectComponent } from '@app/shared/components/select/select.component';
 
 @Component({
     selector: 'bsa-offers',
@@ -11,8 +16,13 @@ import { PaginationComponent } from '@app/shared/components/pagination/paginatio
     imports: [
         OfferComponent,
         PaginationComponent,
-        SearchComponent,
+        OfferSearchDropdownComponent,
         FiltersComponent,
+        DropdownItemComponent,
+        DropdownComponent,
+        DropdownGroupComponent,
+        SelectComponent,
+        PagesManagerComponent,
     ],
     templateUrl: './offers.component.html',
     styleUrl: './offers.component.scss',
@@ -49,5 +59,95 @@ export class OffersComponent {
             maxSalary: 9000,
             technologyLabels: ['JavaScript', 'Angular', 'TypeScript', 'HTML', 'Node.js'],
         },
+        {
+            id: 'o1',
+            title: 'Senior Java Developer but now the title is much more longer than somebody can suppose',
+            companyId: 'c1',
+            companyName: 'Oracle',
+            location: 'San Francisco',
+            minSalary: 17000,
+            maxSalary: 22000,
+            technologyLabels: ['Java', 'Spring', 'Hibernate'],
+        },
+        // {
+        //     id: 'o2',
+        //     title: 'Mid .Net Developer',
+        //     companyId: 'c2',
+        //     companyName: 'Microsoft',
+        //     location: 'Los Angeles',
+        //     minSalary: 11000,
+        //     maxSalary: 16000,
+        //     technologyLabels: ['C#', '.Net', 'Entity Framework'],
+        // },
+        // {
+        //     id: 'o3',
+        //     title: 'Junior JavaScript Developer',
+        //     companyId: 'c3',
+        //     companyName: 'Google',
+        //     location: 'New York',
+        //     minSalary: 6000,
+        //     maxSalary: 9000,
+        //     technologyLabels: ['JavaScript', 'Angular', 'TypeScript', 'HTML', 'Node.js'],
+        // },
+        // {
+        //     id: 'o1',
+        //     title: 'Senior Java Developer but now the title is much more longer than somebody can suppose',
+        //     companyId: 'c1',
+        //     companyName: 'Oracle',
+        //     location: 'San Francisco',
+        //     minSalary: 17000,
+        //     maxSalary: 22000,
+        //     technologyLabels: ['Java', 'Spring', 'Hibernate'],
+        // },
+        // {
+        //     id: 'o2',
+        //     title: 'Mid .Net Developer',
+        //     companyId: 'c2',
+        //     companyName: 'Microsoft',
+        //     location: 'Los Angeles',
+        //     minSalary: 11000,
+        //     maxSalary: 16000,
+        //     technologyLabels: ['C#', '.Net', 'Entity Framework'],
+        // },
+        // {
+        //     id: 'o3',
+        //     title: 'Junior JavaScript Developer',
+        //     companyId: 'c3',
+        //     companyName: 'Google',
+        //     location: 'New York',
+        //     minSalary: 6000,
+        //     maxSalary: 9000,
+        //     technologyLabels: ['JavaScript', 'Angular', 'TypeScript', 'HTML', 'Node.js'],
+        // },
+        // {
+        //     id: 'o1',
+        //     title: 'Senior Java Developer but now the title is much more longer than somebody can suppose',
+        //     companyId: 'c1',
+        //     companyName: 'Oracle',
+        //     location: 'San Francisco',
+        //     minSalary: 17000,
+        //     maxSalary: 22000,
+        //     technologyLabels: ['Java', 'Spring', 'Hibernate'],
+        // },
+        // {
+        //     id: 'o2',
+        //     title: 'Mid .Net Developer',
+        //     companyId: 'c2',
+        //     companyName: 'Microsoft',
+        //     location: 'Los Angeles',
+        //     minSalary: 11000,
+        //     maxSalary: 16000,
+        //     technologyLabels: ['C#', '.Net', 'Entity Framework'],
+        // },
+        // {
+        //     id: 'o3',
+        //     title: 'Junior JavaScript Developer',
+        //     companyId: 'c3',
+        //     companyName: 'Google',
+        //     location: 'New York',
+        //     minSalary: 6000,
+        //     maxSalary: 9000,
+        //     technologyLabels: ['JavaScript', 'Angular', 'TypeScript', 'HTML', 'Node.js'],
+        // },
     ];
 }

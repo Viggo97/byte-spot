@@ -1,7 +1,7 @@
 @if (!filterButtonsVisible) {
-    <bsa-search [searchPhrase]="searchPhrase"
+    <bsa-offer-search-dropdown [searchPhrase]="searchPhrase"
                 (searchPhraseSelected)="onSearchPhraseSelected($event)">
-    </bsa-search>
+    </bsa-offer-search-dropdown>
 } @else {
     <button #searchButtonTrigger
             cdkOverlayOrigin
@@ -11,19 +11,19 @@
         <span class="icon-search"></span>
     </button>
 
-    <ng-template cdkConnectedOverlay
-                 [cdkConnectedOverlayOrigin]="searchButtonTrigger"
-                 [cdkConnectedOverlayOpen]="searchOpen"
-                 [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
-                 [cdkConnectedOverlayHasBackdrop]="true"
-                 cdkConnectedOverlayBackdropClass="cdk-custom-backdrop-background"
-                 (overlayOutsideClick)="searchDrawer.close()"
-                 (detach)="searchOpen = false">
-        <bsa-search-drawer [searchPhrase]="searchPhrase"
-                           (searchPhraseSelected)="onSearchPhraseSelected($event)"
-                           (closeDrawer)="searchOpen = false">
-        </bsa-search-drawer>
-    </ng-template>
+<!--    <ng-template cdkConnectedOverlay-->
+<!--                 [cdkConnectedOverlayOrigin]="searchButtonTrigger"-->
+<!--                 [cdkConnectedOverlayOpen]="searchOpen"-->
+<!--                 [cdkConnectedOverlayScrollStrategy]="scrollStrategy"-->
+<!--                 [cdkConnectedOverlayHasBackdrop]="true"-->
+<!--                 cdkConnectedOverlayBackdropClass="cdk-custom-backdrop-background"-->
+<!--                 (overlayOutsideClick)="searchDrawer.close()"-->
+<!--                 (detach)="searchOpen = false">-->
+<!--        <bsa-offer-search-drawer [searchPhrase]="searchPhrase"-->
+<!--                           (searchPhraseSelected)="onSearchPhraseSelected($event)"-->
+<!--                           (closeDrawer)="searchOpen = false">-->
+<!--        </bsa-offer-search-drawer>-->
+<!--    </ng-template>-->
 }
 
 <button type="button"

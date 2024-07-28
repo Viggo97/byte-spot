@@ -1,0 +1,37 @@
+<div class="input-with-icon input-large">
+    <i class="icon-search"></i>
+    <input type="text"
+           readonly
+           #searchInput
+           cdkOverlayOrigin
+           [formControl]="form"
+           (keydown.enter)="$event.preventDefault(); drawerOpen = true"
+           (keydown.space)="drawerOpen = true"
+           (click)="drawerOpen = true">
+</div>
+
+<ng-template cdkConnectedOverlay
+             [cdkConnectedOverlayOrigin]="searchInput"
+             [cdkConnectedOverlayOpen]="drawerOpen"
+             [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
+             [cdkConnectedOverlayHasBackdrop]="true"
+             cdkConnectedOverlayBackdropClass="cdk-custom-backdrop-background"
+             (overlayOutsideClick)="drawer.close()"
+             (detach)="drawerOpen = false">
+    <bsa-drawer [title]="'global.offer-search-dropdown'"
+                (closeDrawer)="drawerOpen = false">
+        <div class="search-drawer-container">
+            <div class="input-with-icon input-large">
+                <i class="icon-search"></i>
+                <input type="text"
+                       cdkOverlayOrigin
+                       [formControl]="form">
+            </div>
+            <bsa-offer-search-suggestions [suggestions]="suggestions"
+                             (suggestionSelected)="onSuggestionSelected($event)">
+            </bsa-offer-search-suggestions>
+            <button>'global.search'</button>
+        </div>
+    </bsa-drawer>
+</ng-template>
+

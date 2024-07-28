@@ -1,3 +1,9 @@
+@import 'variables';
+
+:host {
+    flex: 1;
+}
+
 .search-drawer-container {
     overflow: auto;
     display: flex;

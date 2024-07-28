@@ -1,4 +1,4 @@
-export enum SuggestionCategories {
+export enum OfferSearchSuggestionCategory {
     COMPANY = 'company',
     KEYWORD = 'keyword',
     LOCATION = 'location',

@@ -1,0 +1,12 @@
+@import 'variables';
+
+:host {
+    display: flex;
+    gap: 24px;
+}
+
+button {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    font: $font-lg;
+}

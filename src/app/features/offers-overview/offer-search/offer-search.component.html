@@ -1,1 +1,6 @@
-<p>offer-search works!</p>
+@if ((dropdownMode | async)?.matches) {
+    <bsa-offer-search-dropdown [searchPhrase]="searchPhrase"></bsa-offer-search-dropdown>
+    <button>'global.search'</button>
+} @else {
+    <bsa-offer-search-drawer [searchPhrase]="searchPhrase"></bsa-offer-search-drawer>
+}

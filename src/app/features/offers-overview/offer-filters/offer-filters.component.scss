@@ -1,0 +1,7 @@
+@import 'variables';
+
+:host {
+    padding: 24px;
+    border: $border-base;
+    border-radius: 8px;
+}

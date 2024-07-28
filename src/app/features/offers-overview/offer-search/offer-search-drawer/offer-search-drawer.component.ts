@@ -2,36 +2,42 @@ import {
     Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild,
 } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { InputComponent } from '@app/features/offers-overview/components/input/input.component';
-import { OffersService } from '@app/features/offers-overview/components/offers/offers.service';
-import { SearchComponent } from '@app/features/offers-overview/components/search/search.component';
-import { SuggestionsComponent } from '@app/features/offers-overview/components/suggestions/suggestions.component';
-import { SearchBase } from '@app/features/offers-overview/model/search-base';
+import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay } from '@angular/cdk/overlay';
+
 import { DrawerComponent } from '@app/shared/components/drawer/drawer.component';
 import { DropdownItem } from '@app/shared/components/dropdown/dropdown-item.model';
 
+import { OfferSearchBase } from '../offer-search-base';
+import { OffersService } from '../../offers.service';
+import { OfferSearchSuggestionsComponent } from '../offer-search-suggestions/offer-search-suggestions.component';
+
 @Component({
-    selector: 'bsa-search-drawer',
+    selector: 'bsa-offer-search-drawer',
     standalone: true,
     imports: [
-        DrawerComponent,
-        InputComponent,
         ReactiveFormsModule,
-        SearchComponent,
-        SuggestionsComponent,
+        CdkOverlayOrigin,
+        CdkConnectedOverlay,
+        DrawerComponent,
+        OfferSearchSuggestionsComponent,
     ],
-    templateUrl: 'search-drawer.component.html',
-    styleUrls: ['./search-drawer.component.scss'],
+    templateUrl: 'offer-search-drawer.component.html',
+    styleUrls: ['./offer-search-drawer.component.scss'],
 })
-export class SearchDrawerComponent extends SearchBase implements OnInit, OnDestroy {
+export class OfferSearchDrawerComponent extends OfferSearchBase implements OnInit, OnDestroy {
     @Input({ required: true }) searchPhrase!: string;
 
     @Output() searchPhraseSelected = new EventEmitter<string>();
-    @Output() closeDrawer = new EventEmitter<void>();
 
     @ViewChild(DrawerComponent) drawer!: DrawerComponent;
 
-    constructor(offersService: OffersService) {
+    drawerOpen = false;
+    scrollStrategy = this.overlay.scrollStrategies.block();
+
+    constructor(
+        offersService: OffersService,
+        private overlay: Overlay,
+    ) {
         super(offersService);
     }
 
@@ -46,14 +52,6 @@ export class SearchDrawerComponent extends SearchBase implements OnInit, OnDestr
         this.suggestions = [];
         this.form.setValue(item.value, { emitEvent: false });
         this.searchPhraseSelected.emit(item.value);
-    }
-
-    onCloseDrawer(): void {
-        this.closeDrawer.emit();
-    }
-
-    close(): void {
-        this.drawer.close();
     }
 
     ngOnDestroy(): void {

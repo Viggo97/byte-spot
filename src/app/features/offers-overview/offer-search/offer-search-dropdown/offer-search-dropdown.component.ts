@@ -1,36 +1,36 @@
-import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import {
-    Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild,
+    Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild,
 } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { InputComponent } from '@app/features/offers-overview/components/input/input.component';
-import { OffersService } from '@app/features/offers-overview/components/offers/offers.service';
-import { SuggestionsComponent } from '@app/features/offers-overview/components/suggestions/suggestions.component';
-import { SearchBase } from '@app/features/offers-overview/model/search-base';
+import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
+
 import { DropdownComponent } from '@app/shared/components/dropdown/dropdown.component';
 import { DropdownItem } from '@app/shared/components/dropdown/dropdown-item.model';
 import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
 
+import { OfferSearchBase } from '../offer-search-base';
+import { OffersService } from '../../offers.service';
+import { OfferSearchSuggestionsComponent } from '../offer-search-suggestions/offer-search-suggestions.component';
+
 @Component({
-    selector: 'bsa-search',
+    selector: 'bsa-offer-search-dropdown',
     standalone: true,
     imports: [
-        CdkConnectedOverlay,
-        CdkOverlayOrigin,
-        DropdownComponent,
-        InputComponent,
         ReactiveFormsModule,
-        SuggestionsComponent,
+        CdkOverlayOrigin,
+        CdkConnectedOverlay,
+        DropdownComponent,
+        OfferSearchSuggestionsComponent,
     ],
-    templateUrl: './search.component.html',
-    styleUrl: './search.component.scss',
+    templateUrl: './offer-search-dropdown.component.html',
+    styleUrl: './offer-search-dropdown.component.scss',
 })
-export class SearchComponent extends SearchBase implements OnInit, OnDestroy {
+export class OfferSearchDropdownComponent extends OfferSearchBase implements OnInit, OnDestroy {
     @Input({ required: true }) searchPhrase!: string;
 
     @Output() searchPhraseSelected = new EventEmitter<string>();
 
-    @ViewChild(InputComponent) searchInput!: InputComponent;
+    @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
     @ViewChild(DropdownComponent) dropdown!: DropdownComponent;
 
     suggestionsOpen = false;
@@ -55,7 +55,7 @@ export class SearchComponent extends SearchBase implements OnInit, OnDestroy {
     }
 
     onOutsideClick($event: MouseEvent): void {
-        if ($event.target === this.searchInput.input.nativeElement) {
+        if ($event.target === this.searchInput.nativeElement) {
             return;
         }
         this.suggestionsOpen = false;
@@ -63,28 +63,28 @@ export class SearchComponent extends SearchBase implements OnInit, OnDestroy {
 
     onOverlayKeydown(event: KeyboardEvent): void {
         if (event.key === Keycodes.TAB) {
-            if (document.activeElement !== this.searchInput.input.nativeElement) {
-                this.searchInput.input.nativeElement.focus();
+            if (document.activeElement !== this.searchInput.nativeElement) {
+                this.searchInput.nativeElement.focus();
             }
             this.suggestionsOpen = false;
         }
 
         if (event.key === Keycodes.ARROW_DOWN) {
             event.preventDefault();
-            if (document.activeElement === this.searchInput.input.nativeElement && this.suggestionsOpen) {
+            if (document.activeElement === this.searchInput.nativeElement && this.suggestionsOpen) {
                 this.dropdown.focusFirstElement();
             }
         }
 
         if (event.key === Keycodes.ESCAPE) {
-            if (document.activeElement !== this.searchInput.input.nativeElement) {
-                this.searchInput.input.nativeElement.focus();
+            if (document.activeElement !== this.searchInput.nativeElement) {
+                this.searchInput.nativeElement.focus();
             }
         }
     }
 
     get maxDropdownHeight(): string {
-        return `${window.innerHeight - this.searchInput.input.nativeElement.getBoundingClientRect().bottom - 16}px`;
+        return `${window.innerHeight - this.searchInput.nativeElement.getBoundingClientRect().bottom - 16}px`;
     }
 
     ngOnDestroy(): void {

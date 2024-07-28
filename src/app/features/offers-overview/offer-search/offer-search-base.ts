@@ -1,14 +1,15 @@
 import { EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { OffersService } from '@app/features/offers-overview/components/offers/offers.service';
-import { SuggestionsGroup } from '@app/features/offers-overview/model/suggestions-group.model';
 import {
     debounceTime, distinctUntilChanged, Observable, Subject, switchMap, takeUntil,
 } from 'rxjs';
 
-export abstract class SearchBase {
+import { OffersService } from '../offers.service';
+import { OfferSearchSuggestionsGroup } from './offer-search-suggestions/model/offer-search-suggestion-group.model';
+
+export abstract class OfferSearchBase {
     protected form!: FormControl<string>;
-    protected suggestions: SuggestionsGroup[] = [];
+    protected suggestions: OfferSearchSuggestionsGroup[] = [];
 
     protected destroy$ = new Subject<void>();
 
@@ -22,7 +23,7 @@ export abstract class SearchBase {
         this.form = new FormControl<string>(initialValue, { nonNullable: true });
     }
 
-    protected getInputValueChanges(): Observable<SuggestionsGroup[]> {
+    protected getInputValueChanges(): Observable<OfferSearchSuggestionsGroup[]> {
         return this.form.valueChanges
             .pipe(
                 debounceTime(300),

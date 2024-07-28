@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
-import { SuggestionCategories } from '@app/features/offers-overview/model/suggestion-categories.enum';
-import { SuggestionsGroup } from '@app/features/offers-overview/model/suggestions-group.model';
+import { delay, Observable, of } from 'rxjs';
+
 import {
-    delay, Observable, of,
-} from 'rxjs';
+    OfferSearchSuggestionsGroup,
+} from './offer-search/offer-search-suggestions/model/offer-search-suggestion-group.model';
+import {
+    OfferSearchSuggestionCategory,
+} from './offer-search/offer-search-suggestions/model/offer-search-suggestion-category.enum';
 
 @Injectable({
     providedIn: 'root',
 })
 export class OffersService {
-    private mockSuggestions: SuggestionsGroup[] = [
+    private mockSuggestions: OfferSearchSuggestionsGroup[] = [
         {
-            category: SuggestionCategories.COMPANY,
+            category: OfferSearchSuggestionCategory.COMPANY,
             suggestions: [
                 'Apple',
                 'Google',
@@ -20,7 +23,7 @@ export class OffersService {
             ],
         },
         {
-            category: SuggestionCategories.LOCATION,
+            category: OfferSearchSuggestionCategory.LOCATION,
             suggestions: [
                 'Warsaw',
                 'Cracow',
@@ -28,7 +31,7 @@ export class OffersService {
             ],
         },
         {
-            category: SuggestionCategories.SKILL,
+            category: OfferSearchSuggestionCategory.SKILL,
             suggestions: [
                 'Angular',
                 'React',
@@ -43,7 +46,7 @@ export class OffersService {
             ],
         },
         {
-            category: SuggestionCategories.POSITION,
+            category: OfferSearchSuggestionCategory.POSITION,
             suggestions: [
                 'Java Backend Developer',
                 '.NET Backend Developer',
@@ -52,11 +55,13 @@ export class OffersService {
         },
     ];
 
-    getSearchSuggestions(searchTerm: string | null): Observable<SuggestionsGroup[]> {
+    getSearchSuggestions(searchTerm: string | null): Observable<OfferSearchSuggestionsGroup[]> {
+        // return of(this.mockSuggestions);
+
         if (!searchTerm) {
             return of(this.mockSuggestions);
         }
-        const suggestions: SuggestionsGroup[] = [];
+        const suggestions: OfferSearchSuggestionsGroup[] = [];
 
         this.mockSuggestions.forEach((group) => {
             const filteredSuggestions = group.suggestions
@@ -71,7 +76,7 @@ export class OffersService {
 
         if (!suggestions.length) {
             suggestions.push({
-                category: SuggestionCategories.KEYWORD,
+                category: OfferSearchSuggestionCategory.KEYWORD,
                 suggestions: [searchTerm],
             });
         }

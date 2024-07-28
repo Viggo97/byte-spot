@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
-import { OfferFiltersComponent } from '@app/features/offers-overview/offer-filters/offer-filters.component';
-import { OfferSearchComponent } from '@app/features/offers-overview/offer-search/offer-search.component';
-import { OfferListComponent } from '@app/features/offers-overview/offer-list/offer-list.component';
+import { OfferFiltersComponent } from './offer-filters/offer-filters.component';
+import { OfferSearchComponent } from './offer-search/offer-search.component';
+import { OfferListComponent } from './offer-list/offer-list.component';
 
 @Component({
     selector: 'bsa-offers-overview',

@@ -1,7 +1,7 @@
 import {
     Component, ElementRef, EventEmitter, Input, Output, QueryList, ViewChildren,
 } from '@angular/core';
-import { SuggestionsGroup } from '@app/features/offers-overview/model/suggestions-group.model';
+import { OfferSearchSuggestionsGroup } from '@app/features/offers-overview/offer-search/offer-search-suggestions/model/offer-search-suggestion-group.model';
 import { DropdownGroupComponent } from '@app/shared/components/dropdown/dropdown-group/dropdown-group.component';
 import { DropdownItem } from '@app/shared/components/dropdown/dropdown-item.model';
 import { DropdownItemComponent } from '@app/shared/components/dropdown/dropdown-item/dropdown-item.component';
@@ -11,18 +11,18 @@ import {
 } from '@app/shared/components/dropdown/dropdown-separator/dropdown-separator.component';
 
 @Component({
-    selector: 'bsa-suggestions',
+    selector: 'bsa-offer-search-suggestions',
     standalone: true,
     imports: [
         DropdownGroupComponent,
         DropdownItemComponent,
         DropdownSeparatorComponent,
     ],
-    templateUrl: './suggestions.component.html',
-    styleUrl: './suggestions.component.scss',
+    templateUrl: './offer-search-suggestions.component.html',
+    styleUrl: './offer-search-suggestions.component.scss',
 })
-export class SuggestionsComponent implements DropdownItemsReference {
-    @Input() suggestions: SuggestionsGroup[] = [];
+export class OfferSearchSuggestionsComponent implements DropdownItemsReference {
+    @Input() suggestions: OfferSearchSuggestionsGroup[] = [];
 
     @Output() suggestionSelected = new EventEmitter<DropdownItem<string>>();
 

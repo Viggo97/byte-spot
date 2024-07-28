@@ -4,8 +4,12 @@ import {
 } from '@angular/core';
 import { Breakpoints } from '@app/core/enums/breakpoints/breakpoints.enum';
 import { LayoutService } from '@app/core/services/layout/layout.service';
-import { SearchComponent } from '@app/features/offers-overview/components/search/search.component';
-import { SearchDrawerComponent } from '@app/features/offers-overview/components/search-drawer/search-drawer.component';
+import {
+    OfferSearchDropdownComponent,
+} from '@app/features/offers-overview/offer-search/offer-search-dropdown/offer-search-dropdown.component';
+import {
+    OfferSearchDrawerComponent,
+} from '@app/features/offers-overview/offer-search/offer-search-drawer/offer-search-drawer.component';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
@@ -14,8 +18,8 @@ import { Subject, takeUntil } from 'rxjs';
     imports: [
         CdkConnectedOverlay,
         CdkOverlayOrigin,
-        SearchComponent,
-        SearchDrawerComponent,
+        OfferSearchDropdownComponent,
+        OfferSearchDrawerComponent,
     ],
     templateUrl: './filters.component.html',
     styleUrl: './filters.component.scss',
@@ -30,7 +34,7 @@ export class FiltersComponent implements OnInit, OnDestroy {
 
     searchPhrase = '';
 
-    @ViewChild(SearchDrawerComponent) searchDrawer!: SearchDrawerComponent;
+    @ViewChild(OfferSearchDrawerComponent) searchDrawer!: OfferSearchDrawerComponent;
 
     private destroy$ = new Subject<void>();
 
