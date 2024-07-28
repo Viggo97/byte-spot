@@ -11,3 +11,32 @@ input {
     line-height: $line-height-sm;
     box-shadow: $shadow-base;
 }
+
+.input-with-icon {
+    position: relative;
+
+    input {
+        padding-left: 2rem;
+    }
+
+    [class^="icon-"] {
+        position: absolute;
+        top: 50%;
+        left: .5rem;
+        transform: translateY(-50%);
+        font: $font-md;
+        color: var(--text-secondary);
+    }
+}
+
+.input-large {
+    input {
+        padding: .75rem 1.5rem .75rem 3rem;
+        font: $font-lg;
+    }
+
+    [class^="icon-"] {
+        left: 1rem;
+        font: $font-lg;
+    }
+}
