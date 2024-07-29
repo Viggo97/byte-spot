@@ -1,5 +1,5 @@
 import {
-    Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild,
+    Component, DestroyRef, EventEmitter, Input, OnInit, Output, ViewChild,
 } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay } from '@angular/cdk/overlay';
@@ -24,7 +24,7 @@ import { OfferSearchSuggestionsComponent } from '../offer-search-suggestions/off
     templateUrl: 'offer-search-drawer.component.html',
     styleUrls: ['./offer-search-drawer.component.scss'],
 })
-export class OfferSearchDrawerComponent extends OfferSearchBase implements OnInit, OnDestroy {
+export class OfferSearchDrawerComponent extends OfferSearchBase implements OnInit {
     @Input({ required: true }) searchPhrase!: string;
 
     @Output() searchPhraseSelected = new EventEmitter<string>();
@@ -35,10 +35,11 @@ export class OfferSearchDrawerComponent extends OfferSearchBase implements OnIni
     scrollStrategy = this.overlay.scrollStrategies.block();
 
     constructor(
+        destroyRef: DestroyRef,
         offersService: OffersService,
         private overlay: Overlay,
     ) {
-        super(offersService);
+        super(destroyRef, offersService);
     }
 
     ngOnInit(): void {
@@ -52,10 +53,5 @@ export class OfferSearchDrawerComponent extends OfferSearchBase implements OnIni
         this.suggestions = [];
         this.form.setValue(item.value, { emitEvent: false });
         this.searchPhraseSelected.emit(item.value);
-    }
-
-    ngOnDestroy(): void {
-        this.destroy$.next();
-        this.destroy$.complete();
     }
 }

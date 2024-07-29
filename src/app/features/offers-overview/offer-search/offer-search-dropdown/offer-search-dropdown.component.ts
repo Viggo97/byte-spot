@@ -1,5 +1,5 @@
 import {
-    Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild,
+    Component, DestroyRef, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild,
 } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
@@ -25,7 +25,7 @@ import { OfferSearchSuggestionsComponent } from '../offer-search-suggestions/off
     templateUrl: './offer-search-dropdown.component.html',
     styleUrl: './offer-search-dropdown.component.scss',
 })
-export class OfferSearchDropdownComponent extends OfferSearchBase implements OnInit, OnDestroy {
+export class OfferSearchDropdownComponent extends OfferSearchBase implements OnInit {
     @Input({ required: true }) searchPhrase!: string;
 
     @Output() searchPhraseSelected = new EventEmitter<string>();
@@ -35,8 +35,11 @@ export class OfferSearchDropdownComponent extends OfferSearchBase implements OnI
 
     suggestionsOpen = false;
 
-    constructor(offersService: OffersService) {
-        super(offersService);
+    constructor(
+        destroyRef: DestroyRef,
+        offersService: OffersService,
+    ) {
+        super(destroyRef, offersService);
     }
 
     ngOnInit(): void {
@@ -85,10 +88,5 @@ export class OfferSearchDropdownComponent extends OfferSearchBase implements OnI
 
     get maxDropdownHeight(): string {
         return `${window.innerHeight - this.searchInput.nativeElement.getBoundingClientRect().bottom - 16}px`;
-    }
-
-    ngOnDestroy(): void {
-        this.destroy$.next();
-        this.destroy$.complete();
     }
 }
