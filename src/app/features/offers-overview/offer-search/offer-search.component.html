@@ -1,6 +1,50 @@
-@if ((dropdownMode | async)?.matches) {
-    <bsa-offer-search-dropdown [searchPhrase]="searchPhrase"></bsa-offer-search-dropdown>
-    <button>'global.search'</button>
-} @else {
-    <bsa-offer-search-drawer [searchPhrase]="searchPhrase"></bsa-offer-search-drawer>
-}
+<div class="input-with-icon input-large">
+    <i class="icon-search"></i>
+    <input type="text"
+           #searchInput
+           cdkOverlayOrigin
+           [formControl]="form"
+           (click)="onInputClick()">
+</div>
+
+<!--TODO implement enter and space click on input-->
+
+<ng-template cdkConnectedOverlay
+             [cdkConnectedOverlayOrigin]="searchInput"
+             [cdkConnectedOverlayOpen]="dropdownOpen"
+             (overlayOutsideClick)="onOutsideClick($event)"
+             (overlayKeydown)="onOverlayKeydown($event)"
+             (detach)="closeDropdown()">
+    <bsa-dropdown [style]="{maxHeight: maxDropdownHeight, width: searchInput.offsetWidth + 'px'}"
+                  [dropdownItemsReference]="suggestionsRef">
+        <bsa-offer-search-suggestions #suggestionsRef
+                                      [suggestions]="suggestions"
+                                      (suggestionSelected)="onSuggestionSelected($event); closeDropdown()">
+        </bsa-offer-search-suggestions>
+    </bsa-dropdown>
+</ng-template>
+
+<ng-template cdkConnectedOverlay
+             [cdkConnectedOverlayOrigin]="searchInput"
+             [cdkConnectedOverlayOpen]="drawerOpen"
+             [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
+             [cdkConnectedOverlayHasBackdrop]="true"
+             cdkConnectedOverlayBackdropClass="cdk-custom-backdrop-background"
+             (overlayOutsideClick)="drawerRef.close()"
+             (detach)="closeDrawer()">
+    <bsa-drawer [title]="'global.offer-search-dropdown'"
+                (closeDrawer)="closeDrawer()">
+        <div class="search-drawer-container">
+            <div class="input-with-icon input-large">
+                <i class="icon-search"></i>
+                <input type="text"
+                       cdkOverlayOrigin
+                       [formControl]="form">
+            </div>
+            <bsa-offer-search-suggestions [suggestions]="suggestions"
+                                          (suggestionSelected)="onSuggestionSelected($event)">
+            </bsa-offer-search-suggestions>
+            <button>'global.search'</button>
+        </div>
+    </bsa-drawer>
+</ng-template>
