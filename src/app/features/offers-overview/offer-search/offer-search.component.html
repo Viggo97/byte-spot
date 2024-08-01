@@ -2,9 +2,12 @@
     <i class="icon-search"></i>
     <input type="text"
            #searchInput
+           bsaResizeObserver
            cdkOverlayOrigin
            [formControl]="form"
-           (click)="onInputClick()">
+           (click)="onInputClick()"
+           (elementResize)="onInputResize($event)"
+    >
 </div>
 
 @if (isDropdownMode) {
@@ -19,7 +22,7 @@
              (overlayOutsideClick)="onOutsideClick($event)"
              (overlayKeydown)="onOverlayKeydown($event)"
              (detach)="closeDropdown()">
-    <bsa-dropdown [style]="{maxHeight: maxDropdownHeight, width: searchInput.offsetWidth + 'px'}"
+    <bsa-dropdown [style]="{maxHeight: maxDropdownHeight, width: dropdownWidth}"
                   [dropdownItemsReference]="suggestionsRef">
         <bsa-offer-search-suggestions #suggestionsRef
                                       [suggestions]="suggestions"
@@ -52,3 +55,8 @@
         </div>
     </bsa-drawer>
 </ng-template>
+
+<div class="xd1"></div>
+<div class="xd2"></div>
+<div class="xd"></div>
+<div class="xd"></div>

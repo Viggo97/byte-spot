@@ -1,10 +1,12 @@
 import {
-    Component, DestroyRef, ElementRef, OnInit, ViewChild,
+    Component, DestroyRef, ElementRef, OnInit, Renderer2, ViewChild,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay } from '@angular/cdk/overlay';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import {
+    debounceTime, distinctUntilChanged, switchMap,
+} from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
@@ -13,6 +15,7 @@ import { DrawerComponent } from '@app/shared/components/drawer/drawer.component'
 import { DropdownItem } from '@app/shared/components/dropdown/dropdown-item.model';
 
 import { OffersService } from '@app/features/offers-overview/offers.service';
+import { ResizeObserverDirective } from '@app/shared/directvies/resize-observer.directive';
 import { OfferSearchSuggestionsGroup } from './offer-search-suggestions/model/offer-search-suggestion-group.model';
 import { OfferSearchSuggestionsComponent } from './offer-search-suggestions/offer-search-suggestions.component';
 
@@ -31,6 +34,7 @@ enum SearchMode {
         DrawerComponent,
         DropdownComponent,
         OfferSearchSuggestionsComponent,
+        ResizeObserverDirective,
     ],
     templateUrl: './offer-search.component.html',
     styleUrl: './offer-search.component.scss',
@@ -41,6 +45,7 @@ export class OfferSearchComponent implements OnInit {
     @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
     @ViewChild(DrawerComponent) drawerRef!: DrawerComponent;
     @ViewChild(DropdownComponent) dropdownRef!: DropdownComponent;
+    @ViewChild(DropdownComponent, { read: ElementRef }) dropdownElementRef!: ElementRef<HTMLInputElement>;
 
     form = new FormControl<string>('', { nonNullable: true });
     suggestions: OfferSearchSuggestionsGroup[] = [];
@@ -48,25 +53,25 @@ export class OfferSearchComponent implements OnInit {
     searchMode: SearchMode | null = null;
     drawerOpen = false;
     dropdownOpen = false;
+    dropdownWidth = '';
 
     scrollStrategy = this.overlay.scrollStrategies.block();
 
     constructor(
+        private destroyRef: DestroyRef,
+        private renderer: Renderer2,
         private breakpointObserver: BreakpointObserver,
         private overlay: Overlay,
-        private destroyRef: DestroyRef,
         protected offersService: OffersService,
     ) {
         this.breakpointObserver.observe('(min-width: 960px)').pipe().subscribe((state) => {
-            // skip first run
-            if (this.searchMode) {
-                // TODO Implement switching between modes
-            }
             this.searchMode = state.matches ? SearchMode.DROPDOWN : SearchMode.DRAWER;
+            this.closeDrawer();
+            this.closeDropdown();
         });
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.form.valueChanges
             .pipe(
                 debounceTime(150),
@@ -161,5 +166,12 @@ export class OfferSearchComponent implements OnInit {
 
     get maxDropdownHeight(): string {
         return `${window.innerHeight - this.searchInput.nativeElement.getBoundingClientRect().bottom - 16}px`;
+    }
+
+    onInputResize(entry: ResizeObserverEntry): void {
+        this.dropdownWidth = `${entry.borderBoxSize[0].inlineSize}px`;
+        if (this.dropdownElementRef?.nativeElement) {
+            this.renderer.setStyle(this.dropdownElementRef.nativeElement, 'width', this.dropdownWidth);
+        }
     }
 }
