@@ -40,13 +40,6 @@ enum SearchMode {
     styleUrl: './offer-search.component.scss',
 })
 export class OfferSearchComponent implements OnInit {
-    searchPhrase = '';
-
-    @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
-    @ViewChild(DrawerComponent) drawerRef!: DrawerComponent;
-    @ViewChild(DropdownComponent) dropdownRef!: DropdownComponent;
-    @ViewChild(DropdownComponent, { read: ElementRef }) dropdownElementRef!: ElementRef<HTMLInputElement>;
-
     form = new FormControl<string>('', { nonNullable: true });
     suggestions: OfferSearchSuggestionsGroup[] = [];
 
@@ -55,7 +48,13 @@ export class OfferSearchComponent implements OnInit {
     dropdownOpen = false;
     dropdownWidth = '';
 
-    scrollStrategy = this.overlay.scrollStrategies.block();
+    readonly scrollStrategy = this.overlay.scrollStrategies.block();
+    readonly SearchMode = SearchMode;
+
+    @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
+    @ViewChild(DrawerComponent) drawerRef!: DrawerComponent;
+    @ViewChild(DropdownComponent) dropdownRef!: DropdownComponent;
+    @ViewChild(DropdownComponent, { read: ElementRef }) dropdownElementRef!: ElementRef<HTMLInputElement>;
 
     constructor(
         private destroyRef: DestroyRef,
@@ -105,12 +104,20 @@ export class OfferSearchComponent implements OnInit {
         this.drawerOpen = false;
     }
 
-    onInputClick(): void {
+    onInputClick(event?: KeyboardEvent): void {
         if (!this.isDrawerMode) {
             return;
         }
 
-        this.drawerOpen = true;
+        if (event && event?.code !== Keycodes.SPACE && event?.code !== Keycodes.ENTER) {
+            return;
+        }
+
+        if (event?.key === Keycodes.ENTER) {
+            event.preventDefault();
+        }
+
+        this.openDrawer();
     }
 
     // Dropdown handlers

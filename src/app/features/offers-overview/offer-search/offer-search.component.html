@@ -2,10 +2,12 @@
     <i class="icon-search"></i>
     <input type="text"
            #searchInput
+           [readonly]="searchMode === SearchMode.DRAWER"
            bsaResizeObserver
            cdkOverlayOrigin
            [formControl]="form"
            (click)="onInputClick()"
+           (keydown)="onInputClick($event)"
            (elementResize)="onInputResize($event)"
     >
 </div>
@@ -13,8 +15,6 @@
 @if (isDropdownMode) {
     <button>'global.search'</button>
 }
-
-<!--TODO implement enter and space click on input-->
 
 <ng-template cdkConnectedOverlay
              [cdkConnectedOverlayOrigin]="searchInput"
@@ -56,7 +56,3 @@
     </bsa-drawer>
 </ng-template>
 
-<div class="xd1"></div>
-<div class="xd2"></div>
-<div class="xd"></div>
-<div class="xd"></div>
