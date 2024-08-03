@@ -1,8 +1,10 @@
-<div class="input-with-icon input-large">
+<div class="input-with-icon input-large"
+     [class.input-fixed-width]="searchMode === SearchMode.DROPDOWN">
     <i class="icon-search"></i>
     <input type="text"
            #searchInput
            [readonly]="searchMode === SearchMode.DRAWER"
+           [style.cursor]="searchMode === SearchMode.DRAWER ? 'pointer' : 'text'"
            bsaResizeObserver
            cdkOverlayOrigin
            [formControl]="form"
@@ -41,7 +43,7 @@
              (detach)="closeDrawer()">
     <bsa-drawer [title]="'global.offer-search-dropdown'"
                 (closeDrawer)="closeDrawer()">
-        <div class="search-drawer-container">
+        <div class="drawer-container">
             <div class="input-with-icon input-large">
                 <i class="icon-search"></i>
                 <input type="text"

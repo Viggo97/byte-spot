@@ -7,6 +7,9 @@
 
 .input-with-icon {
     flex: 1;
+}
+
+.input-fixed-width {
     max-width: 600px;
 }
 
@@ -14,4 +17,18 @@ button {
     padding-left: 2rem;
     padding-right: 2rem;
     font: $font-lg;
+}
+
+.drawer-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .input-with-icon {
+        flex: 0;
+    }
+
+    button {
+        margin-top: auto;
+    }
 }
