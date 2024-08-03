@@ -81,6 +81,6 @@ export class OffersService {
             });
         }
 
-        return of(suggestions).pipe(delay(500));
+        return of(suggestions).pipe(delay(100));
     }
 }

@@ -10,7 +10,6 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
-import { DropdownComponent } from '@app/shared/components/dropdown/dropdown.component';
 import { DrawerComponent } from '@app/shared/components/drawer/drawer.component';
 import { DropdownItem } from '@app/shared/components/dropdown/dropdown-item.model';
 
@@ -32,7 +31,6 @@ enum SearchMode {
         CdkOverlayOrigin,
         CdkConnectedOverlay,
         DrawerComponent,
-        DropdownComponent,
         OfferSearchSuggestionsComponent,
         ResizeObserverDirective,
     ],
@@ -53,8 +51,8 @@ export class OfferSearchComponent implements OnInit {
 
     @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
     @ViewChild(DrawerComponent) drawerRef!: DrawerComponent;
-    @ViewChild(DropdownComponent) dropdownRef!: DropdownComponent;
-    @ViewChild(DropdownComponent, { read: ElementRef }) dropdownElementRef!: ElementRef<HTMLInputElement>;
+    @ViewChild(OfferSearchSuggestionsComponent) suggestionsDropdown!: OfferSearchSuggestionsComponent;
+    @ViewChild(OfferSearchSuggestionsComponent, { read: ElementRef }) dropdownElementRef!: ElementRef<HTMLInputElement>;
 
     constructor(
         private destroyRef: DestroyRef,
@@ -160,7 +158,7 @@ export class OfferSearchComponent implements OnInit {
         if (event.key === Keycodes.ARROW_DOWN) {
             event.preventDefault();
             if (document.activeElement === this.searchInput.nativeElement && this.dropdownOpen) {
-                this.dropdownRef.focusFirstElement();
+                this.suggestionsDropdown.focusFirstElement();
             }
         }
 

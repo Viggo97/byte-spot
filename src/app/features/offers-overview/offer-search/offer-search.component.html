@@ -24,13 +24,10 @@
              (overlayOutsideClick)="onOutsideClick($event)"
              (overlayKeydown)="onOverlayKeydown($event)"
              (detach)="closeDropdown()">
-    <bsa-dropdown [style]="{maxHeight: maxDropdownHeight, width: dropdownWidth}"
-                  [dropdownItemsReference]="suggestionsRef">
-        <bsa-offer-search-suggestions #suggestionsRef
-                                      [suggestions]="suggestions"
-                                      (suggestionSelected)="onSuggestionSelected($event); closeDropdown()">
-        </bsa-offer-search-suggestions>
-    </bsa-dropdown>
+    <bsa-offer-search-suggestions [style]="{maxHeight: maxDropdownHeight, width: dropdownWidth}"
+                                  [suggestions]="suggestions"
+                                  (selectSuggestion)="onSuggestionSelected($event); closeDropdown()">
+    </bsa-offer-search-suggestions>
 </ng-template>
 
 <ng-template cdkConnectedOverlay
@@ -51,7 +48,7 @@
                        [formControl]="form">
             </div>
             <bsa-offer-search-suggestions [suggestions]="suggestions"
-                                          (suggestionSelected)="onSuggestionSelected($event)">
+                                          (selectSuggestion)="onSuggestionSelected($event)">
             </bsa-offer-search-suggestions>
             <button>'global.search'</button>
         </div>
