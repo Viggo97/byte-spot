@@ -10,6 +10,7 @@
            [formControl]="form"
            (click)="onInputClick()"
            (keydown)="onInputClick($event)"
+           (focus)="onInputFocus()"
            (elementResize)="onInputResize($event)"
     >
 </div>
@@ -22,9 +23,9 @@
              [cdkConnectedOverlayOrigin]="searchInput"
              [cdkConnectedOverlayOpen]="dropdownOpen"
              (overlayOutsideClick)="onOutsideClick($event)"
-             (overlayKeydown)="onOverlayKeydown($event)"
+             (overlayKeydown)="onOverlayKeydownDropdown($event)"
              (detach)="closeDropdown()">
-    <bsa-offer-search-suggestions #suggestionsDropdown
+    <bsa-offer-search-suggestions #dropdownSuggestions
                                   [style]="{maxHeight: maxDropdownHeight, width: dropdownWidth}"
                                   [suggestions]="suggestions"
                                   (selectSuggestion)="onSuggestionSelected($event); closeDropdown()">
@@ -36,22 +37,29 @@
              [cdkConnectedOverlayOpen]="drawerOpen"
              [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
              [cdkConnectedOverlayHasBackdrop]="true"
+             [cdkConnectedOverlayDisableClose]="true"
              cdkConnectedOverlayBackdropClass="cdk-custom-backdrop-background"
              (overlayOutsideClick)="drawerRef.close()"
-             (detach)="closeDrawer()">
+             (overlayKeydown)="onOverlayKeydownDrawer($event)"
+             (detach)="closeDrawer(); closeDrawerDropdown()">
     <bsa-drawer [title]="'global.offer-search-dropdown'"
-                (closeDrawer)="closeDrawer()">
+                (closeDrawer)="closeDrawer(); closeDrawerDropdown()">
         <div class="drawer-container">
             <div class="input-with-icon input-large">
                 <i class="icon-search"></i>
                 <input type="text"
+                       #drawerInput
                        cdkOverlayOrigin
-                       [formControl]="form">
+                       [formControl]="form"
+                       (focus)="openDrawerDropdown()">
             </div>
-            <bsa-offer-search-suggestions [suggestions]="suggestions"
-                                          (selectSuggestion)="onSuggestionSelected($event)">
-            </bsa-offer-search-suggestions>
-            <button>'global.search'</button>
+            @if (drawerDropdownOpen) {
+                <bsa-offer-search-suggestions #drawerSuggestions
+                                              [suggestions]="suggestions"
+                                              (selectSuggestion)="onSuggestionSelected($event); closeDrawerDropdown()">
+                </bsa-offer-search-suggestions>
+            }
+            <button #drawerButton>'global.search'</button>
         </div>
     </bsa-drawer>
 </ng-template>

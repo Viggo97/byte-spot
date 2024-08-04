@@ -5,7 +5,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay } from '@angular/cdk/overlay';
 import {
-    debounceTime, distinctUntilChanged, switchMap,
+    debounceTime, distinctUntilChanged, Observable, skip, startWith, switchMap, tap,
 } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -43,6 +43,7 @@ export class OfferSearchComponent implements OnInit {
 
     searchMode: SearchMode | null = null;
     drawerOpen = false;
+    drawerDropdownOpen = true;
     dropdownOpen = false;
     dropdownWidth = '';
 
@@ -51,8 +52,12 @@ export class OfferSearchComponent implements OnInit {
 
     @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
     @ViewChild(DrawerComponent) drawerRef!: DrawerComponent;
-    @ViewChild('suggestionsDropdown') suggestionsDropdown!: OfferSearchSuggestionsComponent;
-    @ViewChild('suggestionsDropdown', { read: ElementRef }) suggestionsDropdownRef!: ElementRef<HTMLInputElement>;
+    @ViewChild('drawerInput') drawerInput!: ElementRef<HTMLInputElement>;
+    @ViewChild('drawerButton') drawerButton!: ElementRef<HTMLButtonElement>;
+    @ViewChild('dropdownSuggestions') dropdownSuggestions!: OfferSearchSuggestionsComponent;
+    @ViewChild('drawerSuggestions') drawerSuggestions!: OfferSearchSuggestionsComponent;
+    @ViewChild('dropdownSuggestions', { read: ElementRef }) dropdownSuggestionsRef!: ElementRef<HTMLInputElement>;
+    @ViewChild('drawerSuggestions', { read: ElementRef }) drawerSuggestionsRef!: ElementRef<HTMLInputElement>;
 
     constructor(
         private destroyRef: DestroyRef,
@@ -61,7 +66,7 @@ export class OfferSearchComponent implements OnInit {
         private overlay: Overlay,
         protected offersService: OffersService,
     ) {
-        this.breakpointObserver.observe('(min-width: 960px)').pipe().subscribe((state) => {
+        this.breakpointObserver.observe('(min-width: 960px)').subscribe((state) => {
             this.searchMode = state.matches ? SearchMode.DROPDOWN : SearchMode.DRAWER;
             this.closeDrawer();
             this.closeDropdown();
@@ -71,22 +76,36 @@ export class OfferSearchComponent implements OnInit {
     ngOnInit(): void {
         this.form.valueChanges
             .pipe(
+                startWith(''),
                 debounceTime(150),
                 distinctUntilChanged(),
-                switchMap((searchTerm) => this.offersService.getSearchSuggestions(searchTerm)),
+                switchMap((searchTerm) => this.fetchSuggestions(searchTerm)),
+                tap((suggestions) => {
+                    this.suggestions = suggestions;
+                }),
+                skip(1),
+                tap(() => {
+                    if (this.isDrawerMode) {
+                        this.openDrawerDropdown();
+                    } else {
+                        this.openDropdown();
+                    }
+                }),
                 takeUntilDestroyed(this.destroyRef),
-            ).subscribe((suggestions) => {
-                this.suggestions = suggestions;
-                // TODO fix this - try to not use dropdown logic here
-                if (this.isDropdownMode) {
-                    this.openDropdown();
-                }
-            });
+            ).subscribe();
     }
 
-    onSuggestionSelected(item: DropdownItem<string>): void {
-        this.suggestions = [];
-        this.form.setValue(item.value, { emitEvent: false });
+    private fetchSuggestions(searchTerm: string): Observable<OfferSearchSuggestionsGroup[]> {
+        return this.offersService.getSearchSuggestions(searchTerm);
+    }
+
+    onSuggestionSelected(suggestion: DropdownItem<string>): void {
+        const searchTerm = suggestion.value;
+        this.form.setValue(searchTerm, { emitEvent: false });
+        this.fetchSuggestions(searchTerm)
+            .subscribe((suggestions) => {
+                this.suggestions = suggestions;
+            });
     }
 
     // Drawer handlers
@@ -100,6 +119,14 @@ export class OfferSearchComponent implements OnInit {
 
     closeDrawer(): void {
         this.drawerOpen = false;
+    }
+
+    openDrawerDropdown(): void {
+        this.drawerDropdownOpen = true;
+    }
+
+    closeDrawerDropdown(): void {
+        this.drawerDropdownOpen = false;
     }
 
     onInputClick(event?: KeyboardEvent): void {
@@ -118,6 +145,35 @@ export class OfferSearchComponent implements OnInit {
         this.openDrawer();
     }
 
+    onOverlayKeydownDrawer(event: KeyboardEvent): void {
+        if (!this.isDrawerMode) {
+            return;
+        }
+
+        if (event.key === Keycodes.TAB) {
+            if (document.activeElement === this.drawerInput.nativeElement) {
+                event.preventDefault();
+                this.closeDrawerDropdown();
+                this.drawerButton.nativeElement.focus();
+            }
+        }
+
+        if (event.key === Keycodes.ARROW_DOWN) {
+            if (document.activeElement === this.drawerInput.nativeElement && this.drawerDropdownOpen) {
+                this.drawerSuggestions.focusFirstElement();
+            }
+        }
+
+        if (event.key === Keycodes.ESCAPE) {
+            if (this.drawerSuggestionsRef?.nativeElement.contains(event.target as HTMLElement)) {
+                this.drawerInput.nativeElement.focus();
+                this.closeDrawerDropdown();
+            } else {
+                this.drawerRef.close();
+            }
+        }
+    }
+
     // Dropdown handlers
     get isDropdownMode(): boolean {
         return this.searchMode === SearchMode.DROPDOWN;
@@ -129,6 +185,14 @@ export class OfferSearchComponent implements OnInit {
 
     closeDropdown(): void {
         this.dropdownOpen = false;
+    }
+
+    onInputFocus(): void {
+        if (!this.isDropdownMode) {
+            return;
+        }
+
+        this.openDropdown();
     }
 
     onOutsideClick($event: MouseEvent): void {
@@ -143,7 +207,7 @@ export class OfferSearchComponent implements OnInit {
         this.dropdownOpen = false;
     }
 
-    onOverlayKeydown(event: KeyboardEvent): void {
+    onOverlayKeydownDropdown(event: KeyboardEvent): void {
         if (!this.isDropdownMode) {
             return;
         }
@@ -158,7 +222,7 @@ export class OfferSearchComponent implements OnInit {
         if (event.key === Keycodes.ARROW_DOWN) {
             event.preventDefault();
             if (document.activeElement === this.searchInput.nativeElement && this.dropdownOpen) {
-                this.suggestionsDropdown.focusFirstElement();
+                this.dropdownSuggestions.focusFirstElement();
             }
         }
 
@@ -175,8 +239,8 @@ export class OfferSearchComponent implements OnInit {
 
     onInputResize(entry: ResizeObserverEntry): void {
         this.dropdownWidth = `${entry.borderBoxSize[0].inlineSize}px`;
-        if (this.suggestionsDropdownRef?.nativeElement) {
-            this.renderer.setStyle(this.suggestionsDropdownRef.nativeElement, 'width', this.dropdownWidth);
+        if (this.dropdownSuggestionsRef?.nativeElement) {
+            this.renderer.setStyle(this.dropdownSuggestionsRef.nativeElement, 'width', this.dropdownWidth);
         }
     }
 }
