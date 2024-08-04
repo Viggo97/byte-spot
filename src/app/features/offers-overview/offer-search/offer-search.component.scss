@@ -31,4 +31,12 @@ button {
     button {
         margin-top: auto;
     }
+
+    bsa-offer-search-suggestions {
+        margin-bottom: 20px;
+
+        bsa-dropdown {
+            border: none !important;
+        }
+    }
 }

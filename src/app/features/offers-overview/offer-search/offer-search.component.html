@@ -24,7 +24,8 @@
              (overlayOutsideClick)="onOutsideClick($event)"
              (overlayKeydown)="onOverlayKeydown($event)"
              (detach)="closeDropdown()">
-    <bsa-offer-search-suggestions [style]="{maxHeight: maxDropdownHeight, width: dropdownWidth}"
+    <bsa-offer-search-suggestions #suggestionsDropdown
+                                  [style]="{maxHeight: maxDropdownHeight, width: dropdownWidth}"
                                   [suggestions]="suggestions"
                                   (selectSuggestion)="onSuggestionSelected($event); closeDropdown()">
     </bsa-offer-search-suggestions>

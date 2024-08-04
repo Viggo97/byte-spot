@@ -51,8 +51,8 @@ export class OfferSearchComponent implements OnInit {
 
     @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
     @ViewChild(DrawerComponent) drawerRef!: DrawerComponent;
-    @ViewChild(OfferSearchSuggestionsComponent) suggestionsDropdown!: OfferSearchSuggestionsComponent;
-    @ViewChild(OfferSearchSuggestionsComponent, { read: ElementRef }) dropdownElementRef!: ElementRef<HTMLInputElement>;
+    @ViewChild('suggestionsDropdown') suggestionsDropdown!: OfferSearchSuggestionsComponent;
+    @ViewChild('suggestionsDropdown', { read: ElementRef }) suggestionsDropdownRef!: ElementRef<HTMLInputElement>;
 
     constructor(
         private destroyRef: DestroyRef,
@@ -175,8 +175,8 @@ export class OfferSearchComponent implements OnInit {
 
     onInputResize(entry: ResizeObserverEntry): void {
         this.dropdownWidth = `${entry.borderBoxSize[0].inlineSize}px`;
-        if (this.dropdownElementRef?.nativeElement) {
-            this.renderer.setStyle(this.dropdownElementRef.nativeElement, 'width', this.dropdownWidth);
+        if (this.suggestionsDropdownRef?.nativeElement) {
+            this.renderer.setStyle(this.suggestionsDropdownRef.nativeElement, 'width', this.dropdownWidth);
         }
     }
 }
