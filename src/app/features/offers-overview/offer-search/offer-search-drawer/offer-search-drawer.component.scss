@@ -1,20 +1,15 @@
 @import 'variables';
 
-:host {
-    flex: 1;
-}
-
-.search-drawer-container {
-    overflow: auto;
+.drawer-container {
     display: flex;
     flex-direction: column;
     height: 100%;
 
-    bsa-suggestions {
-        margin: .75rem 0;
-    }
-
     button {
         margin-top: auto;
+    }
+
+    bsa-offer-search-suggestions {
+        margin-bottom: 20px;
     }
 }
