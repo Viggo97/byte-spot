@@ -56,6 +56,9 @@ export class OfferSearchDrawerComponent implements OnInit {
 
     openDrawer(): void {
         this.drawerOpen = true;
+        setTimeout(() => {
+            this.drawerInput.nativeElement.focus();
+        });
     }
 
     closeDrawer(): void {
