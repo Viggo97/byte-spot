@@ -1,14 +1,15 @@
 import {
-    Component, DestroyRef, EventEmitter, Input, OnInit, Output, ViewChild,
+    Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild,
 } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Subject } from 'rxjs';
 import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay } from '@angular/cdk/overlay';
 
 import { DrawerComponent } from '@app/shared/components/drawer/drawer.component';
 import { DropdownItem } from '@app/shared/components/dropdown/dropdown-item.model';
+import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
 
-import { OfferSearchBase } from '../offer-search-base';
-import { OffersService } from '../../offers.service';
+import { OfferSearchSuggestionsGroup } from '../offer-search-suggestions/model/offer-search-suggestion-group.model';
 import { OfferSearchSuggestionsComponent } from '../offer-search-suggestions/offer-search-suggestions.component';
 
 @Component({
@@ -24,34 +25,85 @@ import { OfferSearchSuggestionsComponent } from '../offer-search-suggestions/off
     templateUrl: 'offer-search-drawer.component.html',
     styleUrls: ['./offer-search-drawer.component.scss'],
 })
-export class OfferSearchDrawerComponent extends OfferSearchBase implements OnInit {
-    @Input({ required: true }) searchPhrase!: string;
+export class OfferSearchDrawerComponent implements OnInit {
+    @Input({ required: true }) form!: FormControl;
+    @Input({ required: true }) suggestions!: OfferSearchSuggestionsGroup[];
+    @Input() suggestionsLoaded$!: Subject<void>;
 
-    @Output() searchPhraseSelected = new EventEmitter<string>();
+    @Output() selectSuggestion = new EventEmitter<string>();
 
     @ViewChild(DrawerComponent) drawer!: DrawerComponent;
+    @ViewChild('drawerInput') drawerInput!: ElementRef<HTMLInputElement>;
+    @ViewChild('searchButton') drawerButton!: ElementRef<HTMLButtonElement>;
+    @ViewChild(OfferSearchSuggestionsComponent) suggestionsComp!: OfferSearchSuggestionsComponent;
+    @ViewChild(OfferSearchSuggestionsComponent, { read: ElementRef }) suggestionsRef!: ElementRef<HTMLElement>;
 
+    readonly scrollStrategy = this.overlay.scrollStrategies.block();
     drawerOpen = false;
-    scrollStrategy = this.overlay.scrollStrategies.block();
+    dropdownOpen = true;
 
-    constructor(
-        destroyRef: DestroyRef,
-        offersService: OffersService,
-        private overlay: Overlay,
-    ) {
-        super(destroyRef, offersService);
-    }
+    constructor(private overlay: Overlay) { }
 
     ngOnInit(): void {
-        this.initForm(this.searchPhrase);
-        this.getInputValueChanges().subscribe((suggestions) => {
-            this.suggestions = suggestions;
+        this.suggestionsLoaded$.subscribe(() => {
+            this.openDropdown();
         });
     }
 
-    onSuggestionSelected(item: DropdownItem<string>): void {
-        this.suggestions = [];
-        this.form.setValue(item.value, { emitEvent: false });
-        this.searchPhraseSelected.emit(item.value);
+    onSelectSuggestion(suggestion: DropdownItem<string>): void {
+        this.selectSuggestion.emit(suggestion.value);
+    }
+
+    openDrawer(): void {
+        this.drawerOpen = true;
+    }
+
+    closeDrawer(): void {
+        this.drawerOpen = false;
+    }
+
+    openDropdown(): void {
+        this.dropdownOpen = true;
+    }
+
+    closeDropdown(): void {
+        this.dropdownOpen = false;
+    }
+
+    onInputClick(event?: KeyboardEvent): void {
+        if (event && event?.code !== Keycodes.SPACE && event?.code !== Keycodes.ENTER) {
+            return;
+        }
+
+        if (event?.key === Keycodes.ENTER) {
+            event.preventDefault();
+        }
+
+        this.openDrawer();
+    }
+
+    onOverlayKeydown(event: KeyboardEvent): void {
+        if (event.key === Keycodes.TAB) {
+            if (document.activeElement === this.drawerInput.nativeElement) {
+                event.preventDefault();
+                this.closeDropdown();
+                this.drawerButton.nativeElement.focus();
+            }
+        }
+
+        if (event.key === Keycodes.ARROW_DOWN) {
+            if (document.activeElement === this.drawerInput.nativeElement && this.dropdownOpen) {
+                this.suggestionsComp.focusFirstElement();
+            }
+        }
+
+        if (event.key === Keycodes.ESCAPE) {
+            if (this.suggestionsRef?.nativeElement.contains(event.target as HTMLElement)) {
+                this.drawerInput.nativeElement.focus();
+                this.closeDropdown();
+            } else {
+                this.drawer.close();
+            }
+        }
     }
 }

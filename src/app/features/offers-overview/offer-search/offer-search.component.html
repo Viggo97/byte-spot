@@ -1,66 +1,13 @@
-<div class="input-with-icon input-large"
-     [class.input-fixed-width]="searchMode === SearchMode.DROPDOWN">
-    <i class="icon-search"></i>
-    <input type="text"
-           #searchInput
-           [readonly]="searchMode === SearchMode.DRAWER"
-           [style.cursor]="searchMode === SearchMode.DRAWER ? 'pointer' : 'text'"
-           bsaResizeObserver
-           cdkOverlayOrigin
-           [formControl]="form"
-           (click)="onInputClick()"
-           (keydown)="onInputClick($event)"
-           (focus)="onInputFocus()"
-           (elementResize)="onInputResize($event)"
-    >
-</div>
-
-@if (isDropdownMode) {
-    <button>'global.search'</button>
+@if (searchMode === SearchMode.DRAWER) {
+    <bsa-offer-search-drawer [form]="form"
+                             [suggestions]="suggestions"
+                             [suggestionsLoaded$]="suggestionsLoaded$"
+                             (selectSuggestion)="onSelectSuggestion($event)">
+    </bsa-offer-search-drawer>
+} @else {
+    <bsa-offer-search-dropdown [form]="form"
+                               [suggestions]="suggestions"
+                               [suggestionsLoaded$]="suggestionsLoaded$"
+                               (selectSuggestion)="onSelectSuggestion($event)">
+    </bsa-offer-search-dropdown>
 }
-
-<ng-template cdkConnectedOverlay
-             [cdkConnectedOverlayOrigin]="searchInput"
-             [cdkConnectedOverlayOpen]="dropdownOpen"
-             (overlayOutsideClick)="onOutsideClick($event)"
-             (overlayKeydown)="onOverlayKeydownDropdown($event)"
-             (detach)="closeDropdown()">
-    <bsa-offer-search-suggestions #dropdownSuggestions
-                                  [style]="{maxHeight: maxDropdownHeight, width: dropdownWidth}"
-                                  [suggestions]="suggestions"
-                                  (selectSuggestion)="onSuggestionSelected($event); closeDropdown()">
-    </bsa-offer-search-suggestions>
-</ng-template>
-
-<ng-template cdkConnectedOverlay
-             [cdkConnectedOverlayOrigin]="searchInput"
-             [cdkConnectedOverlayOpen]="drawerOpen"
-             [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
-             [cdkConnectedOverlayHasBackdrop]="true"
-             [cdkConnectedOverlayDisableClose]="true"
-             cdkConnectedOverlayBackdropClass="cdk-custom-backdrop-background"
-             (overlayOutsideClick)="drawerRef.close()"
-             (overlayKeydown)="onOverlayKeydownDrawer($event)"
-             (detach)="closeDrawer(); closeDrawerDropdown()">
-    <bsa-drawer [title]="'global.offer-search-dropdown'"
-                (closeDrawer)="closeDrawer(); closeDrawerDropdown()">
-        <div class="drawer-container">
-            <div class="input-with-icon input-large">
-                <i class="icon-search"></i>
-                <input type="text"
-                       #drawerInput
-                       cdkOverlayOrigin
-                       [formControl]="form"
-                       (focus)="openDrawerDropdown()">
-            </div>
-            @if (drawerDropdownOpen) {
-                <bsa-offer-search-suggestions #drawerSuggestions
-                                              [suggestions]="suggestions"
-                                              (selectSuggestion)="onSuggestionSelected($event); closeDrawerDropdown()">
-                </bsa-offer-search-suggestions>
-            }
-            <button #drawerButton>'global.search'</button>
-        </div>
-    </bsa-drawer>
-</ng-template>
-

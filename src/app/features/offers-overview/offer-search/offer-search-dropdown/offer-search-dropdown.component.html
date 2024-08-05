@@ -3,20 +3,22 @@
     <input type="text"
            #searchInput
            cdkOverlayOrigin
-           [formControl]="form">
+           bsaResizeObserver
+           [formControl]="form"
+           (focus)="onInputFocus()"
+           (elementResize)="onInputResize($event)">
 </div>
+
+<button>'global.search'</button>
 
 <ng-template cdkConnectedOverlay
              [cdkConnectedOverlayOrigin]="searchInput"
-             [cdkConnectedOverlayOpen]="suggestionsOpen"
+             [cdkConnectedOverlayOpen]="dropdownOpen"
              (overlayOutsideClick)="onOutsideClick($event)"
-             (detach)="suggestionsOpen = false"
-             (overlayKeydown)="onOverlayKeydown($event)">
-    <bsa-dropdown [style]="{maxHeight: maxDropdownHeight, width: searchInput.offsetWidth + 'px'}"
-                  [dropdownItemsReference]="suggestionsRef">
-        <bsa-offer-search-suggestions #suggestionsRef
-                         [suggestions]="suggestions"
-                         (suggestionSelected)="onSuggestionSelected($event)">
-        </bsa-offer-search-suggestions>
-    </bsa-dropdown>
+             (overlayKeydown)="onOverlayKeydown($event)"
+             (detach)="closeDropdown()">
+    <bsa-offer-search-suggestions [style]="{maxHeight: maxDropdownHeight, width: dropdownWidth}"
+                                  [suggestions]="suggestions"
+                                  (selectSuggestion)="onSelectSuggestion($event); closeDropdown()">
+    </bsa-offer-search-suggestions>
 </ng-template>

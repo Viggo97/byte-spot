@@ -1,4 +1,3 @@
-import { CdkTrapFocus } from '@angular/cdk/a11y';
 import {
     Component, ContentChildren, ElementRef, HostListener, QueryList,
 } from '@angular/core';
@@ -8,9 +7,6 @@ import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
 @Component({
     selector: 'bsa-dropdown',
     standalone: true,
-    imports: [
-        CdkTrapFocus,
-    ],
     templateUrl: './dropdown.component.html',
     styleUrl: './dropdown.component.scss',
 })
