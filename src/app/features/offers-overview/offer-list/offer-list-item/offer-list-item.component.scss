@@ -1,0 +1,55 @@
+@import 'variables';
+
+a {
+    padding: 12px;
+    display: flex;
+    border: $border-base;
+    border-radius: 8px;
+    color: var(--text-primary);
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--hover-primary);
+
+    }
+}
+
+section {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 80px 8fr 2fr;
+    grid-template-areas:
+        "logo title location"
+        "logo details salary"
+        "tags tags tags";
+}
+
+.logo {
+    grid-area: logo;
+    background-color: lavender;
+}
+
+.title {
+    grid-area: title;
+    background-color: aliceblue;
+}
+
+.location {
+    grid-area: location;
+    background-color: pink;
+}
+
+.details {
+    grid-area: details;
+    background-color: cornsilk;
+}
+
+.salary {
+    grid-area: salary;
+    background-color: aqua;
+}
+
+.tags {
+    grid-area: tags;
+    background-color: lightskyblue;
+}

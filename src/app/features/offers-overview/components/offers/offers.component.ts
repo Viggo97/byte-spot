@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { FiltersComponent } from '@app/features/offers-overview/components/filters/filters.component';
 import { OfferComponent } from '@app/features/offers-overview/components/offer/offer.component';
-import { OfferSearchDropdownComponent } from '@app/features/offers-overview/offer-search/offer-search-dropdown/offer-search-dropdown.component';
 import { Offer } from '@app/features/offers-overview/model/offer.model';
 import { DropdownComponent } from '@app/shared/components/dropdown/dropdown.component';
 import { DropdownGroupComponent } from '@app/shared/components/dropdown/dropdown-group/dropdown-group.component';
@@ -16,8 +14,6 @@ import { SelectComponent } from '@app/shared/components/select/select.component'
     imports: [
         OfferComponent,
         PaginationComponent,
-        OfferSearchDropdownComponent,
-        FiltersComponent,
         DropdownItemComponent,
         DropdownComponent,
         DropdownGroupComponent,
