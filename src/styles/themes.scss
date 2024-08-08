@@ -1,11 +1,17 @@
 $background-primary-light: hsl(0, 0%, 100%);
-$background-primary-dark: hsl(240, 10%, 4%);
+$background-primary-dark: hsl(260, 4%, 12%);
+
+$background-secondary-light: hsl(228, 45%, 98%);
+$background-secondary-dark: hsl(250, 8%, 16%);
 
 $border-primary-light: hsl(240, 6%, 90%);
-$border-primary-dark: hsl(240, 4%, 16%);
+$border-primary-dark: hsl(250, 10%, 30%);
 
-$hover-primary-light: hsl(240, 4%, 96%);
-$hover-primary-dark: hsl(240, 4%, 10%);
+$border-secondary-light:hsl(228, 10%, 86%);
+$border-secondary-dark: hsl(206, 13%, 25%);
+
+$hover-primary-light: hsl(240, 12%, 98%);
+$hover-primary-dark: hsl(250, 10%, 24%);
 
 $text-primary-light: hsl(240, 10%, 4%);
 $text-primary-dark: hsl(0, 0%, 100%);
@@ -19,9 +25,26 @@ $success-dark: hsl(142 64% 46%);
 $backdrop-light: hsl(0, 0%, 0%, 0.2);
 $backdrop-dark: hsl(0, 0%, 0%, 0.2);
 
+$red-dark: hsl(350, 100%, 50%);
+$red-light: hsl(350, 100%, 90%);
+
+$blue-dark: hsl(210, 100%, 50%);
+$blue-light: hsl(210, 100%, 90%);
+
+$green-dark: hsla(150, 100%, 30%);
+$green-light: hsl(150, 100%, 90%);
+
+$orange-dark: hsl(24, 100%, 50%);
+$orange-light: hsl(24, 100%, 90%);
+
+$purple-dark: hsl(270, 100%, 50%);
+$purple-light: hsl(270, 100%, 90%);
+
 @mixin light-theme {
     --background-primary: #{$background-primary-light};
+    --background-secondary: #{$background-secondary-light};
     --border-primary: #{$border-primary-light};
+    --border-secondary: #{$border-secondary-light};
     --text-primary: #{$text-primary-light};
     --text-secondary: #{$text-secondary-light};
     --hover-primary: #{$hover-primary-light};
@@ -31,10 +54,25 @@ $backdrop-dark: hsl(0, 0%, 0%, 0.2);
 
 @mixin dark-theme {
     --background-primary: #{$background-primary-dark};
+    --background-secondary: #{$background-secondary-dark};
     --border-primary: #{$border-primary-dark};
+    --border-secondary: #{$border-secondary-dark};
     --text-primary: #{$text-primary-dark};
     --text-secondary: #{$text-secondary-dark};
     --hover-primary: #{$hover-primary-dark};
     --success: #{$success-dark};
     --backdrop-background: #{$backdrop-dark};
+}
+
+@mixin common-theme {
+    --red-dark: #{$red-dark};
+    --red-light: #{$red-light};
+    --blue-dark: #{$blue-dark};
+    --blue-light: #{$blue-light};
+    --green-dark: #{$green-dark};
+    --green-light: #{$green-light};
+    --orange-dark: #{$orange-dark};
+    --orange-light: #{$orange-light};
+    --purple-dark: #{$purple-dark};
+    --purple-light: #{$purple-light};
 }
