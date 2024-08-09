@@ -1,29 +1,26 @@
 $background-primary-light: hsl(0, 0%, 100%);
-$background-primary-dark: hsl(260, 4%, 12%);
+$background-primary-dark: hsl(240, 4%, 12%);
 
-$background-secondary-light: hsl(228, 45%, 98%);
-$background-secondary-dark: hsl(250, 8%, 16%);
+$background-secondary-light: hsl(0, 40%, 98%);
+$background-secondary-dark: hsl(240, 8%, 16%);
 
-$border-primary-light: hsl(240, 6%, 90%);
-$border-primary-dark: hsl(250, 10%, 30%);
+$border-primary-light: hsl(240, 12%, 86%);
+$border-primary-dark: hsl(240, 12%, 24%);
 
-$border-secondary-light:hsl(228, 10%, 86%);
-$border-secondary-dark: hsl(206, 13%, 25%);
+$border-secondary-light:hsl(240, 12%, 80%);
+$border-secondary-dark: hsl(240, 12%, 32%);
 
-$hover-primary-light: hsl(240, 12%, 98%);
-$hover-primary-dark: hsl(250, 10%, 24%);
+$hover-primary-light: hsl(0, 0%, 96%);
+$hover-primary-dark: hsl(240, 8%, 16%);
 
-$text-primary-light: hsl(240, 10%, 4%);
+$hover-secondary-light: hsl(0, 0%, 96%);
+$hover-secondary-dark: hsl(240, 8%, 18%);
+
+$text-primary-light: hsl(240, 8%, 16%);
 $text-primary-dark: hsl(0, 0%, 100%);
 
-$text-secondary-light: hsl(0, 0%, 44%);
-$text-secondary-dark: hsl(240, 5%, 64%);
-
-$success-light: hsl(120, 64%, 46%);
-$success-dark: hsl(142 64% 46%);
-
-$backdrop-light: hsl(0, 0%, 0%, 0.2);
-$backdrop-dark: hsl(0, 0%, 0%, 0.2);
+$text-secondary-light: hsl(240, 8%, 40%);
+$text-secondary-dark: hsl(240, 0%, 64%);
 
 $red-dark: hsl(350, 100%, 50%);
 $red-light: hsl(350, 100%, 90%);
@@ -40,16 +37,19 @@ $orange-light: hsl(24, 100%, 90%);
 $purple-dark: hsl(270, 100%, 50%);
 $purple-light: hsl(270, 100%, 90%);
 
+$green-primary-light: hsl(150, 100%, 32%);
+$green-primary-dark: hsl(150, 100%, 32%);
+
 @mixin light-theme {
     --background-primary: #{$background-primary-light};
     --background-secondary: #{$background-secondary-light};
     --border-primary: #{$border-primary-light};
     --border-secondary: #{$border-secondary-light};
+    --hover-primary: #{$hover-primary-light};
+    --hover-secondary: #{$hover-secondary-light};
     --text-primary: #{$text-primary-light};
     --text-secondary: #{$text-secondary-light};
-    --hover-primary: #{$hover-primary-light};
-    --success: #{$success-light};
-    --backdrop-background: #{$backdrop-light};
+    --green-primary-light: #{$green-primary-light};
 }
 
 @mixin dark-theme {
@@ -57,11 +57,11 @@ $purple-light: hsl(270, 100%, 90%);
     --background-secondary: #{$background-secondary-dark};
     --border-primary: #{$border-primary-dark};
     --border-secondary: #{$border-secondary-dark};
+    --hover-primary: #{$hover-primary-dark};
+    --hover-secondary: #{$hover-secondary-dark};
     --text-primary: #{$text-primary-dark};
     --text-secondary: #{$text-secondary-dark};
-    --hover-primary: #{$hover-primary-dark};
-    --success: #{$success-dark};
-    --backdrop-background: #{$backdrop-dark};
+    --green-primary-dark: #{$green-primary-dark};
 }
 
 @mixin common-theme {
