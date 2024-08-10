@@ -1,0 +1,11 @@
+@import 'variables';
+
+.chip {
+    display: flex;
+    padding: 0 12px;
+    width: fit-content;
+    border: $border-base;
+    border-radius: 4px;
+    font: $font-sm;
+    white-space: nowrap;
+}
