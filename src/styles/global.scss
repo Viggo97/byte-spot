@@ -17,6 +17,7 @@ html, body {
 }
 
 body {
+    @include common-theme;
     @include light-theme;
 
     &.dark-theme {
@@ -39,7 +40,7 @@ bsa-root {
 }
 
 h2 {
-    font: $font-xl;
+    font: $font-lg;
     font-weight: 700;
 }
 
