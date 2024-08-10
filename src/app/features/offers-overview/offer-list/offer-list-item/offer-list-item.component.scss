@@ -1,7 +1,9 @@
+@import 'breakpoints';
+@import 'mixins';
 @import 'variables';
 
 a {
-    padding: 12px;
+    padding: 16px;
     display: flex;
     border: $border-base;
     border-radius: 8px;
@@ -10,46 +12,88 @@ a {
 
     &:hover {
         background-color: var(--hover-primary);
-
     }
 }
 
 section {
     flex: 1;
     display: grid;
-    grid-template-columns: 80px 8fr 2fr;
+    grid-column-gap: 16px;
+    grid-row-gap: 12px;
+    grid-template-columns: min-content auto;
     grid-template-areas:
-        "logo title location"
-        "logo details salary"
-        "tags tags tags";
+        "logo title"
+        "salary salary"
+        "location location"
+        "details details"
+        "tags tags";
+    font: $font-md;
+
+    @include md {
+        grid-row-gap: 0;
+        grid-template-columns: auto 8fr auto;
+        grid-template-areas:
+            "logo title salary"
+            "logo details location"
+            "tags tags tags";
+    }
 }
 
 .logo {
     grid-area: logo;
     background-color: lavender;
+    width: 3.5rem;
+    height: 3.5rem;
 }
 
 .title {
     grid-area: title;
-    background-color: aliceblue;
-}
+    align-self: center;
 
-.location {
-    grid-area: location;
-    background-color: pink;
-}
+    @include multiline-ellipsis(2, 1.75rem);
 
-.details {
-    grid-area: details;
-    background-color: cornsilk;
+    @include md {
+        display: block;
+        @include ellipsis;
+    }
 }
 
 .salary {
     grid-area: salary;
-    background-color: aqua;
+    align-self: center;
+
+    @include md {
+        justify-self: end;
+    }
+}
+
+.location {
+    grid-area: location;
+
+    @include md {
+        justify-self: end;
+    }
+}
+
+.details {
+    grid-area: details;
+    align-self: end;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.company {
+    font: $font-sm;
 }
 
 .tags {
     grid-area: tags;
-    background-color: lightskyblue;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+
+    @include md {
+        margin-top: 12px;
+    }
 }
