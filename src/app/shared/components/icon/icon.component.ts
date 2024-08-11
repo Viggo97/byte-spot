@@ -1,0 +1,30 @@
+import { Component, Input } from '@angular/core';
+
+@Component({
+    selector: 'bsa-icon',
+    standalone: true,
+    imports: [],
+    template: `
+        <svg [attr.width]="size" [attr.height]="size" [attr.fill]="color" [attr.stroke]="stroke">
+            <use [attr.href]="path"></use>
+        </svg>
+  `,
+    styles: '',
+})
+export class IconComponent {
+    private location = 'assets/svg/icons';
+
+    protected path!: string;
+    @Input({ required: true }) set name(value: string) {
+        this.path = `${this.location}/${value}.svg#${value}`;
+    }
+
+    private _size = '1rem';
+    get size(): string { return this._size; }
+    @Input() set size(value: number | string) {
+        this._size = typeof value === 'number' ? `${value}px` : value;
+    }
+
+    @Input() color = '#000';
+    @Input() stroke = '#000';
+}
