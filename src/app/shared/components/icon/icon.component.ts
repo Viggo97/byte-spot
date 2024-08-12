@@ -5,7 +5,7 @@ import { Component, Input } from '@angular/core';
     standalone: true,
     imports: [],
     template: `
-        <svg [attr.width]="size" [attr.height]="size" [attr.fill]="color" [attr.stroke]="stroke" [class]="customClass">
+        <svg [attr.width]="size" [attr.height]="size" [attr.fill]="fill" [attr.stroke]="stroke" [class]="customClass">
             <use [attr.href]="path"></use>
         </svg>
   `,
@@ -31,7 +31,7 @@ export class IconComponent {
         this._size = typeof value === 'number' ? `${value}px` : value;
     }
 
-    @Input() color = '#000';
-    @Input() stroke = '#000';
+    @Input() fill = 'currentColor';
+    @Input() stroke = 'currentColor';
     @Input() customClass = '';
 }
