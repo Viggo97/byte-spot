@@ -5,11 +5,17 @@ import { Component, Input } from '@angular/core';
     standalone: true,
     imports: [],
     template: `
-        <svg [attr.width]="size" [attr.height]="size" [attr.fill]="color" [attr.stroke]="stroke">
+        <svg [attr.width]="size" [attr.height]="size" [attr.fill]="color" [attr.stroke]="stroke" [class]="customClass">
             <use [attr.href]="path"></use>
         </svg>
   `,
-    styles: '',
+    styles: `
+      :host {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+    `,
 })
 export class IconComponent {
     private location = 'assets/svg/icons';
@@ -27,4 +33,5 @@ export class IconComponent {
 
     @Input() color = '#000';
     @Input() stroke = '#000';
+    @Input() customClass = '';
 }
