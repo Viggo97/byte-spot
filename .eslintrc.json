@@ -48,6 +48,15 @@
                     "error",
                     4
                 ],
+                "object-curly-newline": [
+                    "error",
+                    {
+                        "ObjectExpression": "always",
+                        "ObjectPattern": { "multiline": true },
+                        "ImportDeclaration": "never",
+                        "ExportDeclaration": "never"
+                    }
+                ],
                 "@typescript-eslint/lines-between-class-members": "off",
                 "@typescript-eslint/no-explicit-any": 0,
                 "@typescript-eslint/no-useless-constructor": "off",
