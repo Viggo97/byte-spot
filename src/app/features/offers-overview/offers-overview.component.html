@@ -1,4 +1,6 @@
 <bsa-offer-filters></bsa-offer-filters>
 <bsa-offer-search></bsa-offer-search>
 <bsa-offer-list></bsa-offer-list>
-
+<bsa-pagination [total]="100"
+                (pageChange)="onPageChange($event)">
+</bsa-pagination>
