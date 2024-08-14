@@ -1,14 +1,12 @@
 import {
     Component, EventEmitter, Input, OnInit, Output,
 } from '@angular/core';
-import { SelectComponent } from '@app/shared/components/select/select.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'bsa-pagination',
     standalone: true,
-    imports: [
-        SelectComponent,
-    ],
+    imports: [FormsModule],
     templateUrl: './pagination.component.html',
     styleUrl: './pagination.component.scss',
 })
@@ -27,6 +25,22 @@ export class PaginationComponent implements OnInit {
 
     ngOnInit(): void {
         this.pages = this.total / this.perPage;
+    }
+
+    onInputBlur(): void {
+        if (!this.page || this.page < 0) {
+            this.page = 1;
+        }
+
+        if (this.page > this.pages) {
+            this.page = this.pages;
+        }
+
+        this.emitPage();
+    }
+
+    onInputEnter(): void {
+        this.emitPage();
     }
 
     onNextPage(): void {

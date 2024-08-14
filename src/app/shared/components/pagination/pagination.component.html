@@ -1,31 +1,34 @@
-<div class="pages-switch">
-    <div>Page {{ page }} of {{ pages }}</div>
+<button type="button"
+        class="button-icon"
+        [disabled]="page === 1"
+        (click)="onFirstPage()">
+    <span class="icon-arrow-left-double"></span>
+</button>
 
-    <button type="button"
-            class="button-icon"
-            [disabled]="page === 1"
-            (click)="onFirstPage()">
-        <span class="icon-arrow-left-double"></span>
-    </button>
+<button type="button"
+        class="button-icon"
+        [disabled]="page === 1"
+        (click)="onPreviousPage()">
+    <span class="icon-arrow-left"></span>
+</button>
 
-    <button type="button"
-            class="button-icon"
-            [disabled]="page === 1"
-            (click)="onPreviousPage()">
-        <span class="icon-arrow-left"></span>
-    </button>
+<input type="number"
+       [min]="1"
+       [max]="pages"
+       [(ngModel)]="page"
+       (blur)="onInputBlur()"
+       (keydown.enter)="onInputEnter()">
 
-    <button type="button"
-            class="button-icon"
-            [disabled]="page === pages"
-            (click)="onNextPage()">
-        <span class="icon-arrow-right"></span>
-    </button>
+<button type="button"
+        class="button-icon"
+        [disabled]="page === pages"
+        (click)="onNextPage()">
+    <span class="icon-arrow-right"></span>
+</button>
 
-    <button type="button"
-            class="button-icon"
-            [disabled]="page === pages"
-            (click)="onLastPage()">
-        <span class="icon-arrow-right-double"></span>
-    </button>
-</div>
+<button type="button"
+        class="button-icon"
+        [disabled]="page === pages"
+        (click)="onLastPage()">
+    <span class="icon-arrow-right-double"></span>
+</button>

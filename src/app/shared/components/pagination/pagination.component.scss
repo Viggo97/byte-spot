@@ -3,20 +3,16 @@
 
 :host {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 24px;
+    gap: 12px;
     font: $font-md;
     color: var(--text-primary);
 
-    @include md {
-        justify-content: flex-end;
-    }
-
-    .pages-select, .pages-switch {
-        display: flex;
-        align-items: center;
-        gap: 12px;
+    input {
+        width: 2.25rem;
+        height: 2.25rem;
+        padding: .5rem;
+        text-align: center;
     }
 }
