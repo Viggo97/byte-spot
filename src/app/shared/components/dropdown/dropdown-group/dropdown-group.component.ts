@@ -4,7 +4,12 @@ import { Component, Input } from '@angular/core';
     selector: 'bsa-dropdown-group',
     standalone: true,
     imports: [],
-    templateUrl: './dropdown-group.component.html',
+    template: `
+        @if (title) {
+            <div class="group-title">{{ title }}</div>
+        }
+        <ng-content></ng-content>
+    `,
     styleUrl: './dropdown-group.component.scss',
 })
 export class DropdownGroupComponent {

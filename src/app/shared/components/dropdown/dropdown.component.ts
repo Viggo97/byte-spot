@@ -1,17 +1,16 @@
-import {
-    Component, ContentChildren, ElementRef, HostListener, QueryList,
-} from '@angular/core';
-import { DropdownItemComponent } from '@app/shared/components/dropdown/dropdown-item/dropdown-item.component';
+import { Component, ContentChildren, ElementRef, HostListener, QueryList } from '@angular/core';
+
+import { DropdownOptionComponent } from '@app/shared/components/dropdown/dropdown-option/dropdown-option.component';
 import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
 
 @Component({
     selector: 'bsa-dropdown',
     standalone: true,
-    templateUrl: './dropdown.component.html',
+    template: '<ng-content></ng-content>',
     styleUrl: './dropdown.component.scss',
 })
 export class DropdownComponent {
-    @ContentChildren(DropdownItemComponent, { descendants: true, read: ElementRef })
+    @ContentChildren(DropdownOptionComponent, { descendants: true, read: ElementRef })
         items!: QueryList<ElementRef<HTMLElement>>;
 
     private index = 0;
