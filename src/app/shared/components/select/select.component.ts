@@ -45,7 +45,7 @@ export class SelectComponent<T> implements AfterViewInit, ControlValueAccessor {
         this.cdr.detectChanges();
     }
 
-    protected onSelectItem(value: T): void {
+    protected onSelectOption(value: T): void {
         this.open = false;
         this.value = value;
         this.onChange(this.value);

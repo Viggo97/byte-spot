@@ -9,12 +9,12 @@ import { Component, EventEmitter, HostBinding, HostListener, Input, Output } fro
 export class DropdownOptionComponent<T> {
     @Input({ required: true }) value!: T;
 
-    @Output() selectItem = new EventEmitter<T>();
+    @Output() selectOption = new EventEmitter<T>();
 
     @HostBinding('tabindex') tabindex = 0;
 
     @HostListener('click')
-    onSelectItem(): void {
-        this.selectItem.emit(this.value);
+    onSelectOption(): void {
+        this.selectOption.emit(this.value);
     }
 }
