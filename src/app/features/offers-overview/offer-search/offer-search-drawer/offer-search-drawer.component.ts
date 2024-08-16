@@ -1,12 +1,9 @@
-import {
-    Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay } from '@angular/cdk/overlay';
 
 import { DrawerComponent } from '@app/shared/components/drawer/drawer.component';
-import { DropdownItem } from '@app/shared/components/dropdown/dropdown-item.model';
 import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
 
 import { OfferSearchSuggestionsGroup } from '../offer-search-suggestions/model/offer-search-suggestion-group.model';
@@ -50,8 +47,8 @@ export class OfferSearchDrawerComponent implements OnInit {
         });
     }
 
-    onSelectSuggestion(suggestion: DropdownItem<string>): void {
-        this.selectSuggestion.emit(suggestion.value);
+    onSelectSuggestion(suggestion: string): void {
+        this.selectSuggestion.emit(suggestion);
     }
 
     openDrawer(): void {

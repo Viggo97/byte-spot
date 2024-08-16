@@ -1,15 +1,8 @@
-import {
-    Component, EventEmitter, Input, Output, ViewChild,
-} from '@angular/core';
-import {
-    OfferSearchSuggestionsGroup,
-} from '@app/features/offers-overview/offer-search/offer-search-suggestions/model/offer-search-suggestion-group.model';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { OfferSearchSuggestionsGroup } from '@app/features/offers-overview/offer-search/offer-search-suggestions/model/offer-search-suggestion-group.model';
 import { DropdownGroupComponent } from '@app/shared/components/dropdown/dropdown-group/dropdown-group.component';
-import { DropdownItem } from '@app/shared/components/dropdown/dropdown-item.model';
-import { DropdownItemComponent } from '@app/shared/components/dropdown/dropdown-item/dropdown-item.component';
-import {
-    DropdownSeparatorComponent,
-} from '@app/shared/components/dropdown/dropdown-separator/dropdown-separator.component';
+import { DropdownOptionComponent } from '@app/shared/components/dropdown/dropdown-option/dropdown-option.component';
+import { DropdownSeparatorComponent } from '@app/shared/components/dropdown/dropdown-separator/dropdown-separator.component';
 import { DropdownComponent } from '@app/shared/components/dropdown/dropdown.component';
 
 @Component({
@@ -17,7 +10,7 @@ import { DropdownComponent } from '@app/shared/components/dropdown/dropdown.comp
     standalone: true,
     imports: [
         DropdownGroupComponent,
-        DropdownItemComponent,
+        DropdownOptionComponent,
         DropdownSeparatorComponent,
         DropdownComponent,
     ],
@@ -27,11 +20,11 @@ import { DropdownComponent } from '@app/shared/components/dropdown/dropdown.comp
 export class OfferSearchSuggestionsComponent {
     @Input() suggestions: OfferSearchSuggestionsGroup[] = [];
 
-    @Output() selectSuggestion = new EventEmitter<DropdownItem<string>>();
+    @Output() selectSuggestion = new EventEmitter<string>();
 
     @ViewChild(DropdownComponent) dropdownRef!: DropdownComponent;
 
-    onSelectItem(item: DropdownItem<string>): void {
+    onSelectOption(item: string): void {
         this.selectSuggestion.emit(item);
     }
 

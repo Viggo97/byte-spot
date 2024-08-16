@@ -1,13 +1,10 @@
-import {
-    Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 
 import { ResizeObserverDirective } from '@app/shared/directvies/resize-observer.directive';
 import { DropdownComponent } from '@app/shared/components/dropdown/dropdown.component';
-import { DropdownItem } from '@app/shared/components/dropdown/dropdown-item.model';
 import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
 
 import { OfferSearchSuggestionsGroup } from '../offer-search-suggestions/model/offer-search-suggestion-group.model';
@@ -49,8 +46,8 @@ export class OfferSearchDropdownComponent implements OnInit {
         });
     }
 
-    onSelectSuggestion(suggestion: DropdownItem<string>): void {
-        this.selectSuggestion.emit(suggestion.value);
+    onSelectSuggestion(suggestion: string): void {
+        this.selectSuggestion.emit(suggestion);
     }
 
     onInputFocus(): void {
