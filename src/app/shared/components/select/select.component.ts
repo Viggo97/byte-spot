@@ -1,11 +1,11 @@
+import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
-import {
-    Component, EventEmitter, Input, Output,
-} from '@angular/core';
-import { FormsModule } from '@angular/forms';
+
+import { IconComponent } from '@app/shared/components/icon/icon.component';
 import { DropdownComponent } from '@app/shared/components/dropdown/dropdown.component';
-import { DropdownItem } from '@app/shared/components/dropdown/dropdown-item.model';
-import { DropdownItemComponent } from '@app/shared/components/dropdown/dropdown-item/dropdown-item.component';
+import { DropdownOptionComponent } from '@app/shared/components/dropdown/dropdown-option/dropdown-option.component';
+import { SelectValueConverterPipe } from '@app/shared/components/select/select-value-converter.pipe';
 
 @Component({
     selector: 'bsa-select',
@@ -13,24 +13,53 @@ import { DropdownItemComponent } from '@app/shared/components/dropdown/dropdown-
     imports: [
         CdkConnectedOverlay,
         CdkOverlayOrigin,
+        IconComponent,
         DropdownComponent,
-        DropdownItemComponent,
-        FormsModule,
+        DropdownOptionComponent,
+        SelectValueConverterPipe,
     ],
     templateUrl: './select.component.html',
     styleUrl: './select.component.scss',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            multi: true,
+            useExisting: SelectComponent,
+        },
+    ],
 })
-export class SelectComponent<T> {
-    @Input({ required: true }) options!: DropdownItem<T>[];
-    @Input() numberOfVisibleOptions?: number;
-
-    @Output() selectOption = new EventEmitter<DropdownItem<T>>();
+export class SelectComponent<T> implements AfterViewInit, ControlValueAccessor {
+    @Input({ required: true }) options!: T[];
+    @Input() optionLabel: string | undefined;
 
     value: T | null = null;
     open = false;
 
-    protected onSelectItem(option: DropdownItem<T>): void {
+    onChange = (value: T) => {};
+    onTouch = () => {};
+
+    constructor(private cdr: ChangeDetectorRef) {}
+
+    ngAfterViewInit(): void {
+        // Additional change detection is need to provide relevant value for cdkConnectedOverlayWidth
+        this.cdr.detectChanges();
+    }
+
+    protected onSelectItem(value: T): void {
         this.open = false;
-        this.value = option.value;
+        this.value = value;
+        this.onChange(this.value);
+    }
+
+    registerOnChange(onChange: (value: T) => void): void {
+        this.onChange = onChange;
+    }
+
+    registerOnTouched(onTouch: () => void): void {
+        this.onTouch = onTouch;
+    }
+
+    writeValue(value: T): void {
+        this.value = value;
     }
 }
