@@ -14,6 +14,8 @@ export class DropdownOptionComponent<T> {
     @HostBinding('tabindex') tabindex = 0;
 
     @HostListener('click')
+    @HostListener('keydown.enter')
+    @HostListener('keydown.space')
     onSelectOption(): void {
         this.selectOption.emit(this.value);
     }
