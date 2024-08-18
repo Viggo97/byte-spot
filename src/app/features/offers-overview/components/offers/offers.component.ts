@@ -3,8 +3,7 @@ import { OfferComponent } from '@app/features/offers-overview/components/offer/o
 import { Offer } from '@app/features/offers-overview/model/offer.model';
 import { DropdownComponent } from '@app/shared/components/dropdown/dropdown.component';
 import { DropdownGroupComponent } from '@app/shared/components/dropdown/dropdown-group/dropdown-group.component';
-import { DropdownItemComponent } from '@app/shared/components/dropdown/dropdown-item/dropdown-item.component';
-import { PagesManagerComponent } from '@app/shared/components/pages-manager/pages-manager.component';
+import { DropdownOptionComponent } from '@app/shared/components/dropdown/dropdown-option/dropdown-option.component';
 import { PaginationComponent } from '@app/shared/components/pagination/pagination.component';
 import { SelectComponent } from '@app/shared/components/select/select.component';
 
@@ -14,11 +13,10 @@ import { SelectComponent } from '@app/shared/components/select/select.component'
     imports: [
         OfferComponent,
         PaginationComponent,
-        DropdownItemComponent,
+        DropdownOptionComponent,
         DropdownComponent,
         DropdownGroupComponent,
         SelectComponent,
-        PagesManagerComponent,
     ],
     templateUrl: './offers.component.html',
     styleUrl: './offers.component.scss',
