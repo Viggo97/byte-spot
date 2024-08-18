@@ -10,18 +10,10 @@ nav {
         margin-left: 20px;
     }
 
-    .icons-container {
+    .icons {
         margin-right: 20px;
         display: flex;
         align-items: center;
         gap: 12px;
-
-        button {
-            font: $font-3xl;
-
-            &::before {
-                min-width: 2rem;
-            }
-        }
     }
 }

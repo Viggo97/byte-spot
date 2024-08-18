@@ -1,39 +1,35 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { NgClass } from '@angular/common';
-import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+import { SelectButtonComponent } from '@app/shared/components/select-button/select-button.component';
+import { IconComponent } from '@app/shared/components/icon/icon.component';
 
 import { Theme } from '@app/core/theme/theme.enum';
 import { ThemeService } from '@app/core/theme/theme.service';
-
-import { DropdownComponent } from '@app/shared/components/dropdown/dropdown.component';
-import { DropdownItem } from '@app/shared/components/dropdown/dropdown-item.model';
-import { DropdownItemComponent } from '@app/shared/components/dropdown/dropdown-item/dropdown-item.component';
 import { Language } from '@app/core/language/language.enum';
 import { LanguageService } from '@app/core/language/language.service';
 import { TranslateService } from '@app/core/translate/translate.service';
 
+type LanguageOption = { key: Language, label: string };
+
 @Component({
     selector: 'bsa-navbar',
     standalone: true,
-    imports: [NgClass, CdkConnectedOverlay, CdkOverlayOrigin, DropdownComponent, DropdownItemComponent],
+    imports: [FormsModule, SelectButtonComponent, IconComponent],
     templateUrl: './navbar.component.html',
     styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
-    @ViewChild('languageButton') languageButton: ElementRef<HTMLButtonElement> | null = null;
+    darkTheme = false;
 
-    darkTheme: boolean = false;
-    languageDropdownOpen = false;
-
-    languageOptions: DropdownItem<Language>[] = [
+    language: Language | undefined;
+    languageOptions: LanguageOption[] = [
         {
             key: Language.ENGLISH,
-            value: Language.ENGLISH,
             label: this.translateService.translate('global.languageEN'),
         },
         {
             key: Language.POLISH,
-            value: Language.POLISH,
             label: this.translateService.translate('global.languagePL'),
         },
     ];
@@ -52,8 +48,8 @@ export class NavbarComponent {
         this.themeService.switchTheme();
     }
 
-    onSelectOption(option: DropdownItem<Language>): void {
-        this.languageService.language = option.value;
-        this.languageDropdownOpen = false;
+    onSelectLanguage(language: LanguageOption): void {
+        this.language = language.key;
+        this.languageService.language = language.key;
     }
 }

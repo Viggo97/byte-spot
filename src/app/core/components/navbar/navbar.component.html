@@ -3,36 +3,19 @@
         <img src="../../../../assets/logo.svg" alt="logo">
     </div>
 
-    <div class="icons-container">
-        <button
-            id="switch-theme-button"
-            class="button-icon button-border-none"
-            [ngClass]="darkTheme ? 'icon-moon' : 'icon-sun'"
-            (click)="onSwitchTheme()">
+    <div class="icons">
+        <button class="button-icon button-border-none"
+                (click)="onSwitchTheme()">
+            <bsa-icon [name]="darkTheme ? 'moon' : 'sun'"
+                      size="2rem">
+            </bsa-icon>
         </button>
-        <button
-            id="change-language-button"
-            class="button-icon button-border-none icon-language"
-            cdkOverlayOrigin
-            #languageButton
-            (click)="languageDropdownOpen = !languageDropdownOpen">
-        </button>
+        <bsa-select-button icon="language"
+                           [options]="languageOptions"
+                           optionLabel="label"
+                           [ngModel]="language"
+                           (ngModelChange)="onSelectLanguage($event)">
+        </bsa-select-button>
     </div>
-</nav>
 
-<ng-template
-    cdkConnectedOverlay
-    [cdkConnectedOverlayOrigin]="languageButton"
-    [cdkConnectedOverlayOpen]="languageDropdownOpen"
-    cdkConnectedOverlayWidth="8rem"
-    (overlayOutsideClick)="$event.stopPropagation(); languageDropdownOpen = false"
-    (detach)="languageDropdownOpen = false">
-    <bsa-dropdown>
-        @for (lang of languageOptions; track lang) {
-            <bsa-dropdown-item
-                [item]="lang"
-                (selectItem)="onSelectOption($event)">
-            </bsa-dropdown-item>
-        }
-    </bsa-dropdown>
-</ng-template>
+</nav>
