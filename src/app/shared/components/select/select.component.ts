@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 
@@ -32,6 +32,9 @@ export class SelectComponent<T> implements AfterViewInit, ControlValueAccessor {
     @Input({ required: true }) options!: T[];
     @Input() optionLabel: string | undefined;
 
+    @ViewChild('selectButton') selectButton!: ElementRef<HTMLButtonElement>;
+    @ViewChild(DropdownComponent) dropdown!: DropdownComponent;
+
     value: T | null = null;
     open = false;
 
@@ -49,6 +52,17 @@ export class SelectComponent<T> implements AfterViewInit, ControlValueAccessor {
         this.open = false;
         this.value = value;
         this.onChange(this.value);
+    }
+
+    moveFocusToDropdown(): void {
+        if (this.open) {
+            this.cdr.detectChanges();
+            this.dropdown.focusFirstElement();
+        }
+    }
+
+    restoreFocusToButton(): void {
+        this.selectButton.nativeElement.focus();
     }
 
     registerOnChange(onChange: (value: T) => void): void {
