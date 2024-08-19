@@ -1,7 +1,7 @@
 import { Component, ContentChildren, ElementRef, HostListener, QueryList } from '@angular/core';
 
-import { DropdownOptionComponent } from '@app/shared/components/dropdown/dropdown-option/dropdown-option.component';
-import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
+import { DropdownOptionComponent } from './dropdown-option/dropdown-option.component';
+import { Keycodes } from '../../enums/keycodes.enum';
 
 @Component({
     selector: 'bsa-dropdown',

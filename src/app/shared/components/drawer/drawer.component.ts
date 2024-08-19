@@ -1,14 +1,7 @@
-import {
-    animate, AnimationEvent,
-    state, style, transition, trigger,
-} from '@angular/animations';
-import {
-    A11yModule,
-} from '@angular/cdk/a11y';
+import { AfterViewInit, Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 import { NgComponentOutlet } from '@angular/common';
-import {
-    AfterViewInit, Component, EventEmitter, HostBinding, HostListener, Input, Output,
-} from '@angular/core';
+import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
+import { A11yModule } from '@angular/cdk/a11y';
 
 @Component({
     selector: 'bsa-drawer',

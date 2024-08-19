@@ -1,6 +1,4 @@
-import {
-    Directive, ElementRef, EventEmitter, OnDestroy, OnInit, Output,
-} from '@angular/core';
+import { Directive, ElementRef, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 
 @Directive({
     selector: '[bsaResizeObserver]',

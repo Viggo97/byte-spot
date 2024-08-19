@@ -2,10 +2,10 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, ViewChi
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 
-import { IconComponent } from '@app/shared/components/icon/icon.component';
-import { DropdownComponent } from '@app/shared/components/dropdown/dropdown.component';
-import { DropdownOptionComponent } from '@app/shared/components/dropdown/dropdown-option/dropdown-option.component';
-import { SelectValueConverterPipe } from '@app/shared/components/select/select-value-converter.pipe';
+import { IconComponent } from '../icon/icon.component';
+import { DropdownComponent } from '../dropdown/dropdown.component';
+import { DropdownOptionComponent } from '../dropdown/dropdown-option/dropdown-option.component';
+import { SelectValueConverterPipe } from '../../pipes/select-value-converter.pipe';
 
 @Component({
     selector: 'bsa-select',
