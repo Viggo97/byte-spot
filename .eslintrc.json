@@ -40,7 +40,10 @@
                 ],
                 "max-len": [
                     "error",
-                    120
+                    120,
+                    {
+                        "ignorePattern": "^import\\s.+\\sfrom\\s.+;$"
+                    }
                 ],
                 "class-methods-use-this": "off",
                 "no-underscore-dangle": "off",
