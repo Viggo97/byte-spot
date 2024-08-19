@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay } from '@angular/cdk/overlay';
 
 import { DrawerComponent } from '@app/shared/components/drawer/drawer.component';
-import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
+import { Keycodes } from '@shared';
 
 import { OfferSearchSuggestionsGroup } from '../offer-search-suggestions/model/offer-search-suggestion-group.model';
 import { OfferSearchSuggestionsComponent } from '../offer-search-suggestions/offer-search-suggestions.component';

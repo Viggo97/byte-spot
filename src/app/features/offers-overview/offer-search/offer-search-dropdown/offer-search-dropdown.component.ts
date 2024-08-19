@@ -5,7 +5,7 @@ import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 
 import { ResizeObserverDirective } from '@app/shared/directvies/resize-observer.directive';
 import { DropdownComponent } from '@app/shared/components/dropdown/dropdown.component';
-import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
+import { Keycodes } from '@shared';
 
 import { OfferSearchSuggestionsGroup } from '../offer-search-suggestions/model/offer-search-suggestion-group.model';
 import { OfferSearchSuggestionsComponent } from '../offer-search-suggestions/offer-search-suggestions.component';
