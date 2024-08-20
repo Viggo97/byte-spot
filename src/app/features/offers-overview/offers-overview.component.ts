@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
-import { PaginationComponent } from '@app/shared/components/pagination/pagination.component';
+import { PaginationComponent } from '@shared';
 
 import { OfferFiltersComponent } from './offer-filters/offer-filters.component';
 import { OfferSearchComponent } from './offer-search/offer-search.component';
+import { OfferSettingsComponent } from './offer-settings/offer-settings.component';
 import { OfferListComponent } from './offer-list/offer-list.component';
 
 @Component({
@@ -14,6 +15,7 @@ import { OfferListComponent } from './offer-list/offer-list.component';
         OfferSearchComponent,
         OfferListComponent,
         PaginationComponent,
+        OfferSettingsComponent,
     ],
     templateUrl: './offers-overview.component.html',
     styleUrl: './offers-overview.component.scss',
