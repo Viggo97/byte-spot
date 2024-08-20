@@ -3,9 +3,8 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 
-import { ResizeObserverDirective } from '@app/shared/directvies/resize-observer.directive';
-import { DropdownComponent } from '@app/shared/components/dropdown/dropdown.component';
-import { Keycodes } from '@shared';
+import { TranslatePipe } from '@core';
+import { ResizeObserverDirective, DropdownComponent, Keycodes } from '@shared';
 
 import { OfferSearchSuggestionsGroup } from '../offer-search-suggestions/model/offer-search-suggestion-group.model';
 import { OfferSearchSuggestionsComponent } from '../offer-search-suggestions/offer-search-suggestions.component';
@@ -20,6 +19,7 @@ import { OfferSearchSuggestionsComponent } from '../offer-search-suggestions/off
         ResizeObserverDirective,
         DropdownComponent,
         OfferSearchSuggestionsComponent,
+        TranslatePipe,
     ],
     templateUrl: './offer-search-dropdown.component.html',
     styleUrl: './offer-search-dropdown.component.scss',

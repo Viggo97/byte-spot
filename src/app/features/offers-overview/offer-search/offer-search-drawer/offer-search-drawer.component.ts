@@ -3,8 +3,8 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay } from '@angular/cdk/overlay';
 
-import { DrawerComponent } from '@app/shared/components/drawer/drawer.component';
-import { Keycodes } from '@shared';
+import { TranslatePipe } from '@core';
+import { DrawerComponent, Keycodes } from '@shared';
 
 import { OfferSearchSuggestionsGroup } from '../offer-search-suggestions/model/offer-search-suggestion-group.model';
 import { OfferSearchSuggestionsComponent } from '../offer-search-suggestions/offer-search-suggestions.component';
@@ -18,6 +18,7 @@ import { OfferSearchSuggestionsComponent } from '../offer-search-suggestions/off
         CdkConnectedOverlay,
         DrawerComponent,
         OfferSearchSuggestionsComponent,
+        TranslatePipe,
     ],
     templateUrl: 'offer-search-drawer.component.html',
     styleUrls: ['./offer-search-drawer.component.scss'],
