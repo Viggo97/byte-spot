@@ -1,20 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Language } from '@app/core/language/language.enum';
-import { I18N } from '@app/core/translate/i18n.model';
-import { LanguageService } from '@app/core/language/language.service';
 
-import { i18nEnglish } from '../../../assets/i18n/i18n-english';
-import { i18nPolish } from '../../../assets/i18n/i18n-polish';
+import { LanguageService } from '../language/language.service';
+import { Language } from '../language/language.enum';
+import { I18nLanguageCode } from './i18n/i18n-language-code.model';
+import { i18n } from './i18n/i18n';
 
-@Injectable({
-    providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class TranslateService {
-    private readonly i18n!: I18N;
+    private readonly i18n = i18n;
+    private readonly code: keyof I18nLanguageCode;
 
     constructor(private languageService: LanguageService) {
         const lang = this.languageService.language;
-        this.i18n = lang === Language.ENGLISH ? i18nEnglish : i18nPolish;
+        this.code = lang === Language.ENGLISH ? 'en' : 'pl';
     }
 
     translate(key: string): string {
@@ -36,7 +34,7 @@ export class TranslateService {
             throw new Error(`Specific key ${specificKey} not found.`);
         }
 
-        return this.i18n[primaryKey][specificKey];
+        return this.i18n[primaryKey][specificKey][this.code];
     }
 
     private getKeys(key: string): string[] {
