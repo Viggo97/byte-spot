@@ -28,6 +28,9 @@
             "@app/*": [
                 "./src/app/*"
             ],
+            "@core": [
+                "./src/app/core/index.ts"
+            ],
             "@shared": [
                 "./src/app/shared/index.ts"
             ]
