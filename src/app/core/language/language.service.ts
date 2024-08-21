@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Language } from '@app/core/language/language.enum';
 
-@Injectable({
-    providedIn: 'root',
-})
+import { Language } from './language.enum';
+
+@Injectable({ providedIn: 'root' })
 export class LanguageService {
     private readonly storageKey = 'language';
 

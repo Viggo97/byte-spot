@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Theme } from '@app/core/theme/theme.enum';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-@Injectable({
-    providedIn: 'root',
-})
+import { Theme } from './theme.enum';
+
+@Injectable({ providedIn: 'root' })
 export class ThemeService {
     private theme: BehaviorSubject<Theme> = new BehaviorSubject<Theme>(Theme.LIGHT);
     theme$: Observable<Theme> = this.theme.asObservable();

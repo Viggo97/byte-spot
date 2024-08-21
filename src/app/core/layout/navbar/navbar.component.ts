@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { SelectButtonComponent } from '@app/shared/components/select-button/select-button.component';
-import { IconComponent } from '@app/shared/components/icon/icon.component';
+import { SelectButtonComponent, IconComponent } from '@shared';
 
-import { Theme } from '@app/core/theme/theme.enum';
-import { ThemeService } from '@app/core/theme/theme.service';
-import { Language } from '@app/core/language/language.enum';
-import { LanguageService } from '@app/core/language/language.service';
-import { TranslateService } from '@app/core/translate/translate.service';
+import { Theme } from '../../theme/theme.enum';
+import { ThemeService } from '../../theme/theme.service';
+import { Language } from '../../language/language.enum';
+import { LanguageService } from '../../language/language.service';
+import { TranslateService } from '../../translate/translate.service';
 
 type LanguageOption = { key: Language, label: string };
 
