@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { IconComponent } from '@app/shared/components/icon/icon.component';
+import { IconComponent } from '@shared';
 
 @Component({
     selector: 'bsa-offer-list-item',

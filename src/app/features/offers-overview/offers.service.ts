@@ -1,16 +1,10 @@
 import { Injectable } from '@angular/core';
 import { delay, Observable, of } from 'rxjs';
 
-import {
-    OfferSearchSuggestionsGroup,
-} from './offer-search/offer-search-suggestions/model/offer-search-suggestion-group.model';
-import {
-    OfferSearchSuggestionCategory,
-} from './offer-search/offer-search-suggestions/model/offer-search-suggestion-category.enum';
+import { OfferSearchSuggestionsGroup } from './offer-search/offer-search-suggestions/model/offer-search-suggestion-group.model';
+import { OfferSearchSuggestionCategory } from './offer-search/offer-search-suggestions/model/offer-search-suggestion-category.enum';
 
-@Injectable({
-    providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class OffersService {
     private mockSuggestions: OfferSearchSuggestionsGroup[] = [
         {

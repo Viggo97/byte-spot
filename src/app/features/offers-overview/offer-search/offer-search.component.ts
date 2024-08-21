@@ -1,10 +1,6 @@
-import {
-    Component, DestroyRef, OnInit,
-} from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import {
-    debounceTime, distinctUntilChanged, Observable, skip, startWith, Subject, switchMap, tap,
-} from 'rxjs';
+import { debounceTime, distinctUntilChanged, Observable, skip, startWith, Subject, switchMap, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BreakpointObserver } from '@angular/cdk/layout';
 

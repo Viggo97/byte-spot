@@ -1,18 +1,16 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { OfferSearchSuggestionsGroup } from '@app/features/offers-overview/offer-search/offer-search-suggestions/model/offer-search-suggestion-group.model';
-import { DropdownGroupComponent } from '@app/shared/components/dropdown/dropdown-group/dropdown-group.component';
-import { DropdownOptionComponent } from '@app/shared/components/dropdown/dropdown-option/dropdown-option.component';
-import { DropdownSeparatorComponent } from '@app/shared/components/dropdown/dropdown-separator/dropdown-separator.component';
-import { DropdownComponent } from '@app/shared/components/dropdown/dropdown.component';
+
+import { DropdownComponent, DropdownGroupComponent, DropdownOptionComponent, DropdownSeparatorComponent } from '@shared';
+import { OfferSearchSuggestionsGroup } from './model/offer-search-suggestion-group.model';
 
 @Component({
     selector: 'bsa-offer-search-suggestions',
     standalone: true,
     imports: [
+        DropdownComponent,
         DropdownGroupComponent,
         DropdownOptionComponent,
         DropdownSeparatorComponent,
-        DropdownComponent,
     ],
     templateUrl: './offer-search-suggestions.component.html',
     styleUrl: './offer-search-suggestions.component.scss',
