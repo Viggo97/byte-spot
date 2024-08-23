@@ -1,0 +1,40 @@
+@import 'variables';
+@import 'breakpoints';
+
+:host {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    gap: 32px;
+
+    @include md {
+        flex-direction: row;
+    }
+}
+
+.results {
+    display: flex;
+    align-items: center;
+    font: $font-sm;
+
+    span {
+        font-weight: 500;
+        color: var(--green-primary);
+    }
+}
+
+.sort {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font: $font-sm;
+}
+
+bsa-select {
+    flex: 1;
+
+    @include sm {
+        flex: unset;
+        width: 240px;
+    }
+}

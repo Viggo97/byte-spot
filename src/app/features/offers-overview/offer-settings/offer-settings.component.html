@@ -1,0 +1,15 @@
+<div class="results">
+    <p>
+        {{ 'offer.found' | translate }}
+        <span>{{ offers }}</span>
+        {{ 'offer.jobOffers' | translate }}
+    </p>
+</div>
+
+<div class="sort">
+    <span>{{ 'global.sortBy' | translate }}</span>
+    <bsa-select [options]="sortOptions"
+                optionLabel="label"
+                [(ngModel)]="sort">
+    </bsa-select>
+</div>

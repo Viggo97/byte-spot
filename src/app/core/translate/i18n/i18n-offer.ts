@@ -1,7 +1,11 @@
 import { I18nLanguageCode } from './i18n-language-code.model';
 
 export const i18nOffer: { [key: string] : I18nLanguageCode } = {
-    jobsOffersFound: {
+    found: {
+        en: 'Showing',
+        pl: 'Znaleziono',
+    },
+    jobOffers: {
         en: 'job offers',
         pl: 'ofert pracy',
     },
