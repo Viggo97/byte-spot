@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { TranslatePipe, TranslateService } from '@core';
+import { NumberFormatterPipe } from '@app/shared/pipes/number-formatter.pipe';
 import { SelectComponent } from '@shared';
 import { SortType } from './offer-sort.enum';
 
@@ -16,6 +17,7 @@ type SortOption = {
     imports: [
         FormsModule,
         TranslatePipe,
+        NumberFormatterPipe,
         SelectComponent,
     ],
     templateUrl: './offer-settings.component.html',
@@ -24,7 +26,7 @@ type SortOption = {
 export class OfferSettingsComponent {
     translateService = inject(TranslateService);
 
-    offers = 12345;
+    offers = 12399999;
 
     sort: SortOption;
 
