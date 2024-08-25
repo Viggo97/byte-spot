@@ -11,3 +11,5 @@ export * from './components/select-button/select-button.component';
 export * from './directvies/resize-observer.directive';
 
 export * from './enums/keycodes.enum';
+
+export * from './pipes/number-formatter.pipe';
