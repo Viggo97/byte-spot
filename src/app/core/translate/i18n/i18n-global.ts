@@ -17,4 +17,8 @@ export const i18nGlobal: { [key: string]: I18nLanguageCode } = {
         en: 'Sort by',
         pl: 'Sortuj według',
     },
+    filters: {
+        en: 'Filters',
+        pl: 'Filtry',
+    },
 };

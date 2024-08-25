@@ -2,17 +2,31 @@
 
 :host {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: auto;
     grid-template-areas:
+        "search"
+        "settings"
+        "list"
+        "pagination";
+    grid-gap: 16px;
+
+    @include md {
+        grid-template-columns: 1fr 3fr;
+        grid-template-areas:
         "filters search"
         "filters settings"
         "filters list"
         "pagination pagination";
-    grid-gap: 16px;
+    }
 }
 
 bsa-offer-filters {
     grid-area: filters;
+    display: none;
+
+    @include md {
+        display: block;
+    }
 }
 
 bsa-offer-search {

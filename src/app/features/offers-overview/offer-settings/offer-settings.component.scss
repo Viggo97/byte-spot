@@ -1,18 +1,46 @@
-@import 'variables';
 @import 'breakpoints';
+@import 'variables';
 
 :host {
-    display: flex;
-    flex-direction: column-reverse;
-    justify-content: space-between;
-    gap: 32px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+        "sort filters"
+        "results results";
+    grid-gap: 16px;
+
+    @include sm {
+        grid-template-columns: 1fr auto auto;
+        grid-template-areas:
+            "results sort filters";
+    }
 
     @include md {
-        flex-direction: row;
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+            "results sort";
+    }
+}
+
+.sort {
+    grid-area: sort;
+    min-width: 0;
+}
+
+.filters {
+    grid-area: filters;
+
+    button {
+        width: 100%;
+    }
+
+    @include md {
+        display: none;
     }
 }
 
 .results {
+    grid-area: results;
     display: flex;
     align-items: center;
     font: $font-sm;
@@ -20,21 +48,5 @@
     span {
         font-weight: 500;
         color: var(--green-primary);
-    }
-}
-
-.sort {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font: $font-sm;
-}
-
-bsa-select {
-    flex: 1;
-
-    @include sm {
-        flex: unset;
-        width: 240px;
     }
 }

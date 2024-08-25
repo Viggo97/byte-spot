@@ -1,15 +1,19 @@
+<div class="sort">
+    <bsa-select [options]="sortOptions"
+                optionLabel="label"
+                [dropdownWidth]="sortDropdownWidth"
+                [(ngModel)]="sort">
+    </bsa-select>
+</div>
+
+<div class="filters">
+    <button>Filters</button>
+</div>
+
 <div class="results">
     <p>
         {{ 'offer.found' | translate }}
         <span>{{ offers | numberFormatter }}</span>
         {{ 'offer.jobOffers' | translate }}
     </p>
-</div>
-
-<div class="sort">
-    <span>{{ 'global.sortBy' | translate }}</span>
-    <bsa-select [options]="sortOptions"
-                optionLabel="label"
-                [(ngModel)]="sort">
-    </bsa-select>
 </div>

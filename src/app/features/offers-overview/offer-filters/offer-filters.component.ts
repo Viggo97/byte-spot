@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
+import { TranslatePipe } from '@core';
 
 @Component({
     selector: 'bsa-offer-filters',
     standalone: true,
-    imports: [],
+    imports: [
+        TranslatePipe,
+    ],
     templateUrl: './offer-filters.component.html',
     styleUrl: './offer-filters.component.scss',
 })

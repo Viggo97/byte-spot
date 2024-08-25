@@ -15,10 +15,10 @@ export const i18nOffer: { [key: string] : I18nLanguageCode } = {
     },
     highestSalary: {
         en: 'Highest salary',
-        pl: 'Najwyższe wynagrodzenie',
+        pl: 'Najwyższe zarobki',
     },
     lowestSalary: {
         en: 'Lowest salary',
-        pl: 'Najniższe wynagrodzenie',
+        pl: 'Najniższe zarobki',
     },
 };

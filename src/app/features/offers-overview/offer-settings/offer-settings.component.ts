@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 import { TranslatePipe, TranslateService } from '@core';
-import { NumberFormatterPipe } from '@app/shared/pipes/number-formatter.pipe';
-import { SelectComponent } from '@shared';
+import { NumberFormatterPipe, SelectComponent } from '@shared';
 import { SortType } from './offer-sort.enum';
 
 type SortOption = {
@@ -28,8 +29,8 @@ export class OfferSettingsComponent {
 
     offers = 12399999;
 
+    sortDropdownWidth: 'auto' | undefined;
     sort: SortOption;
-
     sortOptions: SortOption[] = [
         {
             key: SortType.NEWEST,
@@ -45,7 +46,13 @@ export class OfferSettingsComponent {
         },
     ];
 
-    constructor() {
+    constructor(private breakpointObserver: BreakpointObserver) {
         [this.sort] = this.sortOptions;
+        this.breakpointObserver
+            .observe('(min-width: 600px)')
+            .pipe(takeUntilDestroyed())
+            .subscribe((state) => {
+                this.sortDropdownWidth = state.matches ? 'auto' : undefined;
+            });
     }
 }
