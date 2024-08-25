@@ -10,7 +10,7 @@
     cdkConnectedOverlay
     [cdkConnectedOverlayOrigin]="selectButton"
     [cdkConnectedOverlayOpen]="open"
-    [cdkConnectedOverlayWidth]="selectButton.offsetWidth"
+    [cdkConnectedOverlayWidth]="dropdownWidth || selectButton.offsetWidth"
     (overlayOutsideClick)="$event.stopPropagation(); open = false"
     (detach)="open = false; restoreFocusToButton()">
     <bsa-dropdown>

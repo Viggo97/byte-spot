@@ -31,6 +31,7 @@ import { SelectValueConverterPipe } from '../../pipes/select-value-converter.pip
 export class SelectComponent<T> implements AfterViewInit, ControlValueAccessor {
     @Input({ required: true }) options!: T[];
     @Input() optionLabel: string | undefined;
+    @Input() dropdownWidth: string | undefined;
 
     @ViewChild('selectButton') selectButton!: ElementRef<HTMLButtonElement>;
     @ViewChild(DropdownComponent) dropdown!: DropdownComponent;
