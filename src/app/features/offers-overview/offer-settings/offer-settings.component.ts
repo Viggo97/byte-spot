@@ -1,10 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay } from '@angular/cdk/overlay';
 
 import { TranslatePipe, TranslateService } from '@core';
-import { NumberFormatterPipe, SelectComponent } from '@shared';
+import { DrawerComponent, NumberFormatterPipe, SelectComponent } from '@shared';
+import { OfferFiltersComponent } from '@app/features/offers-overview/offer-filters/offer-filters.component';
 import { SortType } from './offer-sort.enum';
 
 type SortOption = {
@@ -17,15 +19,22 @@ type SortOption = {
     standalone: true,
     imports: [
         FormsModule,
+        CdkOverlayOrigin,
+        CdkConnectedOverlay,
         TranslatePipe,
         NumberFormatterPipe,
         SelectComponent,
+        DrawerComponent,
+        OfferFiltersComponent,
     ],
     templateUrl: './offer-settings.component.html',
     styleUrl: './offer-settings.component.scss',
 })
 export class OfferSettingsComponent {
-    translateService = inject(TranslateService);
+    private translateService = inject(TranslateService);
+    private breakpointObserver = inject(BreakpointObserver);
+    private overlay = inject(Overlay);
+    readonly scrollStrategy = this.overlay.scrollStrategies.block();
 
     offers = 12399999;
 
@@ -46,7 +55,10 @@ export class OfferSettingsComponent {
         },
     ];
 
-    constructor(private breakpointObserver: BreakpointObserver) {
+    drawerOpen = false;
+    @ViewChild(DrawerComponent) drawer!: DrawerComponent;
+
+    constructor() {
         [this.sort] = this.sortOptions;
         this.breakpointObserver
             .observe('(min-width: 600px)')
@@ -54,5 +66,13 @@ export class OfferSettingsComponent {
             .subscribe((state) => {
                 this.sortDropdownWidth = state.matches ? 'auto' : undefined;
             });
+    }
+
+    openDrawer(): void {
+        this.drawerOpen = true;
+    }
+
+    closeDrawer(): void {
+        this.drawerOpen = false;
     }
 }
