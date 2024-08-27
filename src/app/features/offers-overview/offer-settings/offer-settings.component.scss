@@ -1,5 +1,4 @@
 @import 'breakpoints';
-@import 'variables';
 
 :host {
     display: grid;
@@ -22,31 +21,14 @@
     }
 }
 
-.sort {
+bsa-offer-settings-sort {
     grid-area: sort;
-    min-width: 0;
 }
 
-.filters {
+bsa-offer-settings-filters {
     grid-area: filters;
-
-    button {
-        width: 100%;
-    }
-
-    @include md {
-        display: none;
-    }
 }
 
-.results {
+bsa-offer-settings-results {
     grid-area: results;
-    display: flex;
-    align-items: center;
-    font: $font-sm;
-
-    span {
-        font-weight: 500;
-        color: var(--green-primary);
-    }
 }

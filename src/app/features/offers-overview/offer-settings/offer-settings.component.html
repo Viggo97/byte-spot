@@ -1,38 +1,7 @@
-<div class="sort">
-    <bsa-select [options]="sortOptions"
-                optionLabel="label"
-                [dropdownWidth]="sortDropdownWidth"
-                [(ngModel)]="sort">
-    </bsa-select>
-</div>
+<bsa-offer-settings-sort></bsa-offer-settings-sort>
 
-<div class="filters">
-    <button type="button"
-            #filters
-            cdkOverlayOrigin
-            (click)="openDrawer()">
-        {{ 'global.filters' | translate }}
-    </button>
-</div>
+@if (filters) {
+    <bsa-offer-settings-filters></bsa-offer-settings-filters>
+}
 
-<div class="results">
-    <p>
-        {{ 'offer.found' | translate }}
-        <span>{{ offers | numberFormatter }}</span>
-        {{ 'offer.jobOffers' | translate }}
-    </p>
-</div>
-
-<ng-template cdkConnectedOverlay
-             [cdkConnectedOverlayOrigin]="filters"
-             [cdkConnectedOverlayOpen]="drawerOpen"
-             [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
-             [cdkConnectedOverlayHasBackdrop]="true"
-             cdkConnectedOverlayBackdropClass="cdk-custom-backdrop-background"
-             (overlayOutsideClick)="drawer.close()"
-             (detach)="closeDrawer()">
-    <bsa-drawer [title]="'global.filters' | translate"
-                (closeDrawer)="closeDrawer()">
-        <bsa-offer-filters></bsa-offer-filters>
-    </bsa-drawer>
-</ng-template>
+<bsa-offer-settings-results></bsa-offer-settings-results>
