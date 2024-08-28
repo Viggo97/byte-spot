@@ -22,6 +22,9 @@ $text-primary-dark: hsl(0, 0%, 94%);
 $text-secondary-light: hsl(240, 8%, 40%);
 $text-secondary-dark: hsl(240, 0%, 64%);
 
+$text-tertiary-light: hsl(0, 0%, 100%);
+$text-tertiary-dark: hsl(0, 0%, 0%);
+
 $red-dark: hsl(350, 100%, 50%);
 $red-light: hsl(350, 100%, 90%);
 
@@ -38,7 +41,10 @@ $purple-dark: hsl(270, 100%, 50%);
 $purple-light: hsl(270, 100%, 90%);
 
 $green-primary-light: hsl(150, 100%, 36%);
-$green-primary-dark: hsl(150, 100%, 45%);
+$green-primary-dark: hsl(150, 100%, 46%);
+
+$hover-green-primary-light: hsl(150, 100%, 40%);
+$hover-green-primary-dark: hsl(150, 100%, 50%);
 
 $blue-primary-light: hsl(210, 100%, 50%);
 $blue-primary-dark: hsl(210, 100%, 70%);
@@ -52,7 +58,9 @@ $blue-primary-dark: hsl(210, 100%, 70%);
     --hover-secondary: #{$hover-secondary-light};
     --text-primary: #{$text-primary-light};
     --text-secondary: #{$text-secondary-light};
+    --text-tertiary: #{$text-tertiary-light};
     --green-primary: #{$green-primary-light};
+    --hover-green-primary: #{$hover-green-primary-light};
     --blue-primary: #{$blue-primary-light};
 }
 
@@ -65,7 +73,9 @@ $blue-primary-dark: hsl(210, 100%, 70%);
     --hover-secondary: #{$hover-secondary-dark};
     --text-primary: #{$text-primary-dark};
     --text-secondary: #{$text-secondary-dark};
+    --text-tertiary: #{$text-tertiary-dark};
     --green-primary: #{$green-primary-dark};
+    --hover-green-primary: #{$hover-green-primary-dark};
     --blue-primary: #{$blue-primary-dark};
 }
 

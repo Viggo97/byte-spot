@@ -43,4 +43,13 @@ button {
     &.button-border-none {
         border: none;
     }
+
+    &.button-color-green {
+        background-color: var(--green-primary);
+        color: var(--text-tertiary);
+
+        &:hover {
+            background-color: var(--hover-green-primary);
+        }
+    }
 }
