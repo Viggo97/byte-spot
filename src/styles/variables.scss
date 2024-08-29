@@ -15,3 +15,5 @@ $line-height-sm: 1.125rem;
 $border-base: 1px solid var(--border-primary);
 
 $shadow-base: 0 1px 2px 0 hsl(0, 0%, 0%, 0.05);
+$shadow-outline-inner: inset 0 0 0 2px var(--blue-primary);
+$shadow-outline-outer: 0 0 0 2px var(--blue-primary);

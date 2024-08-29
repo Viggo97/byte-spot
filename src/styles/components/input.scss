@@ -1,6 +1,7 @@
 @import 'variables';
 
-input {
+input[type="text"],
+input[type="number"] {
     width: 100%;
     padding: .5rem .75rem;
     border: $border-base;
@@ -10,6 +11,11 @@ input {
     font: $font-sm;
     line-height: $line-height-sm;
     box-shadow: $shadow-base;
+
+    &:focus-visible {
+        box-shadow: $shadow-outline-inner;
+        border-color: transparent;
+    }
 }
 
 .input-with-icon {
