@@ -1,0 +1,34 @@
+$rail-height: .25rem;
+$markup-size: .75rem;
+
+:host {
+    height: .75rem;
+    display: flex;
+    align-items: center;
+}
+
+.rail {
+    position: relative;
+    height: $rail-height;
+    width: 100%;
+    border-radius: calc($rail-height / 2);
+    background-color: var(--border-primary);
+}
+
+.markup-start,
+.markup-end {
+    position: absolute;
+    width: $markup-size;
+    height: $markup-size;
+    border-radius: calc($markup-size / 2);
+    background-color: var(--green-primary);
+    opacity: .5;
+}
+
+.markup-start {
+
+}
+
+.markup-end {
+
+}
