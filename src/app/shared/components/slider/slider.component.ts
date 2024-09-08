@@ -1,5 +1,7 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, inject, Input, isDevMode, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, ElementRef, inject, Input, isDevMode, OnInit, ViewChild } from '@angular/core';
+import { fromEvent } from 'rxjs';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SliderMarkupComponent } from './slider-markup/slider-markup.component';
 import { SliderMove } from './slider-move.enum';
 
@@ -18,8 +20,10 @@ enum SliderMarkup {
     styleUrl: './slider.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SliderComponent implements AfterViewInit {
+export class SliderComponent implements OnInit, AfterViewInit {
     private cdr = inject(ChangeDetectorRef);
+    private destroyRef = inject(DestroyRef);
+    protected readonly SliderMarkup = SliderMarkup;
 
     @Input({ required: true }) min!: number;
     @Input({ required: true }) max!: number;
@@ -61,6 +65,17 @@ export class SliderComponent implements AfterViewInit {
     ratio = 0;
 
     @ViewChild('rail') rail!: ElementRef<HTMLDivElement>;
+
+    ngOnInit(): void {
+        fromEvent(window, 'resize')
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe(() => {
+                this.cdr.detectChanges();
+                this.computeRatio();
+                this.computeMarkupStartPosition();
+                this.computeMarkupEndPosition();
+            });
+    }
 
     ngAfterViewInit(): void {
         this.computeStep();
@@ -146,6 +161,4 @@ export class SliderComponent implements AfterViewInit {
     private endReached(move: SliderMove): boolean {
         return move === SliderMove.RIGHT && this.start === this.end;
     }
-
-    protected readonly SliderMarkup = SliderMarkup;
 }
