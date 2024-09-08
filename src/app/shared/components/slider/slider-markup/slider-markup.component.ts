@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, inject, Input, NgZone, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
+import { Keycodes } from '../../../enums/keycodes.enum';
 import { SliderMove } from '../slider-move.enum';
 
 @Component({
@@ -74,6 +75,21 @@ export class SliderMarkupComponent implements OnInit, OnDestroy {
     private disposePointerMoveListener(): void {
         if (this.pointerMoveListener) {
             this.pointerMoveListener();
+        }
+    }
+
+    @HostListener('keydown', ['$event'])
+    private onKeydown($event: KeyboardEvent): void {
+        const { key } = $event;
+        switch (key) {
+            case Keycodes.ARROW_LEFT:
+                this.changePosition.emit(SliderMove.LEFT);
+                break;
+            case Keycodes.ARROW_RIGHT:
+                this.changePosition.emit(SliderMove.RIGHT);
+                break;
+            default:
+                break;
         }
     }
 
