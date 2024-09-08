@@ -1,0 +1,11 @@
+$markup-size: .75rem;
+
+:host {
+    position: absolute;
+    width: $markup-size;
+    height: $markup-size;
+    border-radius: calc($markup-size / 2);
+    background-color: var(--green-primary);
+    opacity: .5;
+    cursor: pointer;
+}

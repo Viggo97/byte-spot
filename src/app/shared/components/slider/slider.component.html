@@ -1,9 +1,12 @@
 <div class="rail" #rail></div>
 
-<div class="markup-start"
-     [style.transform]="markupStartPosition">
-</div>
-
-<div class="markup-end"
-     [style.transform]="markupEndPosition">
-</div>
+<bsa-slider-markup [ratio]="ratio"
+                   [style.transform]="markupStartPosition"
+                   [style.z-index]="overlappingMarkup === SliderMarkup.START ? 1 : 0"
+                   (changePosition)="onChangePositionMarkupStart($event)">
+</bsa-slider-markup>
+<bsa-slider-markup [ratio]="ratio"
+                   [style.transform]="markupEndPosition"
+                   [style.z-index]="overlappingMarkup === SliderMarkup.END ? 1 : 0"
+                   (changePosition)="onChangePositionMarkupEnd($event)">
+</bsa-slider-markup>
