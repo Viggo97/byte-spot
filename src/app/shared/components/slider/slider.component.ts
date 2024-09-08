@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, inject, Input, isDevMode, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, inject, Input, isDevMode, ViewChild } from '@angular/core';
 
 import { SliderMarkupComponent } from './slider-markup/slider-markup.component';
 import { SliderMove } from './slider-move.enum';
@@ -16,6 +16,7 @@ enum SliderMarkup {
     ],
     templateUrl: './slider.component.html',
     styleUrl: './slider.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SliderComponent implements AfterViewInit {
     private cdr = inject(ChangeDetectorRef);

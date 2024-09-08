@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, inject, Input, NgZone, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, inject, Input, NgZone, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
 import { SliderMove } from '../slider-move.enum';
@@ -9,6 +9,7 @@ import { SliderMove } from '../slider-move.enum';
     imports: [],
     template: '',
     styleUrl: './slider-markup.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SliderMarkupComponent implements OnInit, OnDestroy {
     private ngZone = inject(NgZone);
@@ -19,32 +20,27 @@ export class SliderMarkupComponent implements OnInit, OnDestroy {
     @Input() ratio = 0;
     @Output() changePosition = new EventEmitter<SliderMove>();
 
-    private pointerDownListener: (() => void) | null = null;
     private pointerUpListener: (() => void) | null = null;
     private pointerMoveListener: (() => void) | null = null;
 
     ngOnInit(): void {
         this.elementRef.nativeElement.ondragstart = () => false;
-        this.ngZone.runOutsideAngular(() => {
-            this.pointerDownListener = this.renderer.listen(
-                this.elementRef.nativeElement,
-                'pointerdown',
-                this.onPointerDown.bind(this),
-            );
-        });
     }
 
+    @HostListener('pointerdown')
     private onPointerDown(): void {
-        this.pointerUpListener = this.renderer.listen(
-            this.document,
-            'pointerup',
-            this.onPointerUp.bind(this),
-        );
-        this.pointerMoveListener = this.renderer.listen(
-            this.document,
-            'pointermove',
-            this.onPointerMove.bind(this),
-        );
+        this.ngZone.runOutsideAngular(() => {
+            this.pointerUpListener = this.renderer.listen(
+                this.document,
+                'pointerup',
+                this.onPointerUp.bind(this),
+            );
+            this.pointerMoveListener = this.renderer.listen(
+                this.document,
+                'pointermove',
+                this.onPointerMove.bind(this),
+            );
+        });
     }
 
     private onPointerUp(): void {
@@ -69,12 +65,6 @@ export class SliderMarkupComponent implements OnInit, OnDestroy {
         }
     }
 
-    private disposePointerDownListener(): void {
-        if (this.pointerDownListener) {
-            this.pointerDownListener();
-        }
-    }
-
     private disposePointerUpListener(): void {
         if (this.pointerUpListener) {
             this.pointerUpListener();
@@ -88,7 +78,6 @@ export class SliderMarkupComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.disposePointerDownListener();
         this.disposePointerUpListener();
         this.disposePointerMoveListener();
     }
