@@ -1,29 +1,36 @@
-<!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events-->
-<div class="rail"
-     tabindex="-1"
-     #rail
-    (click)="onRailClick($event)">
+<div class="slider">
+    <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events-->
+    <div class="rail"
+         tabindex="-1"
+         #rail
+         (click)="onRailClick($event)">
+    </div>
+
+    <div class="bar"
+         [style.left]="barLeft"
+         [style.right]="barRight">
+    </div>
+
+    <bsa-slider-markup tabindex="0"
+                       #startMarkup
+                       [ratio]="ratio"
+                       [style.transform]="markupStartPosition"
+                       [style.z-index]="overlappingMarkup === SliderMarkup.START ? 1 : 0"
+                       (focus)="overlappingMarkup = SliderMarkup.START"
+                       (changePosition)="onChangePositionMarkupStart($event)">
+    </bsa-slider-markup>
+
+    <bsa-slider-markup tabindex="0"
+                       #endMarkup
+                       [ratio]="ratio"
+                       [style.transform]="markupEndPosition"
+                       [style.z-index]="overlappingMarkup === SliderMarkup.END ? 1 : 0"
+                       (focus)="overlappingMarkup = SliderMarkup.END"
+                       (changePosition)="onChangePositionMarkupEnd($event)">
+    </bsa-slider-markup>
 </div>
 
-<div class="bar"
-     [style.left]="barLeft"
-     [style.right]="barRight">
+<div class="limits">
+    <span>{{ min }}</span>
+    <span>{{ max }}</span>
 </div>
-
-<bsa-slider-markup tabindex="0"
-                   #startMarkup
-                   [ratio]="ratio"
-                   [style.transform]="markupStartPosition"
-                   [style.z-index]="overlappingMarkup === SliderMarkup.START ? 1 : 0"
-                   (focus)="overlappingMarkup = SliderMarkup.START"
-                   (changePosition)="onChangePositionMarkupStart($event)">
-</bsa-slider-markup>
-
-<bsa-slider-markup tabindex="0"
-                   #endMarkup
-                   [ratio]="ratio"
-                   [style.transform]="markupEndPosition"
-                   [style.z-index]="overlappingMarkup === SliderMarkup.END ? 1 : 0"
-                   (focus)="overlappingMarkup = SliderMarkup.END"
-                   (changePosition)="onChangePositionMarkupEnd($event)">
-</bsa-slider-markup>

@@ -1,11 +1,19 @@
+@import 'variables';
+
 $rail-height: .25rem;
-$markup-size: .75rem;
 
 :host {
-    height: .75rem;
     display: flex;
     align-items: center;
+    flex-direction: column;
+}
+
+.slider {
     position: relative;
+    height: .75rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .rail {
@@ -21,4 +29,12 @@ $markup-size: .75rem;
     height: $rail-height;
     background-color: var(--green-primary);
     pointer-events: none;
+}
+
+.limits {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font: $font-sm;
+
 }
