@@ -5,6 +5,11 @@
     (click)="onRailClick($event)">
 </div>
 
+<div class="bar"
+     [style.left]="barLeft"
+     [style.right]="barRight">
+</div>
+
 <bsa-slider-markup tabindex="0"
                    #startMarkup
                    [ratio]="ratio"
@@ -13,6 +18,7 @@
                    (focus)="overlappingMarkup = SliderMarkup.START"
                    (changePosition)="onChangePositionMarkupStart($event)">
 </bsa-slider-markup>
+
 <bsa-slider-markup tabindex="0"
                    #endMarkup
                    [ratio]="ratio"

@@ -5,13 +5,20 @@ $markup-size: .75rem;
     height: .75rem;
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .rail {
-    position: relative;
     height: $rail-height;
     width: 100%;
     border-radius: calc($rail-height / 2);
     background-color: var(--border-primary);
     cursor: pointer;
+}
+
+.bar {
+    position: absolute;
+    height: $rail-height;
+    background-color: var(--green-primary);
+    pointer-events: none;
 }

@@ -208,4 +208,13 @@ export class SliderComponent implements OnInit, AfterViewInit {
         const stepIndex = round(pointerOffsetFromRailEdge / this.ratio);
         return round(stepIndex * this.step, this.stepDigits);
     }
+
+    get barLeft(): string {
+        return `${this._markupStartPosition}px`;
+    }
+
+    get barRight(): string {
+        const railWidth = this.rail?.nativeElement.getBoundingClientRect().width || 0;
+        return `${railWidth - this._markupEndPosition}px`;
+    }
 }
