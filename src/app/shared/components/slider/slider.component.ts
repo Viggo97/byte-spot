@@ -1,7 +1,8 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, ElementRef, inject, Input, isDevMode, OnInit, ViewChild } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { fromEvent } from 'rxjs';
 
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { getDigitsNumber, round } from '../../utils/number.util';
 import { SliderMarkupComponent } from './slider-markup/slider-markup.component';
 import { SliderMove } from './slider-move.enum';
 
@@ -61,6 +62,7 @@ export class SliderComponent implements OnInit, AfterViewInit {
     }
     set markupEndPosition(value: number) { this._markupEndPosition = value; }
 
+    get stepDigits(): number { return getDigitsNumber(this.step); }
     overlappingMarkup = SliderMarkup.START;
     ratio = 0;
 
@@ -99,18 +101,16 @@ export class SliderComponent implements OnInit, AfterViewInit {
     }
 
     private computeStep(): void {
-        const isStepDividerOfRange = (this.max - this.min) % this.step === 0;
-        if (isStepDividerOfRange) {
-            return;
-        }
-
-        if (isDevMode()) {
-            // eslint-disable-next-line no-console
-            console.warn(`Step is not a divider of the range ${this.min}-${this.max}.\
+        const isStepDividerOfRange = Math.round((this.max - this.min) % this.step) === 0;
+        if (!isStepDividerOfRange) {
+            if (isDevMode()) {
+                // eslint-disable-next-line no-console
+                console.warn(`Step is not a divider of the range ${this.min}-${this.max}.\
                 Step is computed as follow: (max - min) / 10`);
-        }
+            }
 
-        this.step = (this.max - this.min) / 10;
+            this.step = round((this.max - this.min) / 10);
+        }
     }
 
     private computeRatio(): void {
@@ -132,6 +132,7 @@ export class SliderComponent implements OnInit, AfterViewInit {
             return;
         }
         this.start += (move === SliderMove.LEFT) ? -this.step : this.step;
+        this.start = round(this.start, this.stepDigits);
         this.computeMarkupStartPosition();
         this.overlappingMarkup = SliderMarkup.START;
     }
@@ -142,6 +143,7 @@ export class SliderComponent implements OnInit, AfterViewInit {
         }
 
         this.end += (move === SliderMove.LEFT) ? -this.step : this.step;
+        this.end = round(this.end, this.stepDigits);
         this.computeMarkupEndPosition();
         this.overlappingMarkup = SliderMarkup.END;
     }
