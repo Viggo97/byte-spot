@@ -13,22 +13,5 @@ $markup-size: .75rem;
     width: 100%;
     border-radius: calc($rail-height / 2);
     background-color: var(--border-primary);
-}
-
-.markup-start,
-.markup-end {
-    position: absolute;
-    width: $markup-size;
-    height: $markup-size;
-    border-radius: calc($markup-size / 2);
-    background-color: var(--green-primary);
-    opacity: .5;
-}
-
-.markup-start {
-
-}
-
-.markup-end {
-
+    cursor: pointer;
 }

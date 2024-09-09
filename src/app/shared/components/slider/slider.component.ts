@@ -67,6 +67,8 @@ export class SliderComponent implements OnInit, AfterViewInit {
     ratio = 0;
 
     @ViewChild('rail') rail!: ElementRef<HTMLDivElement>;
+    @ViewChild('startMarkup', { read: ElementRef }) startMarkupRef!: ElementRef<HTMLElement>;
+    @ViewChild('endMarkup', { read: ElementRef }) endMarkupRef!: ElementRef<HTMLElement>;
 
     ngOnInit(): void {
         fromEvent(window, 'resize')
@@ -162,5 +164,48 @@ export class SliderComponent implements OnInit, AfterViewInit {
 
     private endReached(move: SliderMove): boolean {
         return move === SliderMove.RIGHT && this.start === this.end;
+    }
+
+    onRailClick(event: MouseEvent): void {
+        const pointerPosition = event.pageX;
+        const newValue = this.computeNewValueOnClick(pointerPosition);
+        const markup = this.selectMarkupToMove(pointerPosition);
+        if (markup === SliderMarkup.START) {
+            this.start = newValue;
+            this.computeMarkupStartPosition();
+        } else {
+            this.end = newValue;
+            this.computeMarkupEndPosition();
+        }
+    }
+
+    private selectMarkupToMove(pointerPosition: number): SliderMarkup {
+        const startMarkupPosition = this.startMarkupRef.nativeElement.getBoundingClientRect().left;
+        const endMarkupPosition = this.endMarkupRef.nativeElement.getBoundingClientRect().left;
+
+        const pointerStartMarkupDiff = Math.abs(pointerPosition - startMarkupPosition);
+        const pointerEndMarkupDiff = Math.abs(pointerPosition - endMarkupPosition);
+
+        if (pointerStartMarkupDiff < pointerEndMarkupDiff) {
+            return SliderMarkup.START;
+        }
+
+        if (pointerStartMarkupDiff > pointerEndMarkupDiff) {
+            return SliderMarkup.END;
+        }
+
+        // Pointer int the middle
+        if (pointerPosition < startMarkupPosition) {
+            return SliderMarkup.START;
+        }
+
+        return SliderMarkup.END;
+    }
+
+    private computeNewValueOnClick(pointerPosition: number): number {
+        const railPositionLeft = this.rail.nativeElement.getBoundingClientRect().left;
+        const pointerOffsetFromRailEdge = pointerPosition - railPositionLeft;
+        const stepIndex = round(pointerOffsetFromRailEdge / this.ratio);
+        return round(stepIndex * this.step, this.stepDigits);
     }
 }
