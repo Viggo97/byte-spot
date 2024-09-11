@@ -14,9 +14,16 @@ export class TooltipDirective {
     private overlay = inject(Overlay);
     private elementRef = inject(ElementRef);
 
-    @Input({ required: true }) bsaTooltip!: string;
+    @Input({ required: true }) set bsaTooltip(value: string) {
+        this.message = value;
+
+        if (this.overlayRef?.hasAttached()) {
+            this.showTooltip();
+        }
+    }
     @Input() tooltipPosition: TooltipPosition = TooltipPosition.TOP;
 
+    private message!: string;
     private overlayRef: null | OverlayRef = null;
 
     @HostListener('pointerenter')
@@ -32,16 +39,19 @@ export class TooltipDirective {
     }
 
     private showTooltip(): void {
+        this.hideTooltip();
+
         const positionStrategy = this.createPositionStrategy();
         this.overlayRef = this.overlay.create({ positionStrategy });
         const componentPortal = new ComponentPortal(TooltipComponent);
         const componentInstance = this.overlayRef.attach(componentPortal);
-        componentInstance.instance.message = this.bsaTooltip;
+        componentInstance.instance.message = this.message;
     }
 
     private hideTooltip(): void {
-        if (this.overlayRef && this.overlayRef.hasAttached()) {
-            this.overlayRef.detach();
+        if (this.overlayRef?.hasAttached()) {
+            this.overlayRef?.detach();
+            this.overlayRef = null;
         }
     }
 
