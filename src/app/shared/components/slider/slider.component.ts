@@ -1,4 +1,5 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, ElementRef, inject, Input, isDevMode, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, ElementRef, EventEmitter, inject, Input, isDevMode, OnInit, Output, ViewChild } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { fromEvent } from 'rxjs';
 
@@ -22,8 +23,15 @@ enum SliderMarkup {
     templateUrl: './slider.component.html',
     styleUrl: './slider.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            multi: true,
+            useExisting: SliderComponent,
+        },
+    ],
 })
-export class SliderComponent implements OnInit, AfterViewInit {
+export class SliderComponent implements OnInit, AfterViewInit, ControlValueAccessor {
     private cdr = inject(ChangeDetectorRef);
     private destroyRef = inject(DestroyRef);
     protected readonly SliderMarkup = SliderMarkup;
@@ -31,6 +39,11 @@ export class SliderComponent implements OnInit, AfterViewInit {
     @Input({ required: true }) min!: number;
     @Input({ required: true }) max!: number;
     @Input() step = 1;
+
+    @Output() valueChange = new EventEmitter<[number, number]>();
+
+    onChange = (value: [number, number]) => {};
+    onTouch = () => {};
 
     private _start = 0;
     get start(): number { return this._start; }
@@ -40,6 +53,8 @@ export class SliderComponent implements OnInit, AfterViewInit {
             return;
         }
         this._start = value;
+        this.onChange([this.start, this.end]);
+        this.valueChange.emit([this.start, this.end]);
     }
 
     private _end = 0;
@@ -50,6 +65,8 @@ export class SliderComponent implements OnInit, AfterViewInit {
             return;
         }
         this._end = value;
+        this.onChange([this.start, this.end]);
+        this.valueChange.emit([this.start, this.end]);
     }
 
     private _markupStartPosition = 0;
@@ -135,8 +152,8 @@ export class SliderComponent implements OnInit, AfterViewInit {
         if (this.minReached(move) || this.endReached(move)) {
             return;
         }
-        this.start += (move === SliderMove.LEFT) ? -this.step : this.step;
-        this.start = round(this.start, this.stepDigits);
+        const newStart = this.start + ((move === SliderMove.LEFT) ? -this.step : this.step);
+        this.start = round(newStart, this.stepDigits);
         this.computeMarkupStartPosition();
         this.overlappingMarkup = SliderMarkup.START;
     }
@@ -146,8 +163,8 @@ export class SliderComponent implements OnInit, AfterViewInit {
             return;
         }
 
-        this.end += (move === SliderMove.LEFT) ? -this.step : this.step;
-        this.end = round(this.end, this.stepDigits);
+        const newEnd = this.end + ((move === SliderMove.LEFT) ? -this.step : this.step);
+        this.end = round(newEnd, this.stepDigits);
         this.computeMarkupEndPosition();
         this.overlappingMarkup = SliderMarkup.END;
     }
@@ -218,5 +235,24 @@ export class SliderComponent implements OnInit, AfterViewInit {
     get barRight(): string {
         const railWidth = this.rail?.nativeElement.getBoundingClientRect().width || 0;
         return `${railWidth - this._markupEndPosition}px`;
+    }
+
+    registerOnChange(onChange: (value: [number, number]) => void): void {
+        this.onChange = onChange;
+    }
+
+    registerOnTouched(onTouch: () => void): void {
+        this.onTouch = onTouch;
+    }
+
+    writeValue(value: [number, number]): void {
+        if (!value) {
+            return;
+        }
+        const [start, end] = value;
+        this.start = start;
+        this.end = end;
+        this.computeMarkupStartPosition();
+        this.computeMarkupEndPosition();
     }
 }
