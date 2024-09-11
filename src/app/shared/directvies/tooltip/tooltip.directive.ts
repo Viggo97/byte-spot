@@ -1,8 +1,10 @@
-import { Directive, HostListener, inject, Input } from '@angular/core';
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { Directive, ElementRef, HostListener, inject, Input } from '@angular/core';
+import { FlexibleConnectedPositionStrategy, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 
+import { TOOLTIP_POSITIONS } from './tooltip-positions.constants';
 import { TooltipComponent } from './tooltip.component';
+import { TooltipPosition } from './tooltip-position.enum';
 
 @Directive({
     selector: '[bsaTooltip]',
@@ -10,8 +12,10 @@ import { TooltipComponent } from './tooltip.component';
 })
 export class TooltipDirective {
     private overlay = inject(Overlay);
+    private elementRef = inject(ElementRef);
 
-    @Input() bsaTooltip!: string;
+    @Input({ required: true }) bsaTooltip!: string;
+    @Input() tooltipPosition: TooltipPosition = TooltipPosition.TOP;
 
     private overlayRef: null | OverlayRef = null;
 
@@ -28,7 +32,8 @@ export class TooltipDirective {
     }
 
     private showTooltip(): void {
-        this.overlayRef = this.overlay.create();
+        const positionStrategy = this.createPositionStrategy();
+        this.overlayRef = this.overlay.create({ positionStrategy });
         const componentPortal = new ComponentPortal(TooltipComponent);
         const componentInstance = this.overlayRef.attach(componentPortal);
         componentInstance.instance.message = this.bsaTooltip;
@@ -38,5 +43,33 @@ export class TooltipDirective {
         if (this.overlayRef && this.overlayRef.hasAttached()) {
             this.overlayRef.detach();
         }
+    }
+
+    private createPositionStrategy(): FlexibleConnectedPositionStrategy {
+        const positionStrategy = this.overlay
+            .position()
+            .flexibleConnectedTo(this.elementRef.nativeElement)
+            .withPositions([TOOLTIP_POSITIONS[this.tooltipPosition]]);
+
+        const tooltipOffset = 8;
+
+        switch (this.tooltipPosition) {
+            case TooltipPosition.TOP:
+                positionStrategy.withDefaultOffsetY(-tooltipOffset);
+                break;
+            case TooltipPosition.BOTTOM:
+                positionStrategy.withDefaultOffsetY(tooltipOffset);
+                break;
+            case TooltipPosition.LEFT:
+                positionStrategy.withDefaultOffsetX(-tooltipOffset);
+                break;
+            case TooltipPosition.RIGHT:
+                positionStrategy.withDefaultOffsetX(tooltipOffset);
+                break;
+            default:
+                break;
+        }
+
+        return positionStrategy;
     }
 }

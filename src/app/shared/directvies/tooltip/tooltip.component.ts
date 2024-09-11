@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
     standalone: true,
     imports: [],
     template: '{{ message }}',
-    styles: '',
+    styleUrl: './tooltip.component.scss',
 })
 export class TooltipComponent {
     message: string | undefined;
