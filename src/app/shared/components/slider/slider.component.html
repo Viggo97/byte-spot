@@ -12,6 +12,7 @@
     </div>
 
     <bsa-slider-markup tabindex="0"
+                       [bsaTooltip]="start.toString()"
                        #startMarkup
                        [ratio]="ratio"
                        [style.transform]="markupStartPosition"
@@ -21,6 +22,7 @@
     </bsa-slider-markup>
 
     <bsa-slider-markup tabindex="0"
+                       [bsaTooltip]="end.toString()"
                        #endMarkup
                        [ratio]="ratio"
                        [style.transform]="markupEndPosition"

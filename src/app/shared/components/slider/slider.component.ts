@@ -5,6 +5,7 @@ import { fromEvent } from 'rxjs';
 import { getDigitsNumber, round } from '../../utils/number.util';
 import { SliderMarkupComponent } from './slider-markup/slider-markup.component';
 import { SliderMove } from './slider-move.enum';
+import { TooltipDirective } from '../../directvies/tooltip/tooltip.directive';
 
 enum SliderMarkup {
     START,
@@ -16,6 +17,7 @@ enum SliderMarkup {
     standalone: true,
     imports: [
         SliderMarkupComponent,
+        TooltipDirective,
     ],
     templateUrl: './slider.component.html',
     styleUrl: './slider.component.scss',
