@@ -4,10 +4,13 @@ $background-primary-dark: hsl(240, 4%, 12%);
 $background-secondary-light: hsl(0, 40%, 98%);
 $background-secondary-dark: hsl(240, 8%, 16%);
 
+$background-tertiary-light: hsl(240, 24%, 24%);
+$background-tertiary-dark: hsl(240, 40%, 98%);
+
 $border-primary-light: hsl(240, 12%, 86%);
 $border-primary-dark: hsl(240, 12%, 24%);
 
-$border-secondary-light:hsl(240, 12%, 80%);
+$border-secondary-light: hsl(240, 12%, 80%);
 $border-secondary-dark: hsl(240, 12%, 32%);
 
 $hover-primary-light: hsl(0, 0%, 96%);
@@ -52,6 +55,7 @@ $blue-primary-dark: hsl(210, 100%, 70%);
 @mixin light-theme {
     --background-primary: #{$background-primary-light};
     --background-secondary: #{$background-secondary-light};
+    --background-tertiary: #{$background-tertiary-light};
     --border-primary: #{$border-primary-light};
     --border-secondary: #{$border-secondary-light};
     --hover-primary: #{$hover-primary-light};
@@ -66,6 +70,7 @@ $blue-primary-dark: hsl(210, 100%, 70%);
 
 @mixin dark-theme {
     --background-primary: #{$background-primary-dark};
+    --background-tertiary: #{$background-tertiary-dark};
     --background-secondary: #{$background-secondary-dark};
     --border-primary: #{$border-primary-dark};
     --border-secondary: #{$border-secondary-dark};
