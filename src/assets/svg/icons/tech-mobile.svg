@@ -1,0 +1,6 @@
+<svg id="tech-mobile" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <rect width="32" height="32" stroke="none" fill="#000000" opacity="0" transform="matrix(1, 0, 0, 1, 4.440892098500626e-16, 4.440892098500626e-16)"/>
+    <g transform="matrix(1.454545021057129, 0, 0, 1.454545021057129, 16, 16)">
+        <path style="stroke: none; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill-rule: nonzero; opacity: 1; stroke-width: 0px; fill: rgb(198, 0, 214);" transform=" translate(-12, -12)" d="M 16.5 1 L 7.5 1 C 6.12 1 5 2.12 5 3.5 L 5 20.5 C 5 21.88 6.12 23 7.5 23 L 16.5 23 C 17.88 23 19 21.88 19 20.5 L 19 3.5 C 19 2.12 17.88 1 16.5 1 z M 12 21.125 C 11.378 21.125 10.875 20.622 10.875 20 C 10.875 19.378 11.378 18.875 12 18.875 C 12.622 18.875 13.125 19.378 13.125 20 C 13.125 20.622 12.622 21.125 12 21.125 z M 17 18 L 7 18 L 7 4 L 17 4 L 17 18 z" stroke-linecap="round"/>
+    </g>
+</svg>
