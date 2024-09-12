@@ -1,1 +1,46 @@
-<p>filters content</p>
+<header>
+    <h3>{{ 'offer.filters' | translate }}</h3>
+    <button>{{ 'offer.clearAll' | translate }}</button>
+</header>
+
+<div class="filters"
+     [formGroup]="form">
+    <section>
+        <h3>{{ 'offer.salary' | translate }}</h3>
+        <bsa-slider id="filter-salary"
+                    formControlName="salary"
+                    [min]="0"
+                    [max]="50000"
+                    [step]="500">
+        </bsa-slider>
+    </section>
+
+    <section formGroupName="workMode">
+        <h3>{{ 'offer.workMode' | translate }}</h3>
+        <bsa-checkbox id="filter-work-mode-on-site"
+                      formControlName="onSite">
+            <label for="filter-work-mode-on-site">{{ 'offer.onSite' | translate }}</label>
+        </bsa-checkbox>
+
+        <bsa-checkbox id="filter-work-mode-hybrid"
+                      formControlName="hybrid">
+            <label for="filter-work-mode-hybrid">{{ 'offer.hybrid' | translate }}</label>
+        </bsa-checkbox>
+
+        <bsa-checkbox id="filter-work-mode-remote"
+                      formControlName="remote">
+            <label for="filter-work-mode-remote">{{ 'offer.remote' | translate }}</label>
+        </bsa-checkbox>
+    </section>
+
+    <section formArrayName="locations">
+        <h3>{{ 'offer.location' | translate }}</h3>
+        @for (location of locations; track location.id; let i=$index) {
+            <bsa-checkbox id="filter-location-{{location.id}}"
+                          [formControlName]="i">
+                <label for="filter-location-{{location.id}}">{{ location.name }}</label>
+            </bsa-checkbox>
+        }
+    </section>
+</div>
+

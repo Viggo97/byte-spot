@@ -3,6 +3,7 @@ import { delay, Observable, of } from 'rxjs';
 
 import { OfferSearchSuggestionsGroup } from './offer-search/offer-search-suggestions/model/offer-search-suggestion-group.model';
 import { OfferSearchSuggestionCategory } from './offer-search/offer-search-suggestions/model/offer-search-suggestion-category.enum';
+import { Location } from './interfaces/location.interface';
 
 @Injectable({ providedIn: 'root' })
 export class OffersService {
@@ -48,6 +49,28 @@ export class OffersService {
             ],
         },
     ];
+    private mockCities: Location[] = [
+        {
+            id: 'warsaw',
+            name: 'Warszawa',
+        },
+        {
+            id: 'cracow',
+            name: 'Krakow',
+        },
+        {
+            id: 'gdansk',
+            name: 'Gdansk',
+        },
+        {
+            id: 'wroclaw',
+            name: 'Wroclaw',
+        },
+        {
+            id: 'poznan',
+            name: 'Poznan',
+        },
+    ];
 
     getSearchSuggestions(searchTerm: string | null): Observable<OfferSearchSuggestionsGroup[]> {
         // return of(this.mockSuggestions);
@@ -76,5 +99,9 @@ export class OffersService {
         }
 
         return of(suggestions).pipe(delay(100));
+    }
+
+    getCities(): Observable<Location[]> {
+        return of(this.mockCities).pipe(delay(100));
     }
 }
