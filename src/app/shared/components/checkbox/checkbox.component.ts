@@ -1,7 +1,7 @@
 import { Component, HostListener, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { IconComponent } from '@shared';
+import { IconComponent } from '../icon/icon.component';
 
 @Component({
     selector: 'bsa-checkbox',
@@ -32,6 +32,7 @@ export class CheckboxComponent implements ControlValueAccessor {
     @HostListener('keydown.space')
     onSelect(): void {
         this.selected = !this.selected;
+        this.onChange(this.selected);
     }
 
     registerOnChange(onChange: (value: boolean) => void): void {

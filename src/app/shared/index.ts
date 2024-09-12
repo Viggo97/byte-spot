@@ -1,3 +1,4 @@
+export * from './components/checkbox/checkbox.component';
 export * from './components/drawer/drawer.component';
 export * from './components/dropdown/dropdown.component';
 export * from './components/dropdown/dropdown-group/dropdown-group.component';
