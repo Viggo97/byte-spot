@@ -3,10 +3,13 @@ import { FormArray, FormBuilder, FormControl, FormsModule, ReactiveFormsModule }
 import { forkJoin } from 'rxjs';
 
 import { TranslatePipe } from '@core';
-import { SliderComponent, CheckboxComponent } from '@shared';
+import { SliderComponent, CheckboxComponent, IconComponent } from '@shared';
 import { OffersService } from '@app/features/offers-overview/offers.service';
+import { ToggleComponent } from '@app/shared/components/toggle/toggle.component';
 import { Location } from '../interfaces/location.interface';
 import { LocationControl } from '../types/location-control.type';
+import { Technology } from '../interfaces/technology.interface';
+import { TechnologyControl } from '../types/technology-control.type';
 
 @Component({
     selector: 'bsa-offer-filters',
@@ -17,6 +20,8 @@ import { LocationControl } from '../types/location-control.type';
         CheckboxComponent,
         FormsModule,
         ReactiveFormsModule,
+        ToggleComponent,
+        IconComponent,
     ],
     templateUrl: './offer-filters.component.html',
     styleUrl: './offer-filters.component.scss',
@@ -33,9 +38,25 @@ export class OfferFiltersComponent implements OnInit {
             remote: false,
         }),
         locations: this.fb.array<FormControl<boolean>>([]),
+        employmentType: this.fb.group({
+            employmentContract: false,
+            b2b: false,
+            mandateContract: false,
+            specificTaskContract: false,
+            internship: false,
+        }),
+        seniority: this.fb.group({
+            intern: false,
+            junior: false,
+            mid: false,
+            senior: false,
+            expert: false,
+        }),
+        technologies: this.fb.array<FormControl<boolean>>([]),
     });
 
     locations: LocationControl[] = [];
+    technologies: TechnologyControl[] = [];
 
     ngOnInit(): void {
         this.fetchFilterData();
@@ -47,8 +68,10 @@ export class OfferFiltersComponent implements OnInit {
     private fetchFilterData(): void {
         forkJoin([
             this.offerService.getCities(),
-        ]).subscribe(([locations]) => {
+            this.offerService.getTechnologies(),
+        ]).subscribe(([locations, technologies]) => {
             this.initLocations(locations);
+            this.initTechnologies(technologies);
         });
     }
 
@@ -63,5 +86,19 @@ export class OfferFiltersComponent implements OnInit {
                 control,
             });
         });
+    }
+
+    private initTechnologies(technologies: Technology[]): void {
+        const technologiesControl = this.form.get('technologies') as FormArray<FormControl<boolean>>;
+        technologies.forEach((technology) => {
+            const control = this.fb.nonNullable.control(false);
+            technologiesControl.push(control, { emitEvent: false });
+            this.technologies.push({
+                id: technology.id,
+                name: technology.name,
+                control,
+            });
+        });
+        console.log(this.technologies);
     }
 }

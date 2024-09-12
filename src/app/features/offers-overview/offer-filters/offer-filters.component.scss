@@ -33,3 +33,9 @@ section {
 bsa-checkbox {
     margin-bottom: 8px;
 }
+
+.technologies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}

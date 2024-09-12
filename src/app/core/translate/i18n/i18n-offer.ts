@@ -53,4 +53,56 @@ export const i18nOffer: { [key: string] : I18nLanguageCode } = {
         en: 'Location',
         pl: 'Lokalizacja',
     },
+    employmentType: {
+        en: 'Employment type',
+        pl: 'Forma zatrudnienia',
+    },
+    employmentContract: {
+        en: 'Employment contract',
+        pl: 'Umowa o pracę',
+    },
+    b2b: {
+        en: 'B2B',
+        pl: 'B2B',
+    },
+    mandateContract: {
+        en: 'Mandate contract',
+        pl: 'Umowa zlecenie',
+    },
+    specificTaskContract: {
+        en: 'Specific task contract',
+        pl: 'Umowa o dzieło',
+    },
+    internship: {
+        en: 'Internship',
+        pl: 'Staż',
+    },
+    seniority: {
+        en: 'Seniority',
+        pl: 'Poziom doświadczenia',
+    },
+    intern: {
+        en: 'Intern',
+        pl: 'Stażysta',
+    },
+    junior: {
+        en: 'Junior',
+        pl: 'Junior',
+    },
+    mid: {
+        en: 'Mid',
+        pl: 'Mid',
+    },
+    senior: {
+        en: 'Senior',
+        pl: 'Senior',
+    },
+    expert: {
+        en: 'Expert',
+        pl: 'Ekspert',
+    },
+    technologies: {
+        en: 'Technologies',
+        pl: 'Technologie',
+    },
 };
