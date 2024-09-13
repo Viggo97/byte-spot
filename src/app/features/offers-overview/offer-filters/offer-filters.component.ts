@@ -2,14 +2,10 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { forkJoin } from 'rxjs';
 
-import { TranslatePipe } from '@core';
-import { SliderComponent, CheckboxComponent, IconComponent } from '@shared';
-import { OffersService } from '@app/features/offers-overview/offers.service';
-import { ToggleComponent } from '@app/shared/components/toggle/toggle.component';
-import { Location } from '../interfaces/location.interface';
-import { LocationControl } from '../types/location-control.type';
-import { Technology } from '../interfaces/technology.interface';
-import { TechnologyControl } from '../types/technology-control.type';
+import { TranslatePipe, CoreValue } from '@core';
+import { SliderComponent, CheckboxComponent, IconComponent, ToggleComponent } from '@shared';
+import { OffersService } from '../offers.service';
+import { ControlValue } from '../types/control-value.type';
 
 @Component({
     selector: 'bsa-offer-filters',
@@ -31,7 +27,8 @@ export class OfferFiltersComponent implements OnInit {
     private offerService = inject(OffersService);
 
     form = this.fb.group({
-        salary: [[4500, 21000]],
+        salary: [[0, 50000]],
+        technologies: this.fb.array<FormControl<boolean>>([]),
         workMode: this.fb.group({
             onSite: false,
             hybrid: false,
@@ -52,11 +49,10 @@ export class OfferFiltersComponent implements OnInit {
             senior: false,
             expert: false,
         }),
-        technologies: this.fb.array<FormControl<boolean>>([]),
     });
 
-    locations: LocationControl[] = [];
-    technologies: TechnologyControl[] = [];
+    locations: ControlValue[] = [];
+    technologies: ControlValue[] = [];
 
     ngOnInit(): void {
         this.fetchFilterData();
@@ -70,35 +66,32 @@ export class OfferFiltersComponent implements OnInit {
             this.offerService.getCities(),
             this.offerService.getTechnologies(),
         ]).subscribe(([locations, technologies]) => {
-            this.initLocations(locations);
-            this.initTechnologies(technologies);
+            this.createLocations(locations);
+            this.createTechnologies(technologies);
         });
     }
 
-    private initLocations(locations: Location[]): void {
+    private createLocations(locations: CoreValue[]): void {
         const locationsControl = this.form.get('locations') as FormArray<FormControl<boolean>>;
-        locations.forEach((location) => {
-            const control = this.fb.nonNullable.control(false);
-            locationsControl.push(control, { emitEvent: false });
-            this.locations.push({
-                id: location.id,
-                name: location.name,
-                control,
-            });
-        });
+        this.locations = this.createDynamicFilterData(locations, locationsControl);
     }
 
-    private initTechnologies(technologies: Technology[]): void {
+    private createTechnologies(technologies: CoreValue[]): void {
         const technologiesControl = this.form.get('technologies') as FormArray<FormControl<boolean>>;
-        technologies.forEach((technology) => {
+        this.technologies = this.createDynamicFilterData(technologies, technologiesControl);
+    }
+
+    private createDynamicFilterData(data: CoreValue[], parentControl: FormArray<FormControl<boolean>>): ControlValue[] {
+        const convertedData: ControlValue[] = [];
+        data.forEach((entry) => {
             const control = this.fb.nonNullable.control(false);
-            technologiesControl.push(control, { emitEvent: false });
-            this.technologies.push({
-                id: technology.id,
-                name: technology.name,
+            parentControl.push(control, { emitEvent: false });
+            convertedData.push({
+                key: entry.key,
+                value: entry.value,
                 control,
             });
         });
-        console.log(this.technologies);
+        return convertedData;
     }
 }

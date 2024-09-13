@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { delay, Observable, of } from 'rxjs';
 
+import { CoreValue } from '@core';
 import { OfferSearchSuggestionsGroup } from './offer-search/offer-search-suggestions/model/offer-search-suggestion-group.model';
 import { OfferSearchSuggestionCategory } from './offer-search/offer-search-suggestions/model/offer-search-suggestion-category.enum';
-import { Location } from './interfaces/location.interface';
-import { Technology } from './interfaces/technology.interface';
 
 @Injectable({ providedIn: 'root' })
 export class OffersService {
@@ -50,94 +49,92 @@ export class OffersService {
             ],
         },
     ];
-    private mockCities: Location[] = [
+    private mockCities: CoreValue[] = [
         {
-            id: 'warsaw',
-            name: 'Warszawa',
+            key: 'warsaw',
+            value: 'Warszawa',
         },
         {
-            id: 'cracow',
-            name: 'Krakow',
+            key: 'cracow',
+            value: 'Krakow',
         },
         {
-            id: 'gdansk',
-            name: 'Gdansk',
+            key: 'gdansk',
+            value: 'Gdansk',
         },
         {
-            id: 'wroclaw',
-            name: 'Wroclaw',
+            key: 'wroclaw',
+            value: 'Wroclaw',
         },
         {
-            id: 'poznan',
-            name: 'Poznan',
+            key: 'poznan',
+            value: 'Poznan',
         },
     ];
-    private mockTechnologies: Technology[] = [
+    private mockTechnologies: CoreValue[] = [
         {
-            id: 'aws',
-            name: 'AWS',
+            key: 'aws',
+            value: 'AWS',
         },
         {
-            id: 'azure',
-            name: 'Azure',
+            key: 'azure',
+            value: 'Azure',
         },
         {
-            id: 'c',
-            name: 'C',
+            key: 'c',
+            value: 'C',
         },
         {
-            id: 'cpp',
-            name: 'C++',
+            key: 'cpp',
+            value: 'C++',
         },
         {
-            id: 'csharp',
-            name: 'C#',
+            key: 'csharp',
+            value: 'C#',
         },
         {
-            id: 'go',
-            name: 'Go',
+            key: 'go',
+            value: 'Go',
         },
         {
-            id: 'java',
-            name: 'Java',
+            key: 'java',
+            value: 'Java',
         },
         {
-            id: 'javascript',
-            name: 'JavaScript',
+            key: 'javascript',
+            value: 'JavaScript',
         },
         {
-            id: 'mobile',
-            name: 'Mobile',
+            key: 'mobile',
+            value: 'Mobile',
         },
         {
-            id: 'php',
-            name: 'PHP',
+            key: 'php',
+            value: 'PHP',
         },
         {
-            id: 'python',
-            name: 'Python',
+            key: 'python',
+            value: 'Python',
         },
         {
-            id: 'ruby',
-            name: 'Ruby',
+            key: 'ruby',
+            value: 'Ruby',
         },
         {
-            id: 'rust',
-            name: 'Rust',
+            key: 'rust',
+            value: 'Rust',
         },
         {
-            id: 'sql',
-            name: 'SQL',
+            key: 'sql',
+            value: 'SQL',
         },
         {
-            id: 'typescript',
-            name: 'TypeScript',
+            key: 'typescript',
+            value: 'TypeScript',
         },
     ];
 
     getSearchSuggestions(searchTerm: string | null): Observable<OfferSearchSuggestionsGroup[]> {
-        // return of(this.mockSuggestions);
-
         if (!searchTerm) {
             return of(this.mockSuggestions);
         }
@@ -164,11 +161,11 @@ export class OffersService {
         return of(suggestions).pipe(delay(100));
     }
 
-    getCities(): Observable<Location[]> {
+    getCities(): Observable<CoreValue[]> {
         return of(this.mockCities).pipe(delay(100));
     }
 
-    getTechnologies(): Observable<Technology[]> {
+    getTechnologies(): Observable<CoreValue[]> {
         return of(this.mockTechnologies).pipe(delay(100));
     }
 }
