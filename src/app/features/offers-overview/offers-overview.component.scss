@@ -2,26 +2,17 @@
 
 :host {
     display: grid;
-    grid-template-columns: auto;
-    grid-template-areas:
-        "search"
-        "settings"
-        "list"
-        "pagination";
+    grid-template-areas: "main";
     grid-gap: 16px;
 
     @include md {
+        grid-template-areas: "aside main";
         grid-template-columns: 1fr 3fr;
-        grid-template-areas:
-        "filters search"
-        "filters settings"
-        "filters list"
-        "pagination pagination";
     }
 }
 
-bsa-offer-filters {
-    grid-area: filters;
+aside {
+    grid-area: aside;
     display: none;
 
     @include md {
@@ -29,20 +20,14 @@ bsa-offer-filters {
     }
 }
 
-bsa-offer-search {
-    grid-area: search;
-}
-
-bsa-offer-settings {
-    grid-area: settings;
-}
-
-bsa-offer-list {
-    grid-area: list;
+main {
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 bsa-pagination {
-    grid-area: pagination;
 
     @include sm {
         justify-content: end;

@@ -1,7 +1,12 @@
-<bsa-offer-filters></bsa-offer-filters>
-<bsa-offer-search></bsa-offer-search>
-<bsa-offer-settings></bsa-offer-settings>
-<bsa-offer-list></bsa-offer-list>
-<bsa-pagination [total]="100"
-                (pageChange)="onPageChange($event)">
-</bsa-pagination>
+<aside>
+    <bsa-offer-filters></bsa-offer-filters>
+
+</aside>
+<main>
+    <bsa-offer-search></bsa-offer-search>
+    <bsa-offer-settings></bsa-offer-settings>
+    <bsa-offer-list></bsa-offer-list>
+    <bsa-pagination [total]="100"
+                    (pageChange)="onPageChange($event)">
+    </bsa-pagination>
+</main>
