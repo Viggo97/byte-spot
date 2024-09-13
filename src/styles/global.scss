@@ -49,6 +49,11 @@ h2 {
     font-weight: 700;
 }
 
+h3 {
+    font: $font-md;
+    font-weight: 700;
+}
+
 .text-ellipsis {
     overflow: hidden;
     white-space: nowrap;
