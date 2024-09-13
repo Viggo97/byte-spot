@@ -9,6 +9,7 @@ export * from './components/pagination/pagination.component';
 export * from './components/select/select.component';
 export * from './components/select-button/select-button.component';
 export * from './components/slider/slider.component';
+export * from './components/toggle/toggle.component';
 
 export * from './directvies/resize-observer.directive';
 
