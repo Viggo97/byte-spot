@@ -2,6 +2,16 @@
 @import 'mixins';
 @import 'variables';
 
+@mixin gap {
+    content: '';
+    margin-left: 4px;
+    display: block;
+    width: .25rem;
+    height: .25rem;
+    border-radius: .125rem;
+    background-color: var(--text-secondary);
+}
+
 a {
     padding: 16px;
     display: flex;
@@ -81,11 +91,15 @@ section {
     grid-area: details;
     align-self: end;
     display: flex;
+    align-items: center;
     gap: 8px;
     flex-wrap: wrap;
 }
 
 .company {
+    display: flex;
+    gap: .25rem;
+    align-items: center;
     font: $font-sm;
 }
 
