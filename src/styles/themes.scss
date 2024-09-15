@@ -52,6 +52,12 @@ $hover-green-primary-dark: hsl(150, 100%, 50%);
 $blue-primary-light: hsl(210, 100%, 50%);
 $blue-primary-dark: hsl(210, 100%, 70%);
 
+$gray-primary-light: hsl(240, 8%, 96%);
+$gray-primary-dark: hsl(240, 8%, 20%);
+
+$gray-secondary-light: hsl(240, 8%, 94%);
+$gray-secondary-dark: hsl(240, 8%, 24%);
+
 @mixin light-theme {
     --background-primary: #{$background-primary-light};
     --background-secondary: #{$background-secondary-light};
@@ -66,6 +72,8 @@ $blue-primary-dark: hsl(210, 100%, 70%);
     --green-primary: #{$green-primary-light};
     --hover-green-primary: #{$hover-green-primary-light};
     --blue-primary: #{$blue-primary-light};
+    --gray-primary: #{$gray-primary-light};
+    --gray-secondary: #{$gray-secondary-light};
 }
 
 @mixin dark-theme {
@@ -82,6 +90,8 @@ $blue-primary-dark: hsl(210, 100%, 70%);
     --green-primary: #{$green-primary-dark};
     --hover-green-primary: #{$hover-green-primary-dark};
     --blue-primary: #{$blue-primary-dark};
+    --gray-primary: #{$gray-primary-dark};
+    --gray-secondary: #{$gray-secondary-dark};
 }
 
 @mixin common-theme {
