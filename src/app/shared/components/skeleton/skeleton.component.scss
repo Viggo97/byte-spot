@@ -1,4 +1,6 @@
 :host {
+    display: block;
+
     .skeleton {
         background-color: var(--gray-primary);
         animation: skeleton-loading 2s infinite ease-in-out;
