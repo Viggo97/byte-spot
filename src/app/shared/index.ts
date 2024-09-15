@@ -8,6 +8,7 @@ export * from './components/icon/icon.component';
 export * from './components/pagination/pagination.component';
 export * from './components/select/select.component';
 export * from './components/select-button/select-button.component';
+export * from './components/skeleton/skeleton.component';
 export * from './components/slider/slider.component';
 export * from './components/toggle/toggle.component';
 
