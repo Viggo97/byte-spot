@@ -1,6 +1,7 @@
 @import 'variables';
 
 :host {
+    width: fit-content;
     display: flex;
     align-items: center;
     gap: .5rem;
@@ -25,5 +26,10 @@
         border-color: var(--green-primary);
         background-color: var(--green-primary);
         color: var(--text-tertiary);
+    }
+
+    &.disabled {
+        background-color: var(--gray-primary);
+        border-color: var(--gray-secondary)
     }
 }

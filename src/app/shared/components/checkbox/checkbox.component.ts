@@ -23,14 +23,21 @@ export class CheckboxComponent implements ControlValueAccessor {
     @Input() id: string | undefined;
 
     selected = false;
+    disabled = false;
 
     onChange = (value: boolean) => {};
     onTouch = () => {};
 
     @HostListener('click')
-    @HostListener('keydown.enter')
-    @HostListener('keydown.space')
-    onSelect(): void {
+    @HostListener('keydown.enter', ['$event'])
+    @HostListener('keydown.space', ['$event'])
+    onSelect(event?: KeyboardEvent): void {
+        if (this.disabled) {
+            return;
+        }
+
+        event?.preventDefault();
+
         this.selected = !this.selected;
         this.onChange(this.selected);
     }
@@ -45,5 +52,9 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     writeValue(value: boolean): void {
         this.selected = value;
+    }
+
+    setDisabledState(disabled: boolean): void {
+        this.disabled = disabled;
     }
 }
