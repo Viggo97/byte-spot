@@ -16,8 +16,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     ],
 })
 export class ToggleComponent implements ControlValueAccessor {
-    @HostBinding('tabindex') tabindex = 0;
+    @HostBinding('tabindex') get tabindex() { return this.disabled ? -1 : 0; }
     @HostBinding('class.checked') checked = false;
+    @HostBinding('class.disabled') disabled = false;
 
     onChange = (value: boolean) => {};
     onTouch = () => {};
@@ -26,8 +27,18 @@ export class ToggleComponent implements ControlValueAccessor {
     @HostListener('keyup.enter')
     @HostListener('keyup.space')
     onCheck(): void {
+        if (this.disabled) {
+            return;
+        }
+
         this.checked = !this.checked;
         this.onChange(this.checked);
+    }
+
+    @HostListener('keydown.enter', ['$event'])
+    @HostListener('keydown.space', ['$event'])
+    onKeydown(event?: KeyboardEvent): void {
+        event?.preventDefault();
     }
 
     registerOnChange(onChange: (value: boolean) => void): void {
@@ -40,5 +51,9 @@ export class ToggleComponent implements ControlValueAccessor {
 
     writeValue(value: boolean): void {
         this.checked = value;
+    }
+
+    setDisabledState(disabled: boolean): void {
+        this.disabled = disabled;
     }
 }
