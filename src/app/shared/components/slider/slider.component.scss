@@ -22,6 +22,10 @@ $rail-height: .25rem;
     border-radius: calc($rail-height / 2);
     background-color: var(--border-primary);
     cursor: pointer;
+
+    &.disabled {
+        background-color: var(--gray-primary);
+    }
 }
 
 .bar {
@@ -29,6 +33,10 @@ $rail-height: .25rem;
     height: $rail-height;
     background-color: var(--green-primary);
     pointer-events: none;
+
+    &.disabled {
+        background-color: var(--gray-secondary);
+    }
 }
 
 .limits {

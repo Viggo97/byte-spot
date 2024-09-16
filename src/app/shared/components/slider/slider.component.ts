@@ -44,6 +44,7 @@ export class SliderComponent implements OnInit, AfterViewInit, ControlValueAcces
 
     onChange = (value: [number, number]) => {};
     onTouch = () => {};
+    disabled = false;
 
     private _start = 0;
     get start(): number { return this._start; }
@@ -149,6 +150,10 @@ export class SliderComponent implements OnInit, AfterViewInit, ControlValueAcces
     }
 
     onChangePositionMarkupStart(move: SliderMove): void {
+        if (this.disabled) {
+            return;
+        }
+
         if (this.minReached(move) || this.endReached(move)) {
             return;
         }
@@ -159,6 +164,10 @@ export class SliderComponent implements OnInit, AfterViewInit, ControlValueAcces
     }
 
     onChangePositionMarkupEnd(move: SliderMove): void {
+        if (this.disabled) {
+            return;
+        }
+
         if (this.maxReached(move) || this.startReached(move)) {
             return;
         }
@@ -186,6 +195,10 @@ export class SliderComponent implements OnInit, AfterViewInit, ControlValueAcces
     }
 
     onRailClick(event: MouseEvent): void {
+        if (this.disabled) {
+            return;
+        }
+
         const pointerPosition = event.pageX;
         const newValue = this.computeNewValueOnClick(pointerPosition);
         const markup = this.selectMarkupToMove(pointerPosition);
@@ -254,5 +267,9 @@ export class SliderComponent implements OnInit, AfterViewInit, ControlValueAcces
         this.end = end;
         this.computeMarkupStartPosition();
         this.computeMarkupEndPosition();
+    }
+
+    setDisabledState(disabled: boolean): void {
+        this.disabled = disabled;
     }
 }
