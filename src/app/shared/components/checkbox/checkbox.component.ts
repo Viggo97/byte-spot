@@ -29,17 +29,21 @@ export class CheckboxComponent implements ControlValueAccessor {
     onTouch = () => {};
 
     @HostListener('click')
-    @HostListener('keydown.enter', ['$event'])
-    @HostListener('keydown.space', ['$event'])
-    onSelect(event?: KeyboardEvent): void {
+    @HostListener('keyup.enter')
+    @HostListener('keyup.space')
+    onSelect(): void {
         if (this.disabled) {
             return;
         }
 
-        event?.preventDefault();
-
         this.selected = !this.selected;
         this.onChange(this.selected);
+    }
+
+    @HostListener('keydown.enter', ['$event'])
+    @HostListener('keydown.space', ['$event'])
+    onKeydown(event?: KeyboardEvent): void {
+        event?.preventDefault();
     }
 
     registerOnChange(onChange: (value: boolean) => void): void {
