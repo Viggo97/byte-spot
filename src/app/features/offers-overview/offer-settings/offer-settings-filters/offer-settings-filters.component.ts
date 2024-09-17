@@ -1,8 +1,9 @@
 import { Component, inject, ViewChild } from '@angular/core';
 import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay } from '@angular/cdk/overlay';
+
 import { DrawerComponent } from '@shared';
 import { TranslatePipe } from '@core';
-import { OfferFiltersComponent } from '@app/features/offers-overview/offer-filters/offer-filters.component';
+import { OfferFiltersComponent } from '../../offer-filters/offer-filters.component';
 
 @Component({
     selector: 'bsa-offer-settings-filters',
