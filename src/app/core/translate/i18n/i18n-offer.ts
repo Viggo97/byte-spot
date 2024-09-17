@@ -29,6 +29,10 @@ export const i18nOffer: { [key: string] : I18nLanguageCode } = {
         en: 'Clear all',
         pl: 'Wyczyść wszystkie',
     },
+    showOffers: {
+        en: 'Show offers',
+        pl: 'Pokaż oferty',
+    },
     salary: {
         en: 'Salary',
         pl: 'Wynagrodzenie',
