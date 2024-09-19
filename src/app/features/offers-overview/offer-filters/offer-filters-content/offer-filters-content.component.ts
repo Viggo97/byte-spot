@@ -24,4 +24,5 @@ export class OfferFiltersContentComponent {
     @Input({ required: true }) form!: FormGroup;
     @Input({ required: true }) technologies!: ControlValue[];
     @Input({ required: true }) locations!: ControlValue[];
+    @Input() displayHeader = false;
 }

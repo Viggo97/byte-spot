@@ -1,7 +1,9 @@
-<header>
-    <h3>{{ 'offer.filters' | translate }}</h3>
-    <button type="button">{{ 'offer.clearAll' | translate }}</button>
-</header>
+@if (displayHeader) {
+    <header>
+        <h3>{{ 'offer.filters' | translate }}</h3>
+        <button type="button">{{ 'offer.clearAll' | translate }}</button>
+    </header>
+}
 
 <div [formGroup]="form">
     <section>
@@ -19,11 +21,11 @@
         <h3>{{ 'offer.technologies' | translate }}</h3>
 
         <div class="technologies">
-            @for (technology of technologies; track technology.key; let i=$index) {
+            @for (technology of technologies; track technology.key; let i = $index) {
                 <bsa-toggle id="filter-technology-{{technology.key}}"
                             [formControlName]="i">
                     <bsa-icon name="tech-{{technology.key}}"></bsa-icon>
-                    <span>{{technology.value}}</span>
+                    <span>{{ technology.value }}</span>
                 </bsa-toggle>
             }
         </div>
@@ -54,7 +56,7 @@
         <h3>{{ 'offer.location' | translate }}</h3>
 
         <div class="filters-group">
-            @for (location of locations; track location.key; let i=$index) {
+            @for (location of locations; track location.key; let i = $index) {
                 <bsa-checkbox id="filter-location-{{location.key}}"
                               [formControlName]="i">
                     <label for="filter-location-{{location.key}}">{{ location.value }}</label>
@@ -69,7 +71,8 @@
         <div class="filters-group">
             <bsa-checkbox id="filter-employment-type-employment-contract"
                           formControlName="employmentContract">
-                <label for="filter-employment-type-employment-contract">{{ 'offer.employmentContract' | translate }}</label>
+                <label
+                    for="filter-employment-type-employment-contract">{{ 'offer.employmentContract' | translate }}</label>
             </bsa-checkbox>
 
             <bsa-checkbox id="filter-employment-type-b2b"
@@ -84,7 +87,8 @@
 
             <bsa-checkbox id="filter-employment-type-specific-task-contract"
                           formControlName="specificTaskContract">
-                <label for="filter-employment-type-specific-task-contract">{{ 'offer.specificTaskContract' | translate }}</label>
+                <label
+                    for="filter-employment-type-specific-task-contract">{{ 'offer.specificTaskContract' | translate }}</label>
             </bsa-checkbox>
 
             <bsa-checkbox id="filter-employment-type-internship"
