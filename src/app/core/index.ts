@@ -1,3 +1,4 @@
+export * from './enums/display-mode.enum';
 export * from './layout/navbar/navbar.component';
 
 export * from './translate/translate.service';
