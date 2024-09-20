@@ -1,0 +1,32 @@
+<button type="button"
+        #filters
+        cdkOverlayOrigin
+        (click)="openDrawer()">
+    {{ 'global.filters' | translate }}
+</button>
+
+<ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="filters"
+    [cdkConnectedOverlayOpen]="drawerOpen"
+    [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
+    [cdkConnectedOverlayHasBackdrop]="true"
+    cdkConnectedOverlayBackdropClass="cdk-custom-backdrop-background"
+    (overlayOutsideClick)="drawer.close()"
+    (detach)="closeDrawer()">
+    <bsa-drawer
+        [title]="'global.filters' | translate"
+        (closeDrawer)="closeDrawer()">
+        <div class="drawer-container">
+            <bsa-offer-filters-content
+                [form]="form"
+                [locations]="locations"
+                [technologies]="technologies">
+            </bsa-offer-filters-content>
+            <div class="actions">
+                <button type="button">{{ 'offer.clearAll' | translate }}</button>
+                <button type="button">{{ 'offer.showOffers' | translate }}</button>
+            </div>
+        </div>
+    </bsa-drawer>
+</ng-template>
