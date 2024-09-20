@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 import { PaginationComponent } from '@shared';
 
@@ -21,6 +22,16 @@ import { OfferListComponent } from './offer-list/offer-list.component';
     styleUrl: './offers-overview.component.scss',
 })
 export class OffersOverviewComponent {
+    private breakpointObserver = inject(BreakpointObserver);
+
+    compactMode!: boolean;
+
+    constructor() {
+        this.breakpointObserver.observe('(min-width: 960px)').subscribe((state) => {
+            this.compactMode = !state.matches;
+        });
+    }
+
     onPageChange(page: number): void {
         console.log(page);
     }

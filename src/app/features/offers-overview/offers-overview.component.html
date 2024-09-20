@@ -1,12 +1,20 @@
-<aside>
-    <bsa-offer-filters></bsa-offer-filters>
+@if (!compactMode) {
+    <div class="panel">
+        <bsa-offer-filters [compactMode]="compactMode"></bsa-offer-filters>
+    </div>
+}
 
-</aside>
-<main>
+<div class="content">
     <bsa-offer-search></bsa-offer-search>
-    <bsa-offer-settings></bsa-offer-settings>
+    <div class="options-bar">
+        <bsa-offer-settings></bsa-offer-settings>
+        @if (compactMode) {
+            <bsa-offer-filters [compactMode]="compactMode"></bsa-offer-filters>
+        }
+    </div>
     <bsa-offer-list></bsa-offer-list>
-    <bsa-pagination [total]="100"
-                    (pageChange)="onPageChange($event)">
+    <bsa-pagination
+        [total]="100"
+        (pageChange)="onPageChange($event)">
     </bsa-pagination>
-</main>
+</div>
