@@ -1,23 +1,27 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component, inject, Input, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl } from '@angular/forms';
+import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { forkJoin } from 'rxjs';
 
 import { TranslatePipe, CoreValue } from '@core';
-import { SliderComponent, CheckboxComponent, IconComponent, ToggleComponent } from '@shared';
+import { DrawerComponent } from '@shared';
 import { OffersService } from '../offers.service';
 import { ControlValue } from '../types/control-value.type';
+import { OfferFiltersCompactComponent } from './offer-filters-compact/offer-filters-compact.component';
+import { OfferFiltersContentComponent } from './offer-filters-content/offer-filters-content.component';
+import { OfferFiltersBroadComponent } from './offer-filters-broad/offer-filters-broad.component';
 
 @Component({
     selector: 'bsa-offer-filters',
     standalone: true,
     imports: [
         TranslatePipe,
-        SliderComponent,
-        CheckboxComponent,
-        FormsModule,
-        ReactiveFormsModule,
-        ToggleComponent,
-        IconComponent,
+        CdkOverlayOrigin,
+        CdkConnectedOverlay,
+        DrawerComponent,
+        OfferFiltersContentComponent,
+        OfferFiltersBroadComponent,
+        OfferFiltersCompactComponent,
     ],
     templateUrl: './offer-filters.component.html',
     styleUrl: './offer-filters.component.scss',
@@ -25,6 +29,8 @@ import { ControlValue } from '../types/control-value.type';
 export class OfferFiltersComponent implements OnInit {
     private fb = inject(FormBuilder);
     private offerService = inject(OffersService);
+
+    @Input({ required: true }) compactMode!: boolean;
 
     form = this.fb.group({
         salary: [[0, 50000]],
@@ -57,7 +63,7 @@ export class OfferFiltersComponent implements OnInit {
     ngOnInit(): void {
         this.fetchFilterData();
         this.form.valueChanges.subscribe((v) => {
-            console.log('value change', v);
+            // console.log('value change', v);
         });
     }
 
