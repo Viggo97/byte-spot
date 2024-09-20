@@ -5,7 +5,6 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { TranslatePipe } from '@core';
 import { NumberFormatterPipe } from '@shared';
 import { OfferSettingsSortComponent } from './offer-settings-sort/offer-settings-sort.component';
-import { OfferSettingsFiltersComponent } from './offer-settings-filters/offer-settings-filters.component';
 import { OfferSettingsResultsComponent } from './offer-settings-results/offer-settings-results.component';
 
 @Component({
@@ -15,7 +14,6 @@ import { OfferSettingsResultsComponent } from './offer-settings-results/offer-se
         TranslatePipe,
         NumberFormatterPipe,
         OfferSettingsSortComponent,
-        OfferSettingsFiltersComponent,
         OfferSettingsResultsComponent,
     ],
     templateUrl: './offer-settings.component.html',
