@@ -16,18 +16,24 @@ import { OfferPost } from '../../interfaces/offer-post.interface';
     styleUrl: './offer-list-item.component.scss',
 })
 export class OfferListItemComponent {
-    @Input() offer?: OfferPost = {
-        title: 'Senior Java Script Developer (Node.js + REST + Docker)',
-        salary: {
-            min: 12000,
-            max: 18000,
-            currency: 'PLN',
-        },
-        location: 'Cracow',
-        company: 'Microsoft',
-        workMode: 'Hybrid',
-        employmentType: 'Employment contract',
-        seniority: 'Senior',
-        technologies: ['JavaScript', 'Typescript', 'Node.js', 'Docker', 'REST'],
-    };
+    @Input() offer?: OfferPost = undefined;
+
+    ngOnInit() {
+        setTimeout(() => {
+            this.offer = {
+                title: 'Senior Java Script Developer (Node.js + REST + Docker)',
+                salary: {
+                    min: 12000,
+                    max: 18000,
+                    currency: 'PLN',
+                },
+                location: 'Cracow',
+                company: 'Microsoft',
+                workMode: 'Hybrid',
+                employmentType: 'Employment contract',
+                seniority: 'Senior',
+                technologies: ['JavaScript', 'Typescript', 'Node.js', 'Docker', 'REST'],
+            };
+        }, 2000);
+    }
 }

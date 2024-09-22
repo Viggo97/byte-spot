@@ -1,26 +1,33 @@
 <a>
     @if (offer) {
         <section>
-            <div class="logo"></div>
-            <h2 class="title"> Senior Java Script Developer (Node.js + REST + Docker) </h2>
-            @if (offer.salary) {
-                <div class="salary">{{ offer.salary.min | numberFormatter }}
-                    - {{ offer.salary.max | numberFormatter }} {{ offer.salary.currency }}
-                </div>
-            }
-            <div class="location">
-                <bsa-icon name="location" size="1.25rem"></bsa-icon>
-                <span>{{ offer.location }}</span>
+            <div class="logo">
+                <div class="logo-img"></div>
             </div>
+
+            <div class="title">
+                <h2>Senior Java Script Developer (Node.js + REST + Docker)</h2>
+                <span class="pill pill-blue">New</span>
+            </div>
+
             <div class="details">
-                <span class="company">
-                    <bsa-icon name="company" size="1.0rem"></bsa-icon>
+                <div class="company">
+                    <bsa-icon name="company"></bsa-icon>
                     <span>{{ offer.company }}</span>
-                </span>
-                <span class="pill pill-green">{{ offer.workMode }}</span>
-                <span class="pill pill-orange">{{ offer.employmentType }}</span>
-                <span class="pill pill-purple">{{ offer.seniority }}</span>
+                </div>
+
+                <div class="location">
+                    <bsa-icon name="location"></bsa-icon>
+                    <span>{{ offer.location }}</span>
+                </div>
+
+                @if (offer.salary) {
+                    <div class="salary">
+                        {{ offer.salary.min | numberFormatter }} - {{ offer.salary.max | numberFormatter }} {{ offer.salary.currency }}
+                    </div>
+                }
             </div>
+
             <div class="tags">
                 @for (technology of offer.technologies; track technology) {
                     <span class="chip">{{ technology }}</span>
@@ -29,17 +36,21 @@
         </section>
     } @else {
         <div class="skeleton-template">
-            <header>
-                <div class="skeleton-logo">
-                    <bsa-skeleton type="square" size="3rem"></bsa-skeleton>
-                </div>
-                <div class="skeleton-title">
-                    <bsa-skeleton></bsa-skeleton>
-                    <bsa-skeleton width="40%"></bsa-skeleton>
-                </div>
-            </header>
-            <bsa-skeleton></bsa-skeleton>
-            <bsa-skeleton width="70%"></bsa-skeleton>
+            <div class="skeleton-logo">
+                <bsa-skeleton type="square" size="3.5rem"></bsa-skeleton>
+            </div>
+            <div class="skeleton-title">
+                <bsa-skeleton></bsa-skeleton>
+                <bsa-skeleton width="40%"></bsa-skeleton>
+            </div>
+            <div class="skeleton-details">
+                <bsa-skeleton width="40%"></bsa-skeleton>
+                <bsa-skeleton width="30%"></bsa-skeleton>
+                <bsa-skeleton width="50%"></bsa-skeleton>
+            </div>
+            <div class="skeleton-tags">
+                <bsa-skeleton width="70%"></bsa-skeleton>
+            </div>
         </div>
     }
 </a>

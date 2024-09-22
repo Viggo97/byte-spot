@@ -9,6 +9,7 @@ a {
     border-radius: 8px;
     color: var(--text-primary);
     cursor: pointer;
+    overflow: hidden;
 
     &:hover {
         background-color: var(--hover-primary);
@@ -16,81 +17,64 @@ a {
 }
 
 section {
-    flex: 1;
+    width: 100%;
     display: grid;
-    grid-column-gap: 16px;
-    grid-row-gap: 12px;
-    grid-template-columns: min-content auto 1fr;
+    gap: 16px;
+    grid-template-columns: min-content auto;
     grid-template-areas:
-        "logo title title"
-        "location location salary"
-        "details details details"
-        "tags tags tags";
+        "logo title"
+        "details details"
+        "tags tags";
     font: $font-md;
 
     @include md {
-        grid-row-gap: 0;
-        grid-template-columns: auto 8fr auto;
         grid-template-areas:
-            "logo title salary"
-            "logo details location"
-            "tags tags tags";
+            "logo title"
+            "logo details"
+            "logo tags";
     }
 }
 
 .logo {
     grid-area: logo;
-    background-color: lavender;
-    width: 3.5rem;
-    height: 3.5rem;
+    display: flex;
+    align-items: center;
+
+    .logo-img {
+        background-color: lavender;
+        width: 3.5rem;
+        height: 3.5rem;
+    }
 }
 
 .title {
     grid-area: title;
-    align-self: center;
-
-    @include multiline-ellipsis(2, 1.75rem);
-
-    @include md {
-        display: block;
-        @include ellipsis;
-    }
-}
-
-.salary {
-    grid-area: salary;
-    align-self: center;
-
-    @include md {
-        justify-self: end;
-    }
-}
-
-.location {
-    grid-area: location;
-    align-self: center;
     display: flex;
-    gap: 4px;
+    align-items: center;
+    gap: 8px;
 
-    @include md {
-        justify-self: end;
+    h2 {
+        @include multiline-ellipsis(2, 1.75rem);
     }
+
 }
 
 .details {
     grid-area: details;
-    align-self: end;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 8px;
     flex-wrap: wrap;
-}
 
-.company {
-    display: flex;
-    gap: .25rem;
-    align-items: center;
-    font: $font-sm;
+    @include md {
+        flex-direction: row;
+        gap: 12px;
+    }
+
+    .salary {
+        font-weight: 500;
+        color: var(--green-primary);
+    }
 }
 
 .tags {
@@ -98,26 +82,79 @@ section {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
+}
+
+.location, .company, .salary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 
     @include md {
-        margin-top: 12px;
+        gap: 4px;
     }
 }
 
 .skeleton-template {
     width: 100%;
+    display: grid;
+    gap: 16px;
+    grid-template-columns: min-content auto;
+    grid-template-areas:
+        "skeleton-logo skeleton-title"
+        "skeleton-details skeleton-details"
+        "skeleton-tags skeleton-tags";
 
-    header {
-        width: 100%;
+    @include md {
+        grid-template-areas:
+            "skeleton-logo skeleton-title"
+            "skeleton-logo skeleton-details"
+            "skeleton-logo skeleton-tags";
+    }
+
+    .skeleton-logo {
+        grid-area: skeleton-logo;
         display: flex;
-        gap: 16px;
+        align-items: center;
+    }
 
-        .skeleton-title {
-            flex: 1;
+    .skeleton-title {
+        grid-area: skeleton-title;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        @include md {
+            bsa-skeleton {
+                margin: 6px 0;
+            }
+
+            bsa-skeleton:not(:nth-of-type(1)) {
+                display: none;
+            }
         }
     }
 
-    bsa-skeleton:nth-of-type(1) {
-        margin-bottom: 1rem;
+    .skeleton-details {
+        grid-area: skeleton-details;
+        display: grid;
+        gap: 8px;
+
+        bsa-skeleton {
+            margin: 4px 0;
+        }
+
+        @include md {
+            bsa-skeleton:not(:nth-of-type(1)) {
+                display: none;
+            }
+        }
+    }
+
+    .skeleton-tags {
+        grid-area: skeleton-tags;
+
+        bsa-skeleton {
+            margin: 2px 0;
+        }
     }
 }
