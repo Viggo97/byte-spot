@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
-import { IconComponent, NumberFormatterPipe } from '@shared';
-import { SkeletonComponent } from '@app/shared/components/skeleton/skeleton.component';
+import { IconComponent, NumberFormatterPipe, SkeletonComponent } from '@shared';
+import { TranslatePipe } from '@core';
 import { OfferPost } from '../../interfaces/offer-post.interface';
 
 @Component({
@@ -11,6 +11,7 @@ import { OfferPost } from '../../interfaces/offer-post.interface';
         IconComponent,
         NumberFormatterPipe,
         SkeletonComponent,
+        TranslatePipe,
     ],
     templateUrl: './offer-list-item.component.html',
     styleUrl: './offer-list-item.component.scss',
@@ -27,12 +28,13 @@ export class OfferListItemComponent {
                     max: 18000,
                     currency: 'PLN',
                 },
-                location: 'Cracow',
+                location: ['Cracow', 'Warsaw'],
                 company: 'Microsoft',
                 workMode: 'Hybrid',
                 employmentType: 'Employment contract',
                 seniority: 'Senior',
                 technologies: ['JavaScript', 'Typescript', 'Node.js', 'Docker', 'REST'],
+                newOffer: true,
             };
         }, 2000);
     }

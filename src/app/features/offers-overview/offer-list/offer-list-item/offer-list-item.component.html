@@ -6,8 +6,10 @@
             </div>
 
             <div class="title">
-                <h2>Senior Java Script Developer (Node.js + REST + Docker)</h2>
-                <span class="pill pill-blue">New</span>
+                <h2>{{ offer.title }}</h2>
+                @if (offer.newOffer) {
+                    <span class="pill pill-blue">{{ 'offer.newOffer' | translate }}</span>
+                }
             </div>
 
             <div class="details">
@@ -18,12 +20,17 @@
 
                 <div class="location">
                     <bsa-icon name="location"></bsa-icon>
-                    <span>{{ offer.location }}</span>
+                    <span>{{ offer.location[0] }}</span>
+                    @if (offer.location.length > 1) {
+                        <span>(+{{offer.location.length - 1}})</span>
+                    }
                 </div>
 
                 @if (offer.salary) {
                     <div class="salary">
-                        {{ offer.salary.min | numberFormatter }} - {{ offer.salary.max | numberFormatter }} {{ offer.salary.currency }}
+                        {{ offer.salary.min | numberFormatter }}
+                        - {{ offer.salary.max | numberFormatter }}
+                        {{ offer.salary.currency }}
                     </div>
                 }
             </div>
