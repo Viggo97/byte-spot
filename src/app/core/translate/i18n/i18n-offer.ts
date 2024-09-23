@@ -109,4 +109,8 @@ export const i18nOffer: { [key: string] : I18nLanguageCode } = {
         en: 'Technologies',
         pl: 'Technologie',
     },
+    newOffer: {
+        en: 'New',
+        pl: 'Nowa',
+    },
 };
