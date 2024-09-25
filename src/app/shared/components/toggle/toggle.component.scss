@@ -12,7 +12,7 @@
     cursor: pointer;
     transition: all 150ms cubic-bezier(.4, 0, .2, 1);
 
-    &:hover:not(:focus-visible):not(.disabled) {
+    &:hover:not(:focus-visible) {
         background-color: var(--hover-primary);
     }
 
@@ -28,6 +28,10 @@
 
     &.disabled {
         background-color: var(--gray-secondary);
-        border-color: var(--gray-primary)
+        border-color: var(--gray-primary);
+
+        &:hover {
+            background-color: var(--gray-secondary);
+        }
     }
 }
