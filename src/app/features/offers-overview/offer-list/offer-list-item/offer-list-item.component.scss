@@ -2,6 +2,10 @@
 @import 'mixins';
 @import 'variables';
 
+:host {
+    display: block;
+}
+
 a {
     padding: 16px;
     display: flex;
@@ -84,7 +88,7 @@ section {
     flex-wrap: wrap;
 }
 
-.location, .company, .salary {
+.locations, .company, .salary {
     display: flex;
     align-items: center;
     gap: 8px;

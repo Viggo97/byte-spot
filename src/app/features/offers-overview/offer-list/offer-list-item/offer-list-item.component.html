@@ -18,11 +18,11 @@
                     <span>{{ offer.company }}</span>
                 </div>
 
-                <div class="location">
+                <div class="locations">
                     <bsa-icon name="location"></bsa-icon>
-                    <span>{{ offer.location[0] }}</span>
-                    @if (offer.location.length > 1) {
-                        <span>(+{{offer.location.length - 1}})</span>
+                    <span>{{ offer.locations[0] }}</span>
+                    @if (offer.locations.length > 1) {
+                        <span>(+{{offer.locations.length - 1}})</span>
                     }
                 </div>
 

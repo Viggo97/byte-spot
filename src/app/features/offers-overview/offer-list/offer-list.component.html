@@ -1,1 +1,3 @@
-<bsa-offer-list-item></bsa-offer-list-item>
+@for (offer of offers$ | async; track offer.title) {
+    <bsa-offer-list-item [offer]="offer"></bsa-offer-list-item>
+}

@@ -5,11 +5,8 @@ export interface OfferPost {
         max: number;
         currency: string;
     }
-    location: string[];
+    locations: string[];
     company: string;
-    workMode: string;
-    employmentType: string;
-    seniority: string;
     technologies: string[];
     newOffer: boolean;
 }

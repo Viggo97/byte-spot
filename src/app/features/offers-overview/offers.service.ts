@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
-import { delay, Observable, of } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { delay, Observable, of, shareReplay } from 'rxjs';
 
 import { CoreValue } from '@core';
+import { HttpClient } from '@angular/common/http';
+import { OfferPost } from '@app/features/offers-overview/interfaces/offer-post.interface';
 import { OfferSearchSuggestionsGroup } from './offer-search/offer-search-suggestions/model/offer-search-suggestion-group.model';
 import { OfferSearchSuggestionCategory } from './offer-search/offer-search-suggestions/model/offer-search-suggestion-category.enum';
 
@@ -167,5 +169,27 @@ export class OffersService {
 
     getTechnologies(): Observable<CoreValue[]> {
         return of(this.mockTechnologies).pipe(delay(100));
+    }
+
+    private http = inject(HttpClient);
+
+    private URL = 'http://localhost:8080';
+
+    getLocations(): Observable<CoreValue[]> {
+        const url = `${this.URL}/locations`;
+        return this.http.get<CoreValue[]>(url)
+            .pipe(shareReplay(1));
+    }
+
+    getTechs(): Observable<CoreValue[]> {
+        const url = `${this.URL}/technologies`;
+        return this.http.get<CoreValue[]>(url)
+            .pipe(shareReplay(1));
+    }
+
+    getOffers(): Observable<OfferPost[]> {
+        const url = `${this.URL}/offers`;
+        return this.http.get<OfferPost[]>(url)
+            .pipe(shareReplay(1));
     }
 }
