@@ -1,7 +1,5 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, ElementRef, EventEmitter, inject, Input, isDevMode, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, inject, Input, isDevMode, OnInit, Output, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { fromEvent } from 'rxjs';
 
 import { getDigitsNumber, round } from '../../utils/number.util';
 import { SliderMarkupComponent } from './slider-markup/slider-markup.component';
@@ -31,9 +29,9 @@ enum SliderMarkup {
         },
     ],
 })
-export class SliderComponent implements OnInit, AfterViewInit, ControlValueAccessor {
+export class SliderComponent implements OnInit, ControlValueAccessor {
     private cdr = inject(ChangeDetectorRef);
-    private destroyRef = inject(DestroyRef);
+    private elementRef = inject(ElementRef);
     protected readonly SliderMarkup = SliderMarkup;
 
     @Input({ required: true }) min!: number;
@@ -70,19 +68,16 @@ export class SliderComponent implements OnInit, AfterViewInit, ControlValueAcces
         this.valueChange.emit([this.start, this.end]);
     }
 
-    private _markupStartPosition = 0;
-    get markupStartPosition(): string {
-        return this.getSelfTranslation(this.start, this._markupStartPosition);
+    get stepDigits(): number {
+        return getDigitsNumber(this.step);
     }
-    set markupStartPosition(value: number) { this._markupStartPosition = value; }
 
-    private _markupEndPosition = 0;
-    get markupEndPosition(): string {
-        return this.getSelfTranslation(this.end, this._markupEndPosition);
+    get markupWidth(): number {
+        return this.startMarkupRef?.nativeElement.offsetWidth || 0;
     }
-    set markupEndPosition(value: number) { this._markupEndPosition = value; }
 
-    get stepDigits(): number { return getDigitsNumber(this.step); }
+    markupStartPosition = 0;
+    markupEndPosition = 0;
     overlappingMarkup = SliderMarkup.START;
     ratio = 0;
 
@@ -91,35 +86,17 @@ export class SliderComponent implements OnInit, AfterViewInit, ControlValueAcces
     @ViewChild('endMarkup', { read: ElementRef }) endMarkupRef!: ElementRef<HTMLElement>;
 
     ngOnInit(): void {
-        fromEvent(window, 'resize')
-            .pipe(takeUntilDestroyed(this.destroyRef))
-            .subscribe(() => {
-                this.cdr.detectChanges();
-                this.computeRatio();
-                this.computeMarkupStartPosition();
-                this.computeMarkupEndPosition();
-            });
-    }
-
-    ngAfterViewInit(): void {
         this.computeStep();
-        this.computeRatio();
-        this.computeMarkupStartPosition();
-        this.computeMarkupEndPosition();
-        this.cdr.detectChanges();
+        new ResizeObserver(() => {
+            this.computeRatio();
+            this.computeMarkupStartPosition();
+            this.computeMarkupEndPosition();
+            this.cdr.detectChanges();
+        }).observe(this.elementRef.nativeElement);
     }
 
     private valueInRange(value: number): boolean {
         return this.min <= value && value <= this.max;
-    }
-
-    private getSelfTranslation(value: number, markupPosition: number): string {
-        let selfTranslation;
-        if (value === this.min) selfTranslation = 0;
-        else if (value === this.max) selfTranslation = 100;
-        else selfTranslation = 50;
-
-        return `translateX(calc(${markupPosition}px - ${selfTranslation}%))`;
     }
 
     private computeStep(): void {
@@ -137,8 +114,8 @@ export class SliderComponent implements OnInit, AfterViewInit, ControlValueAcces
 
     private computeRatio(): void {
         const graduation = (this.max - this.min) / this.step;
-        const railWidth = this.rail.nativeElement.getBoundingClientRect().width;
-        this.ratio = parseFloat((railWidth / graduation).toFixed(2));
+        const railWidth = this.rail.nativeElement.getBoundingClientRect().width - this.markupWidth;
+        this.ratio = parseFloat((railWidth / graduation).toFixed(3));
     }
 
     private computeMarkupStartPosition(): void {
@@ -237,17 +214,17 @@ export class SliderComponent implements OnInit, AfterViewInit, ControlValueAcces
     private computeNewValueOnClick(pointerPosition: number): number {
         const railPositionLeft = this.rail.nativeElement.getBoundingClientRect().left;
         const pointerOffsetFromRailEdge = pointerPosition - railPositionLeft;
-        const stepIndex = round(pointerOffsetFromRailEdge / this.ratio);
+        const stepIndex = round((pointerOffsetFromRailEdge - this.markupWidth / 2) / this.ratio);
         return round(stepIndex * this.step, this.stepDigits);
     }
 
     get barLeft(): string {
-        return `${this._markupStartPosition}px`;
+        return `${this.markupStartPosition + this.markupWidth / 2}px`;
     }
 
     get barRight(): string {
         const railWidth = this.rail?.nativeElement.getBoundingClientRect().width || 0;
-        return `${railWidth - this._markupEndPosition}px`;
+        return `${railWidth - this.markupEndPosition - this.markupWidth / 2}px`;
     }
 
     registerOnChange(onChange: (value: [number, number]) => void): void {

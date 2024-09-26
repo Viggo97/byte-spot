@@ -18,7 +18,7 @@
                        [bsaTooltip]="start.toString()"
                        #startMarkup
                        [ratio]="ratio"
-                       [style.transform]="markupStartPosition"
+                       [style.left]="markupStartPosition + 'px'"
                        [style.z-index]="overlappingMarkup === SliderMarkup.START ? 1 : 0"
                        (focus)="overlappingMarkup = SliderMarkup.START"
                        (changePosition)="onChangePositionMarkupStart($event)">
@@ -29,7 +29,7 @@
                        [bsaTooltip]="end.toString()"
                        #endMarkup
                        [ratio]="ratio"
-                       [style.transform]="markupEndPosition"
+                       [style.left]="markupEndPosition + 'px'"
                        [style.z-index]="overlappingMarkup === SliderMarkup.END ? 1 : 0"
                        (focus)="overlappingMarkup = SliderMarkup.END"
                        (changePosition)="onChangePositionMarkupEnd($event)">
