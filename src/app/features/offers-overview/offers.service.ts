@@ -164,11 +164,11 @@ export class OffersService {
     }
 
     getCities(): Observable<CoreValue[]> {
-        return of(this.mockCities).pipe(delay(100));
+        return of(this.mockCities).pipe(delay(3000));
     }
 
     getTechnologies(): Observable<CoreValue[]> {
-        return of(this.mockTechnologies).pipe(delay(100));
+        return of(this.mockTechnologies).pipe(delay(3000));
     }
 
     private http = inject(HttpClient);
@@ -192,4 +192,9 @@ export class OffersService {
         return this.http.get<OfferPost[]>(url)
             .pipe(shareReplay(1));
     }
+
+    // getSearchSuggestions(): Observable<any> {
+    //     const url = `${this.URL}/search`;
+    //     return this.http.get(url);
+    // }
 }
