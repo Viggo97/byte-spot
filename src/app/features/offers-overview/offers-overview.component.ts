@@ -24,7 +24,7 @@ import { OfferListComponent } from './offer-list/offer-list.component';
 export class OffersOverviewComponent {
     private breakpointObserver = inject(BreakpointObserver);
 
-    compactMode!: boolean;
+    compactMode = window.innerWidth < 960;
 
     constructor() {
         this.breakpointObserver.observe('(min-width: 960px)').subscribe((state) => {
