@@ -7,7 +7,9 @@
 <div class="content">
     <bsa-offer-search [compactMode]="compactMode"></bsa-offer-search>
     <div class="options-bar">
-        <bsa-offer-settings></bsa-offer-settings>
+        <bsa-offer-settings (sortChange)="onSortChange($event)">
+        </bsa-offer-settings>
+
         @if (compactMode) {
             <bsa-offer-filters [compactMode]="compactMode"></bsa-offer-filters>
         }

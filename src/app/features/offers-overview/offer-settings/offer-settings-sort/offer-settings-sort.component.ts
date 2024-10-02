@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Output, inject, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BreakpointObserver } from '@angular/cdk/layout';
@@ -6,10 +6,10 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { SelectComponent } from '@shared';
 import { TranslateService } from '@core';
 
-import { SortType } from './offer-sort.enum';
+import { OfferSort } from '../../enums/offer-sort.enum';
 
 type SortOption = {
-    key: string;
+    key: OfferSort;
     label: string
 };
 
@@ -27,19 +27,21 @@ export class OfferSettingsSortComponent {
     private translateService = inject(TranslateService);
     private breakpointObserver = inject(BreakpointObserver);
 
+    @Output() sortChange = new EventEmitter<OfferSort>();
+
     sortDropdownWidth: 'auto' | undefined;
     sort: SortOption;
     sortOptions: SortOption[] = [
         {
-            key: SortType.NEWEST,
+            key: OfferSort.NEWEST,
             label: this.translateService.translate('offer.newest'),
         },
         {
-            key: SortType.HIGHEST_SALARY,
+            key: OfferSort.HIGHEST_SALARY,
             label: this.translateService.translate('offer.highestSalary'),
         },
         {
-            key: SortType.LOWEST_SALARY,
+            key: OfferSort.LOWEST_SALARY,
             label: this.translateService.translate('offer.lowestSalary'),
         },
     ];
@@ -52,5 +54,9 @@ export class OfferSettingsSortComponent {
             .subscribe((state) => {
                 this.sortDropdownWidth = state.matches ? 'auto' : undefined;
             });
+    }
+
+    onSortChange(sortOption: SortOption): void {
+        this.sortChange.emit(sortOption.key);
     }
 }
