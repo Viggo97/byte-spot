@@ -7,14 +7,16 @@
 <div class="content">
     <bsa-offer-search [compactMode]="compactMode"></bsa-offer-search>
     <div class="options-bar">
-        <bsa-offer-settings (sortChange)="onSortChange($event)">
+        <bsa-offer-settings
+            [sort]="sort"
+            (sortChange)="onSortChange($event)">
         </bsa-offer-settings>
 
         @if (compactMode) {
             <bsa-offer-filters [compactMode]="compactMode"></bsa-offer-filters>
         }
     </div>
-    <bsa-offer-list></bsa-offer-list>
+    <bsa-offer-list [offers$]="offers$"></bsa-offer-list>
     <bsa-pagination
         [total]="100"
         (pageChange)="onPageChange($event)">

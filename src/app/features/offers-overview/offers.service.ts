@@ -2,8 +2,9 @@ import { inject, Injectable } from '@angular/core';
 import { delay, Observable, of, shareReplay } from 'rxjs';
 
 import { CoreValue } from '@core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { OfferPost } from '@app/features/offers-overview/interfaces/offer-post.interface';
+import { OfferSort } from '@app/features/offers-overview/enums/offer-sort.enum';
 import { OfferSearchSuggestionsGroup } from './offer-search/offer-search-suggestions/model/offer-search-suggestion-group.model';
 import { OfferSearchSuggestionCategory } from './offer-search/offer-search-suggestions/model/offer-search-suggestion-category.enum';
 
@@ -187,10 +188,12 @@ export class OffersService {
             .pipe(shareReplay(1));
     }
 
-    getOffers(): Observable<OfferPost[]> {
+    getOffers(sort: OfferSort): Observable<OfferPost[]> {
         const url = `${this.URL}/offers`;
-        return this.http.get<OfferPost[]>(url)
-            .pipe(shareReplay(1));
+        const params = new HttpParams()
+            .set('sort', sort);
+
+        return this.http.get<OfferPost[]>(url, { params });
     }
 
     // getSearchSuggestions(): Observable<any> {

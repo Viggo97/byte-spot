@@ -1,21 +1,20 @@
-import { Component, inject } from '@angular/core';
-
+import { Component, Input } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { OffersService } from '../offers.service';
+import { Observable } from 'rxjs';
+
+import { OfferPost } from '../interfaces/offer-post.interface';
 import { OfferListItemComponent } from './offer-list-item/offer-list-item.component';
 
 @Component({
     selector: 'bsa-offer-list',
     standalone: true,
     imports: [
-        OfferListItemComponent,
         AsyncPipe,
+        OfferListItemComponent,
     ],
     templateUrl: './offer-list.component.html',
     styleUrl: './offer-list.component.scss',
 })
 export class OfferListComponent {
-    private offersService = inject(OffersService);
-
-    offers$ = this.offersService.getOffers();
+    @Input({ required: true }) offers$!: Observable<OfferPost[]>;
 }
