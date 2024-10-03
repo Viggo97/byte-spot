@@ -1,4 +1,4 @@
-import { Component, Output, inject, EventEmitter } from '@angular/core';
+import { Component, Output, inject, EventEmitter, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BreakpointObserver } from '@angular/cdk/layout';
@@ -27,10 +27,11 @@ export class OfferSettingsSortComponent {
     private translateService = inject(TranslateService);
     private breakpointObserver = inject(BreakpointObserver);
 
+    @Input() sort?: OfferSort;
     @Output() sortChange = new EventEmitter<OfferSort>();
 
     sortDropdownWidth: 'auto' | undefined;
-    sort: SortOption;
+    sortOption: SortOption;
     sortOptions: SortOption[] = [
         {
             key: OfferSort.NEWEST,
@@ -47,7 +48,7 @@ export class OfferSettingsSortComponent {
     ];
 
     constructor() {
-        [this.sort] = this.sortOptions;
+        this.sortOption = this.sortOptions.find((option) => option.key === this.sort) || this.sortOptions[0];
         this.breakpointObserver
             .observe('(min-width: 600px)')
             .pipe(takeUntilDestroyed())

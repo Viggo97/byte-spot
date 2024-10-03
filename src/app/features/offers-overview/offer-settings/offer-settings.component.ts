@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { TranslatePipe } from '@core';
 import { NumberFormatterPipe } from '@shared';
@@ -19,6 +19,7 @@ import { OfferSort } from '../enums/offer-sort.enum';
     styleUrl: './offer-settings.component.scss',
 })
 export class OfferSettingsComponent {
+    @Input() sort?: OfferSort;
     @Output() sortChange = new EventEmitter<OfferSort>();
 
     onSortChange(sortType: OfferSort): void {
