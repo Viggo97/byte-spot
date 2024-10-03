@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -8,21 +8,27 @@ import { FormsModule } from '@angular/forms';
     templateUrl: './pagination.component.html',
     styleUrl: './pagination.component.scss',
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent implements OnChanges {
     @Input({ required: true }) total!: number;
-    @Input() perPage = 20;
-
+    @Input({ required: true }) limit!: number;
     @Input() set currentPage(value: number) {
         this.page = value;
     }
+    @Input() disabled = false;
 
     @Output() pageChange = new EventEmitter<number>();
 
     page = 1;
     pages = 1;
 
-    ngOnInit(): void {
-        this.pages = this.total / this.perPage;
+    ngOnChanges(): void {
+        if (this.total && this.limit) {
+            this.computePages();
+        }
+    }
+
+    private computePages(): void {
+        this.pages = Math.ceil(this.total / this.limit);
     }
 
     onInputBlur(): void {
