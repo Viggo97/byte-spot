@@ -3,8 +3,9 @@ import { delay, Observable, of, shareReplay } from 'rxjs';
 
 import { CoreValue } from '@core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { OfferPost } from '@app/features/offers-overview/interfaces/offer-post.interface';
 import { OfferSort } from '@app/features/offers-overview/enums/offer-sort.enum';
+import { PaginationParams } from '@app/features/offers-overview/types/pagination-params';
+import { OfferPostList } from '@app/features/offers-overview/interfaces/offer-post-list.interface';
 import { OfferSearchSuggestionsGroup } from './offer-search/offer-search-suggestions/model/offer-search-suggestion-group.model';
 import { OfferSearchSuggestionCategory } from './offer-search/offer-search-suggestions/model/offer-search-suggestion-category.enum';
 
@@ -188,12 +189,14 @@ export class OffersService {
             .pipe(shareReplay(1));
     }
 
-    getOffers(sort: OfferSort): Observable<OfferPost[]> {
+    getOffers(sort: OfferSort, pagination: PaginationParams): Observable<OfferPostList> {
         const url = `${this.URL}/offers`;
         const params = new HttpParams()
-            .set('sort', sort);
+            .set('sort', sort)
+            .set('page', pagination.page)
+            .set('limit', pagination.limit);
 
-        return this.http.get<OfferPost[]>(url, { params });
+        return this.http.get<OfferPostList>(url, { params });
     }
 
     // getSearchSuggestions(): Observable<any> {

@@ -1,9 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { BehaviorSubject, Observable, switchMap } from 'rxjs';
+import { BehaviorSubject, map, Observable, switchMap, tap } from 'rxjs';
 
 import { PaginationComponent } from '@shared';
 
+import { PaginationParams } from '@app/features/offers-overview/types/pagination-params';
 import { OffersService } from './offers.service';
 import { OfferFiltersComponent } from './offer-filters/offer-filters.component';
 import { OfferSearchComponent } from './offer-search/offer-search.component';
@@ -34,6 +35,11 @@ export class OffersOverviewComponent implements OnInit {
     offersParams$ = new BehaviorSubject<void>(undefined);
     offers$!: Observable<OfferPost[]>;
     sort: OfferSort = OfferSort.NEWEST;
+    pagination: PaginationParams = {
+        limit: 5,
+        page: 1,
+    };
+    total = 0;
 
     constructor() {
         this.breakpointObserver.observe('(min-width: 960px)').subscribe((state) => {
@@ -44,7 +50,11 @@ export class OffersOverviewComponent implements OnInit {
     ngOnInit(): void {
         this.offers$ = this.offersParams$.asObservable()
             .pipe(
-                switchMap(() => this.offersService.getOffers(this.sort)),
+                switchMap(() => this.offersService.getOffers(this.sort, this.pagination)),
+                tap((offerList) => {
+                    this.total = offerList.total;
+                }),
+                map((offerList) => offerList.offers),
             );
     }
 
@@ -54,6 +64,7 @@ export class OffersOverviewComponent implements OnInit {
     }
 
     onPageChange(page: number): void {
-        console.log(page);
+        this.pagination.page = page;
+        this.offersParams$.next();
     }
 }

@@ -18,7 +18,8 @@
     </div>
     <bsa-offer-list [offers$]="offers$"></bsa-offer-list>
     <bsa-pagination
-        [total]="100"
+        [limit]="pagination.limit"
+        [total]="total"
         (pageChange)="onPageChange($event)">
     </bsa-pagination>
 </div>
