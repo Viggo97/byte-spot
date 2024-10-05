@@ -6,6 +6,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { OfferSort } from '@app/features/offers-overview/enums/offer-sort.enum';
 import { PaginationParams } from '@app/features/offers-overview/types/pagination-params';
 import { OfferPostList } from '@app/features/offers-overview/interfaces/offer-post-list.interface';
+import { OfferSearchSuggestion } from '@app/features/offers-overview/interfaces/offer-search-suggestion.interface';
 import { OfferSearchSuggestionsGroup } from './offer-search/offer-search-suggestions/model/offer-search-suggestion-group.model';
 import { OfferSearchSuggestionCategory } from './offer-search/offer-search-suggestions/model/offer-search-suggestion-category.enum';
 
@@ -199,8 +200,10 @@ export class OffersService {
         return this.http.get<OfferPostList>(url, { params });
     }
 
-    // getSearchSuggestions(): Observable<any> {
-    //     const url = `${this.URL}/search`;
-    //     return this.http.get(url);
-    // }
+    getSearchSuggestions2(searchTerm: string): Observable<OfferSearchSuggestion[]> {
+        const url = `${this.URL}/search`;
+        const params = new HttpParams()
+            .set('search', searchTerm);
+        return this.http.get<OfferSearchSuggestion[]>(url);
+    }
 }
