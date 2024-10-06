@@ -125,8 +125,11 @@ export class OffersService {
         const params = new HttpParams()
             .set('sort', sort)
             .set('page', pagination.page)
-            .set('limit', pagination.limit)
-            .set('search', searchTerm);
+            .set('limit', pagination.limit);
+
+        if (searchTerm) {
+            params.set('search', searchTerm);
+        }
 
         return this.http.get<OfferPostList>(url, { params });
     }
