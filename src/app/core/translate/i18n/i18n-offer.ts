@@ -121,4 +121,8 @@ export const i18nOffer: { [key: string] : I18nLanguageCode } = {
         en: 'Companies',
         pl: 'Firmy',
     },
+    keyword: {
+        en: 'Keyword',
+        pl: 'Słowo klucz',
+    },
 };

@@ -24,10 +24,6 @@ export class OfferSearchSuggestionsComponent {
 
     @ViewChild(DropdownComponent) dropdownRef!: DropdownComponent;
 
-    ngOnInit() {
-        console.log(this.suggestions);
-    }
-
     onSelectOption(item: string): void {
         this.selectSuggestion.emit(item);
     }

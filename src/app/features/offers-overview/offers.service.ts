@@ -1,11 +1,12 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { delay, Observable, of, shareReplay } from 'rxjs';
+import { delay, map, Observable, of, shareReplay } from 'rxjs';
 
 import { CoreValue } from '@core';
 import { OfferSort } from '@app/features/offers-overview/enums/offer-sort.enum';
 import { PaginationParams } from '@app/features/offers-overview/types/pagination-params';
 import { OfferPostList } from '@app/features/offers-overview/interfaces/offer-post-list.interface';
+import { OfferSearchSuggestionCategory } from '@app/features/offers-overview/offer-search/offer-search-suggestion-category.enum';
 import { OfferSearchSuggestions } from './offer-search/offer-search-suggestions.interface';
 
 @Injectable({ providedIn: 'root' })
@@ -133,6 +134,14 @@ export class OffersService {
         const url = `${this.URL}/offers/suggestions`;
         const params = new HttpParams()
             .set('search', searchTerm);
-        return this.http.get<OfferSearchSuggestions[]>(url);
+        return this.http.get<OfferSearchSuggestions[]>(url, { params })
+            .pipe(
+                map((suggestions) => {
+                    const notEmptySuggestions = suggestions.filter((suggestion) => suggestion.results.length > 0);
+                    return notEmptySuggestions.length > 0
+                        ? notEmptySuggestions
+                        : [{ category: OfferSearchSuggestionCategory.KEYWORD, results: [searchTerm] }];
+                }),
+            );
     }
 }
