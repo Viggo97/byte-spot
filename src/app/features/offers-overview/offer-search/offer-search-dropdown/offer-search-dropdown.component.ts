@@ -7,7 +7,7 @@ import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { TranslatePipe } from '@core';
 import { ResizeObserverDirective, DropdownComponent, Keycodes } from '@shared';
 
-import { OfferSearchSuggestionsGroup } from '../offer-search-suggestions/model/offer-search-suggestion-group.model';
+import { OfferSearchSuggestions } from '../offer-search-suggestions.interface';
 import { OfferSearchSuggestionsComponent } from '../offer-search-suggestions/offer-search-suggestions.component';
 
 @Component({
@@ -27,13 +27,13 @@ import { OfferSearchSuggestionsComponent } from '../offer-search-suggestions/off
 })
 export class OfferSearchDropdownComponent implements OnInit {
     @Input({ required: true }) form!: FormControl<string>;
-    @Input({ required: true }) suggestions$!: Observable<OfferSearchSuggestionsGroup[]>;
+    @Input({ required: true }) suggestions$!: Observable<OfferSearchSuggestions[]>;
 
     @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
     @ViewChild(OfferSearchSuggestionsComponent) suggestionsComp!: OfferSearchSuggestionsComponent;
     @ViewChild(OfferSearchSuggestionsComponent, { read: ElementRef }) suggestionsRef!: ElementRef<HTMLElement>;
 
-    suggestions: OfferSearchSuggestionsGroup[] = [];
+    suggestions: OfferSearchSuggestions[] = [];
     dropdownOpen = false;
     dropdownWidth = '';
 

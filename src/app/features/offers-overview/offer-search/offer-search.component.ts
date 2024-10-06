@@ -4,9 +4,9 @@ import { BehaviorSubject, debounceTime, distinctUntilChanged, iif, Observable, o
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { OffersService } from '@app/features/offers-overview/offers.service';
+import { OfferSearchSuggestions } from './offer-search-suggestions.interface';
 import { OfferSearchDrawerComponent } from './offer-search-drawer/offer-search-drawer.component';
 import { OfferSearchDropdownComponent } from './offer-search-dropdown/offer-search-dropdown.component';
-import { OfferSearchSuggestionsGroup } from './offer-search-suggestions/model/offer-search-suggestion-group.model';
 
 @Component({
     selector: 'bsa-offer-search',
@@ -23,7 +23,7 @@ export class OfferSearchComponent implements OnInit {
     @Input({ required: true }) compactMode!: boolean;
 
     form = new FormControl<string>('', { nonNullable: true });
-    suggestionsSource = new BehaviorSubject<OfferSearchSuggestionsGroup[]>([]);
+    suggestionsSource = new BehaviorSubject<OfferSearchSuggestions[]>([]);
     suggestions$ = this.suggestionsSource.asObservable();
 
     constructor(
@@ -36,7 +36,7 @@ export class OfferSearchComponent implements OnInit {
             .pipe(
                 debounceTime(150),
                 distinctUntilChanged(),
-                switchMap((searchTerm) => iif<OfferSearchSuggestionsGroup[], OfferSearchSuggestionsGroup[]>(
+                switchMap((searchTerm) => iif<OfferSearchSuggestions[], OfferSearchSuggestions[]>(
                     () => searchTerm.length > 0,
                     this.fetchSuggestions(searchTerm),
                     of([]),
@@ -48,7 +48,7 @@ export class OfferSearchComponent implements OnInit {
             ).subscribe();
     }
 
-    private fetchSuggestions(searchTerm: string): Observable<OfferSearchSuggestionsGroup[]> {
+    private fetchSuggestions(searchTerm: string): Observable<OfferSearchSuggestions[]> {
         return this.offersService.getSearchSuggestions(searchTerm);
     }
 }

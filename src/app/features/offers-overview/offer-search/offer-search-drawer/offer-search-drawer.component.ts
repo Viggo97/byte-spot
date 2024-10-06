@@ -7,7 +7,7 @@ import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay } from '@angular/cdk/ove
 import { TranslatePipe } from '@core';
 import { DrawerComponent, Keycodes } from '@shared';
 
-import { OfferSearchSuggestionsGroup } from '../offer-search-suggestions/model/offer-search-suggestion-group.model';
+import { OfferSearchSuggestions } from '../offer-search-suggestions.interface';
 import { OfferSearchSuggestionsComponent } from '../offer-search-suggestions/offer-search-suggestions.component';
 
 @Component({
@@ -26,7 +26,7 @@ import { OfferSearchSuggestionsComponent } from '../offer-search-suggestions/off
 })
 export class OfferSearchDrawerComponent implements OnInit {
     @Input({ required: true }) form!: FormControl;
-    @Input({ required: true }) suggestions$!: Observable<OfferSearchSuggestionsGroup[]>;
+    @Input({ required: true }) suggestions$!: Observable<OfferSearchSuggestions[]>;
 
     @ViewChild(DrawerComponent) drawer!: DrawerComponent;
     @ViewChild('drawerInput') drawerInput!: ElementRef<HTMLInputElement>;
@@ -35,7 +35,7 @@ export class OfferSearchDrawerComponent implements OnInit {
     @ViewChild(OfferSearchSuggestionsComponent, { read: ElementRef }) suggestionsRef!: ElementRef<HTMLElement>;
 
     readonly scrollStrategy = this.overlay.scrollStrategies.block();
-    suggestions: OfferSearchSuggestionsGroup[] = [];
+    suggestions: OfferSearchSuggestions[] = [];
     drawerOpen = false;
     dropdownOpen = false;
 

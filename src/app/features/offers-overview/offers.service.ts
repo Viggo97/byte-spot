@@ -1,59 +1,15 @@
 import { inject, Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { delay, Observable, of, shareReplay } from 'rxjs';
 
 import { CoreValue } from '@core';
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { OfferSort } from '@app/features/offers-overview/enums/offer-sort.enum';
 import { PaginationParams } from '@app/features/offers-overview/types/pagination-params';
 import { OfferPostList } from '@app/features/offers-overview/interfaces/offer-post-list.interface';
-import { OfferSearchSuggestion } from '@app/features/offers-overview/interfaces/offer-search-suggestion.interface';
-import { OfferSearchSuggestionsGroup } from './offer-search/offer-search-suggestions/model/offer-search-suggestion-group.model';
-import { OfferSearchSuggestionCategory } from './offer-search/offer-search-suggestions/model/offer-search-suggestion-category.enum';
+import { OfferSearchSuggestions } from './offer-search/offer-search-suggestions.interface';
 
 @Injectable({ providedIn: 'root' })
 export class OffersService {
-    private mockSuggestions: OfferSearchSuggestionsGroup[] = [
-        {
-            category: OfferSearchSuggestionCategory.COMPANY,
-            suggestions: [
-                'Apple',
-                'Google',
-                'Microsoft',
-                'Oracle',
-            ],
-        },
-        {
-            category: OfferSearchSuggestionCategory.LOCATION,
-            suggestions: [
-                'Warsaw',
-                'Cracow',
-                'London',
-            ],
-        },
-        {
-            category: OfferSearchSuggestionCategory.SKILL,
-            suggestions: [
-                'Angular',
-                'React',
-                'Vue',
-                'Java',
-                'JavaScript',
-                'TypeScript',
-                'C',
-                'C++',
-                'C#',
-                'Rust',
-            ],
-        },
-        {
-            category: OfferSearchSuggestionCategory.POSITION,
-            suggestions: [
-                'Java Backend Developer',
-                '.NET Backend Developer',
-                'Angular Frontend Developer',
-            ],
-        },
-    ];
     private mockCities: CoreValue[] = [
         {
             key: 'warsaw',
@@ -139,33 +95,6 @@ export class OffersService {
         },
     ];
 
-    getSearchSuggestions(searchTerm: string | null): Observable<OfferSearchSuggestionsGroup[]> {
-        if (!searchTerm) {
-            return of(this.mockSuggestions);
-        }
-        const suggestions: OfferSearchSuggestionsGroup[] = [];
-
-        this.mockSuggestions.forEach((group) => {
-            const filteredSuggestions = group.suggestions
-                .filter((suggestion) => suggestion.toLowerCase().includes(searchTerm.toLowerCase()));
-            if (filteredSuggestions.length > 0) {
-                suggestions.push({
-                    category: group.category,
-                    suggestions: filteredSuggestions,
-                });
-            }
-        });
-
-        if (!suggestions.length) {
-            suggestions.push({
-                category: OfferSearchSuggestionCategory.KEYWORD,
-                suggestions: [searchTerm],
-            });
-        }
-
-        return of(suggestions).pipe(delay(100));
-    }
-
     getCities(): Observable<CoreValue[]> {
         return of(this.mockCities).pipe(delay(3000));
     }
@@ -200,10 +129,10 @@ export class OffersService {
         return this.http.get<OfferPostList>(url, { params });
     }
 
-    getSearchSuggestions2(searchTerm: string): Observable<OfferSearchSuggestion[]> {
-        const url = `${this.URL}/search`;
+    getSearchSuggestions(searchTerm: string): Observable<OfferSearchSuggestions[]> {
+        const url = `${this.URL}/offers/suggestions`;
         const params = new HttpParams()
             .set('search', searchTerm);
-        return this.http.get<OfferSearchSuggestion[]>(url);
+        return this.http.get<OfferSearchSuggestions[]>(url);
     }
 }

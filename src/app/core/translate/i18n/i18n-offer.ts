@@ -113,4 +113,12 @@ export const i18nOffer: { [key: string] : I18nLanguageCode } = {
         en: 'New',
         pl: 'Nowa',
     },
+    locations: {
+        en: 'Locations',
+        pl: 'Lokalizacje',
+    },
+    companies: {
+        en: 'Companies',
+        pl: 'Firmy',
+    },
 };

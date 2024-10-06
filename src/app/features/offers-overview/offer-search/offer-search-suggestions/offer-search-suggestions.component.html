@@ -1,7 +1,7 @@
 <bsa-dropdown>
     @for (suggestionsGroup of suggestions; track suggestionsGroup.category; let last = $last) {
-        <bsa-dropdown-group [title]="suggestionsGroup.category">
-            @for (suggestion of suggestionsGroup.suggestions; track suggestion) {
+        <bsa-dropdown-group title="{{('offer.' + suggestionsGroup.category) | translate}}">
+            @for (suggestion of suggestionsGroup.results; track suggestion) {
                 <bsa-dropdown-option [value]="suggestion"
                                      (selectOption)="onSelectOption($event)">
                     {{ suggestion }}
