@@ -8,7 +8,11 @@
            (elementResize)="onInputResize($event)">
 </div>
 
-<button class="button-color-green">{{ 'global.search' | translate }}</button>
+<button
+    class="button-color-green"
+    (click)="onSearch()">
+    {{ 'global.search' | translate }}
+</button>
 
 <ng-template cdkConnectedOverlay
              [cdkConnectedOverlayOrigin]="searchInput"

@@ -1,4 +1,4 @@
-import { Component, DestroyRef, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, DestroyRef, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Observable, skip } from 'rxjs';
@@ -29,6 +29,8 @@ export class OfferSearchDropdownComponent implements OnInit {
     @Input({ required: true }) form!: FormControl<string>;
     @Input({ required: true }) suggestions$!: Observable<OfferSearchSuggestions[]>;
 
+    @Output() search = new EventEmitter<void>();
+
     @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
     @ViewChild(OfferSearchSuggestionsComponent) suggestionsComp!: OfferSearchSuggestionsComponent;
     @ViewChild(OfferSearchSuggestionsComponent, { read: ElementRef }) suggestionsRef!: ElementRef<HTMLElement>;
@@ -58,9 +60,14 @@ export class OfferSearchDropdownComponent implements OnInit {
             });
     }
 
+    onSearch(): void {
+        this.search.emit();
+    }
+
     onSelectSuggestion(suggestion: string): void {
         this.searchInput.nativeElement.focus();
         this.form.setValue(suggestion, { emitEvent: false });
+        this.search.emit();
     }
 
     openDropdown(): void {

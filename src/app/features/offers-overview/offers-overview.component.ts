@@ -40,6 +40,7 @@ export class OffersOverviewComponent implements OnInit {
         page: 1,
     };
     total = 0;
+    searchTerm = '';
 
     constructor() {
         this.breakpointObserver.observe('(min-width: 960px)').subscribe((state) => {
@@ -50,7 +51,7 @@ export class OffersOverviewComponent implements OnInit {
     ngOnInit(): void {
         this.offers$ = this.offersParams$.asObservable()
             .pipe(
-                switchMap(() => this.offersService.getOffers(this.sort, this.pagination)),
+                switchMap(() => this.offersService.getOffers(this.sort, this.pagination, this.searchTerm)),
                 tap((offerList) => {
                     this.total = offerList.total;
                 }),
@@ -65,6 +66,11 @@ export class OffersOverviewComponent implements OnInit {
 
     onPageChange(page: number): void {
         this.pagination.page = page;
+        this.offersParams$.next();
+    }
+
+    onSearch(searchTerm: string): void {
+        this.searchTerm = searchTerm;
         this.offersParams$.next();
     }
 }

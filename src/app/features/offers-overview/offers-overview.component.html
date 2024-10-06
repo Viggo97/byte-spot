@@ -5,7 +5,10 @@
 }
 
 <div class="content">
-    <bsa-offer-search [compactMode]="compactMode"></bsa-offer-search>
+    <bsa-offer-search
+        [compactMode]="compactMode"
+        (search)="onSearch($event)">
+    </bsa-offer-search>
     <div class="options-bar">
         <bsa-offer-settings
             [sort]="sort"

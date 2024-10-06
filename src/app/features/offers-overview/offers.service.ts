@@ -120,12 +120,13 @@ export class OffersService {
             .pipe(shareReplay(1));
     }
 
-    getOffers(sort: OfferSort, pagination: PaginationParams): Observable<OfferPostList> {
+    getOffers(sort: OfferSort, pagination: PaginationParams, searchTerm: string): Observable<OfferPostList> {
         const url = `${this.URL}/offers`;
         const params = new HttpParams()
             .set('sort', sort)
             .set('page', pagination.page)
-            .set('limit', pagination.limit);
+            .set('limit', pagination.limit)
+            .set('search', searchTerm);
 
         return this.http.get<OfferPostList>(url, { params });
     }
