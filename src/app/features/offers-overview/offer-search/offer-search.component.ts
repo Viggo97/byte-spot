@@ -1,6 +1,6 @@
 import { Component, DestroyRef, Input, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, Observable, skip, startWith, Subject, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, debounceTime, distinctUntilChanged, iif, Observable, of, switchMap, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { OffersService } from '@app/features/offers-overview/offers.service';
@@ -23,8 +23,8 @@ export class OfferSearchComponent implements OnInit {
     @Input({ required: true }) compactMode!: boolean;
 
     form = new FormControl<string>('', { nonNullable: true });
-    suggestions: OfferSearchSuggestionsGroup[] = [];
-    suggestionsLoaded$ = new Subject<void>();
+    suggestionsSource = new BehaviorSubject<OfferSearchSuggestionsGroup[]>([]);
+    suggestions$ = this.suggestionsSource.asObservable();
 
     constructor(
         private destroyRef: DestroyRef,
@@ -34,16 +34,15 @@ export class OfferSearchComponent implements OnInit {
     ngOnInit(): void {
         this.form.valueChanges
             .pipe(
-                startWith(''),
                 debounceTime(150),
                 distinctUntilChanged(),
-                switchMap((searchTerm) => this.fetchSuggestions(searchTerm)),
+                switchMap((searchTerm) => iif<OfferSearchSuggestionsGroup[], OfferSearchSuggestionsGroup[]>(
+                    () => searchTerm.length > 0,
+                    this.fetchSuggestions(searchTerm),
+                    of([]),
+                )),
                 tap((suggestions) => {
-                    this.suggestions = suggestions;
-                }),
-                skip(1),
-                tap(() => {
-                    this.suggestionsLoaded$.next();
+                    this.suggestionsSource.next(suggestions);
                 }),
                 takeUntilDestroyed(this.destroyRef),
             ).subscribe();
@@ -51,13 +50,5 @@ export class OfferSearchComponent implements OnInit {
 
     private fetchSuggestions(searchTerm: string): Observable<OfferSearchSuggestionsGroup[]> {
         return this.offersService.getSearchSuggestions(searchTerm);
-    }
-
-    onSelectSuggestion(searchTerm: string): void {
-        this.form.setValue(searchTerm, { emitEvent: false });
-        this.fetchSuggestions(searchTerm)
-            .subscribe((suggestions) => {
-                this.suggestions = suggestions;
-            });
     }
 }

@@ -1,6 +1,7 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { Component, DestroyRef, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Observable, skip } from 'rxjs';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 
 import { TranslatePipe } from '@core';
@@ -25,33 +26,40 @@ import { OfferSearchSuggestionsComponent } from '../offer-search-suggestions/off
     styleUrl: './offer-search-dropdown.component.scss',
 })
 export class OfferSearchDropdownComponent implements OnInit {
-    @Input({ required: true }) form!: FormControl;
-    @Input({ required: true }) suggestions!: OfferSearchSuggestionsGroup[];
-    @Input() suggestionsLoaded$!: Subject<void>;
-
-    @Output() selectSuggestion = new EventEmitter<string>();
+    @Input({ required: true }) form!: FormControl<string>;
+    @Input({ required: true }) suggestions$!: Observable<OfferSearchSuggestionsGroup[]>;
 
     @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
     @ViewChild(OfferSearchSuggestionsComponent) suggestionsComp!: OfferSearchSuggestionsComponent;
     @ViewChild(OfferSearchSuggestionsComponent, { read: ElementRef }) suggestionsRef!: ElementRef<HTMLElement>;
 
+    suggestions: OfferSearchSuggestionsGroup[] = [];
     dropdownOpen = false;
     dropdownWidth = '';
 
-    constructor(private renderer: Renderer2) {}
+    constructor(
+        private renderer: Renderer2,
+        private destroyRef: DestroyRef,
+    ) {}
 
     ngOnInit(): void {
-        this.suggestionsLoaded$.subscribe(() => {
-            this.openDropdown();
-        });
+        this.suggestions$
+            .pipe(
+                skip(1),
+                takeUntilDestroyed(this.destroyRef),
+            )
+            .subscribe((suggestions) => {
+                this.suggestions = suggestions;
+                if (this.suggestions.length) {
+                    this.openDropdown();
+                } else {
+                    this.closeDropdown();
+                }
+            });
     }
 
     onSelectSuggestion(suggestion: string): void {
-        this.selectSuggestion.emit(suggestion);
-    }
-
-    onInputFocus(): void {
-        this.openDropdown();
+        this.form.setValue(suggestion, { emitEvent: false });
     }
 
     openDropdown(): void {
@@ -67,7 +75,7 @@ export class OfferSearchDropdownComponent implements OnInit {
             return;
         }
 
-        this.dropdownOpen = false;
+        this.closeDropdown();
     }
 
     onOverlayKeydown(event: KeyboardEvent): void {
@@ -75,7 +83,7 @@ export class OfferSearchDropdownComponent implements OnInit {
             if (document.activeElement !== this.searchInput.nativeElement) {
                 this.searchInput.nativeElement.focus();
             }
-            this.dropdownOpen = false;
+            this.closeDropdown();
         }
 
         if (event.key === Keycodes.ARROW_DOWN) {
@@ -93,7 +101,8 @@ export class OfferSearchDropdownComponent implements OnInit {
     }
 
     get maxDropdownHeight(): string {
-        return `${window.innerHeight - this.searchInput.nativeElement.getBoundingClientRect().bottom - 16}px`;
+        const inputBottomOffset = this.searchInput?.nativeElement.getBoundingClientRect().bottom || 0;
+        return `${window.innerHeight - inputBottomOffset - 16}px`;
     }
 
     onInputResize(entry: ResizeObserverEntry): void {

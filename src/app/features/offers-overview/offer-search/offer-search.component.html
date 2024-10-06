@@ -1,13 +1,11 @@
 @if (compactMode) {
-    <bsa-offer-search-drawer [form]="form"
-                             [suggestions]="suggestions"
-                             [suggestionsLoaded$]="suggestionsLoaded$"
-                             (selectSuggestion)="onSelectSuggestion($event)">
+    <bsa-offer-search-drawer
+        [form]="form"
+        [suggestions$]="suggestions$">
     </bsa-offer-search-drawer>
 } @else {
-    <bsa-offer-search-dropdown [form]="form"
-                               [suggestions]="suggestions"
-                               [suggestionsLoaded$]="suggestionsLoaded$"
-                               (selectSuggestion)="onSelectSuggestion($event)">
+    <bsa-offer-search-dropdown
+        [form]="form"
+        [suggestions$]="suggestions$">
     </bsa-offer-search-dropdown>
 }

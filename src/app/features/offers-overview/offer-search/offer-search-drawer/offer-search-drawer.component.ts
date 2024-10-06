@@ -1,6 +1,7 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, DestroyRef, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Observable, skip } from 'rxjs';
 import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay } from '@angular/cdk/overlay';
 
 import { TranslatePipe } from '@core';
@@ -25,10 +26,7 @@ import { OfferSearchSuggestionsComponent } from '../offer-search-suggestions/off
 })
 export class OfferSearchDrawerComponent implements OnInit {
     @Input({ required: true }) form!: FormControl;
-    @Input({ required: true }) suggestions!: OfferSearchSuggestionsGroup[];
-    @Input() suggestionsLoaded$!: Subject<void>;
-
-    @Output() selectSuggestion = new EventEmitter<string>();
+    @Input({ required: true }) suggestions$!: Observable<OfferSearchSuggestionsGroup[]>;
 
     @ViewChild(DrawerComponent) drawer!: DrawerComponent;
     @ViewChild('drawerInput') drawerInput!: ElementRef<HTMLInputElement>;
@@ -37,19 +35,33 @@ export class OfferSearchDrawerComponent implements OnInit {
     @ViewChild(OfferSearchSuggestionsComponent, { read: ElementRef }) suggestionsRef!: ElementRef<HTMLElement>;
 
     readonly scrollStrategy = this.overlay.scrollStrategies.block();
+    suggestions: OfferSearchSuggestionsGroup[] = [];
     drawerOpen = false;
-    dropdownOpen = true;
+    dropdownOpen = false;
 
-    constructor(private overlay: Overlay) { }
+    constructor(
+        private overlay: Overlay,
+        private destroyRef: DestroyRef,
+    ) { }
 
     ngOnInit(): void {
-        this.suggestionsLoaded$.subscribe(() => {
-            this.openDropdown();
-        });
+        this.suggestions$
+            .pipe(
+                skip(1),
+                takeUntilDestroyed(this.destroyRef),
+            )
+            .subscribe((suggestions) => {
+                this.suggestions = suggestions;
+                if (this.suggestions.length) {
+                    this.openDropdown();
+                } else {
+                    this.closeDropdown();
+                }
+            });
     }
 
     onSelectSuggestion(suggestion: string): void {
-        this.selectSuggestion.emit(suggestion);
+        this.form.setValue(suggestion, { emitEvent: false });
     }
 
     openDrawer(): void {

@@ -28,8 +28,7 @@
                 <input type="text"
                        #drawerInput
                        cdkOverlayOrigin
-                       [formControl]="form"
-                       (focus)="openDropdown()">
+                       [formControl]="form">
             </div>
             @if (dropdownOpen) {
                 <bsa-offer-search-suggestions [suggestions]="suggestions"
