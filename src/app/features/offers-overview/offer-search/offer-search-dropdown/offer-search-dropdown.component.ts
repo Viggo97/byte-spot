@@ -59,6 +59,7 @@ export class OfferSearchDropdownComponent implements OnInit {
     }
 
     onSelectSuggestion(suggestion: string): void {
+        this.searchInput.nativeElement.focus();
         this.form.setValue(suggestion, { emitEvent: false });
     }
 

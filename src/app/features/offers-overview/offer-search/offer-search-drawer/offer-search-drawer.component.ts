@@ -61,6 +61,7 @@ export class OfferSearchDrawerComponent implements OnInit {
     }
 
     onSelectSuggestion(suggestion: string): void {
+        this.drawerInput.nativeElement.focus();
         this.form.setValue(suggestion, { emitEvent: false });
     }
 
