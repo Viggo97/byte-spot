@@ -14,5 +14,5 @@ import { NumberFormatterPipe } from '@shared';
     styleUrl: './offer-settings-results.component.scss',
 })
 export class OfferSettingsResultsComponent {
-    @Input() offers = 12399999;
+    @Input() offersNumber = 0;
 }

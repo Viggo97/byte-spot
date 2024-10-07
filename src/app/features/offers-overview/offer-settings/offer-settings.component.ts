@@ -20,6 +20,8 @@ import { OfferSort } from '../enums/offer-sort.enum';
 })
 export class OfferSettingsComponent {
     @Input() sort?: OfferSort;
+    @Input() offersNumber = 0;
+
     @Output() sortChange = new EventEmitter<OfferSort>();
 
     onSortChange(sortType: OfferSort): void {

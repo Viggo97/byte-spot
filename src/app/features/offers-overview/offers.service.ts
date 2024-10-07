@@ -122,13 +122,13 @@ export class OffersService {
 
     getOffers(sort: OfferSort, pagination: PaginationParams, searchTerm: string): Observable<OfferPostList> {
         const url = `${this.URL}/offers`;
-        const params = new HttpParams()
+        let params = new HttpParams()
             .set('sort', sort)
             .set('page', pagination.page)
             .set('limit', pagination.limit);
 
         if (searchTerm) {
-            params.set('search', searchTerm);
+            params = params.append('search', searchTerm);
         }
 
         return this.http.get<OfferPostList>(url, { params });
