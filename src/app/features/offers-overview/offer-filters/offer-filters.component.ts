@@ -1,10 +1,11 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { forkJoin } from 'rxjs';
 
 import { TranslatePipe, CoreValue } from '@core';
 import { DrawerComponent } from '@shared';
+import { OfferFilters } from '@app/features/offers-overview/offer-filters/offer-filters.interface';
 import { OffersService } from '../offers.service';
 import { ControlValue } from '../types/control-value.type';
 import { OfferFiltersCompactComponent } from './offer-filters-compact/offer-filters-compact.component';
@@ -31,6 +32,8 @@ export class OfferFiltersComponent implements OnInit {
     private offerService = inject(OffersService);
 
     @Input({ required: true }) compactMode!: boolean;
+
+    @Output() filtersChange = new EventEmitter<any>();
 
     form = this.fb.group({
         salary: [[0, 50000]],
@@ -60,10 +63,22 @@ export class OfferFiltersComponent implements OnInit {
     locations: ControlValue[] = [];
     technologies: ControlValue[] = [];
 
+    filterValues: OfferFilters = {
+        salary: {
+            min: 0,
+            max: 0,
+        },
+        technologies: [],
+        workMode: [],
+        employmentType: [],
+        locations: [],
+        seniority: [],
+    };
+
     ngOnInit(): void {
         this.fetchFilterData();
         this.form.valueChanges.subscribe((v) => {
-            // console.log('value change', v);
+            this.filtersChange.emit();
         });
     }
 
