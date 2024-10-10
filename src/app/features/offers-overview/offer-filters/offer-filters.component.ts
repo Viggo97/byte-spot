@@ -36,22 +36,22 @@ export class OfferFiltersComponent implements OnInit {
     @Output() filtersChange = new EventEmitter<any>();
 
     form = this.fb.group({
-        salary: [[0, 50000]],
+        salary: this.fb.nonNullable.control([0, 50000]),
         technologies: this.fb.array<FormControl<boolean>>([]),
-        workMode: this.fb.group({
+        workMode: this.fb.nonNullable.group({
             onSite: false,
             hybrid: false,
             remote: false,
         }),
         locations: this.fb.array<FormControl<boolean>>([]),
-        employmentType: this.fb.group({
+        employmentType: this.fb.nonNullable.group({
             employmentContract: false,
             b2b: false,
             mandateContract: false,
             specificTaskContract: false,
             internship: false,
         }),
-        seniority: this.fb.group({
+        seniority: this.fb.nonNullable.group({
             intern: false,
             junior: false,
             mid: false,
@@ -78,8 +78,17 @@ export class OfferFiltersComponent implements OnInit {
     ngOnInit(): void {
         this.fetchFilterData();
         this.form.valueChanges.subscribe((v) => {
+            this.mapFormValuesToFilters();
             this.filtersChange.emit();
         });
+    }
+
+    private mapFormValuesToFilters(): void {
+        this.filterValues.technologies = this.technologies.filter((t) => t.control.value).map((t) => t.value);
+        this.filterValues.locations = this.locations.filter((l) => l.control.value).map((l) => l.value);
+        const [min, max] = this.form.controls.salary.getRawValue();
+        this.filterValues.salary.min = min;
+        this.filterValues.salary.max = max;
     }
 
     private fetchFilterData(): void {
