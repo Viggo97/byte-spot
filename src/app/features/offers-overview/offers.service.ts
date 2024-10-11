@@ -7,6 +7,7 @@ import { OfferSort } from '@app/features/offers-overview/enums/offer-sort.enum';
 import { PaginationParams } from '@app/features/offers-overview/types/pagination-params';
 import { OfferPostList } from '@app/features/offers-overview/interfaces/offer-post-list.interface';
 import { OfferSearchSuggestionCategory } from '@app/features/offers-overview/offer-search/offer-search-suggestion-category.enum';
+import { OfferFilters } from '@app/features/offers-overview/offer-filters/offer-filters.model';
 import { OfferSearchSuggestions } from './offer-search/offer-search-suggestions.interface';
 
 @Injectable({ providedIn: 'root' })
@@ -120,18 +121,24 @@ export class OffersService {
             .pipe(shareReplay(1));
     }
 
-    getOffers(sort: OfferSort, pagination: PaginationParams, searchTerm: string): Observable<OfferPostList> {
+    getOffers(
+        sort: OfferSort,
+        pagination: PaginationParams,
+        searchTerm: string,
+        filters: OfferFilters | null,
+    ): Observable<OfferPostList> {
         const url = `${this.URL}/offers`;
         let params = new HttpParams()
             .set('sort', sort)
             .set('page', pagination.page)
             .set('limit', pagination.limit);
+        const body = filters;
 
         if (searchTerm) {
             params = params.append('search', searchTerm);
         }
 
-        return this.http.get<OfferPostList>(url, { params });
+        return this.http.post<OfferPostList>(url, body, { params });
     }
 
     getSearchSuggestions(searchTerm: string): Observable<OfferSearchSuggestions[]> {

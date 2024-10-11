@@ -12,6 +12,7 @@ import { OfferSettingsComponent } from './offer-settings/offer-settings.componen
 import { OfferListComponent } from './offer-list/offer-list.component';
 import { OfferPost } from './interfaces/offer-post.interface';
 import { OfferSort } from './enums/offer-sort.enum';
+import { OfferFilters } from './offer-filters/offer-filters.model';
 
 @Component({
     selector: 'bsa-offers-overview',
@@ -41,6 +42,7 @@ export class OffersOverviewComponent implements OnInit {
     };
     total = 0;
     searchTerm = '';
+    filters: OfferFilters | null = null;
 
     constructor() {
         this.breakpointObserver.observe('(min-width: 960px)').subscribe((state) => {
@@ -51,7 +53,7 @@ export class OffersOverviewComponent implements OnInit {
     ngOnInit(): void {
         this.offers$ = this.offersParams$.asObservable()
             .pipe(
-                switchMap(() => this.offersService.getOffers(this.sort, this.pagination, this.searchTerm)),
+                switchMap(() => this.offersService.getOffers(this.sort, this.pagination, this.searchTerm, this.filters)),
                 tap((offerList) => {
                     this.total = offerList.total;
                 }),
@@ -71,6 +73,11 @@ export class OffersOverviewComponent implements OnInit {
 
     onSearch(searchTerm: string): void {
         this.searchTerm = searchTerm;
+        this.offersParams$.next();
+    }
+
+    onFiltersChange(filters: OfferFilters): void {
+        this.filters = filters;
         this.offersParams$.next();
     }
 }

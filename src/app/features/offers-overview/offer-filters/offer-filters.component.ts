@@ -1,11 +1,11 @@
 import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormControl } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { forkJoin } from 'rxjs';
 
 import { TranslatePipe, CoreValue } from '@core';
 import { DrawerComponent } from '@shared';
-import { OfferFilters } from '@app/features/offers-overview/offer-filters/offer-filters.interface';
+import { OfferFilters } from './offer-filters.model';
 import { OffersService } from '../offers.service';
 import { ControlValue } from '../types/control-value.type';
 import { OfferFiltersCompactComponent } from './offer-filters-compact/offer-filters-compact.component';
@@ -33,7 +33,7 @@ export class OfferFiltersComponent implements OnInit {
 
     @Input({ required: true }) compactMode!: boolean;
 
-    @Output() filtersChange = new EventEmitter<any>();
+    @Output() filtersChange = new EventEmitter<OfferFilters>();
 
     form = this.fb.group({
         salary: this.fb.nonNullable.control([0, 50000]),
@@ -63,32 +63,14 @@ export class OfferFiltersComponent implements OnInit {
     locations: ControlValue[] = [];
     technologies: ControlValue[] = [];
 
-    filterValues: OfferFilters = {
-        salary: {
-            min: 0,
-            max: 0,
-        },
-        technologies: [],
-        workMode: [],
-        employmentType: [],
-        locations: [],
-        seniority: [],
-    };
+    filterValues: OfferFilters | null = null;
 
     ngOnInit(): void {
         this.fetchFilterData();
-        this.form.valueChanges.subscribe((v) => {
+        this.form.valueChanges.subscribe(() => {
             this.mapFormValuesToFilters();
-            this.filtersChange.emit();
+            this.filtersChange.emit(this.filterValues!);
         });
-    }
-
-    private mapFormValuesToFilters(): void {
-        this.filterValues.technologies = this.technologies.filter((t) => t.control.value).map((t) => t.value);
-        this.filterValues.locations = this.locations.filter((l) => l.control.value).map((l) => l.value);
-        const [min, max] = this.form.controls.salary.getRawValue();
-        this.filterValues.salary.min = min;
-        this.filterValues.salary.max = max;
     }
 
     private fetchFilterData(): void {
@@ -123,5 +105,27 @@ export class OfferFiltersComponent implements OnInit {
             });
         });
         return convertedData;
+    }
+
+    private mapFormValuesToFilters(): void {
+        const [min, max] = this.form.controls.salary.getRawValue();
+        const technologies = this.technologies.filter((t) => t.control.value).map((t) => t.value);
+        const locations = this.locations.filter((l) => l.control.value).map((l) => l.value);
+        const workMode = this.convertCheckboxValues(this.form.controls.workMode);
+        const employmentType = this.convertCheckboxValues(this.form.controls.employmentType);
+        const seniority = this.convertCheckboxValues(this.form.controls.seniority);
+        this.filterValues = new OfferFilters(min, max, technologies, workMode, employmentType, locations, seniority);
+    }
+
+    private convertCheckboxValues(control: FormGroup): string[] {
+        const selectedValues: string[] = [];
+        const controlNames = control.value;
+        Object.keys(controlNames).forEach((name) => {
+            const value = control.get(name)?.getRawValue();
+            if (value) {
+                selectedValues.push(name);
+            }
+        });
+        return selectedValues;
     }
 }

@@ -1,6 +1,9 @@
 @if (!compactMode) {
     <div class="panel">
-        <bsa-offer-filters [compactMode]="compactMode"></bsa-offer-filters>
+        <bsa-offer-filters
+            [compactMode]="compactMode"
+            (filtersChange)="onFiltersChange($event)">
+        </bsa-offer-filters>
     </div>
 }
 
@@ -17,7 +20,10 @@
         </bsa-offer-settings>
 
         @if (compactMode) {
-            <bsa-offer-filters [compactMode]="compactMode"></bsa-offer-filters>
+            <bsa-offer-filters
+                [compactMode]="compactMode"
+                (filtersChange)="onFiltersChange($event)">
+            </bsa-offer-filters>
         }
     </div>
     <bsa-offer-list [offers$]="offers$"></bsa-offer-list>
