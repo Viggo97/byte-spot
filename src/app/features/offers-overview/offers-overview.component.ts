@@ -4,15 +4,15 @@ import { BehaviorSubject, map, Observable, switchMap, tap } from 'rxjs';
 
 import { PaginationComponent } from '@shared';
 
-import { PaginationParams } from '@app/features/offers-overview/types/pagination-params';
 import { OffersService } from './offers.service';
 import { OfferFiltersComponent } from './offer-filters/offer-filters.component';
+import { OfferListComponent } from './offer-list/offer-list.component';
 import { OfferSearchComponent } from './offer-search/offer-search.component';
 import { OfferSettingsComponent } from './offer-settings/offer-settings.component';
-import { OfferListComponent } from './offer-list/offer-list.component';
 import { OfferPost } from './interfaces/offer-post.interface';
 import { OfferSort } from './enums/offer-sort.enum';
 import { OfferFilters } from './offer-filters/offer-filters.model';
+import { PaginationParams } from './types/pagination-params';
 
 @Component({
     selector: 'bsa-offers-overview',
@@ -20,8 +20,8 @@ import { OfferFilters } from './offer-filters/offer-filters.model';
     imports: [
         PaginationComponent,
         OfferFiltersComponent,
-        OfferSearchComponent,
         OfferListComponent,
+        OfferSearchComponent,
         OfferSettingsComponent,
     ],
     templateUrl: './offers-overview.component.html',
@@ -37,7 +37,7 @@ export class OffersOverviewComponent implements OnInit {
     offers$!: Observable<OfferPost[]>;
     sort: OfferSort = OfferSort.NEWEST;
     pagination: PaginationParams = {
-        limit: 5,
+        limit: 15,
         page: 1,
     };
     total = 0;
@@ -53,7 +53,12 @@ export class OffersOverviewComponent implements OnInit {
     ngOnInit(): void {
         this.offers$ = this.offersParams$.asObservable()
             .pipe(
-                switchMap(() => this.offersService.getOffers(this.sort, this.pagination, this.searchTerm, this.filters)),
+                switchMap(() => this.offersService.getOffers(
+                    this.sort,
+                    this.pagination,
+                    this.searchTerm,
+                    this.filters,
+                )),
                 tap((offerList) => {
                     this.total = offerList.total;
                 }),

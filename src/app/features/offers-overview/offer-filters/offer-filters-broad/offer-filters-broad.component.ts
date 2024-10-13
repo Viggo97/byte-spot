@@ -2,7 +2,8 @@ import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { TranslatePipe } from '@core';
-import { ControlValue } from '../../types/control-value.type';
+import { KeyValueControl, ValueControl } from '@shared';
+
 import { OfferFiltersContentComponent } from '../offer-filters-content/offer-filters-content.component';
 
 @Component({
@@ -17,6 +18,6 @@ import { OfferFiltersContentComponent } from '../offer-filters-content/offer-fil
 })
 export class OfferFiltersBroadComponent {
     @Input({ required: true }) form!: FormGroup;
-    @Input({ required: true }) technologies!: ControlValue[];
-    @Input({ required: true }) locations!: ControlValue[];
+    @Input({ required: true }) technologies!: KeyValueControl<string, string>[];
+    @Input({ required: true }) locations!: ValueControl<string>[];
 }

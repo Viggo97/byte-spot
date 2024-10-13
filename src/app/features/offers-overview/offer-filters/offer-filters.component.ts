@@ -1,13 +1,14 @@
 import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { KeyValue } from '@angular/common';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { forkJoin } from 'rxjs';
 
-import { TranslatePipe, CoreValue } from '@core';
-import { DrawerComponent } from '@shared';
-import { OfferFilters } from './offer-filters.model';
+import { TranslatePipe } from '@core';
+import { DrawerComponent, KeyValueControl, ValueControl } from '@shared';
+
 import { OffersService } from '../offers.service';
-import { ControlValue } from '../types/control-value.type';
+import { OfferFilters } from './offer-filters.model';
 import { OfferFiltersCompactComponent } from './offer-filters-compact/offer-filters-compact.component';
 import { OfferFiltersContentComponent } from './offer-filters-content/offer-filters-content.component';
 import { OfferFiltersBroadComponent } from './offer-filters-broad/offer-filters-broad.component';
@@ -60,8 +61,8 @@ export class OfferFiltersComponent implements OnInit {
         }),
     });
 
-    locations: ControlValue[] = [];
-    technologies: ControlValue[] = [];
+    locations: ValueControl<string>[] = [];
+    technologies: KeyValueControl<string, string>[] = [];
 
     filterValues: OfferFilters | null = null;
 
@@ -75,7 +76,7 @@ export class OfferFiltersComponent implements OnInit {
 
     private fetchFilterData(): void {
         forkJoin([
-            this.offerService.getCities(),
+            this.offerService.getLocations(),
             this.offerService.getTechnologies(),
         ]).subscribe(([locations, technologies]) => {
             this.createLocations(locations);
@@ -83,28 +84,33 @@ export class OfferFiltersComponent implements OnInit {
         });
     }
 
-    private createLocations(locations: CoreValue[]): void {
-        const locationsControl = this.form.get('locations') as FormArray<FormControl<boolean>>;
-        this.locations = this.createDynamicFilterData(locations, locationsControl);
-    }
-
-    private createTechnologies(technologies: CoreValue[]): void {
-        const technologiesControl = this.form.get('technologies') as FormArray<FormControl<boolean>>;
-        this.technologies = this.createDynamicFilterData(technologies, technologiesControl);
-    }
-
-    private createDynamicFilterData(data: CoreValue[], parentControl: FormArray<FormControl<boolean>>): ControlValue[] {
-        const convertedData: ControlValue[] = [];
-        data.forEach((entry) => {
+    private createLocations(locations: string[]): void {
+        const parentControl = this.form.get('locations') as FormArray<FormControl<boolean>>;
+        const convertedLocations: ValueControl<string>[] = [];
+        locations.forEach((entry) => {
             const control = this.fb.nonNullable.control(false);
             parentControl.push(control, { emitEvent: false });
-            convertedData.push({
+            convertedLocations.push({
+                value: entry,
+                control,
+            });
+        });
+        this.locations = convertedLocations;
+    }
+
+    private createTechnologies(technologies: KeyValue<string, string>[]): void {
+        const parentControl = this.form.get('technologies') as FormArray<FormControl<boolean>>;
+        const convertedTechnologies: KeyValueControl<string, string>[] = [];
+        technologies.forEach((entry) => {
+            const control = this.fb.nonNullable.control(false);
+            parentControl.push(control, { emitEvent: false });
+            convertedTechnologies.push({
                 key: entry.key,
                 value: entry.value,
                 control,
             });
         });
-        return convertedData;
+        this.technologies = convertedTechnologies;
     }
 
     private mapFormValuesToFilters(): void {

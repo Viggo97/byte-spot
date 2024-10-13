@@ -1,123 +1,32 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { delay, map, Observable, of, shareReplay } from 'rxjs';
+import { KeyValue } from '@angular/common';
+import { map, Observable, shareReplay } from 'rxjs';
 
-import { CoreValue } from '@core';
-import { OfferSort } from '@app/features/offers-overview/enums/offer-sort.enum';
-import { PaginationParams } from '@app/features/offers-overview/types/pagination-params';
-import { OfferPostList } from '@app/features/offers-overview/interfaces/offer-post-list.interface';
-import { OfferSearchSuggestionCategory } from '@app/features/offers-overview/offer-search/offer-search-suggestion-category.enum';
-import { OfferFilters } from '@app/features/offers-overview/offer-filters/offer-filters.model';
+import { OfferSort } from './enums/offer-sort.enum';
+import { PaginationParams } from './types/pagination-params';
+import { OfferFilters } from './offer-filters/offer-filters.model';
+import { OfferPostList } from './interfaces/offer-post-list.interface';
 import { OfferSearchSuggestions } from './offer-search/offer-search-suggestions.interface';
+import { OfferSearchSuggestionCategory } from './offer-search/offer-search-suggestion-category.enum';
 
 @Injectable({ providedIn: 'root' })
 export class OffersService {
-    private mockCities: CoreValue[] = [
-        {
-            key: 'warsaw',
-            value: 'Warszawa',
-        },
-        {
-            key: 'cracow',
-            value: 'Krakow',
-        },
-        {
-            key: 'gdansk',
-            value: 'Gdansk',
-        },
-        {
-            key: 'wroclaw',
-            value: 'Wroclaw',
-        },
-        {
-            key: 'poznan',
-            value: 'Poznan',
-        },
-    ];
-    private mockTechnologies: CoreValue[] = [
-        {
-            key: 'aws',
-            value: 'AWS',
-        },
-        {
-            key: 'azure',
-            value: 'Azure',
-        },
-        {
-            key: 'c',
-            value: 'C',
-        },
-        {
-            key: 'cpp',
-            value: 'C++',
-        },
-        {
-            key: 'csharp',
-            value: 'C#',
-        },
-        {
-            key: 'go',
-            value: 'Go',
-        },
-        {
-            key: 'java',
-            value: 'Java',
-        },
-        {
-            key: 'javascript',
-            value: 'JavaScript',
-        },
-        {
-            key: 'mobile',
-            value: 'Mobile',
-        },
-        {
-            key: 'php',
-            value: 'PHP',
-        },
-        {
-            key: 'python',
-            value: 'Python',
-        },
-        {
-            key: 'ruby',
-            value: 'Ruby',
-        },
-        {
-            key: 'rust',
-            value: 'Rust',
-        },
-        {
-            key: 'sql',
-            value: 'SQL',
-        },
-        {
-            key: 'typescript',
-            value: 'TypeScript',
-        },
-    ];
-
-    getCities(): Observable<CoreValue[]> {
-        return of(this.mockCities).pipe(delay(3000));
-    }
-
-    getTechnologies(): Observable<CoreValue[]> {
-        return of(this.mockTechnologies).pipe(delay(3000));
-    }
-
     private http = inject(HttpClient);
 
     private URL = 'http://localhost:8080';
 
-    getLocations(): Observable<CoreValue[]> {
+    getLocations(): Observable<string[]> {
         const url = `${this.URL}/locations`;
-        return this.http.get<CoreValue[]>(url)
-            .pipe(shareReplay(1));
+        return this.http.get<string[]>(url)
+            .pipe(
+                shareReplay(1),
+            );
     }
 
-    getTechs(): Observable<CoreValue[]> {
+    getTechnologies(): Observable<KeyValue<string, string>[]> {
         const url = `${this.URL}/technologies`;
-        return this.http.get<CoreValue[]>(url)
+        return this.http.get<KeyValue<string, string>[]>(url)
             .pipe(shareReplay(1));
     }
 

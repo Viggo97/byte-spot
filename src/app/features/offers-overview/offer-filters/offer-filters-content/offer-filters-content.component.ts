@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { CheckboxComponent, IconComponent, SliderComponent, ToggleComponent } from '@shared';
 import { TranslatePipe } from '@core';
-import { ControlValue } from '@app/features/offers-overview/types/control-value.type';
+
+import { CheckboxComponent, IconComponent, KeyValueControl, SliderComponent, ToggleComponent, ValueControl } from '@shared';
 
 @Component({
     selector: 'bsa-offer-filters-content',
@@ -21,6 +21,6 @@ import { ControlValue } from '@app/features/offers-overview/types/control-value.
 })
 export class OfferFiltersContentComponent {
     @Input({ required: true }) form!: FormGroup;
-    @Input({ required: true }) technologies!: ControlValue[];
-    @Input({ required: true }) locations!: ControlValue[];
+    @Input({ required: true }) technologies!: KeyValueControl<string, string>[];
+    @Input({ required: true }) locations!: ValueControl<string>[];
 }

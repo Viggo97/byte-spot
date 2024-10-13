@@ -49,10 +49,10 @@
         <h3>{{ 'offer.location' | translate }}</h3>
 
         <div class="filters-group">
-            @for (location of locations; track location.key; let i = $index) {
-                <bsa-checkbox id="filter-location-{{location.key}}"
+            @for (location of locations; track location.value; let i = $index) {
+                <bsa-checkbox id="filter-location-{{i}}"
                               [formControlName]="i">
-                    <label for="filter-location-{{location.key}}">{{ location.value }}</label>
+                    <label for="filter-location-{{i}}">{{ location.value }}</label>
                 </bsa-checkbox>
             }
         </div>
