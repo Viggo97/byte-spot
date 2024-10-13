@@ -18,4 +18,7 @@ export * from './enums/keycodes.enum';
 
 export * from './pipes/number-formatter.pipe';
 
+export * from './types/key-value-control.type';
+export * from './types/value-control.type';
+
 export * from './utils/number.util';
