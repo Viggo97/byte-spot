@@ -244,6 +244,7 @@ export class SliderComponent implements OnInit, ControlValueAccessor {
         this.end = end;
         this.computeMarkupStartPosition();
         this.computeMarkupEndPosition();
+        this.cdr.markForCheck();
     }
 
     setDisabledState(disabled: boolean): void {
