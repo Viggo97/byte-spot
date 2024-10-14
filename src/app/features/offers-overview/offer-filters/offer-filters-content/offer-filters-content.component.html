@@ -10,19 +10,21 @@
         </bsa-slider>
     </section>
 
-    <section formArrayName="technologies">
-        <h3>{{ 'offer.technologies' | translate }}</h3>
+    @if (technologies.length) {
+        <section formArrayName="technologies">
+            <h3>{{ 'offer.technologies' | translate }}</h3>
 
-        <div class="technologies">
-            @for (technology of technologies; track technology.key; let i = $index) {
-                <bsa-toggle id="filter-technology-{{technology.key}}"
-                            [formControlName]="i">
-                    <bsa-icon name="tech-{{technology.key}}"></bsa-icon>
-                    <span>{{ technology.value }}</span>
-                </bsa-toggle>
-            }
-        </div>
-    </section>
+            <div class="technologies">
+                @for (technology of technologies; track technology.key; let i = $index) {
+                    <bsa-toggle id="filter-technology-{{technology.key}}"
+                                [formControlName]="i">
+                        <bsa-icon name="tech-{{technology.key}}"></bsa-icon>
+                        <span>{{ technology.value }}</span>
+                    </bsa-toggle>
+                }
+            </div>
+        </section>
+    }
 
     <section formGroupName="workMode">
         <h3>{{ 'offer.workMode' | translate }}</h3>
@@ -45,18 +47,20 @@
         </div>
     </section>
 
-    <section formArrayName="locations">
-        <h3>{{ 'offer.location' | translate }}</h3>
+    @if (locations.length) {
+        <section formArrayName="locations">
+            <h3>{{ 'offer.location' | translate }}</h3>
 
-        <div class="filters-group">
-            @for (location of locations; track location.value; let i = $index) {
-                <bsa-checkbox id="filter-location-{{i}}"
-                              [formControlName]="i">
-                    <label for="filter-location-{{i}}">{{ location.value }}</label>
-                </bsa-checkbox>
-            }
-        </div>
-    </section>
+            <div class="filters-group">
+                @for (location of locations; track location.value; let i = $index) {
+                    <bsa-checkbox id="filter-location-{{i}}"
+                                  [formControlName]="i">
+                        <label for="filter-location-{{i}}">{{ location.value }}</label>
+                    </bsa-checkbox>
+                }
+            </div>
+        </section>
+    }
 
     <section formArrayName="employmentType">
         <h3>{{ 'offer.employmentType' | translate }}</h3>

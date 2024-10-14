@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { KeyValue } from '@angular/common';
-import { map, Observable, shareReplay } from 'rxjs';
+import { catchError, map, Observable, of, shareReplay } from 'rxjs';
 
 import { OfferSort } from './enums/offer-sort.enum';
 import { PaginationParams } from './types/pagination-params';
@@ -14,20 +14,24 @@ import { OfferSearchSuggestionCategory } from './offer-search/offer-search-sugge
 export class OffersService {
     private http = inject(HttpClient);
 
-    private URL = 'http://localhost:8080';
+    private URL = 'http://localhost:3000';
 
     getLocations(): Observable<string[]> {
         const url = `${this.URL}/locations`;
         return this.http.get<string[]>(url)
             .pipe(
                 shareReplay(1),
+                catchError(() => of([])),
             );
     }
 
     getTechnologies(): Observable<KeyValue<string, string>[]> {
         const url = `${this.URL}/technologies`;
         return this.http.get<KeyValue<string, string>[]>(url)
-            .pipe(shareReplay(1));
+            .pipe(
+                shareReplay(1),
+                catchError(() => of([])),
+            );
     }
 
     getOffers(
@@ -47,7 +51,8 @@ export class OffersService {
             params = params.append('search', searchTerm);
         }
 
-        return this.http.post<OfferPostList>(url, body, { params });
+        return this.http.post<OfferPostList>(url, body, { params })
+            .pipe(catchError(() => of({ offers: [], total: 0 })));
     }
 
     getSearchSuggestions(searchTerm: string): Observable<OfferSearchSuggestions[]> {
@@ -62,6 +67,7 @@ export class OffersService {
                         ? notEmptySuggestions
                         : [{ category: OfferSearchSuggestionCategory.KEYWORD, results: [searchTerm] }];
                 }),
+                catchError(() => of([{ category: OfferSearchSuggestionCategory.KEYWORD, results: [searchTerm] }])),
             );
     }
 }
