@@ -1,8 +1,9 @@
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { Component, DestroyRef, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { KeyValue } from '@angular/common';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { debounceTime, distinctUntilChanged, forkJoin } from 'rxjs';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { forkJoin } from 'rxjs';
 
 import { TranslatePipe } from '@core';
 import { DrawerComponent, KeyValueControl, ValueControl } from '@shared';
@@ -31,6 +32,7 @@ import { OfferFiltersBroadComponent } from './offer-filters-broad/offer-filters-
 export class OfferFiltersComponent implements OnInit {
     private fb = inject(FormBuilder);
     private offerService = inject(OffersService);
+    private destroyRef = inject(DestroyRef);
 
     @Input({ required: true }) compactMode!: boolean;
 
@@ -68,10 +70,18 @@ export class OfferFiltersComponent implements OnInit {
 
     ngOnInit(): void {
         this.fetchFilterData();
-        this.form.valueChanges.subscribe(() => {
-            this.mapFormValuesToFilters();
-            this.filtersChange.emit(this.filterValues!);
-        });
+        if (!this.compactMode) {
+            this.form.valueChanges
+                .pipe(
+                    debounceTime(150),
+                    distinctUntilChanged(),
+                    takeUntilDestroyed(this.destroyRef),
+                )
+                .subscribe(() => {
+                    this.mapFormValuesToFilters();
+                    this.filtersChange.emit(this.filterValues!);
+                });
+        }
     }
 
     private fetchFilterData(): void {
@@ -133,5 +143,14 @@ export class OfferFiltersComponent implements OnInit {
             }
         });
         return selectedValues;
+    }
+
+    onFiltersReset(): void {
+        this.form.reset();
+    }
+
+    onFiltersChange(): void {
+        this.mapFormValuesToFilters();
+        this.filtersChange.emit(this.filterValues!);
     }
 }

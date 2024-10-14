@@ -2,12 +2,15 @@
     <bsa-offer-filters-compact
         [form]="form"
         [locations]="locations"
-        [technologies]="technologies">
+        [technologies]="technologies"
+        (filtersChange)="onFiltersChange()"
+        (filtersReset)="onFiltersReset()">
     </bsa-offer-filters-compact>
 } @else {
     <bsa-offer-filters-broad
         [form]="form"
         [locations]="locations"
-        [technologies]="technologies">
+        [technologies]="technologies"
+        (filtersReset)="onFiltersReset()">
     </bsa-offer-filters-broad>
 }

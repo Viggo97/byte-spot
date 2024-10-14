@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { TranslatePipe } from '@core';
@@ -20,4 +20,10 @@ export class OfferFiltersBroadComponent {
     @Input({ required: true }) form!: FormGroup;
     @Input({ required: true }) technologies!: KeyValueControl<string, string>[];
     @Input({ required: true }) locations!: ValueControl<string>[];
+
+    @Output() filtersReset = new EventEmitter<void>();
+
+    resetFilters(): void {
+        this.filtersReset.emit();
+    }
 }

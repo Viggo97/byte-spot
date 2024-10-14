@@ -1,6 +1,10 @@
 <header>
     <h3>{{ 'offer.filters' | translate }}</h3>
-    <button type="button">{{ 'offer.clearAll' | translate }}</button>
+    <button
+        type="button"
+        (click)="resetFilters()">
+        {{ 'offer.clearAll' | translate }}
+    </button>
 </header>
 
 <bsa-offer-filters-content

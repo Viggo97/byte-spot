@@ -1,4 +1,4 @@
-import { Component, inject, Input, ViewChild } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay } from '@angular/cdk/overlay';
 
@@ -27,10 +27,13 @@ export class OfferFiltersCompactComponent {
     @Input({ required: true }) technologies!: KeyValueControl<string, string>[];
     @Input({ required: true }) locations!: ValueControl<string>[];
 
-    readonly scrollStrategy = this.overlay.scrollStrategies.block();
-    drawerOpen = false;
+    @Output() filtersReset = new EventEmitter<void>();
+    @Output() filtersChange = new EventEmitter<void>();
 
     @ViewChild(DrawerComponent) drawer!: DrawerComponent;
+
+    readonly scrollStrategy = this.overlay.scrollStrategies.block();
+    drawerOpen = false;
 
     openDrawer(): void {
         this.drawerOpen = true;
@@ -38,5 +41,14 @@ export class OfferFiltersCompactComponent {
 
     closeDrawer(): void {
         this.drawerOpen = false;
+    }
+
+    resetFilters(): void {
+        this.filtersReset.emit();
+    }
+
+    changeFilters(): void {
+        this.filtersChange.emit();
+        this.closeDrawer();
     }
 }
