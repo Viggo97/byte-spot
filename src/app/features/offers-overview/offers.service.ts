@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { KeyValue } from '@angular/common';
-import { catchError, map, Observable, of, shareReplay } from 'rxjs';
+import { catchError, delay, map, Observable, of, shareReplay } from 'rxjs';
 
 import { OfferSort } from './enums/offer-sort.enum';
 import { PaginationParams } from './types/pagination-params';
@@ -52,7 +52,7 @@ export class OffersService {
         }
 
         return this.http.post<OfferPostList>(url, body, { params })
-            .pipe(catchError(() => of({ offers: [], total: 0 })));
+            .pipe(delay(1000), catchError(() => of({ offers: [], total: 0 })));
     }
 
     getSearchSuggestions(searchTerm: string): Observable<OfferSearchSuggestions[]> {

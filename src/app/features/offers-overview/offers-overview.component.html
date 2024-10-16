@@ -26,10 +26,17 @@
             </bsa-offer-filters>
         }
     </div>
-    <bsa-offer-list [offers$]="offers$"></bsa-offer-list>
-    <bsa-pagination
-        [limit]="pagination.limit"
+    <bsa-offer-list
+        [offers$]="offers$"
         [total]="total"
-        (pageChange)="onPageChange($event)">
-    </bsa-pagination>
+        [loading]="offersLoading">
+    </bsa-offer-list>
+
+    @if (!offersLoading && total > 0) {
+        <bsa-pagination
+            [limit]="pagination.limit"
+            [total]="total"
+            (pageChange)="onPageChange($event)">
+        </bsa-pagination>
+    }
 </div>

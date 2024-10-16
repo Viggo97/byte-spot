@@ -125,4 +125,8 @@ export const i18nOffer: { [key: string] : I18nLanguageCode } = {
         en: 'Keyword',
         pl: 'Słowo klucz',
     },
+    noResultsFound: {
+        en: 'No offers found matching selected criteria',
+        pl: 'Nie znaleziono żadnych ofert spełniających kryteria',
+    },
 };

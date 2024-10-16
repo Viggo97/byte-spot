@@ -37,12 +37,13 @@ export class OffersOverviewComponent implements OnInit {
     offers$!: Observable<OfferPost[]>;
     sort: OfferSort = OfferSort.NEWEST;
     pagination: PaginationParams = {
-        limit: 15,
+        limit: 10,
         page: 1,
     };
     total = 0;
     searchTerm = '';
     filters: OfferFilters | null = null;
+    offersLoading = true;
 
     constructor() {
         this.breakpointObserver.observe('(min-width: 960px)').subscribe((state) => {
@@ -53,6 +54,9 @@ export class OffersOverviewComponent implements OnInit {
     ngOnInit(): void {
         this.offers$ = this.offersParams$.asObservable()
             .pipe(
+                tap(() => {
+                    this.offersLoading = true;
+                }),
                 switchMap(() => this.offersService.getOffers(
                     this.sort,
                     this.pagination,
@@ -61,6 +65,7 @@ export class OffersOverviewComponent implements OnInit {
                 )),
                 tap((offerList) => {
                     this.total = offerList.total;
+                    this.offersLoading = false;
                 }),
                 map((offerList) => offerList.offers),
             );
@@ -85,4 +90,6 @@ export class OffersOverviewComponent implements OnInit {
         this.filters = filters;
         this.offersParams$.next();
     }
+
+    protected readonly location = location;
 }
