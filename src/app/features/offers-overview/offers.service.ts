@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { KeyValue } from '@angular/common';
-import { catchError, delay, map, Observable, of, shareReplay } from 'rxjs';
+import { catchError, map, Observable, of, shareReplay } from 'rxjs';
 
+import { environment } from '../../../environments/environment';
 import { OfferSort } from './enums/offer-sort.enum';
 import { PaginationParams } from './types/pagination-params';
 import { OfferFilters } from './offer-filters/offer-filters.model';
@@ -14,7 +15,7 @@ import { OfferSearchSuggestionCategory } from './offer-search/offer-search-sugge
 export class OffersService {
     private http = inject(HttpClient);
 
-    private URL = 'http://localhost:3000';
+    private URL = environment.apiUrl;
 
     getLocations(): Observable<string[]> {
         const url = `${this.URL}/locations`;
@@ -52,7 +53,7 @@ export class OffersService {
         }
 
         return this.http.post<OfferPostList>(url, body, { params })
-            .pipe(delay(1000), catchError(() => of({ offers: [], total: 0 })));
+            .pipe(catchError(() => of({ offers: [], total: 0 })));
     }
 
     getSearchSuggestions(searchTerm: string): Observable<OfferSearchSuggestions[]> {
