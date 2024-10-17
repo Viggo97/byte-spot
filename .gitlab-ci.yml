@@ -7,7 +7,7 @@ pages:
   script:
     - npx ng build
     - mkdir public
-    - mv dist/hello-b/browser/* public/
+    - mv dist/byte-spot/browser/* public/
   artifacts:
     paths:
       # The folder that contains the files to be exposed at the Page URL
