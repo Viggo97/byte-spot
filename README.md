@@ -1,27 +1,44 @@
-# ByteSpot
+# Byte Spot - IT Job Listings Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.7.
+A web application showcasing IT job offers. It allows browsing, filtering, and searching through job listings. **All data is fictional** and does not represent real job offers.
 
-## Development server
+# 🌍 Live Demo
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+You can check out the live demo here: Demo Link
 
-## Code scaffolding
+## 🛠 Running the project locally
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. **Clone the repository:**
+   ```sh
+   git clone https://gitlab.com/Viggo97/byte-spot.git
+   cd byte-spot
+   ```
+2. **Install dependencies:**
+   ```sh
+   npm install
+   ```
+3. **Run the application:**
+   ```sh
+   ng serve
+   ```
+   The application will be available at: `http://localhost:4200/`
 
-## Build
+4. **Backend:**
+   To ensure proper functionality, a Node.js backend must be running.
+   📌 Backend repository link: `https://gitlab.com/Viggo97/byte-spot-rest-api-node`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## ✨ Key Features
 
-## Running unit tests
+✅ **Responsive design** – works on various devices 📱💻  
+✅ **Keyboard navigation** – navigate without a mouse ⌨️  
+✅ **Multilingual support** – switch languages 🇬🇧 🇵🇱  
+✅ **Dark/Light mode** – theme switching 🌙☀️  
+✅ **Custom UI components** – uniquely styled interface 🎨   
+✅ **Modern tech stack** – Angular, TypeScript, and SCSS ⚡
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 🎯 Project Goal
 
-## Running end-to-end tests
+This is a showcase project demonstrating my workshop. It’s not perfect, and relatively small, but something is better than nothing! 😃 There’s always room for enhancement and new features!
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+🔧 Feedback and suggestions are always welcome! 🚀
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
