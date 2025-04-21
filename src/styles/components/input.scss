@@ -4,17 +4,30 @@ input[type="text"],
 input[type="number"] {
     width: 100%;
     padding: .5rem .75rem;
-    border: $border-base;
+    background-color: var(--control-bgColor);
+    border: 1px solid var(--control-borderColor);
     border-radius: 6px;
-    background-color: transparent;
-    color: var(--text-primary);
+    color: var(--control-fgColor);
     font: $font-sm;
     line-height: $line-height-sm;
-    box-shadow: $shadow-base;
 
     &:focus-visible {
+        background-color: var(--control-bgColor-focus);
         box-shadow: $shadow-outline-inner;
         border-color: transparent;
+    }
+
+    &:disabled {
+        border-color: var(--control-borderColor-disabled);
+        color: var(--control-fgColor-disabled);
+
+        &::placeholder {
+            color: var(--control-fgColor-placeholder-disabled);
+        }
+    }
+
+    &::placeholder {
+        color: var(--control-fgColor-placeholder);
     }
 }
 
@@ -31,7 +44,11 @@ input[type="number"] {
         left: .5rem;
         transform: translateY(-50%);
         font: $font-md;
-        color: var(--text-secondary);
+        color: var(--control-fgColor);
+    }
+
+    &:has(input:disabled) [class^="icon-"] {
+        color: var(--control-fgColor-disabled);
     }
 }
 

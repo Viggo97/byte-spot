@@ -18,12 +18,10 @@ button {
 
     &:hover {
         background-color: var(--button-default-bgColor-hover);
-        border-color: var(--button-default-borderColor-hover);
     }
 
     &:active {
         background-color: var(--button-default-bgColor-active);
-        border-color: var(--button-default-borderColor-active);
     }
 
     &:disabled {
@@ -45,25 +43,8 @@ button {
 }
 
 .button-invisible {
-    background-color: var(--button-invisible-bgColor);
-    border-color: var(--button-invisible-borderColor);
-    color: var(--button-invisible-fgColor);
-
-    &:hover {
-        background-color: var(--button-invisible-bgColor-hover);
-        border-color: var(--button-invisible-borderColor-hover);
-    }
-
-    &:active {
-        background-color: var(--button-invisible-bgColor-active);
-        border-color: var(--button-invisible-borderColor-active);
-    }
-
-    &:disabled {
-        background-color: var(--button-invisible-bgColor-disabled);
-        border-color: var(--button-invisible-borderColor-disabled);
-        color: var(--button-invisible-fgColor-disabled);
-    }
+    background-color: transparent;
+    border-color: transparent;
 }
 
 .button-green {
@@ -73,12 +54,10 @@ button {
 
     &:hover {
         background-color: var(--button-green-bgColor-hover);
-        border-color: var(--button-green-borderColor-hover);
     }
 
     &:active {
         background-color: var(--button-green-bgColor-active);
-        border-color: var(--button-green-borderColor-active);
     }
 
     &:disabled {
