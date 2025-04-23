@@ -14,22 +14,33 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid var(--border-primary);
+    background-color: var(--control-bgColor);
+    border: 1px solid var(--control-borderColor);
     border-radius: 4px;
+    color: var(--control-fgColor);
 
     &:focus-visible {
+        background-color: var(--control-bgColor-focus);
         border-color: transparent;
-        box-shadow: 0 0 0 2px var(--blue-primary);
+        box-shadow: 0 0 0 2px var(--outlineColor);
     }
 
-    &.selected {
-        border-color: var(--green-primary);
-        background-color: var(--green-primary);
-        color: var(--text-tertiary);
+    &.checked {
+        background-color: var(--control-checked-bgColor);
+        border-color: var(--control-checked-borderColor);
+        color: var(--control-checked-fgColor);
     }
 
     &.disabled {
-        background-color: var(--gray-primary);
-        border-color: var(--gray-secondary)
+        cursor: not-allowed;
+        pointer-events: none;
+        border-color: var(--control-borderColor-disabled);
+        color: var(--control-fgColor-disabled);
+    }
+
+    &.checked.disabled {
+        background-color: var(--control-checked-bgColor-disabled);
+        border-color: var(--control-checked-borderColor-disabled);
+        color: var(--control-checked-fgColor-disabled);
     }
 }

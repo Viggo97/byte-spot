@@ -22,7 +22,7 @@ import { IconComponent } from '../icon/icon.component';
 export class CheckboxComponent implements ControlValueAccessor {
     @Input() id: string | undefined;
 
-    selected = false;
+    checked = false;
     disabled = false;
 
     onChange = (value: boolean) => {};
@@ -36,8 +36,8 @@ export class CheckboxComponent implements ControlValueAccessor {
             return;
         }
 
-        this.selected = !this.selected;
-        this.onChange(this.selected);
+        this.checked = !this.checked;
+        this.onChange(this.checked);
     }
 
     @HostListener('keydown.enter', ['$event'])
@@ -55,7 +55,7 @@ export class CheckboxComponent implements ControlValueAccessor {
     }
 
     writeValue(value: boolean): void {
-        this.selected = value;
+        this.checked = value;
     }
 
     setDisabledState(disabled: boolean): void {

@@ -1,8 +1,8 @@
 <span [tabindex]="disabled ? -1 : 0"
       class="checkbox"
-      [class.selected]="selected"
+      [class.checked]="checked"
       [class.disabled]="disabled">
-    @if (selected) {
+    @if (checked) {
         <bsa-icon name="check"></bsa-icon>
     }
 </span>
