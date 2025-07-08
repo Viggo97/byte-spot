@@ -5,10 +5,12 @@ $markup-size: .75rem;
     width: $markup-size;
     height: $markup-size;
     border-radius: calc($markup-size / 2);
-    background-color: var(--green-primary);
+    background-color: var(--color-violet-500);
     cursor: pointer;
 
     &.disabled {
-        background-color: var(--gray-secondary);
+        opacity: .65;
+        cursor: not-allowed;
+        pointer-events: none;
     }
 }

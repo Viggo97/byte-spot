@@ -6,32 +6,29 @@
     display: flex;
     align-items: center;
     gap: .25rem;
-    border: $border-base;
+    border: $border-primary;
     border-radius: 4px;
     font: $font-sm;
     cursor: pointer;
     transition: all 150ms cubic-bezier(.4, 0, .2, 1);
 
     &:hover:not(:focus-visible) {
-        background-color: var(--hover-primary);
+        background-color: var(--toggle-bgColor-hover);
     }
 
     &.checked {
-        border-color: var(--green-primary);
-        background-color: var(--green-primary);
-        color: var(--text-tertiary);
+        background-color: var(--toggle-bgColor);
+        border: none;
+        color: var(--color-white);
 
         &:hover {
-            background-color: var(--hover-green-primary);
+            background-color: var(--toggle-checked-bgColor-hover);
         }
     }
 
     &.disabled {
-        background-color: var(--gray-secondary);
-        border-color: var(--gray-primary);
-
-        &:hover {
-            background-color: var(--gray-secondary);
-        }
+        opacity: .65;
+        cursor: not-allowed;
+        pointer-events: none;
     }
 }

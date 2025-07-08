@@ -104,7 +104,7 @@ export class SliderComponent implements OnInit, ControlValueAccessor {
         if (!isStepDividerOfRange) {
             if (isDevMode()) {
                 // eslint-disable-next-line no-console
-                console.warn(`Step is not a divider of the range ${this.min}-${this.max}.\
+                console.warn(`Step is not a divider of the range ${this.min}-${this.max}.
                 Step is computed as follow: (max - min) / 10`);
             }
 

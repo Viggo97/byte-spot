@@ -1,5 +1,4 @@
 @import 'variables';
-@import 'themes';
 @import 'colors';
 
 * {
@@ -14,22 +13,11 @@ html {
 
 html, body {
     height: 100%;
-    color: var(--fgColor-default);
+    color: var(--fgColor-primary);
 }
 
 body {
-    @include common-theme;
-    @include light-theme;
-    @include light-theme-new;
-
-    &.dark-theme {
-        @include dark-theme;
-        @include dark-theme-new;
-    }
-}
-
-body {
-    background-color: var(--bgColor-default);
+    background-color: var(--bgColor-primary);
 
     &.transition-disabled {
         * {
@@ -39,8 +27,7 @@ body {
 }
 
 *:focus-visible {
-    outline: none;
-    box-shadow: inset 0 0 0 2px var(--outlineColor);
+    outline: 2px solid var(--outlineColor);
 }
 
 bsa-root {

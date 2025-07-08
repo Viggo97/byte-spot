@@ -2,15 +2,16 @@
     <div class="logo">
         <img src="assets/logo.svg" alt="logo">
     </div>
-
+    
     <div class="icons">
         <button class="button-icon button-invisible"
                 (click)="onSwitchTheme()">
             <bsa-icon [name]="darkTheme ? 'moon' : 'sun'"
-                      size="2rem">
+                      size="1.5rem">
             </bsa-icon>
         </button>
         <bsa-select-button icon="language"
+                           buttonSize="1.5rem"
                            [options]="languageOptions"
                            optionLabel="label"
                            [ngModel]="language"

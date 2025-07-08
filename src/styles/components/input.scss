@@ -11,19 +11,10 @@ input[type="number"] {
     font: $font-sm;
     line-height: $line-height-sm;
 
-    &:focus-visible {
-        background-color: var(--control-bgColor-focus);
-        box-shadow: $shadow-outline-inner;
-        border-color: transparent;
-    }
-
     &:disabled {
-        border-color: var(--control-borderColor-disabled);
-        color: var(--control-fgColor-disabled);
-
-        &::placeholder {
-            color: var(--control-fgColor-placeholder-disabled);
-        }
+        opacity: .65;
+        cursor: not-allowed;
+        pointer-events: none;
     }
 
     &::placeholder {
@@ -45,10 +36,6 @@ input[type="number"] {
         transform: translateY(-50%);
         font: $font-md;
         color: var(--control-fgColor);
-    }
-
-    &:has(input:disabled) [class^="icon-"] {
-        color: var(--control-fgColor-disabled);
     }
 }
 

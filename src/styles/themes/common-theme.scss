@@ -1,0 +1,10 @@
+@mixin common-theme {
+    --pill-green-bgColor: var(--color-green-100);
+    --pill-green-fgColor: var(--color-green-500);
+
+    --pill-blue-bgColor: var(--color-blue-100);
+    --pill-blue-fgColor: var(--color-blue-500);
+
+    --pill-red-bgColor: var(--color-red-100);
+    --pill-red-fgColor: var(--color-red-500);
+}

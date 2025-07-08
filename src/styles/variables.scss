@@ -13,6 +13,8 @@ $font-5xl: 2.25rem/2.5rem Figtree, sans-serif;
 $line-height-sm: 1.125rem;
 
 $border-base: 1px solid var(--border-primary);
+$border-primary: 1px solid var(--borderColor-primary);
+$border-secondary: 1px solid var(--borderColor-secondary);
 
 $shadow-base: 0 1px 2px 0 hsl(0, 0%, 0%, 0.05);
 $shadow-outline-inner: inset 0 0 0 2px var(--blue-primary);

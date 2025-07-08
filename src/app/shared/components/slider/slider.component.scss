@@ -20,22 +20,26 @@ $rail-height: .25rem;
     height: $rail-height;
     width: 100%;
     border-radius: calc($rail-height / 2);
-    background-color: var(--border-primary);
+    background-color: var(--borderColor-primary);
     cursor: pointer;
 
     &.disabled {
-        background-color: var(--gray-primary);
+        opacity: .65;
+        cursor: not-allowed;
+        pointer-events: none;
     }
 }
 
 .bar {
     position: absolute;
     height: $rail-height;
-    background-color: var(--green-primary);
+    background-color: var(--color-violet-500);
     pointer-events: none;
 
     &.disabled {
-        background-color: var(--gray-secondary);
+        opacity: .65;
+        cursor: not-allowed;
+        pointer-events: none;
     }
 }
 

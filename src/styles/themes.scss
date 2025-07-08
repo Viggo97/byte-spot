@@ -1,108 +1,12 @@
-$background-primary-light: hsl(0, 0%, 100%);
-$background-primary-dark: hsl(240, 4%, 12%);
+@import './themes/light-theme';
+@import './themes/dark-theme';
+@import './themes/common-theme';
 
-$background-secondary-light: hsl(0, 0%, 96%);
-$background-secondary-dark: hsl(240, 8%, 16%);
+body {
+    @include common-theme;
+    @include light-theme;
 
-$background-tertiary-light: hsl(240, 24%, 24%);
-$background-tertiary-dark: hsl(240, 40%, 98%);
-
-$border-primary-light: hsl(240, 12%, 86%);
-$border-primary-dark: hsl(240, 12%, 24%);
-
-$border-secondary-light: hsl(240, 12%, 80%);
-$border-secondary-dark: hsl(240, 12%, 32%);
-
-$hover-primary-light: hsl(0, 0%, 96%);
-$hover-primary-dark: hsl(240, 8%, 16%);
-
-$hover-secondary-light: hsl(0, 0%, 98%);
-$hover-secondary-dark: hsl(240, 8%, 18%);
-
-$text-primary-light: hsl(240, 8%, 16%);
-$text-primary-dark: hsl(0, 0%, 94%);
-
-$text-secondary-light: hsl(240, 8%, 40%);
-$text-secondary-dark: hsl(240, 0%, 64%);
-
-$text-tertiary-light: hsl(0, 0%, 100%);
-$text-tertiary-dark: hsl(0, 0%, 0%);
-
-$red-dark: hsl(350, 100%, 50%);
-$red-light: hsl(350, 100%, 90%);
-
-$blue-dark: hsl(210, 100%, 50%);
-$blue-light: hsl(210, 100%, 90%);
-
-$green-dark: hsla(150, 100%, 30%);
-$green-light: hsl(150, 100%, 90%);
-
-$orange-dark: hsl(24, 100%, 50%);
-$orange-light: hsl(24, 100%, 90%);
-
-$purple-dark: hsl(270, 100%, 50%);
-$purple-light: hsl(270, 100%, 90%);
-
-$green-primary-light: hsl(150, 100%, 36%);
-$green-primary-dark: hsl(150, 100%, 46%);
-
-$hover-green-primary-light: hsl(150, 100%, 40%);
-$hover-green-primary-dark: hsl(150, 100%, 50%);
-
-$blue-primary-light: hsl(210, 100%, 50%);
-$blue-primary-dark: hsl(210, 100%, 70%);
-
-$gray-primary-light: hsl(240, 8%, 96%);
-$gray-primary-dark: hsl(240, 8%, 20%);
-
-$gray-secondary-light: hsl(240, 8%, 94%);
-$gray-secondary-dark: hsl(240, 8%, 24%);
-
-@mixin light-theme {
-    --background-primary: #{$background-primary-light};
-    --background-secondary: #{$background-secondary-light};
-    --background-tertiary: #{$background-tertiary-light};
-    --border-primary: #{$border-primary-light};
-    --border-secondary: #{$border-secondary-light};
-    --hover-primary: #{$hover-primary-light};
-    --hover-secondary: #{$hover-secondary-light};
-    --text-primary: #{$text-primary-light};
-    --text-secondary: #{$text-secondary-light};
-    --text-tertiary: #{$text-tertiary-light};
-    --green-primary: #{$green-primary-light};
-    --hover-green-primary: #{$hover-green-primary-light};
-    --blue-primary: #{$blue-primary-light};
-    --gray-primary: #{$gray-primary-light};
-    --gray-secondary: #{$gray-secondary-light};
-}
-
-@mixin dark-theme {
-    --background-primary: #{$background-primary-dark};
-    --background-tertiary: #{$background-tertiary-dark};
-    --background-secondary: #{$background-secondary-dark};
-    --border-primary: #{$border-primary-dark};
-    --border-secondary: #{$border-secondary-dark};
-    --hover-primary: #{$hover-primary-dark};
-    --hover-secondary: #{$hover-secondary-dark};
-    --text-primary: #{$text-primary-dark};
-    --text-secondary: #{$text-secondary-dark};
-    --text-tertiary: #{$text-tertiary-dark};
-    --green-primary: #{$green-primary-dark};
-    --hover-green-primary: #{$hover-green-primary-dark};
-    --blue-primary: #{$blue-primary-dark};
-    --gray-primary: #{$gray-primary-dark};
-    --gray-secondary: #{$gray-secondary-dark};
-}
-
-@mixin common-theme {
-    --red-dark: #{$red-dark};
-    --red-light: #{$red-light};
-    --blue-dark: #{$blue-dark};
-    --blue-light: #{$blue-light};
-    --green-dark: #{$green-dark};
-    --green-light: #{$green-light};
-    --orange-dark: #{$orange-dark};
-    --orange-light: #{$orange-light};
-    --purple-dark: #{$purple-dark};
-    --purple-light: #{$purple-light};
+    &.dark-theme {
+        @include dark-theme;
+    }
 }

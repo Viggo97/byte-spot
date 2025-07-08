@@ -3,7 +3,7 @@
 :host {
     padding: 4px 8px;
     border-radius: 4px;
-    background-color: var(--background-tertiary);
+    background-color: var(--tooltip-bgColor);
     font: $font-xs;
-    color: var(--text-tertiary)
+    color: var(--tooltip-fgColor)
 }

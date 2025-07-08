@@ -1,0 +1,55 @@
+@mixin dark-theme {
+    --bgColor-primary: var(--color-gray-950);
+    --bgColor-secondary: var(--color-gray-800);
+    --bgColor-primary-hover: var(--color-zinc-700);
+    --bgColor-secondary-hover: var(--color-zinc-600);
+
+    --borderColor-primary: var(--color-gray-800);
+    --borderColor-secondary: var(--color-gray-700);
+
+    --fgColor-primary: var(--color-white);
+    --fgColor-secondary: var(--color-gray-400);
+    --fgColor-violet: var(--color-violet-400);
+    --fgColor-red: var(--color-red-400);
+
+    --button-primary-bgColor: var(--color-violet-500);
+    --button-primary-bgColor-hover: var(--color-violet-400);
+    --button-primary-bgColor-active: var(--color-violet-300);
+    --button-primary-fgColor: var(--color-white);
+
+    --button-secondary-bgColor: var(--color-zinc-700);
+    --button-secondary-bgColor-hover: var(--color-zinc-600);
+    --button-secondary-bgColor-active: var(--color-zinc-500);
+    --button-secondary-fgColor: var(--color-white);
+
+    --button-invisible-bgColor-hover: var(--color-zinc-800);
+    --button-invisible-bgColor-active: var(--color-zinc-700);
+    --button-invisible-fgColor: var(--color-white);
+
+    --chip-bgColor: var(--color-zinc-800);
+    --chip-fgColor: var(--color-white);
+
+    --control-bgColor: var(--color-zinc-700);
+    --control-borderColor: var(--color-zinc-600);
+    --control-borderColor-hover: var(--color-zinc-500);
+    --control-fgColor: var(--color-white);
+    --control-fgColor-placeholder: var(--color-gray-400);
+    --control-checked-bgColor: var(--color-zinc-600);
+    --control-checked-fgColor: var(--color-white);
+
+    --dropdown-bgColor: var(--color-zinc-700);
+    --dropdown-bgColor-hover: var(--color-zinc-600);
+    --dropdown-borderColor: var(--color-zinc-600);
+
+    --skeleton-bgColor-muted: var(--color-zinc-700);
+    --skeleton-bgColor-emphasis: var(--color-zinc-600);
+
+    --toggle-bgColor: var(--color-green-500);
+    --toggle-bgColor-hover: var(--color-zinc-600);
+    --toggle-checked-bgColor-hover: var(--color-green-400);
+
+    --tooltip-bgColor: var(--color-zinc-100);
+    --tooltip-fgColor: var(--color-zinc-800);
+
+    --outlineColor: var(--color-violet-500);
+}

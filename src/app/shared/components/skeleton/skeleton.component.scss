@@ -2,7 +2,7 @@
     display: block;
 
     .skeleton {
-        background-color: var(--gray-primary);
+        background-color: var(--skeleton-bgColor-emphasis);
         animation: skeleton-loading 2s infinite ease-in-out;
 
         &.circle {
@@ -27,12 +27,12 @@
 
 @keyframes skeleton-loading {
     0% {
-        background-color: var(--gray-primary);
+        background-color: var(--skeleton-bgColor-emphasis);
     }
     50% {
-        background-color: var(--gray-secondary);
+        background-color: var(--skeleton-bgColor-muted);
     }
     100% {
-        background-color: var(--gray-primary);
+        background-color: var(--skeleton-bgColor-emphasis);
     }
 }

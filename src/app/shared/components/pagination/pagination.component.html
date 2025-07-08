@@ -1,12 +1,12 @@
 <button type="button"
-        class="button-icon"
+        class="button-secondary button-icon"
         [disabled]="disabled || page === 1"
         (click)="onFirstPage()">
     <span class="icon-arrow-left-double"></span>
 </button>
 
 <button type="button"
-        class="button-icon"
+        class="button-secondary button-icon"
         [disabled]="disabled || page === 1"
         (click)="onPreviousPage()">
     <span class="icon-arrow-left"></span>
@@ -21,14 +21,14 @@
        (keydown.enter)="onInputEnter()">
 
 <button type="button"
-        class="button-icon"
+        class="button-secondary button-icon"
         [disabled]="disabled || page === pages"
         (click)="onNextPage()">
     <span class="icon-arrow-right"></span>
 </button>
 
 <button type="button"
-        class="button-icon"
+        class="button-secondary button-icon"
         [disabled]="disabled || page === pages"
         (click)="onLastPage()">
     <span class="icon-arrow-right-double"></span>

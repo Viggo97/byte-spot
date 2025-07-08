@@ -7,10 +7,10 @@
     padding: .375rem .5rem;
     border-radius: 4px;
     font: $font-sm;
-    color: var(--text-primary);
+    color: var(--fgColor-primary);
     cursor: pointer;
 
     &:hover {
-        background-color: var(--hover-primary);
+        background-color: var(--dropdown-bgColor-hover);
     }
 }

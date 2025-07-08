@@ -20,27 +20,22 @@
     color: var(--control-fgColor);
 
     &:focus-visible {
-        background-color: var(--control-bgColor-focus);
-        border-color: transparent;
-        box-shadow: 0 0 0 2px var(--outlineColor);
+        outline-offset: 2px;
+    }
+
+    &:hover {
+        border-color: var(--control-borderColor-hover);
     }
 
     &.checked {
         background-color: var(--control-checked-bgColor);
-        border-color: var(--control-checked-borderColor);
+        border: none;
         color: var(--control-checked-fgColor);
     }
 
     &.disabled {
+        opacity: .65;
         cursor: not-allowed;
         pointer-events: none;
-        border-color: var(--control-borderColor-disabled);
-        color: var(--control-fgColor-disabled);
-    }
-
-    &.checked.disabled {
-        background-color: var(--control-checked-bgColor-disabled);
-        border-color: var(--control-checked-borderColor-disabled);
-        color: var(--control-checked-fgColor-disabled);
     }
 }

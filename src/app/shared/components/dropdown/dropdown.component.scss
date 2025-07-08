@@ -5,8 +5,8 @@
     height: 100%;
     display: block;
     padding: 4px;
-    border: $border-base;
+    border: 1px solid var(--dropdown-borderColor);
     border-radius: 6px;
-    background-color: var(--background-primary);
+    background-color: var(--dropdown-bgColor);
     overflow: auto;
 }

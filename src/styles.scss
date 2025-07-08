@@ -1,8 +1,9 @@
-@import './styles/variables';
+@import 'styles/variables';
 @import 'styles/breakpoints';
-@import './styles/global';
-@import './styles/fonts';
-@import './styles/components';
-@import './styles/mixins';
+@import 'styles/global';
+@import 'styles/fonts';
+@import 'styles/components';
+@import 'styles/mixins';
+@import 'styles/themes';
 
 @import '@angular/cdk/overlay-prebuilt.css';
