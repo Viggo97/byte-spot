@@ -10,31 +10,32 @@
                     "style": "scss"
                 }
             },
-            "root": "",
-            "sourceRoot": "src",
+            "root": "projects/byte-spot",
+            "sourceRoot": "projects/byte-spot/src",
             "prefix": "bsa",
             "architect": {
                 "build": {
                     "builder": "@angular-devkit/build-angular:application",
                     "options": {
                         "outputPath": "dist/byte-spot",
-                        "index": "src/index.html",
-                        "browser": "src/main.ts",
+                        "index": "projects/byte-spot/src/index.html",
+                        "browser": "projects/byte-spot/src/main.ts",
                         "polyfills": [
                             "zone.js"
                         ],
-                        "tsConfig": "tsconfig.app.json",
+                        "tsConfig": "projects/byte-spot/tsconfig.app.json",
                         "inlineStyleLanguage": "scss",
                         "assets": [
-                            "src/favicon.ico",
-                            "src/assets"
+                            "projects/byte-spot/src/favicon.ico",
+                            "projects/byte-spot/src/assets"
                         ],
                         "styles": [
-                            "src/styles.scss"
+                            "projects/byte-spot/src/styles.scss"
                         ],
                         "stylePreprocessorOptions": {
                             "includePaths": [
-                                "src/styles"
+                                "projects/byte-spot/src/styles",
+                                "projects/byte-spot-lib/src/lib/styles"
                             ]
                         },
                         "scripts": []
@@ -60,10 +61,10 @@
                             "extractLicenses": false,
                             "sourceMap": true,
                             "fileReplacements": [
-                              {
-                                "replace": "src/environments/environment.ts",
-                                "with": "src/environments/environment.development.ts"
-                              }
+                                {
+                                    "replace": "projects/byte-spot/src/environments/environment.ts",
+                                    "with": "projects/byte-spot/src/environments/environment.development.ts"
+                                }
                             ]
                         }
                     },
@@ -94,10 +95,10 @@
                             "zone.js",
                             "zone.js/testing"
                         ],
-                        "tsConfig": "tsconfig.spec.json",
+                        "tsConfig": "projects/byte-spot/tsconfig.spec.json",
                         "stylePreprocessorOptions": {
                             "includePaths": [
-                                "src/styles"
+                                "projects/byte-spot/src/styles"
                             ]
                         }
                     }
@@ -108,6 +109,48 @@
                         "lintFilePatterns": [
                             "src/**/*.ts",
                             "src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "byte-spot-lib": {
+            "projectType": "library",
+            "root": "projects/byte-spot-lib",
+            "sourceRoot": "projects/byte-spot-lib/src",
+            "prefix": "ngx-bsa",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:ng-packagr",
+                    "options": {
+                        "project": "projects/byte-spot-lib/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "projects/byte-spot-lib/tsconfig.lib.prod.json"
+                        },
+                        "development": {
+                            "tsConfig": "projects/byte-spot-lib/tsconfig.lib.json"
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "tsConfig": "projects/byte-spot-lib/tsconfig.spec.json",
+                        "polyfills": [
+                            "zone.js",
+                            "zone.js/testing"
+                        ]
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-eslint/builder:lint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "projects/byte-spot-lib/**/*.ts",
+                            "projects/byte-spot-lib/**/*.html"
                         ]
                     }
                 }
