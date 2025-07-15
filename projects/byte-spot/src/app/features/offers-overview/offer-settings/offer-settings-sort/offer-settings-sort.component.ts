@@ -15,13 +15,12 @@ type SortOption = {
 
 @Component({
     selector: 'bsa-offer-settings-sort',
-    standalone: true,
     imports: [
         FormsModule,
         SelectComponent,
     ],
     templateUrl: './offer-settings-sort.component.html',
-    styleUrl: './offer-settings-sort.component.scss',
+    styleUrl: './offer-settings-sort.component.scss'
 })
 export class OfferSettingsSortComponent {
     private translateService = inject(TranslateService);

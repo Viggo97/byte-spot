@@ -7,6 +7,7 @@ import { OverlayService } from '@app/core/overlay/overlay.service';
 @Component({
     selector: 'bsa-mock-component',
     template: '',
+    standalone: false
 })
 class MockComponent {}
 

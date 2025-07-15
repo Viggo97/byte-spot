@@ -3,10 +3,9 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'bsa-pagination',
-    standalone: true,
     imports: [FormsModule],
     templateUrl: './pagination.component.html',
-    styleUrl: './pagination.component.scss',
+    styleUrl: './pagination.component.scss'
 })
 export class PaginationComponent implements OnChanges {
     @Input({ required: true }) total!: number;

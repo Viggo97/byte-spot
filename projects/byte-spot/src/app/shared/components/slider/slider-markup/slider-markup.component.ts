@@ -6,11 +6,10 @@ import { SliderMove } from '../slider-move.enum';
 
 @Component({
     selector: 'bsa-slider-markup',
-    standalone: true,
     imports: [],
     template: '',
     styleUrl: './slider-markup.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SliderMarkupComponent implements OnInit, OnDestroy {
     private ngZone = inject(NgZone);

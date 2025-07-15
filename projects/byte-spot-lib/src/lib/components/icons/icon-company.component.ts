@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'ngx-bsa-icon-company',
-  standalone: true,
-  imports: [],
-  template: `
+    selector: 'ngx-bsa-icon-company',
+    imports: [],
+    template: `
       <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
           <rect width="32" height="32" stroke="none" fill="#000000" opacity="0" transform="matrix(1, 0, 0, 1, 4.440892098500626e-16, 4.440892098500626e-16)"/>
           <g transform="matrix(2.6666669845581055, 0, 0, 2.6666669845581055, 16, 16)">

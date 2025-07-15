@@ -13,10 +13,9 @@ type LanguageOption = { key: Language, label: string };
 
 @Component({
     selector: 'bsa-navbar',
-    standalone: true,
     imports: [FormsModule, SelectButtonComponent, IconComponent],
     templateUrl: './navbar.component.html',
-    styleUrl: './navbar.component.scss',
+    styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
     darkTheme = false;

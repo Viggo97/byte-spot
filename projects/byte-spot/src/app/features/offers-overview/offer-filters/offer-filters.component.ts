@@ -16,7 +16,6 @@ import { OfferFiltersBroadComponent } from './offer-filters-broad/offer-filters-
 
 @Component({
     selector: 'bsa-offer-filters',
-    standalone: true,
     imports: [
         TranslatePipe,
         CdkOverlayOrigin,
@@ -27,7 +26,7 @@ import { OfferFiltersBroadComponent } from './offer-filters-broad/offer-filters-
         OfferFiltersCompactComponent,
     ],
     templateUrl: './offer-filters.component.html',
-    styleUrl: './offer-filters.component.scss',
+    styleUrl: './offer-filters.component.scss'
 })
 export class OfferFiltersComponent implements OnInit {
     private fb = inject(FormBuilder);

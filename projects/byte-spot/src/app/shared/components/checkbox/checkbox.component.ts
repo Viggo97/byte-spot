@@ -5,7 +5,6 @@ import { IconComponent } from '../icon/icon.component';
 
 @Component({
     selector: 'bsa-checkbox',
-    standalone: true,
     imports: [
         IconComponent,
     ],

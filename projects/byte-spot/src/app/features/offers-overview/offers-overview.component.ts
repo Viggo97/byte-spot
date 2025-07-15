@@ -16,7 +16,6 @@ import { PaginationParams } from './types/pagination-params';
 
 @Component({
     selector: 'bsa-offers-overview',
-    standalone: true,
     imports: [
         PaginationComponent,
         OfferFiltersComponent,
@@ -25,7 +24,7 @@ import { PaginationParams } from './types/pagination-params';
         OfferSettingsComponent,
     ],
     templateUrl: './offers-overview.component.html',
-    styleUrl: './offers-overview.component.scss',
+    styleUrl: './offers-overview.component.scss'
 })
 export class OffersOverviewComponent implements OnInit {
     private breakpointObserver = inject(BreakpointObserver);

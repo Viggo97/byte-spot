@@ -3,7 +3,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
     selector: 'bsa-toggle',
-    standalone: true,
     imports: [],
     template: '<ng-content></ng-content>',
     styleUrl: './toggle.component.scss',
@@ -13,7 +12,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
             multi: true,
             useExisting: ToggleComponent,
         },
-    ],
+    ]
 })
 export class ToggleComponent implements ControlValueAccessor {
     @HostBinding('tabindex') get tabindex() { return this.disabled ? -1 : 0; }

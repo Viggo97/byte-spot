@@ -5,13 +5,12 @@ import { NumberFormatterPipe } from '@shared';
 
 @Component({
     selector: 'bsa-offer-settings-results',
-    standalone: true,
     imports: [
         TranslatePipe,
         NumberFormatterPipe,
     ],
     templateUrl: './offer-settings-results.component.html',
-    styleUrl: './offer-settings-results.component.scss',
+    styleUrl: './offer-settings-results.component.scss'
 })
 export class OfferSettingsResultsComponent {
     @Input() offersNumber = 0;

@@ -10,6 +10,7 @@ import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
 @Component({
     selector: 'bsa-mock-component',
     template: '<div id="mock-component">Mock Component, input value: {{ testInput }}</div>',
+    standalone: false
 })
 class MockComponent {
     @Input() testInput: string = '';

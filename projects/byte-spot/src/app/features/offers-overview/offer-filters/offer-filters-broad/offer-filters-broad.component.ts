@@ -8,13 +8,12 @@ import { OfferFiltersContentComponent } from '../offer-filters-content/offer-fil
 
 @Component({
     selector: 'bsa-offer-filters-broad',
-    standalone: true,
     imports: [
         TranslatePipe,
         OfferFiltersContentComponent,
     ],
     templateUrl: './offer-filters-broad.component.html',
-    styleUrl: './offer-filters-broad.component.scss',
+    styleUrl: './offer-filters-broad.component.scss'
 })
 export class OfferFiltersBroadComponent {
     @Input({ required: true }) form!: FormGroup;

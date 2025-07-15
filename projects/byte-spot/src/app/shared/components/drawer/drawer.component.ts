@@ -5,7 +5,6 @@ import { A11yModule } from '@angular/cdk/a11y';
 
 @Component({
     selector: 'bsa-drawer',
-    standalone: true,
     imports: [
         NgComponentOutlet,
         A11yModule,
@@ -18,7 +17,7 @@ import { A11yModule } from '@angular/cdk/a11y';
             state('closed', style({ transform: 'translateY(100%)' })),
             transition('open <=> closed', animate('150ms cubic-bezier(0, 0, 0.2 , 1)')),
         ]),
-    ],
+    ]
 })
 export class DrawerComponent implements AfterViewInit {
     @Input() title: string | null = null;

@@ -10,14 +10,13 @@ import { OfferSearchDropdownComponent } from './offer-search-dropdown/offer-sear
 
 @Component({
     selector: 'bsa-offer-search',
-    standalone: true,
     imports: [
         ReactiveFormsModule,
         OfferSearchDrawerComponent,
         OfferSearchDropdownComponent,
     ],
     templateUrl: './offer-search.component.html',
-    styleUrl: './offer-search.component.scss',
+    styleUrl: './offer-search.component.scss'
 })
 export class OfferSearchComponent implements OnInit {
     @Input({ required: true }) compactMode!: boolean;

@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'bsa-icon',
-    standalone: true,
     imports: [],
     template: `
         <svg [attr.width]="size" [attr.height]="size" [attr.fill]="fill" [attr.stroke]="stroke" [class]="customClass">
@@ -15,7 +14,7 @@ import { Component, Input } from '@angular/core';
           justify-content: center;
           align-items: center;
       }
-    `,
+    `
 })
 export class IconComponent {
     private location = 'assets/svg/icons';

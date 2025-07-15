@@ -8,7 +8,6 @@ import { OfferSort } from '../enums/offer-sort.enum';
 
 @Component({
     selector: 'bsa-offer-settings',
-    standalone: true,
     imports: [
         TranslatePipe,
         NumberFormatterPipe,
@@ -16,7 +15,7 @@ import { OfferSort } from '../enums/offer-sort.enum';
         OfferSettingsResultsComponent,
     ],
     templateUrl: './offer-settings.component.html',
-    styleUrl: './offer-settings.component.scss',
+    styleUrl: './offer-settings.component.scss'
 })
 export class OfferSettingsComponent {
     @Input() sort?: OfferSort;

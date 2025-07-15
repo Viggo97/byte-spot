@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'ngx-bsa-icon-location',
-  standalone: true,
-  imports: [],
-  template: `
+    selector: 'ngx-bsa-icon-location',
+    imports: [],
+    template: `
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path fill="currentColor" d="M 12 0 C 7.583 0 4 3.583 4 8 C 4 12.418 8.666 18.668 12 24 C 15.332 18.668 20 12.418 20 8 C 20 3.583 16.418 0 12 0 Z M 12 12.668 C 10.159 12.668 8.666 11.174 8.666 9.334 C 8.666 7.491 10.159 6 12 6 C 13.841 6 15.332 7.491 15.332 9.334 C 15.332 11.174 13.841 12.668 12 12.668 Z" style="stroke-width: 0px;"/>
       </svg>

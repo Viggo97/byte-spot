@@ -9,7 +9,6 @@ import { SelectValueConverterPipe } from '../../pipes/select-value-converter.pip
 
 @Component({
     selector: 'bsa-select-button',
-    standalone: true,
     imports: [
         CdkOverlayOrigin,
         IconComponent,
@@ -26,7 +25,7 @@ import { SelectValueConverterPipe } from '../../pipes/select-value-converter.pip
             multi: true,
             useExisting: SelectButtonComponent,
         },
-    ],
+    ]
 })
 export class SelectButtonComponent<T> implements ControlValueAccessor {
     @Input({ required: true }) icon!: string;

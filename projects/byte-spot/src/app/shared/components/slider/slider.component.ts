@@ -13,7 +13,6 @@ enum SliderMarkup {
 
 @Component({
     selector: 'bsa-slider',
-    standalone: true,
     imports: [
         SliderMarkupComponent,
         TooltipDirective,
@@ -27,7 +26,7 @@ enum SliderMarkup {
             multi: true,
             useExisting: SliderComponent,
         },
-    ],
+    ]
 })
 export class SliderComponent implements OnInit, ControlValueAccessor {
     private cdr = inject(ChangeDetectorRef);

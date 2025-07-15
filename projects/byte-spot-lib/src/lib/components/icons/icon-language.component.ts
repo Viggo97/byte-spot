@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'ngx-bsa-icon-language',
-  standalone: true,
-  imports: [],
-  template: `
+    selector: 'ngx-bsa-icon-language',
+    imports: [],
+    template: `
       <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
           <ellipse style="stroke: currentColor; fill: none; stroke-width: 1.5;" cx="16" cy="16" rx="12" ry="12"/>
           <ellipse style="stroke: currentColor; fill: none; stroke-width: 1.5;" cx="16" cy="16" rx="4.854" ry="11.903"/>

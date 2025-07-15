@@ -2,10 +2,9 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'bsa-tooltip',
-    standalone: true,
     imports: [],
     template: '{{ message }}',
-    styleUrl: './tooltip.component.scss',
+    styleUrl: './tooltip.component.scss'
 })
 export class TooltipComponent {
     message: string | undefined;

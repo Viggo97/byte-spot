@@ -8,14 +8,13 @@ import { OfferListItemComponent } from './offer-list-item/offer-list-item.compon
 
 @Component({
     selector: 'bsa-offer-list',
-    standalone: true,
     imports: [
         AsyncPipe,
         OfferListItemComponent,
         TranslatePipe,
     ],
     templateUrl: './offer-list.component.html',
-    styleUrl: './offer-list.component.scss',
+    styleUrl: './offer-list.component.scss'
 })
 export class OfferListComponent {
     @Input({ required: true }) offers$!: Observable<OfferPost[]>;

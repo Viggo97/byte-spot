@@ -12,7 +12,6 @@ import { OfferSearchSuggestionsComponent } from '../offer-search-suggestions/off
 
 @Component({
     selector: 'bsa-offer-search-drawer',
-    standalone: true,
     imports: [
         ReactiveFormsModule,
         CdkOverlayOrigin,
@@ -22,7 +21,7 @@ import { OfferSearchSuggestionsComponent } from '../offer-search-suggestions/off
         OfferSearchSuggestionsComponent,
     ],
     templateUrl: 'offer-search-drawer.component.html',
-    styleUrls: ['./offer-search-drawer.component.scss'],
+    styleUrls: ['./offer-search-drawer.component.scss']
 })
 export class OfferSearchDrawerComponent implements OnInit {
     @Input({ required: true }) form!: FormControl;

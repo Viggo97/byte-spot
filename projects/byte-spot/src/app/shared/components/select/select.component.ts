@@ -9,7 +9,6 @@ import { SelectValueConverterPipe } from '../../pipes/select-value-converter.pip
 
 @Component({
     selector: 'bsa-select',
-    standalone: true,
     imports: [
         CdkConnectedOverlay,
         CdkOverlayOrigin,
@@ -26,7 +25,7 @@ import { SelectValueConverterPipe } from '../../pipes/select-value-converter.pip
             multi: true,
             useExisting: SelectComponent,
         },
-    ],
+    ]
 })
 export class SelectComponent<T> implements AfterViewInit, ControlValueAccessor {
     @Input({ required: true }) options!: T[];
