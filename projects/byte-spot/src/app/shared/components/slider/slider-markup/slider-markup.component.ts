@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, inject, Input, NgZone, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, inject, Input, NgZone, OnDestroy, OnInit, Output, Renderer2, DOCUMENT } from '@angular/core';
+
 
 import { Keycodes } from '../../../enums/keycodes.enum';
 import { SliderMove } from '../slider-move.enum';
