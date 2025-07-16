@@ -1,9 +1,7 @@
-@import 'variables';
-
 :host {
      .group-title {
         padding: .375rem .5rem;
-        font: $font-xs;
+        font: var(--font-xs);
         color: var(--text-secondary);
         font-weight: 500;
     }

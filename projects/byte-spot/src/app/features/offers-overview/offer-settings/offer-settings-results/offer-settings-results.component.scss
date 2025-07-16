@@ -1,9 +1,7 @@
-@import 'variables';
-
 :host {
     display: flex;
     align-items: center;
-    font: $font-sm;
+    font: var(--font-sm);
 
     span {
         font-weight: 500;

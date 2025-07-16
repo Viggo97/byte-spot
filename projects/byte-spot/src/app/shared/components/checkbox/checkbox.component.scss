@@ -1,11 +1,9 @@
-@import 'variables';
-
 :host {
     width: fit-content;
     display: flex;
     align-items: center;
     gap: .5rem;
-    font: $font-sm;
+    font: var(--font-sm);
 }
 
 .checkbox {

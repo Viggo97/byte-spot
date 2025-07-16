@@ -1,9 +1,7 @@
-@import 'variables';
-
 :host {
     display: block;
     padding: 8px 16px;
-    border: $border-primary;
+    border: var(--border-primary);
     border-radius: 8px;
 }
 

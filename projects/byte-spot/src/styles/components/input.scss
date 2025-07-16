@@ -1,5 +1,3 @@
-@import 'variables';
-
 input[type="text"],
 input[type="number"] {
     width: 100%;
@@ -8,8 +6,8 @@ input[type="number"] {
     border: 1px solid var(--control-borderColor);
     border-radius: 6px;
     color: var(--control-fgColor);
-    font: $font-sm;
-    line-height: $line-height-sm;
+    font: var(--font-sm);
+    line-height: var(--line-height-sm);
 
     &:disabled {
         opacity: .65;
@@ -34,7 +32,7 @@ input[type="number"] {
         top: 50%;
         left: .5rem;
         transform: translateY(-50%);
-        font: $font-md;
+        font: var(--font-md);
         color: var(--control-fgColor);
     }
 }
@@ -42,12 +40,12 @@ input[type="number"] {
 .input-large {
     input {
         padding: .75rem 1.5rem .75rem 3rem;
-        font: $font-lg;
+        font: var(--font-lg);
     }
 
     [class^="icon-"] {
         left: 1rem;
-        font: $font-lg;
+        font: var(--font-lg);
     }
 }
 

@@ -1,8 +1,6 @@
-@import 'variables';
-
 nav {
     padding: 4px 0;
-    border-bottom: $border-primary;
+    border-bottom: var(--border-primary);
     display: flex;
     align-items: center;
     justify-content: space-between;

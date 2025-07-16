@@ -1,14 +1,12 @@
-@import 'variables';
-
 :host {
     width: fit-content;
     padding: 4px 8px;
     display: flex;
     align-items: center;
     gap: .25rem;
-    border: $border-primary;
+    border: var(--border-primary);
     border-radius: 4px;
-    font: $font-sm;
+    font: var(--font-sm);
     cursor: pointer;
     transition: all 150ms cubic-bezier(.4, 0, .2, 1);
 

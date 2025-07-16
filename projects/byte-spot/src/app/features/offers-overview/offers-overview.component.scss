@@ -1,11 +1,11 @@
-@import 'breakpoints';
+@use 'breakpoints' as breakpoints;
 
 :host {
     display: flex;
     flex-direction: column;
     gap: 16px;
 
-    @include md {
+    @include breakpoints.md {
         flex-direction: row;
     }
 }
@@ -13,7 +13,7 @@
 .panel {
     display: none;
 
-    @include md {
+    @include breakpoints.md {
         display: block;
         flex-basis: 25%;
     }
@@ -36,7 +36,7 @@ bsa-offer-settings {
 
 bsa-pagination {
 
-    @include sm {
+    @include breakpoints.sm {
         justify-content: end;
     }
 }

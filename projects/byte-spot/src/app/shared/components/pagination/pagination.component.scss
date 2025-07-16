@@ -1,12 +1,9 @@
-@import 'breakpoints';
-@import 'variables';
-
 :host {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 12px;
-    font: $font-md;
+    font: var(--font-md);
     color: var(--fgColor-primary);
 
     input {

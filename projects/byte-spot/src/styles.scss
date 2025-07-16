@@ -1,10 +1,11 @@
-@import 'styles/variables';
-@import 'styles/breakpoints';
-@import 'styles/global';
-@import 'styles/fonts';
-@import 'styles/components';
-@import 'styles/mixins';
-@import 'styles/themes';
+@use 'styles/colors';
+@use 'styles/variables';
+@use 'styles/breakpoints';
+@use 'styles/global';
+@use 'styles/fonts';
+@use 'styles/components';
+@use 'styles/mixins';
+@use 'styles/themes';
 
-@import '@angular/cdk/overlay-prebuilt.css';
-@import '../../byte-spot-lib/src/lib/styles';
+@use '@angular/cdk/overlay-prebuilt.css';
+@use '../../byte-spot-lib/src/lib/styles';

@@ -1,4 +1,4 @@
-@import 'mixins';
+@use 'mixins' as mixins;
 
 button {
     width: 100%;
@@ -7,6 +7,6 @@ button {
     gap: .5rem;
 
     span {
-        @include ellipsis;
+        @include mixins.ellipsis;
     }
 }

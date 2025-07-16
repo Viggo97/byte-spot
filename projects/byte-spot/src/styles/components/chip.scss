@@ -1,11 +1,9 @@
-@import 'variables';
-
 .chip {
     display: flex;
     padding: 0 12px;
     width: fit-content;
     border-radius: 4px;
-    font: $font-sm;
+    font: var(--font-sm);
     white-space: nowrap;
     background-color: var(--chip-bgColor);
     color: var(--chip-fgColor)

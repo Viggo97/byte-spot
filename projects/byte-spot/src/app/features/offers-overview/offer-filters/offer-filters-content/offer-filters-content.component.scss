@@ -1,5 +1,4 @@
-@import 'breakpoints';
-@import 'variables';
+@use 'breakpoints' as breakpoints;
 
 section {
     margin-bottom: 16px;
@@ -20,11 +19,11 @@ section {
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 16px;
 
-    @include sm() {
+    @include breakpoints.sm() {
         grid-template-columns: repeat(3, 1fr);
     }
 
-    @include md() {
+    @include breakpoints.md() {
         grid-template-columns: 1fr;
         grid-gap: 8px;
     }

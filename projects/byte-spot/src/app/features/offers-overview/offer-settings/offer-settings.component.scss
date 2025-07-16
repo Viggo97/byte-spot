@@ -1,4 +1,4 @@
-@import 'breakpoints';
+@use 'breakpoints' as breakpoints;
 
 :host {
     display: grid;
@@ -8,13 +8,13 @@
         "results results";
     grid-gap: 16px;
 
-    @include sm {
+    @include breakpoints.sm {
         grid-template-columns: 1fr auto auto;
         grid-template-areas:
             "results sort filters";
     }
 
-    @include md {
+    @include breakpoints.md {
         grid-template-columns: 1fr auto;
         grid-template-areas:
             "results sort";
