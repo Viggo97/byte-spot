@@ -5,7 +5,7 @@ import { Observable, skip } from 'rxjs';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 
 import { TranslatePipe } from '@core';
-import { ResizeObserverDirective, DropdownComponent, Keycodes } from '@shared';
+import { ResizeObserverDirective, Keycodes } from '@shared';
 
 import { OfferSearchSuggestions } from '../offer-search-suggestions.interface';
 import { OfferSearchSuggestionsComponent } from '../offer-search-suggestions/offer-search-suggestions.component';
@@ -18,7 +18,6 @@ import { OfferSearchSuggestionsComponent } from '../offer-search-suggestions/off
         CdkConnectedOverlay,
         TranslatePipe,
         ResizeObserverDirective,
-        DropdownComponent,
         OfferSearchSuggestionsComponent,
     ],
     templateUrl: './offer-search-dropdown.component.html',

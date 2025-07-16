@@ -3,25 +3,17 @@ import { KeyValue } from '@angular/common';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged, forkJoin } from 'rxjs';
-import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 
-import { TranslatePipe } from '@core';
-import { DrawerComponent, KeyValueControl, ValueControl } from '@shared';
+import { KeyValueControl, ValueControl } from '@shared';
 
 import { OffersService } from '../offers.service';
 import { OfferFilters } from './offer-filters.model';
 import { OfferFiltersCompactComponent } from './offer-filters-compact/offer-filters-compact.component';
-import { OfferFiltersContentComponent } from './offer-filters-content/offer-filters-content.component';
 import { OfferFiltersBroadComponent } from './offer-filters-broad/offer-filters-broad.component';
 
 @Component({
     selector: 'bsa-offer-filters',
     imports: [
-        TranslatePipe,
-        CdkOverlayOrigin,
-        CdkConnectedOverlay,
-        DrawerComponent,
-        OfferFiltersContentComponent,
         OfferFiltersBroadComponent,
         OfferFiltersCompactComponent,
     ],

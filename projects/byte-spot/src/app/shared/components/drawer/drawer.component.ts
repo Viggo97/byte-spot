@@ -1,12 +1,10 @@
 import { AfterViewInit, Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
-import { NgComponentOutlet } from '@angular/common';
 import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
 import { A11yModule } from '@angular/cdk/a11y';
 
 @Component({
     selector: 'bsa-drawer',
     imports: [
-        NgComponentOutlet,
         A11yModule,
     ],
     templateUrl: './drawer.component.html',

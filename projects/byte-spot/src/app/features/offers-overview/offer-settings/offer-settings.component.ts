@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { TranslatePipe } from '@core';
-import { NumberFormatterPipe } from '@shared';
 import { OfferSettingsSortComponent } from './offer-settings-sort/offer-settings-sort.component';
 import { OfferSettingsResultsComponent } from './offer-settings-results/offer-settings-results.component';
 import { OfferSort } from '../enums/offer-sort.enum';
@@ -9,8 +7,6 @@ import { OfferSort } from '../enums/offer-sort.enum';
 @Component({
     selector: 'bsa-offer-settings',
     imports: [
-        TranslatePipe,
-        NumberFormatterPipe,
         OfferSettingsSortComponent,
         OfferSettingsResultsComponent,
     ],
