@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 
+/*
+    eslint-disable max-len,
+    @typescript-eslint/no-extraneous-class
+*/
 @Component({
     selector: 'ngx-bsa-icon-language',
     imports: [],
@@ -11,8 +15,6 @@ import { Component } from '@angular/core';
           <path style="stroke: currentColor; stroke-width: 1.5; transform-origin: 16px 20px;" d="M 5.16 20 L 26.844 20"/>
       </svg>
   `,
-    styleUrl: './icon.scss'
+    styleUrl: './icon.scss',
 })
-export class IconLanguageComponent {
-
-}
+export class IconLanguageComponent {}

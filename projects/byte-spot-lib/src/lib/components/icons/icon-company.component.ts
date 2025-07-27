@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 
+/*
+    eslint-disable max-len,
+    @typescript-eslint/no-extraneous-class
+*/
 @Component({
     selector: 'ngx-bsa-icon-company',
     imports: [],
@@ -11,8 +15,6 @@ import { Component } from '@angular/core';
           </g>
       </svg>
   `,
-    styleUrl: './icon.scss'
+    styleUrl: './icon.scss',
 })
-export class IconCompanyComponent {
-
-}
+export class IconCompanyComponent {}

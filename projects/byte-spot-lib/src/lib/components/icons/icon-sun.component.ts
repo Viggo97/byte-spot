@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 
+/*
+    eslint-disable max-len,
+    @typescript-eslint/no-extraneous-class
+*/
 @Component({
     selector: 'ngx-bsa-icon-sun',
     imports: [],
@@ -16,8 +20,6 @@ import { Component } from '@angular/core';
           <path d="M26.3704 26.3697L23.4077 23.4068" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>
   `,
-    styleUrl: './icon.scss'
+    styleUrl: './icon.scss',
 })
-export class IconSunComponent {
-
-}
+export class IconSunComponent {}
