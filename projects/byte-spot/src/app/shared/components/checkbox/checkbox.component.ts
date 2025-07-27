@@ -24,7 +24,9 @@ export class CheckboxComponent implements ControlValueAccessor {
     checked = false;
     disabled = false;
 
-    onChange = (value: boolean) => {};
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    onChange = (_value: boolean) => {};
     onTouch = () => {};
 
     @HostListener('click')

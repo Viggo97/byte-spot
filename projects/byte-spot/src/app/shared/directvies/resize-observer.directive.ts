@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, inject, OnDestroy, OnInit, Output } from '@angular/core';
 
 @Directive({
     selector: '[bsaResizeObserver]',
@@ -9,7 +9,7 @@ export class ResizeObserverDirective implements OnInit, OnDestroy {
 
     @Output() elementResize = new EventEmitter<ResizeObserverEntry>();
 
-    constructor(private elementRef: ElementRef) { }
+    private elementRef = inject(ElementRef<HTMLElement>) as ElementRef<HTMLElement>;
 
     ngOnInit(): void {
         this.observer = new ResizeObserver((entries) => {

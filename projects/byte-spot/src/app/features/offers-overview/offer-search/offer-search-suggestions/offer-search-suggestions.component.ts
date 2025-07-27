@@ -14,7 +14,7 @@ import { OfferSearchSuggestions } from '../offer-search-suggestions.interface';
         TranslatePipe,
     ],
     templateUrl: './offer-search-suggestions.component.html',
-    styleUrl: './offer-search-suggestions.component.scss'
+    styleUrl: './offer-search-suggestions.component.scss',
 })
 export class OfferSearchSuggestionsComponent {
     @Input() suggestions: OfferSearchSuggestions[] = [];

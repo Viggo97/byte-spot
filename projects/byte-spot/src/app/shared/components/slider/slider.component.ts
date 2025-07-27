@@ -26,11 +26,11 @@ enum SliderMarkup {
             multi: true,
             useExisting: SliderComponent,
         },
-    ]
+    ],
 })
 export class SliderComponent implements OnInit, ControlValueAccessor {
     private cdr = inject(ChangeDetectorRef);
-    private elementRef = inject(ElementRef);
+    private elementRef = inject(ElementRef<HTMLElement>) as ElementRef<HTMLElement>;
     protected readonly SliderMarkup = SliderMarkup;
 
     @Input({ required: true }) min!: number;
@@ -39,7 +39,8 @@ export class SliderComponent implements OnInit, ControlValueAccessor {
 
     @Output() valueChange = new EventEmitter<[number, number]>();
 
-    onChange = (value: [number, number]) => {};
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    onChange = (_value: [number, number]) => {};
     onTouch = () => {};
     disabled = false;
 
@@ -72,6 +73,7 @@ export class SliderComponent implements OnInit, ControlValueAccessor {
     }
 
     get markupWidth(): number {
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         return this.startMarkupRef?.nativeElement.offsetWidth || 0;
     }
 
@@ -102,7 +104,7 @@ export class SliderComponent implements OnInit, ControlValueAccessor {
         const isStepDividerOfRange = Math.round((this.max - this.min) % this.step) === 0;
         if (!isStepDividerOfRange) {
             if (isDevMode()) {
-                // eslint-disable-next-line no-console
+
                 console.warn(`Step is not a divider of the range ${this.min}-${this.max}.
                 Step is computed as follow: (max - min) / 10`);
             }
@@ -222,6 +224,7 @@ export class SliderComponent implements OnInit, ControlValueAccessor {
     }
 
     get barRight(): string {
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         const railWidth = this.rail?.nativeElement.getBoundingClientRect().width || 0;
         return `${railWidth - this.markupEndPosition - this.markupWidth / 2}px`;
     }
@@ -234,7 +237,7 @@ export class SliderComponent implements OnInit, ControlValueAccessor {
         this.onTouch = onTouch;
     }
 
-    writeValue(value: [number, number]): void {
+    writeValue(value: [number, number] | null): void {
         if (!value) {
             return;
         }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { SelectButtonComponent, IconComponent } from '@shared';
@@ -9,16 +9,20 @@ import { Language } from '../../language/language.enum';
 import { LanguageService } from '../../language/language.service';
 import { TranslateService } from '../../translate/translate.service';
 
-type LanguageOption = { key: Language, label: string };
+interface LanguageOption { key: Language, label: string }
 
 @Component({
     selector: 'bsa-navbar',
     imports: [FormsModule, SelectButtonComponent, IconComponent],
     templateUrl: './navbar.component.html',
-    styleUrl: './navbar.component.scss'
+    styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
     darkTheme = false;
+
+    private languageService = inject(LanguageService);
+    private themeService = inject(ThemeService);
+    private translateService = inject(TranslateService);
 
     language: Language | undefined;
     languageOptions: LanguageOption[] = [
@@ -32,11 +36,7 @@ export class NavbarComponent {
         },
     ];
 
-    constructor(
-        private languageService: LanguageService,
-        private themeService: ThemeService,
-        private translateService: TranslateService,
-    ) {
+    constructor() {
         this.themeService.theme$.subscribe((theme) => {
             this.darkTheme = theme === Theme.DARK;
         });

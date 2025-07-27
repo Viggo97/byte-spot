@@ -1,19 +1,18 @@
-import {
-    Component, EventEmitter, Input, Output,
-} from '@angular/core';
+/* eslint-disable */
+
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { EdgeX, EdgeY } from '@app/core/overlay/enum/relative-position-edge.enum';
 import { CustomOverlay } from '@app/core/overlay/custom-overlay';
 import { OverlayService } from '@app/core/overlay/overlay.service';
-import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
+import { Keycodes } from '@shared';
 
 @Component({
     selector: 'bsa-mock-component',
     template: '<div id="mock-component">Mock Component, input value: {{ testInput }}</div>',
-    standalone: false
 })
 class MockComponent {
-    @Input() testInput: string = '';
+    @Input() testInput = '';
     @Output() testOutput = new EventEmitter<string>();
 }
 
@@ -44,13 +43,13 @@ const setupOverlayContent = () => {
 };
 
 describe('CustomOverlay', () => {
+
     let service: OverlayService<MockComponent>;
     let overlay: CustomOverlay<MockComponent> | null = null;
 
     beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [MockComponent],
-        });
+        TestBed.configureTestingModule({declarations: [MockComponent]});
+
         service = TestBed.inject(OverlayService);
     });
 
@@ -325,9 +324,7 @@ describe('CustomOverlay', () => {
     });
 
     it('should set input in component', () => {
-        overlay = service.show(MockComponent, {
-            componentInputs: [{ name: 'testInput', value: 'input value' }],
-        });
+        overlay = service.show(MockComponent, {componentInputs: [{ name: 'testInput', value: 'input value' }]});
         const componentContent = document.getElementById('mock-component') as HTMLDivElement;
         expect(overlay.componentRef.instance.testInput).toBe('input value');
         expect(componentContent.innerText).toContain('input value');

@@ -18,7 +18,7 @@ import { OfferFiltersBroadComponent } from './offer-filters-broad/offer-filters-
         OfferFiltersCompactComponent,
     ],
     templateUrl: './offer-filters.component.html',
-    styleUrl: './offer-filters.component.scss'
+    styleUrl: './offer-filters.component.scss',
 })
 export class OfferFiltersComponent implements OnInit {
     private fb = inject(FormBuilder);
@@ -57,7 +57,7 @@ export class OfferFiltersComponent implements OnInit {
     locations: ValueControl<string>[] = [];
     technologies: KeyValueControl<string, string>[] = [];
 
-    filterValues: OfferFilters | null = null;
+    filterValues = OfferFilters.default();
 
     ngOnInit(): void {
         this.fetchFilterData();
@@ -70,7 +70,7 @@ export class OfferFiltersComponent implements OnInit {
                 )
                 .subscribe(() => {
                     this.mapFormValuesToFilters();
-                    this.filtersChange.emit(this.filterValues!);
+                    this.filtersChange.emit(this.filterValues);
                 });
         }
     }
@@ -126,9 +126,9 @@ export class OfferFiltersComponent implements OnInit {
 
     private convertCheckboxValues(control: FormGroup): string[] {
         const selectedValues: string[] = [];
-        const controlNames = control.value;
+        const controlNames = control.value as object;
         Object.keys(controlNames).forEach((name) => {
-            const value = control.get(name)?.getRawValue();
+            const value = control.get(name)?.getRawValue() as string;
             if (value) {
                 selectedValues.push(name);
             }
@@ -142,6 +142,6 @@ export class OfferFiltersComponent implements OnInit {
 
     onFiltersChange(): void {
         this.mapFormValuesToFilters();
-        this.filtersChange.emit(this.filterValues!);
+        this.filtersChange.emit(this.filterValues);
     }
 }

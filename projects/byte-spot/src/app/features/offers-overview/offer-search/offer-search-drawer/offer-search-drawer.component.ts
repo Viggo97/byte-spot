@@ -1,4 +1,4 @@
-import { Component, DestroyRef, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, DestroyRef, ElementRef, EventEmitter, inject, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Observable, skip } from 'rxjs';
@@ -21,13 +21,13 @@ import { OfferSearchSuggestionsComponent } from '../offer-search-suggestions/off
         OfferSearchSuggestionsComponent,
     ],
     templateUrl: 'offer-search-drawer.component.html',
-    styleUrls: ['./offer-search-drawer.component.scss']
+    styleUrls: ['./offer-search-drawer.component.scss'],
 })
 export class OfferSearchDrawerComponent implements OnInit {
     @Input({ required: true }) form!: FormControl;
     @Input({ required: true }) suggestions$!: Observable<OfferSearchSuggestions[]>;
 
-    @Output() search = new EventEmitter<void>();
+    @Output() searchOffers = new EventEmitter<void>();
 
     @ViewChild(DrawerComponent) drawer!: DrawerComponent;
     @ViewChild('drawerInput') drawerInput!: ElementRef<HTMLInputElement>;
@@ -35,15 +35,14 @@ export class OfferSearchDrawerComponent implements OnInit {
     @ViewChild(OfferSearchSuggestionsComponent) suggestionsComp!: OfferSearchSuggestionsComponent;
     @ViewChild(OfferSearchSuggestionsComponent, { read: ElementRef }) suggestionsRef!: ElementRef<HTMLElement>;
 
+    private overlay = inject(Overlay);
+    private destroyRef = inject(DestroyRef);
+
     readonly scrollStrategy = this.overlay.scrollStrategies.block();
     suggestions: OfferSearchSuggestions[] = [];
     drawerOpen = false;
     dropdownOpen = false;
 
-    constructor(
-        private overlay: Overlay,
-        private destroyRef: DestroyRef,
-    ) { }
 
     ngOnInit(): void {
         this.suggestions$
@@ -62,7 +61,7 @@ export class OfferSearchDrawerComponent implements OnInit {
     }
 
     onSearch(): void {
-        this.search.emit();
+        this.searchOffers.emit();
         this.closeDrawer();
     }
 
@@ -91,7 +90,8 @@ export class OfferSearchDrawerComponent implements OnInit {
     }
 
     onInputClick(event?: KeyboardEvent): void {
-        if (event && event?.code !== Keycodes.SPACE && event?.code !== Keycodes.ENTER) {
+        const code = event?.code as Keycodes;
+        if (event && code !== Keycodes.SPACE && code !== Keycodes.ENTER) {
             return;
         }
 
@@ -103,7 +103,7 @@ export class OfferSearchDrawerComponent implements OnInit {
     }
 
     onOverlayKeydown(event: KeyboardEvent): void {
-        if (event.key === Keycodes.TAB) {
+        if ((event.key as Keycodes) === Keycodes.TAB) {
             if (document.activeElement === this.drawerInput.nativeElement) {
                 event.preventDefault();
                 this.closeDropdown();
@@ -111,14 +111,14 @@ export class OfferSearchDrawerComponent implements OnInit {
             }
         }
 
-        if (event.key === Keycodes.ARROW_DOWN) {
+        if ((event.key as Keycodes) === Keycodes.ARROW_DOWN) {
             if (document.activeElement === this.drawerInput.nativeElement && this.dropdownOpen) {
                 this.suggestionsComp.focusFirstElement();
             }
         }
 
-        if (event.key === Keycodes.ESCAPE) {
-            if (this.suggestionsRef?.nativeElement.contains(event.target as HTMLElement)) {
+        if ((event.key as Keycodes) === Keycodes.ESCAPE) {
+            if (this.suggestionsRef.nativeElement.contains(event.target as HTMLElement)) {
                 this.drawerInput.nativeElement.focus();
                 this.closeDropdown();
             } else {

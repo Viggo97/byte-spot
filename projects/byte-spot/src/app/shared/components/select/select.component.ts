@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 
@@ -25,7 +25,7 @@ import { SelectValueConverterPipe } from '../../pipes/select-value-converter.pip
             multi: true,
             useExisting: SelectComponent,
         },
-    ]
+    ],
 })
 export class SelectComponent<T> implements AfterViewInit, ControlValueAccessor {
     @Input({ required: true }) options!: T[];
@@ -38,10 +38,11 @@ export class SelectComponent<T> implements AfterViewInit, ControlValueAccessor {
     value: T | null = null;
     open = false;
 
-    onChange = (value: T) => {};
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    onChange = (_value: T) => {};
     onTouch = () => {};
 
-    constructor(private cdr: ChangeDetectorRef) {}
+    private cdr = inject(ChangeDetectorRef);
 
     ngAfterViewInit(): void {
         // Additional change detection is need to provide relevant value for cdkConnectedOverlayWidth

@@ -1,4 +1,4 @@
-import { Component, DestroyRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, DestroyRef, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, iif, Observable, of, switchMap, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -16,21 +16,19 @@ import { OfferSearchDropdownComponent } from './offer-search-dropdown/offer-sear
         OfferSearchDropdownComponent,
     ],
     templateUrl: './offer-search.component.html',
-    styleUrl: './offer-search.component.scss'
+    styleUrl: './offer-search.component.scss',
 })
 export class OfferSearchComponent implements OnInit {
     @Input({ required: true }) compactMode!: boolean;
 
-    @Output() search = new EventEmitter<string>();
+    @Output() searchOffers = new EventEmitter<string>();
 
     form = new FormControl<string>('', { nonNullable: true });
     suggestionsSource = new BehaviorSubject<OfferSearchSuggestions[]>([]);
     suggestions$ = this.suggestionsSource.asObservable();
 
-    constructor(
-        private destroyRef: DestroyRef,
-        protected offersService: OffersService,
-    ) {}
+    private destroyRef = inject(DestroyRef);
+    private offersService = inject(OffersService);
 
     ngOnInit(): void {
         this.form.valueChanges
@@ -50,7 +48,7 @@ export class OfferSearchComponent implements OnInit {
     }
 
     onSearch(): void {
-        this.search.emit(this.form.getRawValue());
+        this.searchOffers.emit(this.form.getRawValue());
     }
 
     private fetchSuggestions(searchTerm: string): Observable<OfferSearchSuggestions[]> {

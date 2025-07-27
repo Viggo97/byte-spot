@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
         }
         <ng-content></ng-content>
     `,
-    styleUrl: './dropdown-group.component.scss'
+    styleUrl: './dropdown-group.component.scss',
 })
 export class DropdownGroupComponent {
     @Input() title?: string;

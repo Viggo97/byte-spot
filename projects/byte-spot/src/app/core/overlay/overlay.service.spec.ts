@@ -1,13 +1,12 @@
-import {
-    Component,
-} from '@angular/core';
+/* eslint-disable */
+
+import {Component} from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { OverlayService } from '@app/core/overlay/overlay.service';
 
 @Component({
     selector: 'bsa-mock-component',
     template: '',
-    standalone: false
 })
 class MockComponent {}
 
@@ -15,9 +14,7 @@ describe('OverlayService', () => {
     let service: OverlayService<MockComponent>;
 
     beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [MockComponent],
-        });
+        TestBed.configureTestingModule({declarations: [MockComponent]});
         service = TestBed.inject(OverlayService<MockComponent>);
     });
 

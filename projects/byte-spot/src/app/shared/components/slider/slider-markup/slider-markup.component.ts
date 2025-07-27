@@ -9,12 +9,12 @@ import { SliderMove } from '../slider-move.enum';
     imports: [],
     template: '',
     styleUrl: './slider-markup.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SliderMarkupComponent implements OnInit, OnDestroy {
     private ngZone = inject(NgZone);
     private renderer = inject(Renderer2);
-    private elementRef = inject(ElementRef<HTMLElement>);
+    private elementRef = inject(ElementRef<HTMLElement>) as ElementRef<HTMLElement>;
     private document = inject(DOCUMENT);
 
     @Input() ratio = 0;
@@ -79,8 +79,8 @@ export class SliderMarkupComponent implements OnInit, OnDestroy {
 
     @HostListener('keydown', ['$event'])
     private onKeydown($event: KeyboardEvent): void {
-        const { key } = $event;
-        switch (key) {
+        const code = $event.code as Keycodes;
+        switch (code) {
             case Keycodes.ARROW_LEFT:
                 this.changePosition.emit(SliderMove.LEFT);
                 break;

@@ -1,4 +1,4 @@
-export type I18nLanguageCode = {
+export interface I18nLanguageCode {
     en : string,
     pl: string,
-};
+}

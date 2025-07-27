@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
     selector: 'bsa-tooltip',
     imports: [],
     template: '{{ message }}',
-    styleUrl: './tooltip.component.scss'
+    styleUrl: './tooltip.component.scss',
 })
 export class TooltipComponent {
     message: string | undefined;

@@ -12,14 +12,15 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
             multi: true,
             useExisting: ToggleComponent,
         },
-    ]
+    ],
 })
 export class ToggleComponent implements ControlValueAccessor {
     @HostBinding('tabindex') get tabindex() { return this.disabled ? -1 : 0; }
     @HostBinding('class.checked') checked = false;
     @HostBinding('class.disabled') disabled = false;
 
-    onChange = (value: boolean) => {};
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    onChange = (_value: boolean) => {};
     onTouch = () => {};
 
     @HostListener('click')

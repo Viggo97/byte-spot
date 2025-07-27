@@ -1,7 +1,7 @@
 import { TooltipPosition } from '@app/shared/directvies/tooltip/tooltip-position.enum';
 import { ConnectedPosition } from '@angular/cdk/overlay';
 
-export const TOOLTIP_POSITIONS: { [key in TooltipPosition]: ConnectedPosition } = {
+export const TOOLTIP_POSITIONS: Record<TooltipPosition, ConnectedPosition> = {
     TOP: {
         originX: 'center',
         originY: 'top',

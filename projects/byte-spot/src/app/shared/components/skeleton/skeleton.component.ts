@@ -13,7 +13,7 @@ import { NgClass } from '@angular/common';
              [style.height]="type === 'rectangle' ? height : size">
         </div>
     `,
-    styleUrl: './skeleton.component.scss'
+    styleUrl: './skeleton.component.scss',
 })
 export class SkeletonComponent {
     @Input() type: 'rectangle' | 'square' | 'circle' = 'rectangle';

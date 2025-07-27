@@ -36,7 +36,7 @@
 //         });
 //     });
 //
-//     it('should set English as default language when value not coming from local storage or system preference', () => {
+//     it('should set English as default lang when value does not come from local storage or system preference', () => {
 //         spyOn(localStorage, 'getItem').and.returnValue('invalid value');
 //         spyOnProperty(window.navigator, 'language').and.returnValue(undefined as any);
 //         service = TestBed.inject(LanguageService);

@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
     selector: 'bsa-dropdown-separator',
     imports: [],
     template: '<div></div>',
-    styleUrl: './dropdown-separator.component.scss'
+    styleUrl: './dropdown-separator.component.scss',
 })
+// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class DropdownSeparatorComponent {}

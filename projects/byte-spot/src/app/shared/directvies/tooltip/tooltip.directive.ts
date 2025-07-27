@@ -12,7 +12,7 @@ import { TooltipPosition } from './tooltip-position.enum';
 })
 export class TooltipDirective {
     private overlay = inject(Overlay);
-    private elementRef = inject(ElementRef);
+    private elementRef = inject(ElementRef) as ElementRef<HTMLElement>;
 
     @Input({ required: true }) set bsaTooltip(value: string) {
         this.message = value;
@@ -50,7 +50,7 @@ export class TooltipDirective {
 
     private hideTooltip(): void {
         if (this.overlayRef?.hasAttached()) {
-            this.overlayRef?.detach();
+            this.overlayRef.detach();
             this.overlayRef = null;
         }
     }

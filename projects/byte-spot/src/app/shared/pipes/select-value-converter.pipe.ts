@@ -9,12 +9,13 @@ export class SelectValueConverterPipe implements PipeTransform {
         if (!value) {
             return '';
         }
-        if (value && typeof value === 'object' && label) {
+        if (typeof value === 'object' && label) {
             if (label in value) {
                 return value[label as keyof typeof value];
             }
             throw new Error('Provided label is incorrect');
         }
+        // eslint-disable-next-line @typescript-eslint/no-base-to-string
         return value.toString();
     }
 }

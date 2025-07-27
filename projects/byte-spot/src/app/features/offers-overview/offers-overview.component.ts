@@ -24,7 +24,7 @@ import { PaginationParams } from './types/pagination-params';
         OfferSettingsComponent,
     ],
     templateUrl: './offers-overview.component.html',
-    styleUrl: './offers-overview.component.scss'
+    styleUrl: './offers-overview.component.scss',
 })
 export class OffersOverviewComponent implements OnInit {
     private breakpointObserver = inject(BreakpointObserver);

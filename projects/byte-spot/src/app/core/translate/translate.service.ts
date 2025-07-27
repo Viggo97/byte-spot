@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
 import { LanguageService } from '../language/language.service';
 import { Language } from '../language/language.enum';
@@ -9,8 +9,9 @@ import { i18n } from './i18n/i18n';
 export class TranslateService {
     private readonly i18n = i18n;
     private readonly code: keyof I18nLanguageCode;
+    private languageService = inject(LanguageService);
 
-    constructor(private languageService: LanguageService) {
+    constructor() {
         const lang = this.languageService.language;
         this.code = lang === Language.ENGLISH ? 'en' : 'pl';
     }

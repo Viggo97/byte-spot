@@ -1,6 +1,6 @@
 import { FormControl } from '@angular/forms';
 
-export type ValueControl<T> = {
+export interface ValueControl<T> {
     value: T;
     control: FormControl;
-};
+}

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 
@@ -25,7 +25,7 @@ import { SelectValueConverterPipe } from '../../pipes/select-value-converter.pip
             multi: true,
             useExisting: SelectButtonComponent,
         },
-    ]
+    ],
 })
 export class SelectButtonComponent<T> implements ControlValueAccessor {
     @Input({ required: true }) icon!: string;
@@ -40,11 +40,11 @@ export class SelectButtonComponent<T> implements ControlValueAccessor {
     value: T | null = null;
     open = false;
 
-    onChange = (value: T) => {};
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    onChange = (_value: T) => {};
     onTouch = () => {};
 
-    constructor(private cdr: ChangeDetectorRef) {
-    }
+    private cdr = inject(ChangeDetectorRef);
 
     onSelectOption(value: T): void {
         this.open = false;

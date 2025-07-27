@@ -28,4 +28,8 @@ export class OfferFilters {
         this.locations = locations;
         this.seniority = seniority;
     }
+
+    static default(): OfferFilters {
+        return new OfferFilters(0, 50000, [], [], [], [], []);
+    }
 }

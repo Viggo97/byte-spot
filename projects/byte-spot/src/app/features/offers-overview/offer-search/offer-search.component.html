@@ -2,12 +2,12 @@
     <bsa-offer-search-drawer
         [form]="form"
         [suggestions$]="suggestions$"
-        (search)="onSearch()">
+        (searchOffers)="onSearch()">
     </bsa-offer-search-drawer>
 } @else {
     <bsa-offer-search-dropdown
         [form]="form"
         [suggestions$]="suggestions$"
-        (search)="onSearch()">
+        (searchOffers)="onSearch()">
     </bsa-offer-search-dropdown>
 }

@@ -11,7 +11,7 @@ import { Keycodes } from '../../enums/keycodes.enum';
 })
 export class DropdownComponent {
     @ContentChildren(DropdownOptionComponent, { descendants: true, read: ElementRef })
-        items!: QueryList<ElementRef<HTMLElement>>;
+    items!: QueryList<ElementRef<HTMLElement>>;
 
     private index = 0;
 
@@ -19,7 +19,7 @@ export class DropdownComponent {
     onKeyboardAction(event: KeyboardEvent): void {
         event.preventDefault();
 
-        const { code } = event;
+        const code = event.code as Keycodes;
 
         switch (code) {
             case Keycodes.ARROW_DOWN:

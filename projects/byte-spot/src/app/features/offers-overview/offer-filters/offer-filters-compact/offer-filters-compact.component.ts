@@ -17,7 +17,7 @@ import { OfferFiltersContentComponent } from '../offer-filters-content/offer-fil
         OfferFiltersContentComponent,
     ],
     templateUrl: './offer-filters-compact.component.html',
-    styleUrl: './offer-filters-compact.component.scss'
+    styleUrl: './offer-filters-compact.component.scss',
 })
 export class OfferFiltersCompactComponent {
     private overlay = inject(Overlay);

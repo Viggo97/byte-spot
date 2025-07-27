@@ -14,7 +14,7 @@ import { OfferListItemComponent } from './offer-list-item/offer-list-item.compon
         TranslatePipe,
     ],
     templateUrl: './offer-list.component.html',
-    styleUrl: './offer-list.component.scss'
+    styleUrl: './offer-list.component.scss',
 })
 export class OfferListComponent {
     @Input({ required: true }) offers$!: Observable<OfferPost[]>;

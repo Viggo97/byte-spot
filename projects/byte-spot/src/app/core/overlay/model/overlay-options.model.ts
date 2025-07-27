@@ -11,27 +11,27 @@ export type OverlayOptions =
         relativePosition?: OverlayRelativeContentPosition;
     };
 
-type BaseOverlayOptions = {
+interface BaseOverlayOptions {
     componentInputs?: ComponentInputs[];
     backdrop?: OverlayBackdropOptions;
-};
+}
 
-export type OverlayBackdropOptions = {
+export interface OverlayBackdropOptions {
     background?: boolean;
     closeOnBackdropClick?: boolean;
     closeOnEscape?: boolean;
-};
+}
 
-type OverlayDirectContentPosition = {
+interface OverlayDirectContentPosition {
     top?: number;
     bottom?: number;
     left?: number;
     right?: number;
     width?: number;
     height?: number;
-};
+}
 
-type OverlayRelativeContentPosition = {
+interface OverlayRelativeContentPosition {
     relativeElement: Element;
     offsetX?: number;
     offsetY?: number;
@@ -45,4 +45,4 @@ type OverlayRelativeContentPosition = {
     }
     width?: number;
     height?: number;
-};
+}

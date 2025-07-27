@@ -76,6 +76,7 @@ describe('ThemeService', () => {
         });
 
         expect(theme).toBe(Theme.DARK);
+        // eslint-disable-next-line @typescript-eslint/unbound-method
         expect(themeService.switchTheme).not.toHaveBeenCalled();
         expect(localStorage.getItem('theme')).toBe(null);
         expect(document.body).toHaveClass('dark-theme');

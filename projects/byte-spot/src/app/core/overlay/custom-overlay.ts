@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import {
     ApplicationRef, ComponentRef, createComponent,
     NgZone, Renderer2, Type,
@@ -5,7 +7,7 @@ import {
 import { EdgeX, EdgeY } from '@app/core/overlay/enum/relative-position-edge.enum';
 import { ComponentInputs } from '@app/core/overlay/model/component-inputs.model';
 import { OverlayBackdropOptions, OverlayOptions } from '@app/core/overlay/model/overlay-options.model';
-import { Keycodes } from '@app/shared/enums/keycodes/keycodes.enum';
+import { Keycodes } from '@shared';
 import { Subject } from 'rxjs';
 
 type CustomOverlayBackdrop = {

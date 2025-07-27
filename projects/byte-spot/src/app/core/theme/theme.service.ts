@@ -40,8 +40,8 @@ export class ThemeService {
         });
     }
 
-    private themeValid(theme: string): boolean {
-        return theme === Theme.LIGHT || theme === Theme.DARK;
+    private themeValid(theme: string): theme is Theme {
+        return Object.values(Theme).includes(theme as Theme);
     }
 
     private saveThemeToLocalStorage(theme: Theme): void {

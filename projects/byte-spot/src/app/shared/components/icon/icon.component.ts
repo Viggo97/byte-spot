@@ -14,7 +14,7 @@ import { Component, Input } from '@angular/core';
           justify-content: center;
           align-items: center;
       }
-    `
+    `,
 })
 export class IconComponent {
     private location = 'assets/svg/icons';

@@ -16,7 +16,7 @@ import { CheckboxComponent, IconComponent, KeyValueControl, SliderComponent, Tog
         TranslatePipe,
     ],
     templateUrl: './offer-filters-content.component.html',
-    styleUrl: './offer-filters-content.component.scss'
+    styleUrl: './offer-filters-content.component.scss',
 })
 export class OfferFiltersContentComponent {
     @Input({ required: true }) form!: FormGroup;

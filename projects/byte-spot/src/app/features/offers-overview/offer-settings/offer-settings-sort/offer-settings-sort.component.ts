@@ -8,10 +8,10 @@ import { TranslateService } from '@core';
 
 import { OfferSort } from '../../enums/offer-sort.enum';
 
-type SortOption = {
+interface SortOption {
     key: OfferSort;
     label: string
-};
+}
 
 @Component({
     selector: 'bsa-offer-settings-sort',
@@ -20,7 +20,7 @@ type SortOption = {
         SelectComponent,
     ],
     templateUrl: './offer-settings-sort.component.html',
-    styleUrl: './offer-settings-sort.component.scss'
+    styleUrl: './offer-settings-sort.component.scss',
 })
 export class OfferSettingsSortComponent {
     private translateService = inject(TranslateService);
