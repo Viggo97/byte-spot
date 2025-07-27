@@ -107,8 +107,8 @@
                     "builder": "@angular-eslint/builder:lint",
                     "options": {
                         "lintFilePatterns": [
-                            "src/**/*.ts",
-                            "src/**/*.html"
+                            "projects/byte-spot/**/*.ts",
+                            "projects/byte-spot/**/*.html"
                         ]
                     }
                 }

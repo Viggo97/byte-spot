@@ -67,6 +67,8 @@ export default defineConfig(
             '@stylistic/quotes': ['error', 'single'],
             'comma-dangle': ['error', 'always-multiline'],
             '@typescript-eslint/no-explicit-any': 'error',
+            '@typescript-eslint/restrict-template-expressions': 'off',
+            '@typescript-eslint/no-empty-function': 'off',
             '@angular-eslint/directive-selector': [
                 'error',
                 {
