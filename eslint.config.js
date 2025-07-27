@@ -93,4 +93,26 @@ export default defineConfig(
             ...angular.configs.templateAccessibility,
         ],
     },
+    {
+        basePath: 'projects/byte-spot-lib',
+        files: ['**/*.ts'],
+        rules: {
+            '@angular-eslint/directive-selector': [
+                'error',
+                {
+                    'type': 'attribute',
+                    'prefix': 'ngx-bsa',
+                    'style': 'camelCase',
+                },
+            ],
+            '@angular-eslint/component-selector': [
+                'error',
+                {
+                    'type': 'element',
+                    'prefix': 'ngx-bsa',
+                    'style': 'kebab-case',
+                },
+            ],
+        }
+    },
 );
