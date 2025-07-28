@@ -1,0 +1,15 @@
+<span role="checkbox"
+      [attr.aria-checked]="checked()"
+      [attr.aria-disabled]="disabled()"
+      [attr.aria-labelledby]="id() + '-label'"
+      [id]="id()"
+      [tabindex]="disabled() ? -1 : 0"
+      class="checkbox">
+    @if (checked()) {
+        <ngx-bsa-icon-check></ngx-bsa-icon-check>
+    }
+</span>
+
+<span [id]="id() + '-label'">
+    <ng-content></ng-content>
+</span>
