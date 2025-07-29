@@ -5,5 +5,6 @@ export * from './lib/components/icons/icon-language.component';
 export * from './lib/components/icons/icon-location.component';
 export * from './lib/components/icons/icon-moon.component';
 export * from './lib/components/icons/icon-sun.component';
+export * from './lib/components/icons/icon-x-mark.component';
 
 export * from './lib/components/checkbox/checkbox.component';
