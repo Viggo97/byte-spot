@@ -1,0 +1,31 @@
+:host {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: 95vh;
+    height: 100%;
+
+    .drawer-container {
+        height: 100%;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--bgColor-secondary);
+        border: var(--border-secondary);
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+
+        header {
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row-reverse;
+        }
+
+        .drawer-content {
+            overflow-y: auto;
+            height: 100%;
+        }
+    }
+}

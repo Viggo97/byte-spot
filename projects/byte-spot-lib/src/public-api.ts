@@ -8,3 +8,4 @@ export * from './lib/components/icons/icon-sun.component';
 export * from './lib/components/icons/icon-x-mark.component';
 
 export * from './lib/components/checkbox/checkbox.component';
+export * from './lib/components/drawer/drawer.component';
