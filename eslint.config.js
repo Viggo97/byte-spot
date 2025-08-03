@@ -69,6 +69,7 @@ export default defineConfig(
             '@typescript-eslint/no-explicit-any': 'error',
             '@typescript-eslint/restrict-template-expressions': 'off',
             '@typescript-eslint/no-empty-function': 'off',
+            '@typescript-eslint/no-unused-vars': 'off',
             '@angular-eslint/directive-selector': [
                 'error',
                 {
@@ -103,7 +104,7 @@ export default defineConfig(
                 'error',
                 {
                     'type': 'attribute',
-                    'prefix': 'ngx-bsa',
+                    'prefix': 'ngxBsa',
                     'style': 'camelCase',
                 },
             ],
