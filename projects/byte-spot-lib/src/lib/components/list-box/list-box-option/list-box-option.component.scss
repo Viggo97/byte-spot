@@ -1,0 +1,31 @@
+@use '../../../styles/mixins';
+
+:host {
+    position: relative;
+    padding: .375rem 1.25rem .375rem .5rem;
+    border-radius: 4px;
+    font: var(--font-sm);
+    color: var(--fgColor-primary);
+    cursor: pointer;
+    @include mixins.ellipsis;
+
+    &:hover,
+    &.visual-focus {
+        background-color: var(--list-box-bgColor-hover);
+    }
+
+    &[aria-selected="true"] {
+        ngx-bsa-icon-check {
+            display: inline;
+            visibility: visible;
+        }
+    }
+
+    ngx-bsa-icon-check {
+        display: none;
+        visibility: hidden;
+        position: absolute;
+        right: 0;
+        color: var(--fgColor-violet);
+    }
+}
