@@ -34,6 +34,7 @@ export default defineConfig(
             'import/no-unresolved': 'off',
             'import/first': 'error',
             'import/newline-after-import': 'error',
+            'import/no-cycle': ['error', { 'maxDepth': 1 }],
             'no-duplicate-imports': 'error',
             'unused-imports/no-unused-imports': 'error',
             'unused-imports/no-unused-vars': [
@@ -65,6 +66,7 @@ export default defineConfig(
             ],
             '@stylistic/indent': ['error', 4],
             '@stylistic/quotes': ['error', 'single'],
+            '@stylistic/no-multiple-empty-lines': ['error', { 'max': 1 }],
             'comma-dangle': ['error', 'always-multiline'],
             '@typescript-eslint/no-explicit-any': 'error',
             '@typescript-eslint/restrict-template-expressions': 'off',
