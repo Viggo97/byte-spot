@@ -32,6 +32,7 @@ export class ListBoxComponent<T> implements ControlValueAccessor, AfterContentIn
     ariaLabelledby = input<string>();
     exposeAriaActiveDescendant = input(false);
     comparisonField = input<keyof T>();
+    comboSelection = input(false);
 
     selectOption = output<T>();
 
@@ -67,8 +68,7 @@ export class ListBoxComponent<T> implements ControlValueAccessor, AfterContentIn
     private initSelectedOption(): void {
         const optionIndex = this.listBoxOptions().findIndex(o => this.equalsToCurrentValue(o.value()));
         if (optionIndex !== -1) {
-            this.addSelectedAttribute(optionIndex);
-            this.addVisualFocus(optionIndex);
+            this.markOption(optionIndex, true);
         }
     }
 
@@ -79,8 +79,7 @@ export class ListBoxComponent<T> implements ControlValueAccessor, AfterContentIn
                 this.clearVisualFocus();
                 const optionIndex = this.listBoxOptions().findIndex(o => this.equalsToCurrentValue(o.value()));
                 if (optionIndex !== -1) {
-                    this.addSelectedAttribute(optionIndex);
-                    this.addVisualFocus(optionIndex);
+                    this.markOption(optionIndex, true);
                 }
                 this.value = value;
                 this.onChange(this.value);
@@ -105,7 +104,7 @@ export class ListBoxComponent<T> implements ControlValueAccessor, AfterContentIn
             this.value = this.listBoxOptions()[optionIndex].value();
             this.onChange(this.value);
         } else {
-            this.addVisualFocus(0);
+            this.markOption(0);
         }
     }
 
@@ -116,32 +115,40 @@ export class ListBoxComponent<T> implements ControlValueAccessor, AfterContentIn
 
         if (optionIndex === -1) {
             if (event.code === 'ArrowDown') {
-                this.addVisualFocus(firstOption);
+                this.markOption(firstOption);
             } else if (event.code === 'ArrowUp') {
-                this.addVisualFocus(lastOption);
+                this.markOption(lastOption);
             }
             return;
         }
 
         this.removeVisualFocus(optionIndex);
+        this.removeSelectedAttribute();
 
         if (event.code === 'ArrowDown') {
             if (optionIndex === lastOption) {
-                this.addVisualFocus(firstOption);
+                this.markOption(firstOption);
             } else {
-                this.addVisualFocus(optionIndex + 1);
+                this.markOption(optionIndex + 1);
             }
         } else if (event.code === 'ArrowUp') {
             if (optionIndex === 0) {
-                this.addVisualFocus(lastOption);
+                this.markOption(lastOption);
             } else {
-                this.addVisualFocus(optionIndex - 1);
+                this.markOption(optionIndex - 1);
             }
         }
     }
 
     private getVisuallyFocusedListBoxOptionRefIndex(): number {
         return this.listBoxOptionRefs().findIndex(r => r.nativeElement.classList.contains('visual-focus'));
+    }
+
+    private markOption(optionIndex: number, addSelectedAttribute = false): void {
+        this.addVisualFocus(optionIndex);
+        if (addSelectedAttribute || this.comboSelection()) {
+            this.addSelectedAttribute(optionIndex);
+        }
     }
 
     private addVisualFocus(optionIndex: number): void {

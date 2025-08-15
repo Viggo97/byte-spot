@@ -9,7 +9,9 @@ import { IconCheckComponent } from '../../icons/icon-check.component';
     ],
     template: `
         <ng-content></ng-content>
-        <ngx-bsa-icon-check></ngx-bsa-icon-check>
+        @if (showCheck()) {
+            <ngx-bsa-icon-check></ngx-bsa-icon-check>
+        }
     `,
     styleUrl: './list-box-option.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,6 +23,7 @@ import { IconCheckComponent } from '../../icons/icon-check.component';
 export class ListBoxOptionComponent<T> {
     value = input.required<T>();
     id = input.required<string>();
+    showCheck = input(true);
     selectOption = output<T>();
 
     private optionIdGenerator = inject(OptionIdGenerator);
