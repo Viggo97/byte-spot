@@ -33,14 +33,14 @@ import { ListBoxEventBusUtil } from '../list-box/list-box-event-bus.util';
         },
     ],
 })
-export class SelectComponent<T> implements OnInit, ControlValueAccessor {
+export class SelectComponent<TOption> implements OnInit, ControlValueAccessor {
     id = input.required<string>();
-    options = input.required<T[]>();
+    options = input.required<TOption[]>();
     bindLabel = input<string>();
     placeholder = input<string>('');
     ariaLabel = input<string>();
     ariaLabelledBy = input<string>();
-    comparisonField = input<keyof T>();
+    comparisonField = input<keyof TOption>();
     iconMode = input(false);
     customIcon = input(false);
     dropdownWidth = input<string>();
@@ -50,12 +50,12 @@ export class SelectComponent<T> implements OnInit, ControlValueAccessor {
     private listBoxEventBus = inject(ListBoxEventBusUtil);
     private destroyRef = inject(DestroyRef);
 
-    onChange = (_value: T) => {};
+    onChange = (_value: TOption) => {};
     onTouch = () => {};
-    value: T | null = null;
+    value: TOption | null = null;
 
     protected open = signal(false);
-    protected form = new FormControl<T | null>(null);
+    protected form = new FormControl<TOption | null>(null);
     protected ariaActiveDescendant = computed<string | null>(() => this.listBox()?.ariaActiveDescendant() ?? null);
 
     ngOnInit(): void {
@@ -98,7 +98,7 @@ export class SelectComponent<T> implements OnInit, ControlValueAccessor {
         this.listBoxEventBus.emit(event);
     }
 
-    registerOnChange(onChange: (value: T) => void): void {
+    registerOnChange(onChange: (value: TOption) => void): void {
         this.onChange = onChange;
     }
 
@@ -106,7 +106,7 @@ export class SelectComponent<T> implements OnInit, ControlValueAccessor {
         this.onTouch = onTouch;
     }
 
-    writeValue(value: T): void {
+    writeValue(value: TOption): void {
         this.value = value;
         this.form.setValue(value);
     }

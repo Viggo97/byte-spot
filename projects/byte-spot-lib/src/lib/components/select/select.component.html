@@ -2,13 +2,13 @@
     type="button"
     class="button-secondary"
     role="combobox"
+    #selectButton
+    cdkOverlayOrigin
     [attr.aria-expanded]="open()"
     [attr.aria-controls]="'list-box-' + id()"
     [attr.aria-label]="ariaLabel()"
     [attr.aria-labelledby]="ariaLabelledBy()"
     [attr.aria-activedescendant]="ariaActiveDescendant()"
-    #selectButton
-    cdkOverlayOrigin
     (click)="onClick()"
     (keydown.enter)="onKeydown($any($event))"
     (keydown.space)="onKeydown($any($event))"
@@ -31,7 +31,7 @@
     cdkConnectedOverlay
     [cdkConnectedOverlayOrigin]="selectButton"
     [cdkConnectedOverlayOpen]="open()"
-    [cdkConnectedOverlayWidth]="selectButton.offsetWidth"
+    [cdkConnectedOverlayWidth]="dropdownWidth() || selectButton.offsetWidth"
     (overlayOutsideClick)="hideListBox()">
     <ngx-bsa-list-box
         ngxBsaListBoxEventMiddleware
