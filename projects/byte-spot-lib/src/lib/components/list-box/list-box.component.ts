@@ -32,7 +32,7 @@ export class ListBoxComponent<T> implements ControlValueAccessor, AfterContentIn
     ariaLabelledby = input<string>();
     exposeAriaActiveDescendant = input(false);
     comparisonField = input<keyof T>();
-    comboSelection = input(false);
+    initialFocusedOptionIndex  = input<number | null>(null);
 
     selectOption = output<T>();
 
@@ -68,7 +68,13 @@ export class ListBoxComponent<T> implements ControlValueAccessor, AfterContentIn
     private initSelectedOption(): void {
         const optionIndex = this.listBoxOptions().findIndex(o => this.equalsToCurrentValue(o.value()));
         if (optionIndex !== -1) {
-            this.markOption(optionIndex, true);
+            this.setSelectedAttribute(optionIndex);
+            this.setVisualFocus(optionIndex);
+            return;
+        }
+
+        if (this.initialFocusedOptionIndex() !== null) {
+            this.setVisualFocus(this.initialFocusedOptionIndex() as number);
         }
     }
 
@@ -77,11 +83,12 @@ export class ListBoxComponent<T> implements ControlValueAccessor, AfterContentIn
             option.selectOption.subscribe(value => {
                 this.removeSelectedAttribute();
                 this.clearVisualFocus();
+                this.value = value;
                 const optionIndex = this.listBoxOptions().findIndex(o => this.equalsToCurrentValue(o.value()));
                 if (optionIndex !== -1) {
-                    this.markOption(optionIndex, true);
+                    this.setSelectedAttribute(optionIndex);
+                    this.setVisualFocus(optionIndex);
                 }
-                this.value = value;
                 this.onChange(this.value);
             });
         });
@@ -100,11 +107,9 @@ export class ListBoxComponent<T> implements ControlValueAccessor, AfterContentIn
 
         if (optionIndex !== -1) {
             this.removeSelectedAttribute();
-            this.addSelectedAttribute(optionIndex);
+            this.setSelectedAttribute(optionIndex);
             this.value = this.listBoxOptions()[optionIndex].value();
             this.onChange(this.value);
-        } else {
-            this.markOption(0);
         }
     }
 
@@ -115,27 +120,26 @@ export class ListBoxComponent<T> implements ControlValueAccessor, AfterContentIn
 
         if (optionIndex === -1) {
             if (event.code === 'ArrowDown') {
-                this.markOption(firstOption);
+                this.setVisualFocus(firstOption);
             } else if (event.code === 'ArrowUp') {
-                this.markOption(lastOption);
+                this.setVisualFocus(lastOption);
             }
             return;
         }
 
         this.removeVisualFocus(optionIndex);
-        this.removeSelectedAttribute();
 
         if (event.code === 'ArrowDown') {
             if (optionIndex === lastOption) {
-                this.markOption(firstOption);
+                this.setVisualFocus(firstOption);
             } else {
-                this.markOption(optionIndex + 1);
+                this.setVisualFocus(optionIndex + 1);
             }
         } else if (event.code === 'ArrowUp') {
             if (optionIndex === 0) {
-                this.markOption(lastOption);
+                this.setVisualFocus(lastOption);
             } else {
-                this.markOption(optionIndex - 1);
+                this.setVisualFocus(optionIndex - 1);
             }
         }
     }
@@ -144,14 +148,7 @@ export class ListBoxComponent<T> implements ControlValueAccessor, AfterContentIn
         return this.listBoxOptionRefs().findIndex(r => r.nativeElement.classList.contains('visual-focus'));
     }
 
-    private markOption(optionIndex: number, addSelectedAttribute = false): void {
-        this.addVisualFocus(optionIndex);
-        if (addSelectedAttribute || this.comboSelection()) {
-            this.addSelectedAttribute(optionIndex);
-        }
-    }
-
-    private addVisualFocus(optionIndex: number): void {
+    private setVisualFocus(optionIndex: number): void {
         const option = this.listBoxOptionRefs()[optionIndex];
         option.nativeElement.classList.add('visual-focus');
         this.ariaActiveDescendant.set(option.nativeElement.id);
@@ -169,7 +166,7 @@ export class ListBoxComponent<T> implements ControlValueAccessor, AfterContentIn
         }
     }
 
-    protected addSelectedAttribute(optionIndex: number): void {
+    protected setSelectedAttribute(optionIndex: number): void {
         this.listBoxOptionRefs()[optionIndex].nativeElement.setAttribute('aria-selected', 'true');
     }
 
