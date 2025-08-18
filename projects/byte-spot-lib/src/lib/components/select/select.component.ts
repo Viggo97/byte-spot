@@ -57,6 +57,7 @@ export class SelectComponent<TOption> implements OnInit, ControlValueAccessor {
     protected open = signal(false);
     protected form = new FormControl<TOption | null>(null);
     protected ariaActiveDescendant = computed<string | null>(() => this.listBox()?.ariaActiveDescendant() ?? null);
+    protected initialFocusedOptionIndex = signal(0);
 
     ngOnInit(): void {
         this.form.valueChanges
@@ -91,11 +92,14 @@ export class SelectComponent<TOption> implements OnInit, ControlValueAccessor {
 
         if (!this.open()) {
             this.showListBox();
-            if (this.value && (event.code === 'Enter' || event.code === 'Space')) {
-                return;
+            if (event.code === 'ArrowUp') {
+                this.initialFocusedOptionIndex.set(this.options().length - 1);
+            } else if (event.code === 'ArrowDown') {
+                this.initialFocusedOptionIndex.set(0);
             }
+        } else {
+            this.listBox()?.onKeydown(event);
         }
-        this.listBoxEventBus.emit(event);
     }
 
     registerOnChange(onChange: (value: TOption) => void): void {
