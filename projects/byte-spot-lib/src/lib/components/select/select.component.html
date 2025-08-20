@@ -34,7 +34,6 @@
     [cdkConnectedOverlayWidth]="dropdownWidth() || selectButton.offsetWidth"
     (overlayOutsideClick)="hideListBox()">
     <ngx-bsa-list-box
-        ngxBsaListBoxEventMiddleware
         [formControl]="form!"
         [initialFocusedOptionIndex]="initialFocusedOptionIndex()"
         [comparisonField]="comparisonField()"

@@ -6,8 +6,6 @@ import { IconChevronDownComponent } from '../icons/icon-chevron-down.component';
 import { ListBoxComponent } from '../list-box/list-box.component';
 import { ListBoxOptionComponent } from '../list-box/list-box-option/list-box-option.component';
 import { ListBoxOptionValueConverterPipe } from '../list-box/list-box-option/list-box-option-value-converter.pipe';
-import { ListBoxEventMiddlewareDirective } from '../list-box/list-box-event-middleware.directive';
-import { ListBoxEventBusUtil } from '../list-box/list-box-event-bus.util';
 
 @Component({
     selector: 'ngx-bsa-select',
@@ -20,12 +18,10 @@ import { ListBoxEventBusUtil } from '../list-box/list-box-event-bus.util';
         ListBoxComponent,
         ListBoxOptionComponent,
         ListBoxOptionValueConverterPipe,
-        ListBoxEventMiddlewareDirective,
     ],
     templateUrl: './select.component.html',
     styleUrl: './select.component.scss',
     providers: [
-        ListBoxEventBusUtil,
         {
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => SelectComponent),
@@ -47,7 +43,6 @@ export class SelectComponent<TOption> implements OnInit, ControlValueAccessor {
 
     private listBox = viewChild(ListBoxComponent);
 
-    private listBoxEventBus = inject(ListBoxEventBusUtil);
     private destroyRef = inject(DestroyRef);
 
     onChange = (_value: TOption) => {};
