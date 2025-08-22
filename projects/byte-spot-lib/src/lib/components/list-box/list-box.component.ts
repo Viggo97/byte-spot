@@ -1,4 +1,4 @@
-import { Component, input, ChangeDetectionStrategy, HostListener, forwardRef, contentChildren, ElementRef, output, AfterContentInit, signal } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy, HostListener, forwardRef, contentChildren, ElementRef, output, AfterContentInit, signal, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OptionIdGenerator } from './option-id-generator';
 import { ListBoxOptionComponent } from './list-box-option/list-box-option.component';
@@ -26,24 +26,32 @@ import { ListBoxOptionComponent } from './list-box-option/list-box-option.compon
         '(blur)': 'clearVisualFocus()',
     },
 })
-export class ListBoxComponent<T> implements ControlValueAccessor, AfterContentInit {
+export class ListBoxComponent<TOption> implements OnInit, AfterContentInit, ControlValueAccessor {
     id = input.required<string>();
     ariaLabel = input<string>();
     ariaLabelledby = input<string>();
     exposeAriaActiveDescendant = input(false);
-    comparisonField = input<keyof T>();
+    comparisonField = input<keyof TOption>();
+    initialValue = input<TOption | null>();
     initialFocusedOptionIndex  = input<number | null>(null);
 
-    selectOption = output<T>();
+    selectOption = output<TOption>();
 
-    listBoxOptions = contentChildren(ListBoxOptionComponent<T>);
-    listBoxOptionRefs = contentChildren<ListBoxOptionComponent<T>, ElementRef<HTMLElement>>
+    listBoxOptions = contentChildren(ListBoxOptionComponent<TOption>);
+    listBoxOptionRefs = contentChildren<ListBoxOptionComponent<TOption>, ElementRef<HTMLElement>>
     (ListBoxOptionComponent, { descendants: true, read: ElementRef<HTMLElement> });
 
     ariaActiveDescendant = signal<string | null>(null);
-    onChange = (_value: T) => {};
+    onChange = (_value: TOption) => {};
     onTouch = () => {};
-    value?: T;
+    private value: TOption | null = null;
+
+    ngOnInit(): void {
+        const initialValue = this.initialValue();
+        if (initialValue) {
+            this.value = initialValue;
+        }
+    }
 
     ngAfterContentInit(): void {
         this.initSelectedOption();
@@ -90,11 +98,12 @@ export class ListBoxComponent<T> implements ControlValueAccessor, AfterContentIn
                     this.setVisualFocus(optionIndex);
                 }
                 this.onChange(this.value);
+                this.selectOption.emit(this.value);
             });
         });
     }
 
-    private equalsToCurrentValue(value: T): boolean {
+    private equalsToCurrentValue(value: TOption): boolean {
         const comparisonField = this.comparisonField();
 
         return comparisonField && this.value && typeof this.value === 'object' && comparisonField in this.value
@@ -110,6 +119,7 @@ export class ListBoxComponent<T> implements ControlValueAccessor, AfterContentIn
             this.setSelectedAttribute(optionIndex);
             this.value = this.listBoxOptions()[optionIndex].value();
             this.onChange(this.value);
+            this.selectOption.emit(this.value);
         }
     }
 
@@ -176,7 +186,7 @@ export class ListBoxComponent<T> implements ControlValueAccessor, AfterContentIn
             ?.nativeElement.removeAttribute('aria-selected');
     }
 
-    registerOnChange(onChange: (value: T) => void): void {
+    registerOnChange(onChange: (value: TOption) => void): void {
         this.onChange = onChange;
     }
 
@@ -184,7 +194,7 @@ export class ListBoxComponent<T> implements ControlValueAccessor, AfterContentIn
         this.onTouch = onTouch;
     }
 
-    writeValue(value: T): void {
+    writeValue(value: TOption): void {
         this.value = value;
     }
 }

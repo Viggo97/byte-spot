@@ -20,11 +20,11 @@ import { IconCheckComponent } from '../../icons/icon-check.component';
         '[attr.id]': 'listBoxOptionId()',
     },
 })
-export class ListBoxOptionComponent<T> {
-    value = input.required<T>();
+export class ListBoxOptionComponent<TOption> {
+    value = input.required<TOption>();
     id = input.required<string>();
     showCheck = input(true);
-    selectOption = output<T>();
+    selectOption = output<TOption>();
 
     private optionIdGenerator = inject(OptionIdGenerator);
 
