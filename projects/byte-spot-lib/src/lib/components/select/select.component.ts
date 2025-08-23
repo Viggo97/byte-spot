@@ -1,6 +1,5 @@
-import { Component, inject, input, signal, viewChild, OnInit, forwardRef, DestroyRef, computed } from '@angular/core';
-import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, input, signal, viewChild, forwardRef, computed } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { IconChevronDownComponent } from '../icons/icon-chevron-down.component';
 import { ListBoxComponent } from '../list-box/list-box.component';
@@ -12,8 +11,6 @@ import { ListBoxOptionValueConverterPipe } from '../list-box/list-box-option/lis
     imports: [
         CdkOverlayOrigin,
         CdkConnectedOverlay,
-        FormsModule,
-        ReactiveFormsModule,
         IconChevronDownComponent,
         ListBoxComponent,
         ListBoxOptionComponent,
@@ -29,7 +26,7 @@ import { ListBoxOptionValueConverterPipe } from '../list-box/list-box-option/lis
         },
     ],
 })
-export class SelectComponent<TOption> implements OnInit, ControlValueAccessor {
+export class SelectComponent<TOption> implements ControlValueAccessor {
     id = input.required<string>();
     options = input.required<TOption[]>();
     bindLabel = input<string>();
@@ -43,31 +40,16 @@ export class SelectComponent<TOption> implements OnInit, ControlValueAccessor {
 
     private listBox = viewChild(ListBoxComponent);
 
-    private destroyRef = inject(DestroyRef);
-
     onChange = (_value: TOption) => {};
     onTouch = () => {};
-    value: TOption | null = null;
+    protected value: TOption | null = null;
 
     protected open = signal(false);
-    protected form = new FormControl<TOption | null>(null);
     protected ariaActiveDescendant = computed<string | null>(() => this.listBox()?.ariaActiveDescendant() ?? null);
     protected initialFocusedOptionIndex = signal(0);
 
-    ngOnInit(): void {
-        this.form.valueChanges
-            .pipe(takeUntilDestroyed(this.destroyRef))
-            .subscribe(value => {
-                if (value) {
-                    this.value = value;
-                    this.onChange(this.value);
-                }
-                this.hideListBox();
-            });
-    }
-
     protected showListBox(): void {
-        this. open.set(true);
+        this.open.set(true);
     }
 
     protected hideListBox(): void {
@@ -80,6 +62,12 @@ export class SelectComponent<TOption> implements OnInit, ControlValueAccessor {
         } else {
             this.showListBox();
         }
+    }
+
+    protected onSelectOption(value: TOption): void {
+        this.value = value;
+        this.onChange(this.value);
+        this.hideListBox();
     }
 
     protected onKeydown(event: KeyboardEvent) {
@@ -107,6 +95,5 @@ export class SelectComponent<TOption> implements OnInit, ControlValueAccessor {
 
     writeValue(value: TOption): void {
         this.value = value;
-        this.form.setValue(value);
     }
 }

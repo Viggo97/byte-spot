@@ -18,7 +18,7 @@
     @if (iconMode()) {
         <ng-content select="[data-custom-icon]"></ng-content>
     } @else {
-        <span>{{value ? (value | listBoxOptionValueConverter : bindLabel()) : placeholder()}}</span>
+        <span>{{ value ? (value | listBoxOptionValueConverter : bindLabel()) : placeholder() }}</span>
 
         @if (customIcon()) {
             <ng-content select="[data-custom-icon]"></ng-content>
@@ -34,18 +34,19 @@
     [cdkConnectedOverlayWidth]="dropdownWidth() || selectButton.offsetWidth"
     (overlayOutsideClick)="hideListBox()">
     <ngx-bsa-list-box
-        [formControl]="form!"
+        [initialValue]="value"
         [initialFocusedOptionIndex]="initialFocusedOptionIndex()"
         [comparisonField]="comparisonField()"
         [id]="'list-box-' + id()"
         [ariaLabel]="ariaLabel()"
         [ariaLabelledby]="ariaLabelledBy()"
-        [exposeAriaActiveDescendant]="true">
+        [exposeAriaActiveDescendant]="true"
+        (selectOption)="onSelectOption($event)">
         @for (option of options(); track option) {
             <ngx-bsa-list-box-option
                 [id]="'list-box-option-' + id()"
                 [value]="option">
-                    <ng-container>{{option | listBoxOptionValueConverter : bindLabel()}}</ng-container>
+                <ng-container>{{ option | listBoxOptionValueConverter : bindLabel() }}</ng-container>
             </ngx-bsa-list-box-option>
         }
     </ngx-bsa-list-box>
