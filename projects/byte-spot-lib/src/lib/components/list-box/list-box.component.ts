@@ -55,7 +55,22 @@ export class ListBoxComponent<TOption> implements OnInit, AfterContentInit, Cont
 
     ngAfterContentInit(): void {
         this.initSelectedOption();
-        this.listenForListBoxSelectOption();
+    }
+
+    @HostListener('click', ['$event'])
+    onClick(event: PointerEvent) {
+        const element = event.target as HTMLElement;
+        const isOption = element.matches('[role="option"]');
+        if (isOption) {
+            this.removeSelectedAttribute();
+            this.clearVisualFocus();
+            const optionIndex = this.listBoxOptionRefs().findIndex(o => o.nativeElement.id === element.id);
+            this.setSelectedAttribute(optionIndex);
+            this.setVisualFocus(optionIndex);
+            this.value = this.listBoxOptions()[optionIndex].value();
+            this.onChange(this.value);
+            this.selectOption.emit(this.value);
+        }
     }
 
     @HostListener('keydown', ['$event'])
@@ -84,23 +99,6 @@ export class ListBoxComponent<TOption> implements OnInit, AfterContentInit, Cont
         if (this.initialFocusedOptionIndex() !== null) {
             this.setVisualFocus(this.initialFocusedOptionIndex() as number);
         }
-    }
-
-    private listenForListBoxSelectOption(): void {
-        this.listBoxOptions().forEach(option => {
-            option.selectOption.subscribe(value => {
-                this.removeSelectedAttribute();
-                this.clearVisualFocus();
-                this.value = value;
-                const optionIndex = this.listBoxOptions().findIndex(o => this.equalsToCurrentValue(o.value()));
-                if (optionIndex !== -1) {
-                    this.setSelectedAttribute(optionIndex);
-                    this.setVisualFocus(optionIndex);
-                }
-                this.onChange(this.value);
-                this.selectOption.emit(this.value);
-            });
-        });
     }
 
     private equalsToCurrentValue(value: TOption): boolean {
