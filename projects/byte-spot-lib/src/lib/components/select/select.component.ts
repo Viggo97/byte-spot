@@ -46,13 +46,14 @@ export class SelectComponent<TOption> implements ControlValueAccessor {
 
     protected open = signal(false);
     protected ariaActiveDescendant = computed<string | null>(() => this.listBox()?.ariaActiveDescendant() ?? null);
-    protected initialFocusedOptionIndex = signal(0);
+    protected initialFocusedOptionIndex = signal<number | null>(null);
 
     protected showListBox(): void {
         this.open.set(true);
     }
 
     protected hideListBox(): void {
+        this.initialFocusedOptionIndex.set(null);
         this.open.set(false);
     }
 
