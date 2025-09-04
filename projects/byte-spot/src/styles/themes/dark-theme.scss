@@ -14,7 +14,7 @@
 
     --button-primary-bgColor: var(--color-violet-500);
     --button-primary-bgColor-hover: var(--color-violet-400);
-    --button-primary-bgColor-active: var(--color-violet-300);
+    --button-primary-bgColor-active: var(--color-violet-600);
     --button-primary-fgColor: var(--color-white);
 
     --button-secondary-bgColor: var(--color-zinc-700);
@@ -47,6 +47,14 @@
     --toggle-bgColor: var(--color-green-500);
     --toggle-bgColor-hover: var(--color-zinc-600);
     --toggle-checked-bgColor-hover: var(--color-green-400);
+
+    --checkbox-button-bgColor: var(--color-zinc-700);
+    --checkbox-button-bgColor-hover: var(--color-zinc-500);
+    --checkbox-button-borderColor: var(--color-zinc-600);
+    --checkbox-button-bgColor-checked: var(--color-violet-500);
+    --checkbox-button-borderColor-checked: var(--color-violet-500);
+    --checkbox-button-bgColor-checked-hover: var(--color-violet-400);
+    --checkbox-button-borderColor-checked-hover: var(--color-violet-400);
 
     --tooltip-bgColor: var(--color-zinc-100);
     --tooltip-fgColor: var(--color-zinc-800);
