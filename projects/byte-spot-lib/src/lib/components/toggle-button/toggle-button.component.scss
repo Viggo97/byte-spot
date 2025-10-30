@@ -1,0 +1,34 @@
+:host {
+    width: fit-content;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+    background-color: var(--checkbox-button-bgColor);
+    border: 1px solid var(--checkbox-button-borderColor);
+    border-radius: 4px;
+    font: var(--font-sm);
+    cursor: pointer;
+    transition: all 150ms cubic-bezier(.4, 0, .2, 1);
+
+    &:hover {
+        background-color: var(--checkbox-button-bgColor-hover);
+    }
+
+    &.checked {
+        background-color: var(--checkbox-button-bgColor-checked);
+        border-color: var(--checkbox-button-borderColor-checked);
+        color: var(--color-white);
+
+        &:hover {
+            background-color: var(--checkbox-button-bgColor-checked-hover);
+            border-color: var(--checkbox-button-borderColor-checked-hover);
+        }
+    }
+
+    &.disabled {
+        opacity: .65;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+}
