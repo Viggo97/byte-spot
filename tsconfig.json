@@ -25,9 +25,6 @@
       ],
       "baseUrl": "./",
       "paths": {
-        "@byte-spot-lib": [
-          "projects/byte-spot-lib/src/public-api.ts"
-        ],
         "@app/*": [
           "projects/byte-spot/src/app/*"
         ],

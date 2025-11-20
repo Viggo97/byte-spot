@@ -34,8 +34,7 @@
                         ],
                         "stylePreprocessorOptions": {
                             "includePaths": [
-                                "projects/byte-spot/src/styles",
-                                "projects/byte-spot-lib/src/lib/styles"
+                                "projects/byte-spot/src/styles"
                             ]
                         },
                         "scripts": []
@@ -109,48 +108,6 @@
                         "lintFilePatterns": [
                             "projects/byte-spot/**/*.ts",
                             "projects/byte-spot/**/*.html"
-                        ]
-                    }
-                }
-            }
-        },
-        "byte-spot-lib": {
-            "projectType": "library",
-            "root": "projects/byte-spot-lib",
-            "sourceRoot": "projects/byte-spot-lib/src",
-            "prefix": "ngx-bsa",
-            "architect": {
-                "build": {
-                    "builder": "@angular-devkit/build-angular:ng-packagr",
-                    "options": {
-                        "project": "projects/byte-spot-lib/ng-package.json"
-                    },
-                    "configurations": {
-                        "production": {
-                            "tsConfig": "projects/byte-spot-lib/tsconfig.lib.prod.json"
-                        },
-                        "development": {
-                            "tsConfig": "projects/byte-spot-lib/tsconfig.lib.json"
-                        }
-                    },
-                    "defaultConfiguration": "production"
-                },
-                "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
-                    "options": {
-                        "tsConfig": "projects/byte-spot-lib/tsconfig.spec.json",
-                        "polyfills": [
-                            "zone.js",
-                            "zone.js/testing"
-                        ]
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-eslint/builder:lint",
-                    "options": {
-                        "lintFilePatterns": [
-                            "projects/byte-spot-lib/**/*.ts",
-                            "projects/byte-spot-lib/**/*.html"
                         ]
                     }
                 }
