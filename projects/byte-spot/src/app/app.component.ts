@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
@@ -6,7 +6,7 @@ import { NavbarComponent } from '@core';
 
 @Component({
     selector: 'bsa-root',
-    imports: [CommonModule, RouterOutlet, NavbarComponent],
+    imports: [RouterOutlet, NavbarComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
 })
