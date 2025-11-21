@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { SelectButtonComponent, IconComponent } from '@shared';
+import { SelectButtonComponent } from '@shared';
 
 import { Theme } from '../../theme/theme.enum';
 import { ThemeService } from '../../theme/theme.service';
@@ -13,16 +13,17 @@ interface LanguageOption { key: Language, label: string }
 
 @Component({
     selector: 'bsa-navbar',
-    imports: [FormsModule, SelectButtonComponent, IconComponent],
+    imports: [FormsModule, SelectButtonComponent],
     templateUrl: './navbar.component.html',
     styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
-    darkTheme = false;
-
     private languageService = inject(LanguageService);
     private themeService = inject(ThemeService);
     private translateService = inject(TranslateService);
+
+    protected readonly Theme = Theme;
+    protected theme = signal(this.themeService.theme);
 
     language: Language | undefined;
     languageOptions: LanguageOption[] = [
@@ -36,14 +37,9 @@ export class NavbarComponent {
         },
     ];
 
-    constructor() {
-        this.themeService.theme$.subscribe((theme) => {
-            this.darkTheme = theme === Theme.DARK;
-        });
-    }
-
     onSwitchTheme(): void {
-        this.themeService.switchTheme();
+        this.theme.update(previousTheme => previousTheme === Theme.DARK ? Theme.LIGHT : Theme.DARK);
+        this.themeService.setTheme(this.theme());
     }
 
     onSelectLanguage(language: LanguageOption): void {

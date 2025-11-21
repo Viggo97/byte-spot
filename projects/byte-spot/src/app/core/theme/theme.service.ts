@@ -1,47 +1,39 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Theme } from './theme.enum';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
-    private theme: BehaviorSubject<Theme> = new BehaviorSubject<Theme>(Theme.LIGHT);
-    theme$: Observable<Theme> = this.theme.asObservable();
     private readonly storageKey = 'theme';
+    private _theme = Theme.DARK;
+    get theme(): Theme {
+        return this._theme;
+    }
+
     constructor() {
         this.init();
     }
 
     private init(): void {
-        const savedTheme = this.getThemeFromLocalStorage();
+        let theme = this.getThemeFromLocalStorage();
 
-        if (savedTheme && this.themeValid(savedTheme)) {
-            this.theme.next(savedTheme);
-        } else {
+        if (!theme) {
             const prefersDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            this.theme.next(prefersDarkTheme ? Theme.DARK : Theme.LIGHT);
+            theme = prefersDarkTheme ? Theme.DARK : Theme.LIGHT;
         }
 
-        this.setThemeClass(this.theme.value);
+        this._theme = theme;
+        this.setThemeClass(theme);
     }
 
-    switchTheme(): void {
-        const newTheme = this.theme.value === Theme.DARK ? Theme.LIGHT : Theme.DARK;
-        this.setThemeClass(newTheme);
-        this.saveThemeToLocalStorage(newTheme);
-        this.theme.next(newTheme);
+    setTheme(theme: Theme): void {
+        this._theme = theme;
+        this.setThemeClass(theme);
+        this.saveThemeToLocalStorage(theme);
     }
 
     private setThemeClass(theme: Theme): void {
-        document.body.classList.add('transition-disabled');
         document.body.classList.toggle('dark-theme', theme === Theme.DARK);
-        setTimeout(() => {
-            document.body.classList.remove('transition-disabled');
-        });
-    }
-
-    private themeValid(theme: string): theme is Theme {
-        return Object.values(Theme).includes(theme as Theme);
     }
 
     private saveThemeToLocalStorage(theme: Theme): void {
@@ -49,6 +41,16 @@ export class ThemeService {
     }
 
     private getThemeFromLocalStorage(): Theme | null {
-        return localStorage.getItem(this.storageKey) as Theme | null;
+        const theme = localStorage.getItem(this.storageKey);
+
+        if (!theme || !this.themeValid(theme)) {
+            return null;
+        }
+
+        return theme;
+    }
+
+    private themeValid(theme: string): theme is Theme {
+        return Object.values(Theme).includes(theme as Theme);
     }
 }
