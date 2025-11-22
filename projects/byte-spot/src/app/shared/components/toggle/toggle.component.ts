@@ -19,7 +19,6 @@ export class ToggleComponent implements ControlValueAccessor {
     @HostBinding('class.checked') checked = false;
     @HostBinding('class.disabled') disabled = false;
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onChange = (_value: boolean) => {};
     onTouch = () => {};
 
@@ -37,7 +36,7 @@ export class ToggleComponent implements ControlValueAccessor {
 
     @HostListener('keydown.enter', ['$event'])
     @HostListener('keydown.space', ['$event'])
-    onKeydown(event?: KeyboardEvent): void {
+    onKeydown(event?: Event): void {
         event?.preventDefault();
     }
 

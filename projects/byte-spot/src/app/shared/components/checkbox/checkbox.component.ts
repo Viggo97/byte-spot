@@ -24,8 +24,6 @@ export class CheckboxComponent implements ControlValueAccessor {
     checked = false;
     disabled = false;
 
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onChange = (_value: boolean) => {};
     onTouch = () => {};
 
@@ -43,7 +41,7 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     @HostListener('keydown.enter', ['$event'])
     @HostListener('keydown.space', ['$event'])
-    onKeydown(event?: KeyboardEvent): void {
+    onKeydown(event?: Event): void {
         event?.preventDefault();
     }
 

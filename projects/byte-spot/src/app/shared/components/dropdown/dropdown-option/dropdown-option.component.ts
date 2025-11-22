@@ -16,7 +16,7 @@ export class DropdownOptionComponent<T> {
     @HostListener('click')
     @HostListener('keydown.enter', ['$event'])
     @HostListener('keydown.space')
-    onSelectOption(event?: KeyboardEvent): void {
+    onSelectOption(event?: Event): void {
         event?.preventDefault();
         this.selectOption.emit(this.value);
     }
