@@ -1,0 +1,8 @@
+<button class="button-icon button-invisible"
+        (click)="onSwitchTheme()">
+    @if (theme() === Theme.DARK) {
+        <ngx-bsl-icon-moon></ngx-bsl-icon-moon>
+    } @else {
+        <ngx-bsl-icon-sun></ngx-bsl-icon-sun>
+    }
+</button>
