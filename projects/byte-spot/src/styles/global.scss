@@ -1,3 +1,5 @@
+@use 'ngx-bsl/styles/index';
+
 * {
     margin: 0;
     padding: 0;
@@ -10,39 +12,22 @@ html {
 
 html, body {
     height: 100%;
-    color: var(--fgColor-primary);
+    background-color: var(--bsl-backgroundColor);
+    color: var(--bsl-textColor);
 }
 
 body {
-    background-color: var(--bgColor-primary);
+    @include index.light-theme;
 
-    &.transition-disabled {
-        * {
-            transition: none !important;
-        }
+    &.dark-theme {
+        @include index.dark-theme;
     }
 }
 
 *:focus-visible {
-    outline: 2px solid var(--outlineColor);
+    outline: 2px solid var(--bsa-outline-color);
 }
 
 bsa-root {
     isolation: isolate;
-}
-
-h2 {
-    font: var(--font-lg);
-    font-weight: 700;
-}
-
-h3 {
-    font: var(--font-md);
-    font-weight: 700;
-}
-
-.text-ellipsis {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
 }

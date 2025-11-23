@@ -2,9 +2,6 @@
 @use 'styles/variables';
 @use 'styles/breakpoints';
 @use 'styles/global';
-@use 'styles/fonts';
-@use 'styles/components';
-@use 'styles/mixins';
-@use 'styles/themes';
 
 @use '@angular/cdk/overlay-prebuilt.css';
+@use 'ngx-bsl/styles/index';

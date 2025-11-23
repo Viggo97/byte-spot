@@ -1,4 +1,4 @@
-@use 'mixins' as mixins;
+@use 'ngx-bsl/styles/index';
 
 button {
     width: 100%;
@@ -7,6 +7,6 @@ button {
     gap: .5rem;
 
     span {
-        @include mixins.ellipsis;
+        @include index.ellipsis;
     }
 }
