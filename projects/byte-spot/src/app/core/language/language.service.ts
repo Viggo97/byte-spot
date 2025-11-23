@@ -5,14 +5,16 @@ import { Language } from './language.enum';
 @Injectable({ providedIn: 'root' })
 export class LanguageService {
     private readonly storageKey = 'language';
-
-    private readonly _language: Language;
-
+    private _language = Language.ENGLISH;
     get language(): Language {
         return this._language;
     }
 
-    set language(value: Language) {
+    constructor() {
+        this.init();
+    }
+
+    setLanguage(value: Language) {
         if (value === this._language) {
             return;
         }
@@ -20,27 +22,21 @@ export class LanguageService {
         window.location.reload();
     }
 
-    constructor() {
-        this._language = this.getDefaultLanguage();
-    }
-
-    private getDefaultLanguage(): Language {
-        const languageFromStorage = this.getDefaultLanguageFromLocalStorage();
-
-        if (languageFromStorage) {
-            return languageFromStorage;
+    private init(): void {
+        let language = this.getLanguageFromLocalStorage();
+        if (language) {
+            this._language = language;
+            return;
         }
 
         const preferredLanguage = window.navigator.language;
-
         if (preferredLanguage) {
-            return preferredLanguage.includes('en') ? Language.ENGLISH : Language.POLISH;
+            language = preferredLanguage.includes('en') ? Language.ENGLISH : Language.POLISH;
+            this._language = language;
         }
-
-        return Language.ENGLISH;
     }
 
-    private getDefaultLanguageFromLocalStorage(): Language | null {
+    private getLanguageFromLocalStorage(): Language | null {
         const availableLanguages = Object.values(Language) as string[];
         const language = localStorage.getItem('language');
         if (language && availableLanguages.includes(language)) {
