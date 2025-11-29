@@ -31,3 +31,18 @@ body {
 bsa-root {
     isolation: isolate;
 }
+
+h1 {
+    font: var(--bsl-font-xl);
+    font-weight: 700;
+}
+
+h2 {
+    font: var(--bsl-font-lg);
+    font-weight: 700;
+}
+
+h3 {
+    font: var(--bsl-font-md);
+    font-weight: 700;
+}

@@ -1,0 +1,29 @@
+button {
+    &.danger {
+        background-color: var(--bsa-danger-backgroundColor);
+        color: var(--bsa-danger-textColor);
+        border-color: transparent;
+
+        &:hover {
+            background-color: var(--bsa-danger-backgroundColor-hover);
+        }
+
+        &:active {
+            background-color: var(--bsa-danger-backgroundColor-active);
+        }
+    }
+
+    &.invisible {
+        background-color: transparent;
+        border-color: transparent;
+        color: var(--bsa-danger-textColor-invisible);
+
+        &:hover {
+            background-color: var(--bsl-button-backgroundColor-hover);
+        }
+
+        &:active {
+            background-color: var(--bsl-button-backgroundColor-active);
+        }
+    }
+}

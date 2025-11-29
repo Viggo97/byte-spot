@@ -1,7 +1,8 @@
+@use 'styles/global';
 @use 'styles/colors';
 @use 'styles/variables';
 @use 'styles/breakpoints';
-@use 'styles/global';
+@use 'styles/components/button';
 
 @use '@angular/cdk/overlay-prebuilt.css';
 @use 'ngx-bsl/styles/index';
