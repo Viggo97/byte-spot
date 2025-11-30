@@ -1,0 +1,10 @@
+:host {
+    display: flex;
+    align-items: center;
+    font: var(--bsl-font-sm);
+
+    span {
+        font-weight: 700;
+        color: var(--bsa-textColor-highlight);
+    }
+}

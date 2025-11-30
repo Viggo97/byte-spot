@@ -1,0 +1,7 @@
+@if (numberOfOffers() > 0) {
+    <p>
+        {{ 'offer.found' | translate }}
+        <span>{{ numberOfOffers() | numberFormatter }}</span>
+        {{ 'offer.jobOffers' | translate }}
+    </p>
+}
