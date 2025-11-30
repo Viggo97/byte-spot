@@ -1,6 +1,8 @@
 body {
     --bsa-outline-color: var(--bsa-color-violet-500);
 
+    --bsa-textColor-highlight: var(--bsa-color-violet-500);
+
     --bsa-danger-backgroundColor: var(--bsa-color-red-600);
     --bsa-danger-backgroundColor-hover: var(--bsa-color-red-700);
     --bsa-danger-backgroundColor-active: var(--bsa-color-red-800);
@@ -13,5 +15,9 @@ body {
         --bsa-danger-backgroundColor-active: var(--bsa-color-red-600);
         --bsa-danger-textColor: var(--bsl-color-neutral-200);
         --bsa-danger-textColor-invisible: var(--bsa-color-red-400);
+    }
+
+    &.dark-theme {
+        --bsa-textColor-highlight: var(--bsa-color-violet-400);
     }
 }
