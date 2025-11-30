@@ -1,0 +1,10 @@
+<header>
+    <h2>{{ 'offer.filters' | translate }}</h2>
+    <button
+        type="button"
+        class="danger invisible"
+        (click)="resetFilters()">
+        {{ 'offer.clearAll' | translate }}
+    </button>
+</header>
+<bsa-offers-overview-filters-form></bsa-offers-overview-filters-form>

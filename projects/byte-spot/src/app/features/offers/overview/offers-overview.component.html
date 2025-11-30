@@ -1,0 +1,11 @@
+@if (!compactMode()) {
+    <aside>
+        <bsa-offers-overview-filters-view-broad></bsa-offers-overview-filters-view-broad>
+    </aside>
+}
+
+<main>
+    @if (compactMode()) {
+        <bsa-offers-overview-filters-view-compact></bsa-offers-overview-filters-view-compact>
+    }
+</main>

@@ -1,0 +1,32 @@
+@use 'breakpoints' as breakpoints;
+
+:host {
+    overflow: auto;
+}
+
+section {
+    margin-bottom: 1rem;
+
+    h2 {
+        margin-bottom: 0.5rem;
+    }
+}
+
+.filters-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 16px;
+
+    @include breakpoints.sm() {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include breakpoints.md() {
+        grid-template-columns: 1fr;
+        grid-gap: 8px;
+    }
+}
+
+ngx-bsl-range {
+    margin-top: 1rem;
+}

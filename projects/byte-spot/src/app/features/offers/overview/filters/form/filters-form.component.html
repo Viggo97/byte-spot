@@ -1,0 +1,140 @@
+<ng-container [formGroup]="form">
+    <section>
+        <h3>{{ 'offer.salary' | translate }}</h3>
+
+        <ngx-bsl-range
+            [min]="0"
+            [max]="50000"
+            [step]="1000"
+            [showThumbLabels]="true"
+            formControlName="salary">
+        </ngx-bsl-range>
+    </section>
+
+    @if (technologies().length) {
+        <section>
+            <h3>{{ 'offer.technologies' | translate }}</h3>
+            <div class="filters-group" formArrayName="technologies">
+                @for (technology of technologies(); track technology.id; let i = $index) {
+                    <ngx-bsl-checkbox
+                        [id]="'filter-technology-' + i"
+                        [formControlName]="i">
+                        {{ technology.name }}
+                    </ngx-bsl-checkbox>
+                }
+            </div>
+        </section>
+    }
+
+    <section formGroupName="workMode">
+        <h3>{{ 'offer.workMode' | translate }}</h3>
+
+        <div class="filters-group">
+            <ngx-bsl-checkbox
+                [id]="'filter-work-mode-on-site'"
+                formControlName="onSite">
+                {{ 'offer.onSite' | translate }}
+            </ngx-bsl-checkbox>
+
+            <ngx-bsl-checkbox
+                [id]="'filter-work-mode-hybrid'"
+                formControlName="hybrid">
+                {{ 'offer.hybrid' | translate }}
+            </ngx-bsl-checkbox>
+
+            <ngx-bsl-checkbox
+                [id]="'filter-work-mode-remote'"
+                formControlName="remote">
+                {{ 'offer.remote' | translate }}
+            </ngx-bsl-checkbox>
+        </div>
+    </section>
+
+    @if (locations().length) {
+        <section formArrayName="locations">
+            <h3>{{ 'offer.locations' | translate }}</h3>
+
+            <div class="filters-group">
+                @for (location of locations(); track location.id; let i = $index) {
+                    <ngx-bsl-checkbox
+                        [id]="'filter-location-' + i"
+                        [formControlName]="i">
+                        {{ location.name }}
+                    </ngx-bsl-checkbox>
+                }
+            </div>
+        </section>
+    }
+
+    <section formGroupName="employmentType">
+        <h3>{{ 'offer.employmentType' | translate }}</h3>
+
+        <div class="filters-group">
+            <ngx-bsl-checkbox
+                [id]="'filter-employment-type-employment-contract'"
+                formControlName="employmentContract">
+                {{ 'offer.employmentContract' | translate }}
+            </ngx-bsl-checkbox>
+
+            <ngx-bsl-checkbox
+                [id]="'filter-employment-type-b2b'"
+                formControlName="b2b">
+                {{ 'offer.b2b' | translate }}
+            </ngx-bsl-checkbox>
+
+            <ngx-bsl-checkbox
+                [id]="'filter-employment-type-mandate-contract'"
+                formControlName="mandateContract">
+                {{ 'offer.mandateContract' | translate }}
+            </ngx-bsl-checkbox>
+
+            <ngx-bsl-checkbox
+                [id]="'filter-employment-type-specific-task-contract'"
+                formControlName="specificTaskContract">
+                {{ 'offer.specificTaskContract' | translate }}
+            </ngx-bsl-checkbox>
+
+            <ngx-bsl-checkbox
+                [id]="'filter-employment-type-internship'"
+                formControlName="internship">
+                {{ 'offer.internship' | translate }}
+            </ngx-bsl-checkbox>
+        </div>
+    </section>
+
+    <section formGroupName="seniority">
+        <h3>{{ 'offer.seniority' | translate }}</h3>
+
+        <div class="filters-group">
+            <ngx-bsl-checkbox
+                [id]="'filter-seniority-intern'"
+                formControlName="intern">
+                {{ 'offer.intern' | translate }}
+            </ngx-bsl-checkbox>
+
+            <ngx-bsl-checkbox
+                [id]="'filter-seniority-junior'"
+                formControlName="junior">
+                {{ 'offer.junior' | translate }}
+            </ngx-bsl-checkbox>
+
+            <ngx-bsl-checkbox
+                [id]="'filter-seniority-mid'"
+                formControlName="mid">
+                {{ 'offer.mid' | translate }}
+            </ngx-bsl-checkbox>
+
+            <ngx-bsl-checkbox
+                [id]="'filter-seniority-senior'"
+                formControlName="senior">
+                {{ 'offer.senior' | translate }}
+            </ngx-bsl-checkbox>
+
+            <ngx-bsl-checkbox
+                [id]="'filter-seniority-expert'"
+                formControlName="expert">
+                {{ 'offer.expert' | translate }}
+            </ngx-bsl-checkbox>
+        </div>
+    </section>
+</ng-container>

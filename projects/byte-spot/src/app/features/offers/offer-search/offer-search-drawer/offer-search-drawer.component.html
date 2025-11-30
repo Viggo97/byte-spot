@@ -1,0 +1,45 @@
+<div class="input-with-icon input-large">
+    <i class="icon-search"></i>
+    <input type="text"
+           #searchInput
+           readonly
+           cdkOverlayOrigin
+           [formControl]="form"
+           (click)="onInputClick()"
+           (keydown)="onInputClick($event)"
+    >
+</div>
+
+<ng-template cdkConnectedOverlay
+             [cdkConnectedOverlayOrigin]="searchInput"
+             [cdkConnectedOverlayOpen]="drawerOpen"
+             [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
+             [cdkConnectedOverlayHasBackdrop]="true"
+             [cdkConnectedOverlayDisableClose]="true"
+             cdkConnectedOverlayBackdropClass="cdk-custom-backdrop-background"
+             (overlayOutsideClick)="drawer.close()"
+             (overlayKeydown)="onOverlayKeydown($event)"
+             (detach)="closeDrawer(); closeDropdown()">
+    <bsa-drawer [title]="'global.offers-search-dropdown'"
+                (closeDrawer)="closeDrawer(); closeDropdown()">
+        <div class="drawer-container">
+            <div class="input-with-icon input-large">
+                <i class="icon-search"></i>
+                <input type="text"
+                       #drawerInput
+                       cdkOverlayOrigin
+                       [formControl]="form">
+            </div>
+            @if (dropdownOpen) {
+                <bsa-offer-search-suggestions [suggestions]="suggestions"
+                                              (selectSuggestion)="onSelectSuggestion($event); closeDropdown()">
+                </bsa-offer-search-suggestions>
+            }
+            <button #searchButton
+                    (click)="onSearch()">
+                {{ 'global.search' | translate }}
+            </button>
+        </div>
+    </bsa-drawer>
+</ng-template>
+

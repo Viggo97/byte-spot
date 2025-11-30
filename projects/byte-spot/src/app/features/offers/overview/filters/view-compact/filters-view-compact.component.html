@@ -1,0 +1,35 @@
+<button
+    #filters
+    cdkOverlayOrigin
+    (click)="openDrawer()">
+    {{ 'global.filters' | translate }}
+</button>
+
+<ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="filters"
+    [cdkConnectedOverlayOpen]="drawerOpen()"
+    [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
+    [cdkConnectedOverlayHasBackdrop]="true"
+    (overlayOutsideClick)="drawerRef().close()"
+    (detach)="closeDrawer()">
+    <ngx-bsl-drawer
+        [title]="'global.filters' | translate"
+        (closed)="closeDrawer()">
+        <div class="filters-form-container">
+            <bsa-offers-overview-filters-form></bsa-offers-overview-filters-form>
+            <div class="actions">
+                <button
+                    type="button"
+                    (click)="resetFilters()">
+                    {{ 'offer.clearAll' | translate }}
+                </button>
+                <button
+                    type="button"
+                    (click)="changeFilters()">
+                    {{ 'offer.showOffers' | translate }}
+                </button>
+            </div>
+        </div>
+    </ngx-bsl-drawer>
+</ng-template>

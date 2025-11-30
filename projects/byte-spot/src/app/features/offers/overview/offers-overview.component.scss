@@ -1,0 +1,27 @@
+@use 'breakpoints' as breakpoints;
+
+:host {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    @include breakpoints.md {
+        flex-direction: row;
+    }
+}
+
+aside {
+    display: none; // avoiding blinking effect when compactMode is set
+
+    @include breakpoints.md {
+        display: block;
+        flex-basis: 25%;
+    }
+}
+
+main {
+    flex-basis: 75%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}

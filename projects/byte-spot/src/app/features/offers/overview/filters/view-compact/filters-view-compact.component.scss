@@ -1,0 +1,22 @@
+.filters-form-container {
+    padding: 0 4px 4px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+bsa-offers-overview-filters-form {
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding: 8px 16px;
+}
+
+.actions {
+    display: flex;
+    gap: 16px;
+
+    button {
+        flex: 1;
+    }
+}

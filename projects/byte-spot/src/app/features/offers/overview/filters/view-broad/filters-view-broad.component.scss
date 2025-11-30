@@ -1,0 +1,17 @@
+:host {
+    display: block;
+    padding: 8px 24px;
+    border: 1px solid var(--bsl-borderColor);
+    border-radius: 8px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button {
+    margin-right: -16px;
+    padding: 8px;
+}

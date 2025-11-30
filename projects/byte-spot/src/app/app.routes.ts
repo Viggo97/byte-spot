@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { OffersOverviewComponent } from '@app/features/offers-overview/offers-overview.component';
+import { OffersOverviewComponent } from '@app/features/offers/overview/offers-overview.component';
 
 export const routes: Routes = [
     {
