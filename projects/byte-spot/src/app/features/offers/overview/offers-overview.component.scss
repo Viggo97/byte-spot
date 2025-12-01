@@ -25,3 +25,46 @@ main {
     flex-direction: column;
     gap: 16px;
 }
+
+.settings {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2fr;
+    gap: 1rem;
+
+    bsa-offers-overview-info {
+        grid-column: span 2;
+        grid-row: 2;
+    }
+
+    bsa-offers-overview-filters-view-compact {
+        grid-column: 1;
+        grid-row: 1;
+        width: 100%;
+    }
+
+    bsa-offers-overview-sort {
+        grid-column: 2;
+        grid-row: 1;
+        width: 100%;
+    }
+
+
+    @include breakpoints.sm {
+        grid-template-columns: 1fr auto auto;
+        grid-template-rows: 1fr;
+
+        bsa-offers-overview-info {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        bsa-offers-overview-filters-view-compact {
+            grid-column: 2;
+        }
+
+        bsa-offers-overview-sort {
+            grid-column: 3;
+        }
+    }
+}

@@ -7,12 +7,16 @@ import { FiltersFormService } from './filters/form/filters-form.service';
 import { FiltersDataService } from './filters/data/filters-data.service';
 import { FiltersViewBroadComponent } from './filters/view-broad/filters-view-broad.component';
 import { FiltersViewCompactComponent } from './filters/view-compact/filters-view-compact.component';
+import { SortComponent } from './sort/sort.component';
+import { InfoComponent } from '@app/features/offers/overview/info/info.component';
 
 @Component({
     selector: 'bsa-offers-overview',
     imports: [
         FiltersViewBroadComponent,
         FiltersViewCompactComponent,
+        SortComponent,
+        InfoComponent,
     ],
     templateUrl: './offers-overview.component.html',
     styleUrl: './offers-overview.component.scss',

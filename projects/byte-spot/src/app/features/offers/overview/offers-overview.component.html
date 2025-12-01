@@ -5,7 +5,13 @@
 }
 
 <main>
-    @if (compactMode()) {
-        <bsa-offers-overview-filters-view-compact></bsa-offers-overview-filters-view-compact>
-    }
+    <div class="settings">
+        <bsa-offers-overview-info [numberOfOffers]="44123"></bsa-offers-overview-info>
+
+        @if (compactMode()) {
+            <bsa-offers-overview-filters-view-compact></bsa-offers-overview-filters-view-compact>
+        }
+
+        <bsa-offers-overview-sort></bsa-offers-overview-sort>
+    </div>
 </main>
