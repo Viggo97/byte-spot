@@ -1,5 +1,5 @@
 import { Component, inject, output, signal } from '@angular/core';
-import { SelectComponent } from 'ngx-bsl';
+import { ListBoxOptionComponent, SelectComponent } from 'ngx-bsl';
 import { TranslateService } from '@core';
 import { SortBy } from './sort-by.enum';
 
@@ -12,6 +12,7 @@ interface SortByOption {
     selector: 'bsa-offers-overview-sort',
     imports: [
         SelectComponent,
+        ListBoxOptionComponent,
     ],
     templateUrl: './sort.component.html',
     styleUrl: './sort.component.scss',
@@ -37,8 +38,7 @@ export class SortComponent {
     ];
     protected sortBy = signal(this.options[0]);
 
-    protected onSortByChange(sortValue: SortByOption): void {
-        this.sortBy.set(sortValue);
+    protected onSortByChange(): void {
         this.sortChanged.emit(this.sortBy().key);
     }
 }

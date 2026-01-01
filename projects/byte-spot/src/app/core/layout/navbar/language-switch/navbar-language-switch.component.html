@@ -1,12 +1,17 @@
 <ngx-bsl-select
     id="language-selection"
-    [value]="language()"
-    (valueChange)="onSelectLanguage($event!)"
-    [options]="languageOptions"
-    [comparisonField]="'key'"
-    [bindLabel]="'label'"
+    [(value)]="language"
+    (valueChange)="onSelectLanguage()"
+    [displayLabel]="'label'"
     [iconMode]="true"
     [customIcon]="true"
     [dropdownWidth]="'8rem'">
     <ngx-bsl-icon-language data-custom-icon></ngx-bsl-icon-language>
+        @for (option of languageOptions; track option.key) {
+            <ngx-bsl-list-box-option
+                [id]="option.key"
+                [value]="option">
+                {{option.label}}
+            </ngx-bsl-list-box-option>
+        }
 </ngx-bsl-select>

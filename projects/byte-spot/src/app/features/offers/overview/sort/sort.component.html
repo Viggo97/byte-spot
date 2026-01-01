@@ -1,7 +1,13 @@
 <ngx-bsl-select
     [id]="'offers-sort'"
-    [options]="options"
-    [bindLabel]="'label'"
-    [value]="sortBy()"
-    (valueChange)="onSortByChange($event!)">
+    [displayLabel]="'label'"
+    [(value)]="sortBy"
+    (valueChange)="onSortByChange()">
+        @for (option of options; track option.key) {
+            <ngx-bsl-list-box-option
+                [id]="option.key"
+                [value]="option">
+                {{option.label}}
+            </ngx-bsl-list-box-option>
+        }
 </ngx-bsl-select>

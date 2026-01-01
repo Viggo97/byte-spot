@@ -1,5 +1,5 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
-import { IconLanguageComponent, SelectComponent } from 'ngx-bsl';
+import { IconLanguageComponent, ListBoxOptionComponent, SelectComponent } from 'ngx-bsl';
 import { LanguageService} from '../../../language/language.service';
 import { Language } from '../../../language/language.enum';
 import { LanguageOption } from './navbar-language-switch-option.interface';
@@ -10,6 +10,7 @@ import { TranslateService } from '../../../translate/translate.service';
     imports: [
         IconLanguageComponent,
         SelectComponent,
+        ListBoxOptionComponent,
     ],
     templateUrl: './navbar-language-switch.component.html',
 })
@@ -34,9 +35,8 @@ export class NavbarLanguageSwitchComponent implements OnInit {
         this.setInitialLanguage();
     }
 
-    onSelectLanguage(language: LanguageOption): void {
-        this.language.set(language);
-        this.languageService.setLanguage(language.key);
+    onSelectLanguage(): void {
+        this.languageService.setLanguage(this.language().key);
     }
 
     private setInitialLanguage(): void {
