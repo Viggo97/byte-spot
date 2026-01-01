@@ -3,6 +3,12 @@ body {
 
     --bsa-textColor-highlight: var(--bsa-color-violet-500);
 
+    --bsa-primary-backgroundColor: var(--bsa-color-violet-600);
+    --bsa-primary-backgroundColor-hover: var(--bsa-color-violet-700);
+    --bsa-primary-backgroundColor-active: var(--bsa-color-violet-800);
+    --bsa-primary-textColor: var(--bsl-color-neutral-200);
+    --bsa-primary-textColor-invisible: var(--bsa-color-violet-600);
+
     --bsa-danger-backgroundColor: var(--bsa-color-red-600);
     --bsa-danger-backgroundColor-hover: var(--bsa-color-red-700);
     --bsa-danger-backgroundColor-active: var(--bsa-color-red-800);
@@ -10,6 +16,12 @@ body {
     --bsa-danger-textColor-invisible: var(--bsa-color-red-600);
 
     &.dark-theme {
+        --bsa-primary-backgroundColor: var(--bsa-color-violet-800);
+        --bsa-primary-backgroundColor-hover: var(--bsa-color-violet-700);
+        --bsa-primary-backgroundColor-active: var(--bsa-color-violet-600);
+        --bsa-primary-textColor: var(--bsl-color-neutral-200);
+        --bsa-primary-textColor-invisible: var(--bsa-color-violet-400);
+
         --bsa-danger-backgroundColor: var(--bsa-color-red-800);
         --bsa-danger-backgroundColor-hover: var(--bsa-color-red-700);
         --bsa-danger-backgroundColor-active: var(--bsa-color-red-600);
