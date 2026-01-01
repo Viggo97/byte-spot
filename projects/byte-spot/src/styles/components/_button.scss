@@ -1,4 +1,22 @@
 button {
+    &.primary {
+        background-color: var(--bsa-primary-backgroundColor);
+        color: var(--bsa-primary-textColor);
+        border-color: transparent;
+
+        &:hover {
+            background-color: var(--bsa-primary-backgroundColor-hover);
+        }
+
+        &:active {
+            background-color: var(--bsa-primary-backgroundColor-active);
+        }
+
+        &.invisible {
+            color: var(--bsa-danger-textColor-invisible);
+        }
+    }
+
     &.danger {
         background-color: var(--bsa-danger-backgroundColor);
         color: var(--bsa-danger-textColor);
@@ -11,12 +29,15 @@ button {
         &:active {
             background-color: var(--bsa-danger-backgroundColor-active);
         }
+
+        &.invisible {
+            color: var(--bsa-danger-textColor-invisible);
+        }
     }
 
     &.invisible {
         background-color: transparent;
         border-color: transparent;
-        color: var(--bsa-danger-textColor-invisible);
 
         &:hover {
             background-color: var(--bsl-button-backgroundColor-hover);
