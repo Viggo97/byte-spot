@@ -1,0 +1,34 @@
+<input
+    type="text"
+    readonly
+    #searchCompact
+    cdkOverlayOrigin
+    [value]="searchValue().value"
+    [placeholder]="'offer.searchPlaceholder' | translate"
+    (click)="onInputClick()"
+    (keydown)="onInputClick($event)"
+>
+
+<ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="searchCompact"
+    [cdkConnectedOverlayOpen]="drawerOpen()"
+    [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
+    [cdkConnectedOverlayHasBackdrop]="true"
+    [cdkConnectedOverlayDisposeOnNavigation]="true"
+    (overlayOutsideClick)="closeDrawer()"
+    (attach)="focusCombobox()"
+    (detach)="closeDrawer()">
+            <ngx-bsl-drawer
+                [title]="'Search'"
+                (closed)="closeDrawer()">
+                <div class="drawer-wrapper">
+                    <bsa-offers-overview-search-form
+                        (confirmSelection)="onConfirmSelection()">
+                    </bsa-offers-overview-search-form>
+                    <button (click)="onConfirmSelection()">
+                        {{ 'global.search' | translate }}
+                    </button>
+                </div>
+            </ngx-bsl-drawer>
+</ng-template>

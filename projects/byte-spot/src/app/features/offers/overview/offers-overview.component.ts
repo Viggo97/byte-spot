@@ -8,7 +8,11 @@ import { FiltersDataService } from './filters/data/filters-data.service';
 import { FiltersViewBroadComponent } from './filters/view-broad/filters-view-broad.component';
 import { FiltersViewCompactComponent } from './filters/view-compact/filters-view-compact.component';
 import { SortComponent } from './sort/sort.component';
-import { InfoComponent } from '@app/features/offers/overview/info/info.component';
+import { InfoComponent } from './info/info.component';
+import { SearchService } from './search/search.service';
+import { SearchDataService } from './search/data/search-data.service';
+import { SearchViewBroadComponent } from './search/view-broad/search-view-broad.component';
+import { SearchViewCompactComponent } from './search/view-compact/search-view-compact.component';
 
 @Component({
     selector: 'bsa-offers-overview',
@@ -17,6 +21,8 @@ import { InfoComponent } from '@app/features/offers/overview/info/info.component
         FiltersViewCompactComponent,
         SortComponent,
         InfoComponent,
+        SearchViewBroadComponent,
+        SearchViewCompactComponent,
     ],
     templateUrl: './offers-overview.component.html',
     styleUrl: './offers-overview.component.scss',
@@ -24,6 +30,8 @@ import { InfoComponent } from '@app/features/offers/overview/info/info.component
         FiltersFormService,
         FiltersDataService,
         FiltersService,
+        SearchDataService,
+        SearchService,
     ],
 })
 export class OffersOverviewComponent {

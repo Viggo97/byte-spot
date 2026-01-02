@@ -12,7 +12,8 @@
     [cdkConnectedOverlayOpen]="drawerOpen()"
     [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
     [cdkConnectedOverlayHasBackdrop]="true"
-    (overlayOutsideClick)="drawerRef().close()"
+    [cdkConnectedOverlayDisposeOnNavigation]="true"
+    (overlayOutsideClick)="closeDrawer()"
     (detach)="closeDrawer()">
     <ngx-bsl-drawer
         [title]="'global.filters' | translate"

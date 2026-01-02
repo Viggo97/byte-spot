@@ -1,4 +1,4 @@
-import { Component, inject, signal, viewChild } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay } from '@angular/cdk/overlay';
 import { DrawerComponent } from 'ngx-bsl';
 import { TranslatePipe } from '@core';
@@ -26,8 +26,6 @@ export class FiltersViewCompactComponent {
     protected readonly scrollStrategy = this.overlay.scrollStrategies.block();
 
     protected drawerOpen = signal(false);
-
-    protected drawerRef = viewChild.required(DrawerComponent);
 
     protected openDrawer(): void {
         this.drawerOpen.set(true);

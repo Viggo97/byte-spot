@@ -5,6 +5,13 @@
 }
 
 <main>
+    <div class="search">
+        @if (compactMode()) {
+            <bsa-offers-overview-search-view-compact></bsa-offers-overview-search-view-compact>
+        } @else {
+            <bsa-offers-overview-search-view-broad></bsa-offers-overview-search-view-broad>
+        }
+    </div>
     <div class="settings">
         <bsa-offers-overview-info [numberOfOffers]="44123"></bsa-offers-overview-info>
 

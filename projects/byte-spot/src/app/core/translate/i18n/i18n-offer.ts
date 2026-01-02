@@ -5,6 +5,10 @@ export const i18nOffer: Record<string, I18nLanguageCode> = {
         en: 'Showing',
         pl: 'Znaleziono',
     },
+    searchPlaceholder: {
+        en: 'Search for dream job',
+        pl: 'Znajdź swoją wymarzoną pracę',
+    },
     jobOffers: {
         en: 'job offers',
         pl: 'ofert pracy',

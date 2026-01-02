@@ -1,0 +1,21 @@
+<ngx-bsl-combobox
+    [formControl]="form"
+    [id]="'offers-search'"
+    [placeholder]="'offer.searchPlaceholder' | translate"
+    [optionValueParse]="optionValueParse"
+    (confirmSelection)="onConfirmSelection()">
+    @for (category of categories(); track category.category; let last = $last) {
+        <ngx-bsl-list-box-group [title]="category.category">
+            @for (option of category.options; track option.value) {
+                <ngx-bsl-list-box-option
+                    [id]="'option-' + option.value"
+                    [value]="option">
+                    {{option.value}}
+                </ngx-bsl-list-box-option>
+            }
+        </ngx-bsl-list-box-group>
+        @if (!last) {
+            <ngx-bsl-list-box-separator></ngx-bsl-list-box-separator>
+        }
+    }
+</ngx-bsl-combobox>
