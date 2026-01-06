@@ -13,6 +13,9 @@ import { SearchService } from './search/search.service';
 import { SearchDataService } from './search/data/search-data.service';
 import { SearchViewBroadComponent } from './search/view-broad/search-view-broad.component';
 import { SearchViewCompactComponent } from './search/view-compact/search-view-compact.component';
+import { ListDataService } from './list/data/list.data.service';
+import { ListService } from './list/list.service';
+import { OfferListComponent } from './list/offer-list.component';
 
 @Component({
     selector: 'bsa-offers-overview',
@@ -23,6 +26,7 @@ import { SearchViewCompactComponent } from './search/view-compact/search-view-co
         InfoComponent,
         SearchViewBroadComponent,
         SearchViewCompactComponent,
+        OfferListComponent,
     ],
     templateUrl: './offers-overview.component.html',
     styleUrl: './offers-overview.component.scss',
@@ -32,6 +36,8 @@ import { SearchViewCompactComponent } from './search/view-compact/search-view-co
         FiltersService,
         SearchDataService,
         SearchService,
+        ListDataService,
+        ListService,
     ],
 })
 export class OffersOverviewComponent {

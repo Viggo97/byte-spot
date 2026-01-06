@@ -1,0 +1,15 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    gap: 16px
+}
+
+.no-offers {
+    display: flex;
+    justify-content: center;
+    padding: 16px 0;
+}
+
+ngx-bsl-pagination {
+    align-self: flex-end;
+}

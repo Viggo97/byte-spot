@@ -1,0 +1,40 @@
+<a href="/">
+    <section>
+        <div class="logo">
+            <div class="logo-img">{{offer().company[0]}}</div>
+        </div>
+
+        <div class="title">
+            <h2>{{ offer().title }}</h2>
+        </div>
+
+        <div class="details">
+            <div class="company">
+                <ngx-bsl-icon-company></ngx-bsl-icon-company>
+                <span>{{ offer().company }}</span>
+            </div>
+
+            <div class="locations">
+                <ngx-bsl-icon-location></ngx-bsl-icon-location>
+
+                <span>{{ offer().locations[0] }}</span>
+                @if (offer().locations.length > 1) {
+                    <span>(+{{offer().locations.length - 1}})</span>
+                }
+            </div>
+
+            @if (offer().salary) {
+                <div class="salary">
+                    {{ offer().salary.min | numberFormatter }}
+                    - {{ offer().salary.max | numberFormatter }}
+                </div>
+            }
+        </div>
+
+        <div class="tags">
+            @for (technology of offer().technologies; track technology) {
+                <span class="tag">{{ technology }}</span>
+            }
+        </div>
+    </section>
+</a>

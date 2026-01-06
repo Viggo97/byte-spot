@@ -1,0 +1,110 @@
+@use 'breakpoints' as breakpoints;
+@use 'ngx-bsl/styles/mixins' as mixins;
+
+a {
+    padding: 16px;
+    display: flex;
+    border: 1px solid var(--bsl-borderColor);
+    border-radius: 8px;
+    color: var(--bsl-textColor);
+    cursor: pointer;
+    overflow: hidden;
+
+    &:hover {
+        background-color: var(--bsl-backgroundColor-muted);
+    }
+}
+
+section {
+    width: 100%;
+    display: grid;
+    gap: 16px;
+    grid-template-columns: min-content auto;
+    grid-template-areas:
+        "logo title"
+        "details details"
+        "tags tags";
+    font: var(--bsl-font-md);
+
+    @include breakpoints.md {
+        grid-template-areas:
+            "logo title"
+            "logo details"
+            "logo tags";
+    }
+}
+
+.logo {
+    grid-area: logo;
+    display: flex;
+    align-items: center;
+
+    .logo-img {
+        width: 3.5rem;
+        height: 3.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+        background-color: var(--bsl-backgroundColor-emphasis);
+        font: var(--bsl-font-4xl);
+        color: var(--bsa-textColor-highlight);
+    }
+}
+
+.title {
+    grid-area: title;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    h2 {
+        @include mixins.multiline-ellipsis(2, 1.75rem);
+    }
+
+}
+
+.details {
+    grid-area: details;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-wrap: wrap;
+
+    @include breakpoints.md {
+        flex-direction: row;
+        gap: 12px;
+    }
+
+    .salary {
+        font-weight: 500;
+        color: var(--bsa-textColor-highlight);
+    }
+}
+
+.tags {
+    grid-area: tags;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+
+    .tag {
+        display: flex;
+        padding: 0 12px;
+        width: fit-content;
+        border-radius: 4px;
+        font: var(--bsl-font-sm);
+        white-space: nowrap;
+        background-color: var(--bsl-backgroundColor-emphasis);
+    }
+}
+
+.locations, .company, .salary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    @include breakpoints.md {
+        gap: 4px;
+    }
+}
