@@ -3,7 +3,7 @@
     [displayLabel]="'label'"
     [(value)]="sortBy"
     (valueChange)="onSortByChange()">
-        @for (option of options; track option.key) {
+        @for (option of options(); track option.key) {
             <ngx-bsl-list-box-option
                 [id]="option.key"
                 [value]="option">
