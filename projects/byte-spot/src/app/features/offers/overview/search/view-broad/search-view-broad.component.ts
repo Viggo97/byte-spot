@@ -1,6 +1,7 @@
-import { Component, output } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TranslatePipe } from '@core';
 import { SearchFormComponent } from '../form/search-form.component';
+import { SearchService } from '../search.service';
 
 @Component({
     selector: 'bsa-offers-overview-search-view-broad',
@@ -12,10 +13,10 @@ import { SearchFormComponent } from '../form/search-form.component';
     styleUrl: './search-view-broad.component.scss',
 })
 export class SearchViewBroadComponent {
-    confirmSelection = output();
+    private searchService = inject(SearchService);
 
     protected onConfirmSelection(): void {
-        this.confirmSelection.emit();
+        this.searchService.changeSearch();
     }
 }
 

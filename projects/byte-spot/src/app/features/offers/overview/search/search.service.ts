@@ -1,7 +1,7 @@
 import { DestroyRef, inject, Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { debounceTime, distinctUntilChanged, iif, map, of, switchMap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, iif, map, of, Subject, switchMap } from 'rxjs';
 import { SearchDataService } from './data/search-data.service';
 import { SearchOption } from './models/search-option.interface';
 import { CategorySearchOptions } from './models/category-search-options.interface';
@@ -10,6 +10,9 @@ import { CategorySearchOptions } from './models/category-search-options.interfac
 export class SearchService {
     private searchDataService = inject(SearchDataService);
     private destroyRef = inject(DestroyRef);
+
+    private searchChanged = new Subject<void>();
+    searchChanged$ = this.searchChanged.asObservable();
 
     searchForm = new FormControl('', {nonNullable: true});
     options$ = this.searchForm.valueChanges
@@ -39,5 +42,13 @@ export class SearchService {
             }
         });
         return optionsByCategory;
+    }
+
+    changeSearch(): void {
+        this.searchChanged.next();
+    }
+
+    getSearchValue(): string {
+        return this.searchForm.getRawValue();
     }
 }

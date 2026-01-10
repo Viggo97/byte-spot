@@ -1,4 +1,4 @@
-import { Component, inject, output, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay } from '@angular/cdk/overlay';
 import { DrawerComponent } from 'ngx-bsl';
@@ -22,8 +22,6 @@ import { SearchFormComponent } from '../form/search-form.component';
 export class SearchViewCompactComponent {
     private overlay = inject(Overlay);
     private searchService = inject(SearchService);
-
-    confirmSelection = output();
 
     readonly scrollStrategy = this.overlay.scrollStrategies.block();
 
@@ -62,6 +60,6 @@ export class SearchViewCompactComponent {
 
     protected onConfirmSelection(): void {
         this.closeDrawer();
-        this.confirmSelection.emit();
+        this.searchService.changeSearch();
     }
 }
