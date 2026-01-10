@@ -40,13 +40,13 @@ export class FiltersFormService {
 
     initTechnologiesForm(technologies: Technology[]): void {
         technologies.forEach(() => {
-            this.form.controls.technologies.push(this.formBuilder.nonNullable.control(false));
+            this.form.controls.technologies.push(this.formBuilder.nonNullable.control(false), {emitEvent: false});
         });
     }
 
     initLocationsForm(locations: Location[]): void {
         locations.forEach(() => {
-            this.form.controls.locations.push(this.formBuilder.nonNullable.control(false));
+            this.form.controls.locations.push(this.formBuilder.nonNullable.control(false), {emitEvent: false});
         });
     }
 

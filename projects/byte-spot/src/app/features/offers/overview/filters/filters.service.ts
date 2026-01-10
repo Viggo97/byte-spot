@@ -1,7 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpParams } from '@angular/common/http';
-import { catchError, forkJoin, of, Subject } from 'rxjs';
-import { booleanStringValueMapper , HttpParamConverter } from '@shared';
+import { BehaviorSubject, catchError, forkJoin, of, Subject } from 'rxjs';
+import { booleanStringValueMapper  } from '@shared';
 import { Technology } from './models/technology.interface';
 import { Location } from './models/location.interface';
 import { FiltersDataService } from './data/filters-data.service';
@@ -16,6 +15,8 @@ export class FiltersService {
     technologies: Technology[] = [];
     locations: Location[] = [];
 
+    private filtersInitialized = new BehaviorSubject(false);
+    filtersInitialized$ = this.filtersInitialized.asObservable();
     private filtersChanged = new Subject<void>();
     filtersChanged$ = this.filtersChanged.asObservable();
 
@@ -36,14 +37,15 @@ export class FiltersService {
                 this.locations = locations;
                 this.filtersFormService.initTechnologiesForm(this.technologies);
                 this.filtersFormService.initLocationsForm(this.locations);
+                this.filtersInitialized.next(true);
             });
     }
 
     createFilterDto(): FiltersDto {
         const form = this.filtersFormService.getFormValue();
         return {
-            salaryFrom: form.salary.from,
-            salaryTo: form.salary.to,
+            salaryMin: form.salary.from,
+            salaryMax: form.salary.to,
             workMode: booleanStringValueMapper(FiltersDto.workModeValueMap, form.workMode),
             employmentType: booleanStringValueMapper(FiltersDto.employmentTypeValueMap, form.employmentType),
             seniority: booleanStringValueMapper(FiltersDto.seniorityValueMap, form.seniority),
@@ -52,19 +54,19 @@ export class FiltersService {
         };
     }
 
-    createFilterParams(): HttpParams {
+    getFilterParams(): Record<string, unknown> {
         const form = this.filtersFormService.getFormValue();
         const defaultSalaryFrom = this.filtersFormService.form.controls.salary.defaultValue.from;
         const defaultSalaryTo = this.filtersFormService.form.controls.salary.defaultValue.to;
-        return HttpParamConverter({
-            salaryFrom: form.salary.from !== defaultSalaryFrom && form.salary.from,
-            salaryTo: form.salary.to !== defaultSalaryTo && form.salary.to,
+        return {
+            salaryMin: form.salary.from !== defaultSalaryFrom && form.salary.from,
+            salaryMax: form.salary.to !== defaultSalaryTo && form.salary.to,
             workMode: booleanStringValueMapper(FiltersDto.workModeValueMap, form.workMode),
             employmentType: booleanStringValueMapper(FiltersDto.employmentTypeValueMap, form.employmentType),
             seniority: booleanStringValueMapper(FiltersDto.seniorityValueMap, form.seniority),
-            technologies: this.getSelectedTechnologies(),
-            locations: this.getSelectedLocations(),
-        });
+            technology: this.getSelectedTechnologies(),
+            location: this.getSelectedLocations(),
+        };
     }
 
     private getSelectedTechnologies(): string[] {

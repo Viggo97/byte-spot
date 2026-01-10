@@ -1,6 +1,7 @@
 <button
     #filters
     class="filters-button"
+    [disabled]="!filtersInitialized()"
     cdkOverlayOrigin
     (click)="openDrawer()">
     {{ 'global.filters' | translate }}
@@ -28,7 +29,7 @@
                 </button>
                 <button
                     type="button"
-                    (click)="changeFilters()">
+                    (click)="closeDrawer()">
                     {{ 'offer.showOffers' | translate }}
                 </button>
             </div>
