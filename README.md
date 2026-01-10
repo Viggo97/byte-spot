@@ -4,7 +4,7 @@ A web application showcasing IT job offers. It allows browsing, filtering, and s
 
 # 🌍 Live Demo
 
-You can check out the live demo here: [Byte Spot](https://viggo97.gitlab.io/byte-spot)  
+You can check out the live demo here: [Byte Spot](https://viggo97.github.io/byte-spot/)  
 ⚠️ Warning: Data retrieval from the REST API may take up to several tens of seconds as the backend is hosted on a free server with limited resources.⚠️
 
 ## ✨ Key Features
