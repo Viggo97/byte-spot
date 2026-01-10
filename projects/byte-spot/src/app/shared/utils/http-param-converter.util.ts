@@ -1,6 +1,6 @@
 import { HttpParams } from '@angular/common/http';
 
-export function HttpParamConverter(valueToConversion: Record<string, unknown>): HttpParams {
+export function HttpParamsConverter(valueToConversion: Record<string, unknown>): HttpParams {
     let params = new HttpParams();
 
     Object.keys(valueToConversion).forEach(key => {
