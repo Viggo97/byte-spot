@@ -1,11 +1,12 @@
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { TranslatePipe } from '@core';
+import { PaginationComponent } from 'ngx-bsl';
 import { ListService } from './list.service';
+import { PaginationService } from './pagination.service';
 import { OfferPost } from './models/offer-post.interface';
 import { OfferListItemComponent } from './item/offer-list-item.component';
 import { OfferListSkeletonComponent } from './skeleton/offer-list-skeleton.component';
-import { TranslatePipe } from '@core';
-import { PaginationComponent } from 'ngx-bsl';
 
 @Component({
     selector: 'bsa-offer-list',
@@ -21,24 +22,27 @@ import { PaginationComponent } from 'ngx-bsl';
 export class OfferListComponent implements OnInit {
     private destroyRef = inject(DestroyRef);
     private listService = inject(ListService);
+    private paginationService = inject(PaginationService);
 
     protected offers = signal<OfferPost[]>([]);
-    protected skeletons = signal([...Array(3).keys()]);
-    protected loading = signal(true);
-    protected page = signal(1);
-    protected total = signal(0);
+    protected skeletons = signal([...Array(this.paginationService.limit).keys()]);
+    protected loading = toSignal(this.listService.fetchingOffers$);
+    protected page = this.paginationService.page;
+    protected total = this.paginationService.total;
+    protected limit = this.paginationService.limit;
 
     ngOnInit(): void {
-        this.listService.getOffers()
+        this.listService.offers$
             .pipe(takeUntilDestroyed(this.destroyRef))
-            .subscribe(data => {
-                this.offers.set(data);
-                this.total.set(data.length);
-                this.loading.set(false);
+            .subscribe(offerPostList => {
+                this.offers.set(offerPostList.data);
+                this.total.set(offerPostList.total);
+                this.skeletons.set([...Array(offerPostList.data.length || this.paginationService.limit).keys()]);
             });
     }
 
-    protected onPageChange(page: number): void {
-
+    protected onPageChange(): void {
+        console.log('change pagination');
+        this.paginationService.changePagination();
     }
 }

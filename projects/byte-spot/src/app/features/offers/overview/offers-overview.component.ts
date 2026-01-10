@@ -13,9 +13,11 @@ import { SearchService } from './search/search.service';
 import { SearchDataService } from './search/data/search-data.service';
 import { SearchViewBroadComponent } from './search/view-broad/search-view-broad.component';
 import { SearchViewCompactComponent } from './search/view-compact/search-view-compact.component';
+import { SortService } from './sort/sort.service';
 import { ListDataService } from './list/data/list.data.service';
 import { ListService } from './list/list.service';
 import { OfferListComponent } from './list/offer-list.component';
+import { PaginationService } from './list/pagination.service';
 
 @Component({
     selector: 'bsa-offers-overview',
@@ -36,20 +38,20 @@ import { OfferListComponent } from './list/offer-list.component';
         FiltersService,
         SearchDataService,
         SearchService,
+        SortService,
         ListDataService,
         ListService,
+        PaginationService,
     ],
 })
 export class OffersOverviewComponent {
     private breakpointObserver = inject(BreakpointObserver);
-    private filtersService = inject(FiltersService);
     private destroyRef = inject(DestroyRef);
 
     compactMode = signal(window.innerWidth < 960);
 
     constructor() {
         this.subscribeToBreakpointObserver();
-        this.subscribeToFiltersChange();
     }
 
     private subscribeToBreakpointObserver(): void {
@@ -57,15 +59,6 @@ export class OffersOverviewComponent {
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((state) => {
                 this.compactMode.set(!state.matches);
-            });
-    }
-
-    private subscribeToFiltersChange(): void {
-        this.filtersService.filtersChanged$
-            .pipe(takeUntilDestroyed(this.destroyRef))
-            .subscribe(() => {
-                const filters = this.filtersService.createFilterParams();
-                // TODO fetch offers
             });
     }
 }

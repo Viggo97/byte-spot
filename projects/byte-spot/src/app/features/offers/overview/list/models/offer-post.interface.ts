@@ -1,9 +1,8 @@
 export interface OfferPost {
+    id: string;
     title: string;
-    salary: {
-        min: number;
-        max: number;
-    }
+    salaryMin: number;
+    salaryMax: number;
     locations: string[];
     company: string;
     technologies: string[];
