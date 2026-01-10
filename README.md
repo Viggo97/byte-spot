@@ -24,21 +24,23 @@ This is a showcase project demonstrating my workshop. It’s not perfect, and re
 
 ## 🛠 Running the project locally
 
-1. **Clone the repository:**
-   ```sh
-   git clone https://gitlab.com/Viggo97/byte-spot.git
-   cd byte-spot
-   ```
-2. **Install dependencies:**
-   ```sh
-   npm install
-   ```
-3. **Run the application:**
-   ```sh
-   ng serve
-   ```
+To run this project locally, follow these steps:
+1. Clone the repository:
+```bash
+  git clone https://github.com/Viggo97/byte-spot.git
+```
+2. If you are using Docker:
+```bash
+  docker build .
+  docker compose up --watch
+```
+3. Or if you are using local Angular CLI:
+```bash
+  npm install
+  ng s
+```
    The application will be available at: `http://localhost:4200/`
 
 4. **Backend:**
    To ensure proper functionality, a Node.js backend must be running.
-   📌 Backend repository link: [Backend Link](https://gitlab.com/Viggo97/byte-spot-rest-api-node)
+   📌 Backend repository link: [Backend Link](https://github.com/Viggo97/byte-spot-api)
