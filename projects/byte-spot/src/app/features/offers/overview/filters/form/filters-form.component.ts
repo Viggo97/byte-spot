@@ -23,5 +23,8 @@ export class FiltersFormComponent {
     protected form = this.filterFormService.form;
     protected technologies = signal([...this.filtersService.technologies]);
     protected locations = signal([...this.filtersService.locations]);
+    protected workModes = signal([...this.filtersService.workModes]);
+    protected experienceLevels = signal([...this.filtersService.experienceLevels]);
+    protected employmentTypes = signal([...this.filtersService.employmentTypes]);
 }
 

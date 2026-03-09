@@ -85,8 +85,8 @@ export const i18nOffer: Record<string, I18nLanguageCode> = {
         en: 'Internship',
         pl: 'Staż',
     },
-    seniority: {
-        en: 'Seniority',
+    experienceLevel: {
+        en: 'Experience level',
         pl: 'Poziom doświadczenia',
     },
     intern: {

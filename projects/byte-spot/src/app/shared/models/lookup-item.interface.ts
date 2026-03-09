@@ -1,4 +1,4 @@
-export interface Location {
+export interface LookupItem {
     id: string;
     name: string;
 }

@@ -26,29 +26,20 @@
         </section>
     }
 
-    <section formGroupName="workMode">
-        <h3>{{ 'offer.workMode' | translate }}</h3>
-
-        <div class="filters-group">
-            <ngx-bsl-checkbox
-                [id]="'filter-work-mode-on-site'"
-                formControlName="onSite">
-                {{ 'offer.onSite' | translate }}
-            </ngx-bsl-checkbox>
-
-            <ngx-bsl-checkbox
-                [id]="'filter-work-mode-hybrid'"
-                formControlName="hybrid">
-                {{ 'offer.hybrid' | translate }}
-            </ngx-bsl-checkbox>
-
-            <ngx-bsl-checkbox
-                [id]="'filter-work-mode-remote'"
-                formControlName="remote">
-                {{ 'offer.remote' | translate }}
-            </ngx-bsl-checkbox>
-        </div>
-    </section>
+    @if (workModes().length) {
+        <section>
+            <h3>{{ 'offer.workMode' | translate }}</h3>
+            <div class="filters-group" formArrayName="workModes">
+                @for (workMode of workModes(); track workMode.id; let i = $index) {
+                    <ngx-bsl-checkbox
+                        [id]="'filter-workMode-' + i"
+                        [formControlName]="i">
+                        {{ workMode.name }}
+                    </ngx-bsl-checkbox>
+                }
+            </div>
+        </section>
+    }
 
     @if (locations().length) {
         <section formArrayName="locations">
@@ -66,75 +57,36 @@
         </section>
     }
 
-    <section formGroupName="employmentType">
-        <h3>{{ 'offer.employmentType' | translate }}</h3>
+    @if (experienceLevels().length) {
+        <section formArrayName="experienceLevels">
+            <h3>{{ 'offer.experienceLevel' | translate }}</h3>
 
-        <div class="filters-group">
-            <ngx-bsl-checkbox
-                [id]="'filter-employment-type-employment-contract'"
-                formControlName="employmentContract">
-                {{ 'offer.employmentContract' | translate }}
-            </ngx-bsl-checkbox>
+            <div class="filters-group">
+                @for (experienceLevel of experienceLevels(); track experienceLevel.id; let i = $index) {
+                    <ngx-bsl-checkbox
+                        [id]="'filter-experience-level-' + i"
+                        [formControlName]="i">
+                        {{ experienceLevel.name }}
+                    </ngx-bsl-checkbox>
+                }
+            </div>
+        </section>
+    }
 
-            <ngx-bsl-checkbox
-                [id]="'filter-employment-type-b2b'"
-                formControlName="b2b">
-                {{ 'offer.b2b' | translate }}
-            </ngx-bsl-checkbox>
+    @if (employmentTypes().length) {
+        <section formArrayName="employmentTypes">
+            <h3>{{ 'offer.employmentType' | translate }}</h3>
 
-            <ngx-bsl-checkbox
-                [id]="'filter-employment-type-mandate-contract'"
-                formControlName="mandateContract">
-                {{ 'offer.mandateContract' | translate }}
-            </ngx-bsl-checkbox>
+            <div class="filters-group">
+                @for (employmentType of employmentTypes(); track employmentType.id; let i = $index) {
+                    <ngx-bsl-checkbox
+                        [id]="'filter-employment-type-' + i"
+                        [formControlName]="i">
+                        {{ employmentType.name }}
+                    </ngx-bsl-checkbox>
+                }
+            </div>
+        </section>
+    }
 
-            <ngx-bsl-checkbox
-                [id]="'filter-employment-type-specific-task-contract'"
-                formControlName="specificTaskContract">
-                {{ 'offer.specificTaskContract' | translate }}
-            </ngx-bsl-checkbox>
-
-            <ngx-bsl-checkbox
-                [id]="'filter-employment-type-internship'"
-                formControlName="internship">
-                {{ 'offer.internship' | translate }}
-            </ngx-bsl-checkbox>
-        </div>
-    </section>
-
-    <section formGroupName="seniority">
-        <h3>{{ 'offer.seniority' | translate }}</h3>
-
-        <div class="filters-group">
-            <ngx-bsl-checkbox
-                [id]="'filter-seniority-intern'"
-                formControlName="intern">
-                {{ 'offer.intern' | translate }}
-            </ngx-bsl-checkbox>
-
-            <ngx-bsl-checkbox
-                [id]="'filter-seniority-junior'"
-                formControlName="junior">
-                {{ 'offer.junior' | translate }}
-            </ngx-bsl-checkbox>
-
-            <ngx-bsl-checkbox
-                [id]="'filter-seniority-mid'"
-                formControlName="mid">
-                {{ 'offer.mid' | translate }}
-            </ngx-bsl-checkbox>
-
-            <ngx-bsl-checkbox
-                [id]="'filter-seniority-senior'"
-                formControlName="senior">
-                {{ 'offer.senior' | translate }}
-            </ngx-bsl-checkbox>
-
-            <ngx-bsl-checkbox
-                [id]="'filter-seniority-expert'"
-                formControlName="expert">
-                {{ 'offer.expert' | translate }}
-            </ngx-bsl-checkbox>
-        </div>
-    </section>
 </ng-container>

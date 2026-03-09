@@ -42,11 +42,11 @@ export class FiltersViewBroadComponent implements OnInit {
                 this.filtersService.changeFilters();
             });
         merge(
-            this.filtersFormService.form.controls.workMode.valueChanges,
-            this.filtersFormService.form.controls.employmentType.valueChanges,
-            this.filtersFormService.form.controls.seniority.valueChanges,
             this.filtersFormService.form.controls.technologies.valueChanges,
             this.filtersFormService.form.controls.locations.valueChanges,
+            this.filtersFormService.form.controls.workModes.valueChanges,
+            this.filtersFormService.form.controls.employmentTypes.valueChanges,
+            this.filtersFormService.form.controls.experienceLevels.valueChanges,
         )
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe(() => {
