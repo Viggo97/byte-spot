@@ -14,8 +14,8 @@ export class SortService {
     options = signal<SortByOption[]>(
         [
             {
-                key: SortBy.NEWEST,
-                label: this.translateService.translate('offer.newest'),
+                key: SortBy.LATEST,
+                label: this.translateService.translate('offer.latest'),
             },
             {
                 key: SortBy.HIGHEST_SALARY,
