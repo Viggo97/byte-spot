@@ -23,10 +23,18 @@
                 }
             </div>
 
-            @if (offer().salaryMin && offer().salaryMax) {
+            @let salaryMin = offer().salaryMin;
+            @let salaryMax = offer().salaryMax;
+            @let salaryFixed = offer().salaryFixed;
+
+            @if (salaryMin && salaryMax) {
                 <div class="salary">
-                    {{ offer().salaryMin | numberFormatter }}
-                    - {{ offer().salaryMax | numberFormatter }}
+                    {{ salaryMin | numberFormatter }}
+                    - {{ salaryMax | numberFormatter }}
+                </div>
+            } @else if (salaryFixed) {
+                <div class="salary">
+                    {{ salaryFixed | numberFormatter }}
                 </div>
             }
         </div>

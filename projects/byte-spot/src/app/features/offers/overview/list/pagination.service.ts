@@ -7,7 +7,7 @@ export class PaginationService {
     paginationChanged$ = this.paginationChanged.asObservable();
     private pageChanged = false;
 
-    readonly limit = 3;
+    readonly limit = 10;
     page = signal(1);
     total = signal(0);
 
@@ -16,11 +16,11 @@ export class PaginationService {
         this.paginationChanged.next();
     }
 
-    getPaginationParams(): {limit: number, page: number} {
+    getPaginationParams(): {pageSize: number, pageNumber: number} {
         const page = this.pageChanged ? this.page() : 1;
         const params = {
-            limit: this.limit,
-            page,
+            pageSize: this.limit,
+            pageNumber: page,
         };
         this.page.set(page);
         this.pageChanged = false;

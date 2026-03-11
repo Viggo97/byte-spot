@@ -4,7 +4,7 @@
     }
 }
 @else if (offers().length) {
-    @for (offer of offers(); track offer.title) {
+    @for (offer of offers(); track offer.id) {
         <bsa-offer-list-item [offer]="offer"></bsa-offer-list-item>
     }
 }

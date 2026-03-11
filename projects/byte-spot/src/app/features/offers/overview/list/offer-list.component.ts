@@ -34,15 +34,14 @@ export class OfferListComponent implements OnInit {
     ngOnInit(): void {
         this.listService.offers$
             .pipe(takeUntilDestroyed(this.destroyRef))
-            .subscribe(offerPostList => {
-                this.offers.set(offerPostList.data);
-                this.total.set(offerPostList.total);
-                this.skeletons.set([...Array(offerPostList.data.length || this.paginationService.limit).keys()]);
+            .subscribe(offers => {
+                this.offers.set(offers.items);
+                this.total.set(offers.totalCount);
+                this.skeletons.set([...Array(offers.items.length || this.paginationService.limit).keys()]);
             });
     }
 
     protected onPageChange(): void {
-        console.log('change pagination');
         this.paginationService.changePagination();
     }
 }
