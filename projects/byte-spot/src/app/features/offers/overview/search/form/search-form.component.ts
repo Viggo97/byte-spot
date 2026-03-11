@@ -4,8 +4,9 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { ComboboxComponent, ListBoxGroupComponent, ListBoxOptionComponent, ListBoxSeparatorComponent } from 'ngx-bsl';
 import { TranslatePipe } from '@core';
 import { SearchService } from '../search.service';
-import { CategorySearchOptions } from '../models/category-search-options.interface';
-import { SearchOption } from '../models/search-option.interface';
+import { Suggestion } from '../models/suggestion.interface';
+import { SuggestionCategoryGroup } from '../models/suggestion-category-group.interface';
+import { suggestionCategoryLangMap } from '../models/suggestion-category-lang-map.const';
 
 @Component({
     selector: 'bsa-offers-overview-search-form',
@@ -24,9 +25,12 @@ export class SearchFormComponent {
 
     confirmSelection = output();
 
+    suggestionCategoryLangMap = suggestionCategoryLangMap;
+
     protected form = this.searchService.searchForm;
-    protected categories: Signal<CategorySearchOptions[]> = toSignal(this.searchService.options$, {initialValue: []});
-    protected optionValueParse = (option: SearchOption) => option.value;
+    protected categories: Signal<SuggestionCategoryGroup[]>
+        = toSignal(this.searchService.options$, {initialValue: []});
+    protected optionValueParse = (option: Suggestion) => option.value;
 
     protected onConfirmSelection(): void {
         this.confirmSelection.emit();

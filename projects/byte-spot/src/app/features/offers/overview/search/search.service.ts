@@ -3,8 +3,8 @@ import { FormControl } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged, iif, map, of, Subject, switchMap } from 'rxjs';
 import { SearchDataService } from './data/search-data.service';
-import { SearchOption } from './models/search-option.interface';
-import { CategorySearchOptions } from './models/category-search-options.interface';
+import { SuggestionCategoryGroup } from './models/suggestion-category-group.interface';
+import { Suggestion } from './models/suggestion.interface';
 
 @Injectable()
 export class SearchService {
@@ -17,19 +17,19 @@ export class SearchService {
     searchForm = new FormControl('', {nonNullable: true});
     options$ = this.searchForm.valueChanges
         .pipe(
-            debounceTime(200),
+            debounceTime(300),
             distinctUntilChanged(),
-            switchMap((searchTerm) => iif(
-                () => searchTerm.length > 0,
-                this.searchDataService.getSearchOptions(searchTerm),
-                of([] as SearchOption[]),
+            switchMap((searchPhrase) => iif(
+                () => searchPhrase.length > 0,
+                this.searchDataService.getSearchOptions(searchPhrase),
+                of([] as Suggestion[]),
             )),
             map((options) => this.mapToCategories(options)),
             takeUntilDestroyed(this.destroyRef),
         );
 
-    private mapToCategories(options: SearchOption[]): CategorySearchOptions[] {
-        const optionsByCategory: CategorySearchOptions[] = [];
+    private mapToCategories(options: Suggestion[]): SuggestionCategoryGroup[] {
+        const optionsByCategory: SuggestionCategoryGroup[] = [];
         options.forEach(option => {
             const category = optionsByCategory.find(o => o.category === option.category);
             if (!category) {

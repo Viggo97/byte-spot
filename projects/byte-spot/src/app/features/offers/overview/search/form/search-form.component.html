@@ -5,7 +5,8 @@
     [optionValueParse]="optionValueParse"
     (confirmSelection)="onConfirmSelection()">
     @for (category of categories(); track category.category; let last = $last) {
-        <ngx-bsl-list-box-group [title]="category.category">
+        @let categoryTitle = suggestionCategoryLangMap.get(category.category) || 'offer.keyword';
+        <ngx-bsl-list-box-group [title]="categoryTitle | translate">
             @for (option of category.options; track option.value) {
                 <ngx-bsl-list-box-option
                     [id]="'option-' + option.value"
