@@ -1,6 +1,7 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { NumberFormatterPipe } from '@shared';
 import { TranslatePipe } from '@core';
+import { InfoService } from './info.service';
 
 @Component({
     selector: 'bsa-offers-overview-info',
@@ -12,5 +13,6 @@ import { TranslatePipe } from '@core';
     styleUrl: './info.component.scss',
 })
 export class InfoComponent {
-    numberOfOffers = input(0);
+    private infoService = inject(InfoService);
+    numberOfOffers = computed(() => this.infoService.total());
 }

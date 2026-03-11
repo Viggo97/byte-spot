@@ -18,6 +18,7 @@ import { ListDataService } from './list/data/list.data.service';
 import { ListService } from './list/list.service';
 import { OfferListComponent } from './list/offer-list.component';
 import { PaginationService } from './list/pagination.service';
+import { InfoService } from './info/info.service';
 
 @Component({
     selector: 'bsa-offers-overview',
@@ -42,6 +43,7 @@ import { PaginationService } from './list/pagination.service';
         ListDataService,
         ListService,
         PaginationService,
+        InfoService,
     ],
 })
 export class OffersOverviewComponent {
