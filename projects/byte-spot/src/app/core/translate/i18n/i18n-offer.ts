@@ -13,8 +13,8 @@ export const i18nOffer: Record<string, I18nLanguageCode> = {
         en: 'job offers',
         pl: 'ofert pracy',
     },
-    newest: {
-        en: 'Newest',
+    latest: {
+        en: 'Latest',
         pl: 'Najnowsze',
     },
     highestSalary: {
@@ -45,77 +45,21 @@ export const i18nOffer: Record<string, I18nLanguageCode> = {
         en: 'Work mode',
         pl: 'Tryb pracy',
     },
-    onSite: {
-        en: 'On-site',
-        pl: 'Stacjonarnie',
-    },
-    hybrid: {
-        en: 'Hybrid',
-        pl: 'Hybrydowo',
-    },
-    remote: {
-        en: 'Remote',
-        pl: 'Zdalnie',
-    },
-    location: {
-        en: 'Location',
-        pl: 'Lokalizacja',
-    },
     employmentType: {
         en: 'Employment type',
         pl: 'Forma zatrudnienia',
-    },
-    employmentContract: {
-        en: 'Employment contract',
-        pl: 'Umowa o pracę',
-    },
-    b2b: {
-        en: 'B2B',
-        pl: 'B2B',
-    },
-    mandateContract: {
-        en: 'Mandate contract',
-        pl: 'Umowa zlecenie',
-    },
-    specificTaskContract: {
-        en: 'Specific task contract',
-        pl: 'Umowa o dzieło',
-    },
-    internship: {
-        en: 'Internship',
-        pl: 'Staż',
     },
     experienceLevel: {
         en: 'Experience level',
         pl: 'Poziom doświadczenia',
     },
-    intern: {
-        en: 'Intern',
-        pl: 'Stażysta',
-    },
-    junior: {
-        en: 'Junior',
-        pl: 'Junior',
-    },
-    mid: {
-        en: 'Mid',
-        pl: 'Mid',
-    },
-    senior: {
-        en: 'Senior',
-        pl: 'Senior',
-    },
-    expert: {
-        en: 'Expert',
-        pl: 'Ekspert',
+    newOffer: {
+        en: 'New',
+        pl: 'Nowa',
     },
     technologies: {
         en: 'Technologies',
         pl: 'Technologie',
-    },
-    newOffer: {
-        en: 'New',
-        pl: 'Nowa',
     },
     locations: {
         en: 'Locations',
@@ -124,6 +68,10 @@ export const i18nOffer: Record<string, I18nLanguageCode> = {
     companies: {
         en: 'Companies',
         pl: 'Firmy',
+    },
+    position_name: {
+        en: 'Position',
+        pl: 'Stanowisko',
     },
     keyword: {
         en: 'Keyword',
