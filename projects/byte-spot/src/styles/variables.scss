@@ -3,6 +3,8 @@ body {
 
     --bsa-textColor-highlight: var(--bsa-color-violet-500);
 
+    --bsa-box-shadow-primary: 0 0 8px var(--bsl-color-neutral-300);
+
     --bsa-primary-backgroundColor: var(--bsa-color-violet-600);
     --bsa-primary-backgroundColor-hover: var(--bsa-color-violet-700);
     --bsa-primary-backgroundColor-active: var(--bsa-color-violet-800);
@@ -16,6 +18,8 @@ body {
     --bsa-danger-textColor-invisible: var(--bsa-color-red-600);
 
     &.dark-theme {
+        --bsa-box-shadow-primary: 0 0 4px var(--bsl-color-neutral-900);
+
         --bsa-primary-backgroundColor: var(--bsa-color-violet-800);
         --bsa-primary-backgroundColor-hover: var(--bsa-color-violet-700);
         --bsa-primary-backgroundColor-active: var(--bsa-color-violet-600);
