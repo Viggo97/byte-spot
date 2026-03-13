@@ -1,0 +1,32 @@
+:host {
+    width: 12rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.loader {
+    width: 100%;
+    height: .25rem;
+    --c:no-repeat linear-gradient(var(--bsa-color-violet-600) 0 0);
+    background: var(--c),var(--c), var(--bsl-color-neutral-200);
+    background-size: 60% 100%;
+    animation: loader-animation 3s infinite;
+    border-radius: 2px;
+}
+@keyframes loader-animation {
+    0%   {background-position:-150% 0,-150% 0}
+    66%  {background-position: 250% 0,-150% 0}
+    100% {background-position: 250% 0, 250% 0}
+}
+
+.description {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font: var(--bsl-font-md);
+}
