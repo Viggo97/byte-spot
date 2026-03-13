@@ -1,0 +1,9 @@
+.bsl-checkbox-button {
+    padding: 0.25rem .5rem;
+    border-radius: .5rem;
+
+    &[aria-checked=true] {
+        color: var(--bsa-primary-textColor);
+        border-color: var(--bsl-checkbox-button-backgroundColor-checked);
+    }
+}

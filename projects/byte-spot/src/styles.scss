@@ -3,6 +3,7 @@
 @use 'styles/variables';
 @use 'styles/breakpoints';
 @use 'styles/components/button';
+@use 'styles/components/checkbox-button';
 
 @use '@angular/cdk/overlay-prebuilt.css';
 @use 'ngx-bsl/styles/index';

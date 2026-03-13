@@ -1,9 +1,11 @@
 body {
     --bsl-range-thumb-backgroundColor: var(--bsa-color-violet-600);
     --bsl-range-tracker-backgroundColor: var(--bsa-color-violet-400);
+    --bsl-checkbox-button-backgroundColor-checked: var(--bsa-color-violet-600);
 
     &.dark-theme {
         --bsl-range-thumb-backgroundColor: var(--bsa-color-violet-600);
         --bsl-range-tracker-backgroundColor: var(--bsa-color-violet-800);
+        --bsl-checkbox-button-backgroundColor-checked: var(--bsa-color-violet-600);
     }
 }
