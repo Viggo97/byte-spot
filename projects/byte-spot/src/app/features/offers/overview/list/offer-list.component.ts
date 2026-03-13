@@ -4,7 +4,7 @@ import { TranslatePipe } from '@core';
 import { PaginationComponent } from 'ngx-bsl';
 import { ListService } from './list.service';
 import { PaginationService } from './pagination.service';
-import { OfferPost } from './models/offer-post.interface';
+import { Offer } from './models/offer.interface';
 import { OfferListItemComponent } from './item/offer-list-item.component';
 import { OfferListSkeletonComponent } from './skeleton/offer-list-skeleton.component';
 
@@ -24,7 +24,7 @@ export class OfferListComponent implements OnInit {
     private listService = inject(ListService);
     private paginationService = inject(PaginationService);
 
-    protected offers = signal<OfferPost[]>([]);
+    protected offers = signal<Offer[]>([]);
     protected skeletons = signal([...Array(this.paginationService.limit).keys()]);
     protected loading = toSignal(this.listService.fetchingOffers$);
     protected page = this.paginationService.page;

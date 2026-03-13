@@ -19,6 +19,8 @@ import { ListService } from './list/list.service';
 import { OfferListComponent } from './list/offer-list.component';
 import { PaginationService } from './list/pagination.service';
 import { InfoService } from './info/info.service';
+import { OffersDataService } from './offers-data.service';
+import { LoaderComponent } from '@shared';
 
 @Component({
     selector: 'bsa-offers-overview',
@@ -30,6 +32,7 @@ import { InfoService } from './info/info.service';
         SearchViewBroadComponent,
         SearchViewCompactComponent,
         OfferListComponent,
+        LoaderComponent,
     ],
     templateUrl: './offers-overview.component.html',
     styleUrl: './offers-overview.component.scss',
@@ -44,23 +47,38 @@ import { InfoService } from './info/info.service';
         ListService,
         PaginationService,
         InfoService,
+        OffersDataService,
     ],
 })
 export class OffersOverviewComponent {
-    private breakpointObserver = inject(BreakpointObserver);
-    private destroyRef = inject(DestroyRef);
+    private readonly _breakpointObserver = inject(BreakpointObserver);
+    private readonly _destroyRef = inject(DestroyRef);
+    private readonly _offersDataService = inject(OffersDataService);
 
     compactMode = signal(window.innerWidth < 960);
+    loading = signal(true);
 
     constructor() {
         this.subscribeToBreakpointObserver();
+        this.subscribeToInitialDataLoad();
+        this._offersDataService.fetchData();
     }
 
     private subscribeToBreakpointObserver(): void {
-        this.breakpointObserver.observe('(min-width: 960px)')
-            .pipe(takeUntilDestroyed(this.destroyRef))
+        this._breakpointObserver.observe('(min-width: 960px)')
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((state) => {
                 this.compactMode.set(!state.matches);
+            });
+    }
+
+    private subscribeToInitialDataLoad(): void {
+        this._offersDataService.dataFetched$
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe(dataFetched => {
+                if (dataFetched) {
+                    this.loading.set(false);
+                }
             });
     }
 }

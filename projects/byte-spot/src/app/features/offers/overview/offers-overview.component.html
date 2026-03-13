@@ -1,28 +1,37 @@
-@if (!compactMode()) {
-    <aside>
-        <bsa-offers-overview-filters-view-broad></bsa-offers-overview-filters-view-broad>
-    </aside>
+@defer (when !loading()) {
+    @if (!compactMode()) {
+        <aside>
+            <bsa-offers-overview-filters-view-broad></bsa-offers-overview-filters-view-broad>
+        </aside>
+    }
+
+    <main>
+        <div class="search">
+            @if (compactMode()) {
+                <bsa-offers-overview-search-view-compact></bsa-offers-overview-search-view-compact>
+            } @else {
+                <bsa-offers-overview-search-view-broad></bsa-offers-overview-search-view-broad>
+            }
+        </div>
+        <div class="settings">
+            <bsa-offers-overview-info></bsa-offers-overview-info>
+
+            @if (compactMode()) {
+                <bsa-offers-overview-filters-view-compact></bsa-offers-overview-filters-view-compact>
+            }
+
+            <bsa-offers-overview-sort></bsa-offers-overview-sort>
+        </div>
+
+        <div class="list">
+            <bsa-offer-list></bsa-offer-list>
+        </div>
+    </main>
 }
-
-<main>
-    <div class="search">
-        @if (compactMode()) {
-            <bsa-offers-overview-search-view-compact></bsa-offers-overview-search-view-compact>
-        } @else {
-            <bsa-offers-overview-search-view-broad></bsa-offers-overview-search-view-broad>
-        }
+@placeholder (minimum 500ms) {
+    <div class="loader">
+        <bsa-loader>
+            <div style="width: 500px">We are looking for best offers...</div>
+        </bsa-loader>
     </div>
-    <div class="settings">
-        <bsa-offers-overview-info></bsa-offers-overview-info>
-
-        @if (compactMode()) {
-            <bsa-offers-overview-filters-view-compact></bsa-offers-overview-filters-view-compact>
-        }
-
-        <bsa-offers-overview-sort></bsa-offers-overview-sort>
-    </div>
-
-    <div class="list">
-        <bsa-offer-list></bsa-offer-list>
-    </div>
-</main>
+}

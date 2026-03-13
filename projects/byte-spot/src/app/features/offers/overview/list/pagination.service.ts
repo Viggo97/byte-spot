@@ -1,5 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { Subject } from 'rxjs';
+import { PaginationParams } from '@app/shared/models/pagination-params.interface';
 
 @Injectable()
 export class PaginationService {
@@ -16,7 +17,7 @@ export class PaginationService {
         this.paginationChanged.next();
     }
 
-    getPaginationParams(): {pageSize: number, pageNumber: number} {
+    getPaginationParams(): PaginationParams {
         const page = this.pageChanged ? this.page() : 1;
         const params = {
             pageSize: this.limit,

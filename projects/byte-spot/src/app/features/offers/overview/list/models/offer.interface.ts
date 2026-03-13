@@ -1,4 +1,4 @@
-export interface OfferPost {
+export interface Offer {
     id: string;
     title: string;
     company: string;
