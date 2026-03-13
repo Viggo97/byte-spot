@@ -1,24 +1,11 @@
-@if (filtersInitialized()) {
-    <header>
-        <h2>{{ 'offer.filters' | translate }}</h2>
-        <button
-            type="button"
-            class="danger invisible"
-            (click)="resetFilters()">
-            {{ 'offer.clearAll' | translate }}
-        </button>
-    </header>
+<header>
+    <h2>{{ 'offer.filters' | translate }}</h2>
+    <button
+        type="button"
+        class="danger invisible"
+        (click)="resetFilters()">
+        {{ 'offer.clearAll' | translate }}
+    </button>
+</header>
 
-    <bsa-offers-overview-filters-form></bsa-offers-overview-filters-form>
-} @else {
-    <div class="skeletons">
-        @for (skeleton of skeletons(); track skeleton) {
-            <div class="skeletons-section">
-                <ngx-bsl-skeleton></ngx-bsl-skeleton>
-                <ngx-bsl-skeleton width="50%"></ngx-bsl-skeleton>
-                <ngx-bsl-skeleton width="30%"></ngx-bsl-skeleton>
-                <ngx-bsl-skeleton width="70%"></ngx-bsl-skeleton>
-            </div>
-        }
-    </div>
-}
+<bsa-offers-overview-filters-form></bsa-offers-overview-filters-form>

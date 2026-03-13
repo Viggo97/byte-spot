@@ -1,6 +1,6 @@
 import { Component, inject, signal, OnInit, DestroyRef } from '@angular/core';
 import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay } from '@angular/cdk/overlay';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime, merge } from 'rxjs';
 import { DrawerComponent } from 'ngx-bsl';
 import { TranslatePipe } from '@core';
@@ -28,7 +28,6 @@ export class FiltersViewCompactComponent implements OnInit {
 
     protected readonly scrollStrategy = this.overlay.scrollStrategies.block();
 
-    protected filtersInitialized = toSignal(this.filtersService.filtersInitialized$);
     protected drawerOpen = signal(false);
 
     ngOnInit(): void {

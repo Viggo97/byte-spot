@@ -1,7 +1,6 @@
-import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime, merge } from 'rxjs';
-import { SkeletonComponent } from 'ngx-bsl';
 import { TranslatePipe } from '@core';
 import { FiltersService } from '../filters.service';
 import { FiltersFormService } from '../form/filters-form.service';
@@ -12,7 +11,6 @@ import { FiltersFormComponent } from '../form/filters-form.component';
     imports: [
         TranslatePipe,
         FiltersFormComponent,
-        SkeletonComponent,
     ],
     templateUrl: './filters-view-broad.component.html',
     styleUrl: './filters-view-broad.component.scss',
@@ -21,9 +19,6 @@ export class FiltersViewBroadComponent implements OnInit {
     private filtersService = inject(FiltersService);
     private filtersFormService = inject(FiltersFormService);
     private destroyRef = inject(DestroyRef);
-
-    protected filtersInitialized = toSignal(this.filtersService.filtersInitialized$);
-    protected skeletons = signal([...Array(5).keys()]);
 
     ngOnInit(): void {
         this.subscribeToFormChanges();
