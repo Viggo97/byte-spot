@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CheckboxComponent, RangeComponent } from 'ngx-bsl';
+import { CheckboxButtonComponent, CheckboxComponent, RangeComponent } from 'ngx-bsl';
 import { TranslatePipe } from '@core';
 import { FiltersFormService } from './filters-form.service';
 import { FiltersService } from '../filters.service';
@@ -12,6 +12,7 @@ import { FiltersService } from '../filters.service';
         CheckboxComponent,
         RangeComponent,
         TranslatePipe,
+        CheckboxButtonComponent,
     ],
     templateUrl: './filters-form.component.html',
     styleUrl: './filters-form.component.scss',

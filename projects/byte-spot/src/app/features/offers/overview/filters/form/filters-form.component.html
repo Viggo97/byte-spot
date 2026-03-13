@@ -14,13 +14,13 @@
     @if (technologies().length) {
         <section>
             <h3>{{ 'offer.technologies' | translate }}</h3>
-            <div class="filters-group" formArrayName="technologies">
+            <div class="filters-group filters-technologies" formArrayName="technologies">
                 @for (technology of technologies(); track technology.id; let i = $index) {
-                    <ngx-bsl-checkbox
+                    <ngx-bsl-checkbox-button
                         [id]="'filter-technology-' + i"
                         [formControlName]="i">
                         {{ technology.name }}
-                    </ngx-bsl-checkbox>
+                    </ngx-bsl-checkbox-button>
                 }
             </div>
         </section>
