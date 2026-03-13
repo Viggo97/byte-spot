@@ -1,1 +1,1 @@
-export const environment = { apiUrl: 'https://byte-spot-api.onrender.com' };
+export const environment = { apiUrl: 'https://byte-spot-rest-api.onrender.com/api' };
