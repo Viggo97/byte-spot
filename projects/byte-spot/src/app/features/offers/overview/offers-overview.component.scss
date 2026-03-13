@@ -13,6 +13,10 @@
 aside {
     display: none; // avoiding blinking effect when compactMode is set
 
+    bsa-offers-overview-filters-view-broad {
+        box-shadow: var(--bsa-box-shadow-primary);
+    }
+
     @include breakpoints.md {
         display: block;
         flex-basis: 25%;
