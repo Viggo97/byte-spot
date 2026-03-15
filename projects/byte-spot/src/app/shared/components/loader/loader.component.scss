@@ -1,5 +1,4 @@
 :host {
-    width: 12rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -8,10 +7,10 @@
 }
 
 .loader {
-    width: 100%;
+    --g:no-repeat linear-gradient(var(--bsa-color-violet-600) 0 0);
+    width: 12rem;
     height: .25rem;
-    --c:no-repeat linear-gradient(var(--bsa-color-violet-600) 0 0);
-    background: var(--c),var(--c), var(--bsl-color-neutral-200);
+    background: var(--g), var(--g), var(--bsl-color-neutral-200);
     background-size: 60% 100%;
     animation: loader-animation 3s infinite;
     border-radius: 2px;
@@ -23,8 +22,8 @@
 }
 
 .description {
-    width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
