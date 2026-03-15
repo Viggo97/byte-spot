@@ -31,7 +31,8 @@
 @placeholder (minimum 500ms) {
     <div class="loader">
         <bsa-loader>
-            <div style="width: 500px">We are looking for best offers...</div>
+            <div>{{ 'offer.loading' | translate }}</div>
+            <div class="warning">{{ 'offer.loadingWarning' | translate }}</div>
         </bsa-loader>
     </div>
 }

@@ -2,6 +2,8 @@ import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BreakpointObserver } from '@angular/cdk/layout';
 
+import { LoaderComponent } from '@shared';
+import { TranslatePipe } from '@core';
 import { FiltersService } from './filters/filters.service';
 import { FiltersFormService } from './filters/form/filters-form.service';
 import { FiltersDataService } from './filters/data/filters-data.service';
@@ -20,11 +22,11 @@ import { OfferListComponent } from './list/offer-list.component';
 import { PaginationService } from './list/pagination.service';
 import { InfoService } from './info/info.service';
 import { OffersDataService } from './offers-data.service';
-import { LoaderComponent } from '@shared';
 
 @Component({
     selector: 'bsa-offers-overview',
     imports: [
+        TranslatePipe,
         FiltersViewBroadComponent,
         FiltersViewCompactComponent,
         SortComponent,

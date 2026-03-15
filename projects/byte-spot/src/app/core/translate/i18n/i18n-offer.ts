@@ -81,4 +81,12 @@ export const i18nOffer: Record<string, I18nLanguageCode> = {
         en: 'No offers found matching selected criteria',
         pl: 'Nie znaleziono żadnych ofert spełniających kryteria',
     },
+    loading: {
+        en: 'We\'re preparing offers for you.',
+        pl: 'Przygotowujemy oferty dla Ciebie.',
+    },
+    loadingWarning: {
+        en: 'This app uses free services that have limited resources. Loading may take up to 60 seconds.',
+        pl: 'Ta aplikacja korzysta z darmowych serwisów, które mają limitowane zasoby. Ładowanie może potrwać do 60s.',
+    },
 };
