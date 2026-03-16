@@ -19,6 +19,7 @@
                     <ngx-bsl-checkbox-button
                         [id]="'filter-technology-' + i"
                         [formControlName]="i">
+                        <div class="icon-container" [innerHTML]="technology.iconCode"></div>
                         {{ technology.name }}
                     </ngx-bsl-checkbox-button>
                 }

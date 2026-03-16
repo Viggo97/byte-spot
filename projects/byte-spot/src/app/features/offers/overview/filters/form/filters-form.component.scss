@@ -35,4 +35,10 @@ ngx-bsl-range {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
+
+    .icon-container {
+        width: 1rem;
+        height: 1rem;
+        display: flex;
+    }
 }
