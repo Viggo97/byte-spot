@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'bsa-loader',
@@ -6,6 +6,5 @@ import { Component, input } from '@angular/core';
     templateUrl: './loader.component.html',
     styleUrl: './loader.component.scss',
 })
-export class LoaderComponent {
-    width = input<string>();
-}
+// eslint-disable-next-line @typescript-eslint/no-extraneous-class
+export class LoaderComponent {}
