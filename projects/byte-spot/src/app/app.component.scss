@@ -1,5 +1,12 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 main {
     margin: 0 auto;
     padding: 24px 16px;
     max-width: 1600px;
+    flex-grow: 1;
 }
