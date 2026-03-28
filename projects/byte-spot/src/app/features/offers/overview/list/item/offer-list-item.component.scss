@@ -25,7 +25,7 @@ section {
         "logo title"
         "details details"
         "tags tags";
-    font: var(--bsl-font-md);
+    font: var(--bsa-font-md);
 
     @include breakpoints.md {
         grid-template-areas:
@@ -48,7 +48,7 @@ section {
         align-items: center;
         border-radius: 8px;
         background-color: var(--bsl-backgroundColor-emphasis);
-        font: var(--bsl-font-4xl);
+        font: var(--bsa-font-4xl);
         color: var(--bsa-textColor-highlight);
     }
 }
@@ -94,7 +94,7 @@ section {
         padding: 0 12px;
         width: fit-content;
         border-radius: 4px;
-        font: var(--bsl-font-sm);
+        font: var(--bsa-font-sm);
         white-space: nowrap;
         background-color: var(--bsl-backgroundColor-emphasis);
     }
