@@ -21,4 +21,20 @@ export const i18nGlobal: Record<string, I18nLanguageCode> = {
         en: 'Filters',
         pl: 'Filtry',
     },
+    systemError: {
+        en: 'System error',
+        pl: 'Błąd systemu',
+    },
+    pageNotExist: {
+        en: 'Page does not exist',
+        pl: 'Strona nie istnieje',
+    },
+    pageErrorDesc: {
+        en: 'It looks like this page has been moved, deleted, or never existed.',
+        pl: 'Wygląda na to, że ta strona została przeniesiona, usunięta lub nigdy nie istniała.',
+    },
+    goHomePage: {
+        en: 'Go back to the home page',
+        pl: 'Wróć na stronę główną',
+    },
 };
