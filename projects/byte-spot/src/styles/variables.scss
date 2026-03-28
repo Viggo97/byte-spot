@@ -1,14 +1,19 @@
 body {
     --bsa-outline-color: var(--bsa-color-violet-500);
+    --bsa-gradient-primary: linear-gradient(90deg, var(--bsa-color-violet-400) 0%, var(--bsa-color-violet-700) 100%);
 
     --bsa-textColor-highlight: var(--bsa-color-violet-500);
 
-    --bsa-box-shadow-primary: 0 0 8px var(--bsl-color-neutral-300);
+    --bsa-boxShadowColor-primary: var(--bsl-color-neutral-300);
+    --bsa-box-shadow-primary: 0 0 8px var(--bsa-boxShadowColor-primary);
 
     --bsa-primary-backgroundColor: var(--bsa-color-violet-600);
     --bsa-primary-backgroundColor-hover: var(--bsa-color-violet-700);
     --bsa-primary-backgroundColor-active: var(--bsa-color-violet-800);
     --bsa-primary-textColor: var(--bsl-color-neutral-200);
+    --bsa-primary-backgroundColor-muted: var(--bsa-color-violet-200);
+    --bsa-primary-textColor-muted: var(--bsl-color-neutral-800);
+    --bsa-primary-textColor-disabled: var(--bsl-color-neutral-600);
     --bsa-primary-textColor-invisible: var(--bsa-color-violet-600);
 
     --bsa-danger-backgroundColor: var(--bsa-color-red-600);
@@ -18,12 +23,18 @@ body {
     --bsa-danger-textColor-invisible: var(--bsa-color-red-600);
 
     &.dark-theme {
-        --bsa-box-shadow-primary: 0 0 4px var(--bsl-color-neutral-900);
+        --bsa-boxShadowColor-primary: var(--bsl-color-neutral-900);
+        --bsa-box-shadow-primary: 0 0 4px var(--bsa-boxShadowColor-primary);
+
+        --bsa-textColor-highlight: var(--bsa-color-violet-400);
 
         --bsa-primary-backgroundColor: var(--bsa-color-violet-800);
         --bsa-primary-backgroundColor-hover: var(--bsa-color-violet-700);
         --bsa-primary-backgroundColor-active: var(--bsa-color-violet-600);
         --bsa-primary-textColor: var(--bsl-color-neutral-200);
+        --bsa-primary-backgroundColor-muted: var(--bsa-color-violet-600);
+        --bsa-primary-textColor-muted: var(--bsl-color-neutral-100);
+        --bsa-primary-textColor-disabled: var(--bsl-color-neutral-400);
         --bsa-primary-textColor-invisible: var(--bsa-color-violet-400);
 
         --bsa-danger-backgroundColor: var(--bsa-color-red-800);
@@ -31,9 +42,5 @@ body {
         --bsa-danger-backgroundColor-active: var(--bsa-color-red-600);
         --bsa-danger-textColor: var(--bsl-color-neutral-200);
         --bsa-danger-textColor-invisible: var(--bsa-color-red-400);
-    }
-
-    &.dark-theme {
-        --bsa-textColor-highlight: var(--bsa-color-violet-400);
     }
 }
