@@ -1,0 +1,9 @@
+<h2>{{'offer.validUntil' | translate}}</h2>
+<div class="offer-deadline-description">
+    {{'offer.expires' | translate}}
+    {{leftDays()}} {{'offer.days' | translate}}
+    ({{'offer.until' | translate}} {{ expires() }})
+</div>
+<div class="offer-deadline-bar">
+    <div class="offer-deadline-progress" [style.transform]="'translateX('+ (-100 + progress()) + '%)'"></div>
+</div>

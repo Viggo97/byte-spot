@@ -1,0 +1,26 @@
+@use 'breakpoints' as breakpoints;
+
+:host {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background-color: var(--bsl-backgroundColor);
+    border: 1px solid var(--bsl-borderColor);
+    border-radius: 8px;
+    box-shadow: var(--bsa-box-shadow-primary);
+
+    @include breakpoints.md {
+        flex-direction: column;
+    }
+}
+
+button {
+    width: 100%;
+    font: var(--bsa-font-md);
+    font-weight: 700;
+
+    &.offer-save-button {
+        flex-basis: min-content;
+    }
+}

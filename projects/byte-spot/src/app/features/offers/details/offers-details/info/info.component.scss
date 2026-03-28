@@ -1,0 +1,64 @@
+@use 'breakpoints' as breakpoints;
+@use 'ngx-bsl/styles/mixins' as mixins;
+
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 16px;
+    border: 1px solid var(--bsl-borderColor);
+    border-radius: 8px;
+    box-shadow: var(--bsa-box-shadow-primary);
+
+    @include breakpoints.md {
+        flex-direction: row;
+    }
+}
+
+section {
+    height: 100%;
+    width: 100%;
+    padding: 16px;
+    border: 1px solid var(--bsl-borderColor);
+    border-radius: 8px;
+
+    @include breakpoints.md {
+        flex-grow: 1;
+        flex-basis: 0;
+        overflow: hidden;
+    }
+}
+
+h2 {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 1px;
+    flex-wrap: nowrap;
+
+    span {
+        @include mixins.ellipsis;
+    }
+}
+
+.bsl-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--bsa-textColor-highlight);
+}
+
+.offer-info-primary-value {
+    font: var(--bsa-font-md);
+    font-weight: 700;
+}
+
+.offer-info-secondary-value {
+    font: var(--bsa-font-sm);
+    color: var(--bsa-primary-textColor-disabled);
+
+    &:not(:last-child) {
+        margin-bottom: 12px;
+    }
+}

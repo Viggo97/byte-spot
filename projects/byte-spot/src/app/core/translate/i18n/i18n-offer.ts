@@ -65,6 +65,10 @@ export const i18nOffer: Record<string, I18nLanguageCode> = {
         en: 'Locations',
         pl: 'Lokalizacje',
     },
+    location: {
+        en: 'Location',
+        pl: 'Lokalizacja',
+    },
     companies: {
         en: 'Companies',
         pl: 'Firmy',
@@ -88,5 +92,45 @@ export const i18nOffer: Record<string, I18nLanguageCode> = {
     loadingWarning: {
         en: 'This app uses free services that have limited resources. Loading may take up to 60 seconds.',
         pl: 'Ta aplikacja korzysta z darmowych serwisów, które mają limitowane zasoby. Ładowanie może potrwać do 60s.',
+    },
+    apply: {
+        en: 'Apply',
+        pl: 'Aplikuj',
+    },
+    save: {
+        en: 'Save',
+        pl: 'Zapisz',
+    },
+    validUntil: {
+        en: 'Valid until:',
+        pl: 'Termin aplikacji: ',
+    },
+    expires: {
+        en: 'Offers expires in',
+        pl: 'Oferta wygasa za',
+    },
+    days: {
+        en: 'days',
+        pl: 'dni',
+    },
+    until: {
+        en: 'until',
+        pl: 'do',
+    },
+    gross: {
+        en: 'gross',
+        pl: 'brutto',
+    },
+    net: {
+        en: 'net',
+        pl: 'netto',
+    },
+    perHour: {
+        en: 'per hour',
+        pl: 'godz.',
+    },
+    perMonth: {
+        en: 'per month',
+        pl: 'miesiąc',
     },
 };

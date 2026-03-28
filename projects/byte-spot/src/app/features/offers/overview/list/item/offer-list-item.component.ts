@@ -1,4 +1,5 @@
 import { Component, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { IconCompanyComponent, IconLocationComponent } from 'ngx-bsl';
 import { NumberFormatterPipe } from '@shared';
 import { Offer } from '../models/offer.interface';
@@ -9,6 +10,7 @@ import { Offer } from '../models/offer.interface';
         NumberFormatterPipe,
         IconCompanyComponent,
         IconLocationComponent,
+        RouterLink,
     ],
     templateUrl: './offer-list-item.component.html',
     styleUrl: './offer-list-item.component.scss',

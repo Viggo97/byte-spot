@@ -1,0 +1,27 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 16px;
+    border: 1px solid var(--bsl-borderColor);
+    border-radius: 8px;
+    box-shadow: var(--bsa-box-shadow-primary);
+}
+
+.offer-description-technologies {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.offer-description-technologies-container {
+    display: flex;
+    gap: 16px;
+}
+
+.offer-description-technology {
+    padding: .25rem .5rem;
+    border-radius: 8px;
+    background-color: var(--bsa-primary-backgroundColor-muted);
+    color: var(--bsa-primary-textColor-muted);
+}

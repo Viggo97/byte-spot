@@ -1,0 +1,59 @@
+<section>
+    <h2>
+        <ngx-bsl-icon-money />
+        <span>{{ 'offer.salary' | translate }}</span>
+    </h2>
+    @for (salary of salaries(); track salary.employmentType)
+    {
+        @if (salary.fixed) {
+            <div class="offer-info-primary-value">{{salary.fixed}} {{salary.currency}}</div>
+        }
+        @else
+        {
+            <div class="offer-info-primary-value">{{salary.min}} - {{salary.max}} {{salary.currency}}</div>
+        }
+
+        @let billingCount = (salary.billingUnit === BillingUnit.HOUR
+            ? 'offer.perHour'
+            : 'offer.perMonth') | translate;
+
+        @let type = (salary.type === SalaryType.NET ? 'offer.net' : 'offer.gross') | translate;
+
+        <div class="offer-info-secondary-value">{{type}} / {{billingCount}} ({{salary.employmentType}})</div>
+    }
+</section>
+
+<section>
+    <h2>
+        <ngx-bsl-icon-location />
+        <span>{{ 'offer.location' | translate }}</span>
+    </h2>
+
+    <div class="offer-info-primary-value">
+        @for (location of locations(); track location; let last = $last)
+        {
+            {{location}} @if(!last) {•}
+        }
+    </div>
+
+    <div class="offer-info-secondary-value">
+        @for (workMode of workModes(); track workMode; let last = $last)
+        {
+            {{workMode}} @if(!last) {/}
+        }
+    </div>
+</section>
+
+<section>
+    <h2>
+        <ngx-bsl-icon-cap-graduation />
+        <span>{{ 'offer.experienceLevel' | translate }}</span>
+    </h2>
+
+    <div class="offer-info-primary-value">
+        @for (experienceLevel of experienceLevels(); track experienceLevel; let last = $last)
+        {
+            {{experienceLevel}} @if(!last) {•}
+        }
+    </div>
+</section>

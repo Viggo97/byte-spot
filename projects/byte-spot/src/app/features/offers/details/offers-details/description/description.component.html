@@ -1,0 +1,14 @@
+<section class="offer-description-technologies">
+    <h2>{{'offer.technologies' | translate}}</h2>
+
+    <div class="offer-description-technologies-container">
+        @for (technology of technologies(); track technology)
+        {
+            <div class="offer-description-technology">{{technology}}</div>
+        }
+    </div>
+</section>
+
+<section class="offer-description-content">
+   {{description()}}
+</section>

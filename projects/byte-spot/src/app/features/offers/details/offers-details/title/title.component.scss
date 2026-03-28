@@ -1,0 +1,30 @@
+:host {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 16px;
+    border: 1px solid var(--bsl-borderColor);
+    border-radius: 8px;
+    box-shadow: var(--bsa-box-shadow-primary);
+}
+
+.logo {
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: hotpink;
+    border-radius: 4px;
+    font: var(--bsa-font-5xl);
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.company {
+    color: var(--bsl-primary-textColor-muted);
+}

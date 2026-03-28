@@ -1,0 +1,28 @@
+@if (offer()) {
+    <bsa-offers-details-title
+        [companyId]="offer()!.company.id"
+        [companyName]="offer()!.company.name"
+        [title]="offer()!.title"
+    />
+
+    <bsa-offers-details-info
+        [salaries]="offer()!.salaries"
+        [locations]="offer()!.locations"
+        [workModes]="offer()!.workModes"
+        [experienceLevels]="offer()!.experienceLevels"
+    />
+
+    <bsa-offers-details-description
+        [technologies]="offer()!.technologies"
+        [description]="offer()!.description" />
+
+    <bsa-offers-details-action />
+
+    <bsa-offers-details-deadline
+        [validFrom]="offer()!.validFrom"
+        [validTo]="offer()!.validTo"
+    />
+}
+@else {
+    <bsa-loader></bsa-loader>
+}
