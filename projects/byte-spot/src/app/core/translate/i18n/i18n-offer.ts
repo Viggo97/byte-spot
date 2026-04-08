@@ -133,4 +133,24 @@ export const i18nOffer: Record<string, I18nLanguageCode> = {
         en: 'per month',
         pl: 'miesiąc',
     },
+    employmentOfContractShort: {
+        en: 'EC',
+        pl: 'UoP',
+    },
+    b2bShort: {
+        en: 'B2B',
+        pl: 'B2B',
+    },
+    mandateContractShort: {
+        en: 'MC',
+        pl: 'UZ',
+    },
+    specificTaskContractShort: {
+        en: 'STC',
+        pl: 'UoD',
+    },
+    internshipShort: {
+        en: 'Intern',
+        pl: 'Staż',
+    },
 };

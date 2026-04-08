@@ -1,5 +1,5 @@
 import { LookupItem } from '@shared';
-import { Salary } from './salary.interface';
+import { Salary } from '@app/features/offers/shared/models/salary.interface';
 
 export interface OfferDetails {
     title: string;

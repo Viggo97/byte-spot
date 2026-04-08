@@ -3,8 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { delay, Observable, of } from 'rxjs';
 import { environment } from 'projects/byte-spot/src/environments/environment';
 import { OfferDetails } from './models/offer-details.interface';
-import { BillingUnit } from './models/billing-unit.enum';
-import { SalaryType } from './models/salary-type.enum';
+import { SalaryType } from '@app/features/offers/shared/enums/salary-type.enum';
+import { BillingUnit } from '@app/features/offers/shared/enums/billing-unit.enum';
+import { CurrencyCode } from '@app/features/offers/shared/enums/currency-code.enum';
+import { EmploymentType } from '@app/features/offers/shared/enums/employment-type.enum';
 
 @Injectable()
 export class OfferDetailsDataService {
@@ -33,8 +35,11 @@ export class OfferDetailsDataService {
                     max: 12000,
                     fixed: undefined,
                     type: SalaryType.GROSS,
-                    currency: 'PLN',
-                    employmentType: 'Employment contract',
+                    currencyCode: CurrencyCode.PLN,
+                    employmentType: {
+                        id: EmploymentType.EmploymentContract,
+                        value: 'Employment contract',
+                    },
                     billingUnit: BillingUnit.MONTH,
                 },
                 {
@@ -42,8 +47,11 @@ export class OfferDetailsDataService {
                     max: 130,
                     fixed: undefined,
                     type: SalaryType.NET,
-                    currency: 'PLN',
-                    employmentType: 'B2B',
+                    currencyCode: CurrencyCode.PLN,
+                    employmentType: {
+                        id: EmploymentType.B2B,
+                        value: 'B2B',
+                    },
                     billingUnit: BillingUnit.HOUR,
                 },
             ],

@@ -1,10 +1,10 @@
+import { Salary } from '@app/features/offers/shared/models/salary.interface';
+
 export interface Offer {
     id: string;
     title: string;
     company: string;
-    salaryMin?: number;
-    salaryMax?: number;
-    salaryFixed?: number;
+    salaries: Salary[];
     locations: string[];
     technologies: string[];
 }

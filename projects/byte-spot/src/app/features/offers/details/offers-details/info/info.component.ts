@@ -1,9 +1,9 @@
 import { Component, input } from '@angular/core';
 import { IconCapGraduationComponent, IconLocationComponent, IconMoneyComponent } from 'ngx-bsl';
 import { TranslatePipe } from '@core';
-import { Salary } from '../models/salary.interface';
-import { BillingUnit } from '../models/billing-unit.enum';
-import { SalaryType } from '../models/salary-type.enum';
+import { Salary } from '@app/features/offers/shared/models/salary.interface';
+import { SalaryType } from '@app/features/offers/shared/enums/salary-type.enum';
+import { BillingUnit } from '@app/features/offers/shared/enums/billing-unit.enum';
 
 @Component({
     selector: 'bsa-offers-details-info',

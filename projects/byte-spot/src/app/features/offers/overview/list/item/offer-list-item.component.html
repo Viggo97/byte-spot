@@ -23,20 +23,27 @@
                 }
             </div>
 
-            @let salaryMin = offer().salaryMin;
-            @let salaryMax = offer().salaryMax;
-            @let salaryFixed = offer().salaryFixed;
+            @for (salary of offer().salaries; track salary.employmentType.id; let last = $last)
+            {
+                @let min = salary.min;
+                @let max = salary.max;
+                @let fixed = salary.fixed;
 
-            @if (salaryMin && salaryMax) {
                 <div class="salary">
-                    {{ salaryMin | numberFormatter }}
-                    - {{ salaryMax | numberFormatter }}
-                </div>
-            } @else if (salaryFixed) {
-                <div class="salary">
-                    {{ salaryFixed | numberFormatter }}
+                    <span class="salary-value">
+                        @if (min && max) {
+                            {{ min | salarySplit }}-{{ max | salarySplit }}
+                        }
+                        @else if (fixed) {
+                            {{ fixed | salarySplit }}
+                        }
+                    </span>
+                    <span class="salary-info">
+                        {{salary.currencyCode}} ({{salary.employmentType.id | employmentTypeShorthand}}) @if (!last) {,}
+                    </span>
                 </div>
             }
+
         </div>
 
         <div class="tags">

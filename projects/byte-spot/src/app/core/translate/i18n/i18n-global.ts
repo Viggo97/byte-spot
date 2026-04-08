@@ -37,4 +37,8 @@ export const i18nGlobal: Record<string, I18nLanguageCode> = {
         en: 'Go back to the home page',
         pl: 'Wróć na stronę główną',
     },
+    na: {
+        en: 'N/A',
+        pl: 'nd.',
+    },
 };

@@ -78,8 +78,14 @@ section {
     }
 
     .salary {
-        font-weight: 500;
-        color: var(--bsa-textColor-highlight);
+        .salary-value {
+            font-weight: 500;
+            color: var(--bsa-textColor-highlight);
+        }
+
+        .salary-info {
+            font: var(--bsa-font-xs);
+        }
     }
 }
 

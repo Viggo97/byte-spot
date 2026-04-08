@@ -6,11 +6,11 @@
     @for (salary of salaries(); track salary.employmentType)
     {
         @if (salary.fixed) {
-            <div class="offer-info-primary-value">{{salary.fixed}} {{salary.currency}}</div>
+            <div class="offer-info-primary-value">{{salary.fixed}} {{salary.currencyCode}}</div>
         }
         @else
         {
-            <div class="offer-info-primary-value">{{salary.min}} - {{salary.max}} {{salary.currency}}</div>
+            <div class="offer-info-primary-value">{{salary.min}} - {{salary.max}} {{salary.currencyCode}}</div>
         }
 
         @let billingCount = (salary.billingUnit === BillingUnit.HOUR
