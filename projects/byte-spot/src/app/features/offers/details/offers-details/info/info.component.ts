@@ -4,6 +4,7 @@ import { TranslatePipe } from '@core';
 import { Salary } from '@app/features/offers/shared/models/salary.interface';
 import { SalaryType } from '@app/features/offers/shared/enums/salary-type.enum';
 import { BillingUnit } from '@app/features/offers/shared/enums/billing-unit.enum';
+import { NumberFormatterPipe } from '@shared';
 
 @Component({
     selector: 'bsa-offers-details-info',
@@ -12,6 +13,7 @@ import { BillingUnit } from '@app/features/offers/shared/enums/billing-unit.enum
         IconLocationComponent,
         IconCapGraduationComponent,
         TranslatePipe,
+        NumberFormatterPipe,
     ],
     templateUrl: './info.component.html',
     styleUrl: './info.component.scss',

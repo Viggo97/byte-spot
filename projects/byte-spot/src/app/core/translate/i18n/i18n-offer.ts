@@ -129,6 +129,10 @@ export const i18nOffer: Record<string, I18nLanguageCode> = {
         en: 'per hour',
         pl: 'godz.',
     },
+    perDay: {
+        en: 'per day',
+        pl: 'dzień',
+    },
     perMonth: {
         en: 'per month',
         pl: 'miesiąc',

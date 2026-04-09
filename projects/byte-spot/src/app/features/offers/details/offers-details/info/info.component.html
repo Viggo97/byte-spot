@@ -3,23 +3,24 @@
         <ngx-bsl-icon-money />
         <span>{{ 'offer.salary' | translate }}</span>
     </h2>
-    @for (salary of salaries(); track salary.employmentType)
+    @for (salary of salaries(); track salary.employmentType.name)
     {
         @if (salary.fixed) {
-            <div class="offer-info-primary-value">{{salary.fixed}} {{salary.currencyCode}}</div>
+            <div class="offer-info-primary-value">{{salary.fixed | numberFormatter}} {{salary.currencyCode}}</div>
         }
-        @else
+        @else if (salary.min && salary.max)
         {
-            <div class="offer-info-primary-value">{{salary.min}} - {{salary.max}} {{salary.currencyCode}}</div>
+            <div class="offer-info-primary-value">{{salary.min | numberFormatter}} - {{salary.max | numberFormatter}} {{salary.currencyCode}}</div>
         }
 
         @let billingCount = (salary.billingUnit === BillingUnit.HOUR
             ? 'offer.perHour'
-            : 'offer.perMonth') | translate;
+            : (salary.billingUnit === BillingUnit.DAY ? 'offer.perDay' : 'offer.perMonth')
+        ) | translate;
 
         @let type = (salary.type === SalaryType.NET ? 'offer.net' : 'offer.gross') | translate;
 
-        <div class="offer-info-secondary-value">{{type}} / {{billingCount}} ({{salary.employmentType}})</div>
+        <div class="offer-info-secondary-value">{{type}} / {{billingCount}} ({{salary.employmentType.name}})</div>
     }
 </section>
 

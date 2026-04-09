@@ -12,6 +12,6 @@ export interface Salary {
     billingUnit: BillingUnit;
     employmentType: {
         id: EmploymentType;
-        value: string;
+        name: string;
     };
 }
