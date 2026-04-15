@@ -6,7 +6,6 @@ import { LoaderComponent } from '@shared';
 import { TranslatePipe } from '@core';
 import { FiltersService } from './filters/filters.service';
 import { FiltersFormService } from './filters/form/filters-form.service';
-import { FiltersDataService } from './filters/data/filters-data.service';
 import { FiltersViewBroadComponent } from './filters/view-broad/filters-view-broad.component';
 import { FiltersViewCompactComponent } from './filters/view-compact/filters-view-compact.component';
 import { SortComponent } from './sort/sort.component';
@@ -40,7 +39,6 @@ import { OffersDataService } from './offers-data.service';
     styleUrl: './offers-overview.component.scss',
     providers: [
         FiltersFormService,
-        FiltersDataService,
         FiltersService,
         SearchDataService,
         SearchService,
