@@ -1,5 +1,6 @@
 <ngx-bsl-select
     id="language-selection"
+    [ariaLabel]="'global.changeLanguage' | translate"
     [(value)]="language"
     (valueChange)="onSelectLanguage()"
     [displayLabel]="'label'"

@@ -4,6 +4,7 @@ import { LanguageService} from '../../../language/language.service';
 import { Language } from '../../../language/language.enum';
 import { LanguageOption } from './navbar-language-switch-option.interface';
 import { TranslateService } from '../../../translate/translate.service';
+import { TranslatePipe } from '../../../translate/translate.pipe';
 
 @Component({
     selector: 'bsa-navbar-language-switch',
@@ -11,6 +12,7 @@ import { TranslateService } from '../../../translate/translate.service';
         IconLanguageComponent,
         SelectComponent,
         ListBoxOptionComponent,
+        TranslatePipe,
     ],
     templateUrl: './navbar-language-switch.component.html',
 })

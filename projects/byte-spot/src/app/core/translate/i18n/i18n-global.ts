@@ -9,6 +9,14 @@ export const i18nGlobal: Record<string, I18nLanguageCode> = {
         en: 'Polish',
         pl: 'Polski',
     },
+    changeLanguage: {
+        en: 'Change language',
+        pl: 'Zmień język',
+    },
+    changeTheme: {
+        en: 'Change motyw',
+        pl: 'Zmień motyw',
+    },
     search: {
         en: 'Search',
         pl: 'Wyszukaj',

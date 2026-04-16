@@ -1,5 +1,7 @@
-<button class="bsl-button-icon"
-        (click)="onSwitchTheme()">
+<button
+    class="bsl-button-icon"
+    [attr.aria-label]="'global.changeTheme' | translate"
+    (click)="onSwitchTheme()">
     @if (theme() === Theme.DARK) {
         <ngx-bsl-icon-moon></ngx-bsl-icon-moon>
     } @else {
