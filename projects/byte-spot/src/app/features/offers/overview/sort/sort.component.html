@@ -1,6 +1,7 @@
 <ngx-bsl-select
     [id]="'offers-sort'"
     [displayLabel]="'label'"
+    [ariaLabel]="'global.sortBy' | translate"
     [(value)]="sortBy"
     (valueChange)="onSortByChange()">
         @for (option of options(); track option.key) {

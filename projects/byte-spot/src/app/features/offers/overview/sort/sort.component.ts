@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ListBoxOptionComponent, SelectComponent } from 'ngx-bsl';
+import { TranslatePipe } from '@core';
 import { SortService } from './sort.service';
 
 @Component({
@@ -7,6 +8,7 @@ import { SortService } from './sort.service';
     imports: [
         SelectComponent,
         ListBoxOptionComponent,
+        TranslatePipe,
     ],
     templateUrl: './sort.component.html',
     styleUrl: './sort.component.scss',
