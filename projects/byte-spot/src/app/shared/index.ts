@@ -1,4 +1,5 @@
 export * from './components/loader/loader.component';
+export * from './components/svg-icon/svg-icon.component';
 
 export * from './directvies/resize-observer.directive';
 
