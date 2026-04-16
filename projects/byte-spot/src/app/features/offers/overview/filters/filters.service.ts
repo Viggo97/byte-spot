@@ -1,14 +1,18 @@
-import { inject, Injectable } from '@angular/core';
+import { DestroyRef, inject, Injectable } from '@angular/core';
 import { FormArray } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { catchError, forkJoin, of, Subject } from 'rxjs';
 import { LookupItem } from '@app/shared/models/lookup-item.interface';
 import { Technology } from './models/technology.interface';
-import { FiltersFormService } from './form/filters-form.service';
 import { FilterParams } from './models/filter-params.interface';
+import { FiltersFormService } from './form/filters-form.service';
+import { FiltersDataService } from './data/filters-data.service';
 
 @Injectable()
 export class FiltersService {
-    private filtersFormService = inject(FiltersFormService);
+    private readonly _destroyRef = inject(DestroyRef);
+    private readonly _filtersDataService = inject(FiltersDataService);
+    private readonly _filtersFormService = inject(FiltersFormService);
 
     technologies: Technology[] = [];
     locations: LookupItem[] = [];
@@ -16,27 +20,55 @@ export class FiltersService {
     experienceLevels: LookupItem[] = [];
     employmentTypes: LookupItem[] = [];
 
+    private filtersInitialized = new Subject<void>();
+    filtersInitialized$ = this.filtersInitialized.asObservable();
+
     private filtersChanged = new Subject<void>();
     filtersChanged$ = this.filtersChanged.asObservable();
 
-    initFilters(technologies: Technology[], locations: LookupItem[] = [], workModes: LookupItem[],
-        experienceLevels: LookupItem[], employmentTypes: LookupItem[]): void {
-        this.technologies = technologies;
-        this.locations = locations;
-        this.workModes = workModes;
-        this.experienceLevels = experienceLevels;
-        this.employmentTypes = employmentTypes;
-        this.filtersFormService.initLookupFiltersForm(this.technologies, 'technologies');
-        this.filtersFormService.initLookupFiltersForm(this.locations, 'locations');
-        this.filtersFormService.initLookupFiltersForm(this.workModes, 'workModes');
-        this.filtersFormService.initLookupFiltersForm(this.experienceLevels, 'experienceLevels');
-        this.filtersFormService.initLookupFiltersForm(this.employmentTypes, 'employmentTypes');
+    constructor() {
+        this.fetchData();
+    }
+
+    private fetchData(): void {
+        forkJoin([
+            this._filtersDataService.getTechnologies().pipe(catchError(() => of([]))),
+            this._filtersDataService.getLocations().pipe(catchError(() => of([]))),
+            this._filtersDataService.getWorkModes().pipe(catchError(() => of([]))),
+            this._filtersDataService.getExperienceLevels().pipe(catchError(() => of([]))),
+            this._filtersDataService.getEmploymentTypes().pipe(catchError(() => of([]))),
+        ])
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe(([technologies, locations, workModes, experienceLevels, employmentTypes]) => {
+                this.technologies = technologies;
+                this.locations = locations;
+                this.workModes = workModes;
+                this.experienceLevels = experienceLevels;
+                this.employmentTypes = employmentTypes;
+
+                this.initFiltersForm();
+
+                this.filtersInitialized.next();
+                this.filtersInitialized.complete();
+            });
+    }
+
+    private initFiltersForm(): void {
+        this._filtersFormService.initLookupFiltersForm(this.technologies, 'technologies');
+        this._filtersFormService.initLookupFiltersForm(this.locations, 'locations');
+        this._filtersFormService.initLookupFiltersForm(this.workModes, 'workModes');
+        this._filtersFormService.initLookupFiltersForm(this.experienceLevels, 'experienceLevels');
+        this._filtersFormService.initLookupFiltersForm(this.employmentTypes, 'employmentTypes');
+    }
+
+    changeFilters(): void {
+        this.filtersChanged.next();
     }
 
     getFilterParams(): FilterParams {
-        const form = this.filtersFormService.getFormValue();
-        const defaultSalaryFrom = this.filtersFormService.form.controls.salary.defaultValue.from;
-        const defaultSalaryTo = this.filtersFormService.form.controls.salary.defaultValue.to;
+        const form = this._filtersFormService.getFormValue();
+        const defaultSalaryFrom = this._filtersFormService.form.controls.salary.defaultValue.from;
+        const defaultSalaryTo = this._filtersFormService.form.controls.salary.defaultValue.to;
         return {
             salaryMin: form.salary.from !== defaultSalaryFrom ? form.salary.from : undefined,
             salaryMax: form.salary.to !== defaultSalaryTo ? form.salary.to : undefined,
@@ -49,7 +81,7 @@ export class FiltersService {
     }
 
     private getFiltersFromCollection(collection: LookupItem[], controlName: string): string[] {
-        const controls = this.filtersFormService.form.controls;
+        const controls = this._filtersFormService.form.controls;
         if (controlName in controls) {
             const formControl = controls[controlName as keyof typeof controls];
             if (formControl instanceof FormArray) {
@@ -60,9 +92,5 @@ export class FiltersService {
             return [];
         }
         return [];
-    }
-
-    changeFilters(): void {
-        this.filtersChanged.next();
     }
 }

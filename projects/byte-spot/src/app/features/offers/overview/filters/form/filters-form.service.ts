@@ -7,15 +7,15 @@ import { LookupItem } from '@app/shared/models/lookup-item.interface';
 
 @Injectable()
 export class FiltersFormService {
-    private formBuilder = inject(FormBuilder);
+    private _formBuilder = inject(FormBuilder);
 
-    form = this.formBuilder.nonNullable.group({
-        salary: this.formBuilder.nonNullable.control<Salary>({ from: 0, to: 50_000 }),
-        technologies: this.formBuilder.nonNullable.array<boolean>([]),
-        locations: this.formBuilder.nonNullable.array<boolean>([]),
-        workModes: this.formBuilder.nonNullable.array<boolean>([]),
-        experienceLevels: this.formBuilder.nonNullable.array<boolean>([]),
-        employmentTypes: this.formBuilder.nonNullable.array<boolean>([]),
+    form = this._formBuilder.nonNullable.group({
+        salary: this._formBuilder.nonNullable.control<Salary>({ from: 0, to: 50_000 }),
+        technologies: this._formBuilder.nonNullable.array<boolean>([]),
+        locations: this._formBuilder.nonNullable.array<boolean>([]),
+        workModes: this._formBuilder.nonNullable.array<boolean>([]),
+        experienceLevels: this._formBuilder.nonNullable.array<boolean>([]),
+        employmentTypes: this._formBuilder.nonNullable.array<boolean>([]),
     });
 
     initLookupFiltersForm(items: LookupItem[], formGroupName: string): void {
@@ -23,7 +23,7 @@ export class FiltersFormService {
             const formGroup = this.form.controls[formGroupName as keyof typeof this.form.controls];
             if (formGroup instanceof FormArray) {
                 items.forEach(() => {
-                    formGroup.push(this.formBuilder.nonNullable.control(false), {emitEvent: false});
+                    formGroup.push(this._formBuilder.nonNullable.control(false), {emitEvent: false});
                 });
             }
         }

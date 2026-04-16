@@ -7,7 +7,7 @@ import { Technology } from '../models/technology.interface';
 
 @Injectable({providedIn: 'root'})
 export class FiltersDataService {
-    private readonly http = inject(HttpClient);
+    private readonly _http = inject(HttpClient);
 
     private readonly URL = environment.apiUrl;
 
@@ -19,7 +19,7 @@ export class FiltersDataService {
 
     getTechnologies(): Observable<Technology[]> {
         const url = this.URL + '/technologies';
-        this.technologies ??= this.http.get<Technology[]>(url)
+        this.technologies ??= this._http.get<Technology[]>(url)
             .pipe(shareReplay(1));
 
         return this.technologies;
@@ -27,7 +27,7 @@ export class FiltersDataService {
 
     getLocations(): Observable<LookupItem[]> {
         const url = this.URL + '/locations';
-        this.locations ??= this.http.get<LookupItem[]>(url)
+        this.locations ??= this._http.get<LookupItem[]>(url)
             .pipe(shareReplay(1));
 
         return this.locations;
@@ -35,21 +35,21 @@ export class FiltersDataService {
 
     getWorkModes(): Observable<LookupItem[]> {
         const url = this.URL + '/work-modes';
-        this.workModes ??= this.http.get<LookupItem[]>(url).pipe(shareReplay(1));
+        this.workModes ??= this._http.get<LookupItem[]>(url).pipe(shareReplay(1));
 
         return this.workModes;
     }
 
     getExperienceLevels(): Observable<LookupItem[]> {
         const url = this.URL + '/experience-levels';
-        this.experienceLevels ??= this.http.get<LookupItem[]>(url).pipe(shareReplay(1));
+        this.experienceLevels ??= this._http.get<LookupItem[]>(url).pipe(shareReplay(1));
 
         return this.experienceLevels;
     }
 
     getEmploymentTypes(): Observable<LookupItem[]> {
         const url = this.URL + '/employment-types';
-        this.employmentTypes ??= this.http.get<LookupItem[]>(url).pipe(shareReplay(1));
+        this.employmentTypes ??= this._http.get<LookupItem[]>(url).pipe(shareReplay(1));
 
         return this.employmentTypes;
     }

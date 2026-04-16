@@ -1,5 +1,6 @@
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { forkJoin } from 'rxjs';
 import { BreakpointObserver } from '@angular/cdk/layout';
 
 import { LoaderComponent } from '@shared';
@@ -20,7 +21,7 @@ import { ListService } from './list/list.service';
 import { OfferListComponent } from './list/offer-list.component';
 import { PaginationService } from './list/pagination.service';
 import { InfoService } from './info/info.service';
-import { OffersDataService } from './offers-data.service';
+import { OffersOverviewService } from './offers-overview.service';
 
 @Component({
     selector: 'bsa-offers-overview',
@@ -47,21 +48,21 @@ import { OffersDataService } from './offers-data.service';
         ListService,
         PaginationService,
         InfoService,
-        OffersDataService,
     ],
 })
 export class OffersOverviewComponent {
     private readonly _breakpointObserver = inject(BreakpointObserver);
     private readonly _destroyRef = inject(DestroyRef);
-    private readonly _offersDataService = inject(OffersDataService);
+    private readonly _offersOverviewService = inject(OffersOverviewService);
+    private readonly _filtersService = inject(FiltersService);
+    private readonly _listService = inject(ListService);
 
     compactMode = signal(window.innerWidth < 960);
-    loading = signal(true);
+    loading = signal(this._offersOverviewService.initialLoad);
 
     constructor() {
         this.subscribeToBreakpointObserver();
         this.subscribeToInitialDataLoad();
-        this._offersDataService.fetchData();
     }
 
     private subscribeToBreakpointObserver(): void {
@@ -73,12 +74,14 @@ export class OffersOverviewComponent {
     }
 
     private subscribeToInitialDataLoad(): void {
-        this._offersDataService.dataFetched$
+        forkJoin([
+            this._filtersService.filtersInitialized$,
+            this._listService.offersInitialized$,
+        ])
             .pipe(takeUntilDestroyed(this._destroyRef))
-            .subscribe(dataFetched => {
-                if (dataFetched) {
-                    this.loading.set(false);
-                }
+            .subscribe(() => {
+                this._offersOverviewService.initialLoad = false;
+                this.loading.set(false);
             });
     }
 }

@@ -20,28 +20,32 @@ import { OfferListSkeletonComponent } from './skeleton/offer-list-skeleton.compo
     styleUrl: './offer-list.component.scss',
 })
 export class OfferListComponent implements OnInit {
-    private destroyRef = inject(DestroyRef);
-    private listService = inject(ListService);
-    private paginationService = inject(PaginationService);
+    private readonly _destroyRef = inject(DestroyRef);
+    private readonly _listService = inject(ListService);
+    private readonly _paginationService = inject(PaginationService);
 
     protected offers = signal<Offer[]>([]);
-    protected skeletons = signal([...Array(this.paginationService.limit).keys()]);
-    protected loading = toSignal(this.listService.fetchingOffers$);
-    protected page = this.paginationService.page;
-    protected total = this.paginationService.total;
-    protected limit = this.paginationService.limit;
+    protected skeletons = signal([...Array(this._paginationService.limit).keys()]);
+    protected loading = toSignal(this._listService.fetchingOffers$);
+    protected page = this._paginationService.page;
+    protected total = this._paginationService.total;
+    protected limit = this._paginationService.limit;
 
     ngOnInit(): void {
-        this.listService.offers$
-            .pipe(takeUntilDestroyed(this.destroyRef))
+        this._listService.offers$
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(offers => {
-                this.offers.set(offers.items);
-                this.total.set(offers.totalCount);
-                this.skeletons.set([...Array(offers.items.length || this.paginationService.limit).keys()]);
+                if (offers) {
+                    this.offers.set(offers.items);
+                    this.total.set(offers.totalCount);
+                    this.skeletons.set([...Array(offers.items.length || this._paginationService.limit).keys()]);
+                } else {
+                    this.skeletons.set([...Array(this._paginationService.limit).keys()]);
+                }
             });
     }
 
     protected onPageChange(): void {
-        this.paginationService.changePagination();
+        this._paginationService.changePagination();
     }
 }

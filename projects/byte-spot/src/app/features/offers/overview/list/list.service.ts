@@ -1,6 +1,6 @@
 import { DestroyRef, inject, Injectable } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, merge, Observable, of, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, merge, Subject, switchMap, tap } from 'rxjs';
 import { PagedResults } from '@shared';
 import { ListDataService } from './data/list.data.service';
 import { FiltersService } from '../filters/filters.service';
@@ -13,43 +13,63 @@ import { Offer } from './models/offer.interface';
 
 @Injectable()
 export class ListService {
-    private destroyRef = inject(DestroyRef);
-    private listDataService = inject(ListDataService);
-    private filtersService = inject(FiltersService);
-    private sortService = inject(SortService);
-    private searchService = inject(SearchService);
-    private infoService = inject(InfoService);
-    private paginationService = inject(PaginationService);
+    private readonly _destroyRef = inject(DestroyRef);
+    private readonly _listDataService = inject(ListDataService);
+    private readonly _filtersService = inject(FiltersService);
+    private readonly _sortService = inject(SortService);
+    private readonly _searchService = inject(SearchService);
+    private readonly _paginationService = inject(PaginationService);
+    private readonly _infoService = inject(InfoService);
 
-    private fetchingOffers = new BehaviorSubject(false);
+    private fetchingOffers = new BehaviorSubject(true);
     fetchingOffers$ = this.fetchingOffers.asObservable();
 
-    offers$!: Observable<PagedResults<Offer>>;
-    private initialOffers$!: Observable<PagedResults<Offer>>;
-    private filteredOffers$ = merge(
-        this.filtersService.filtersChanged$,
-        this.sortService.sortChanged$,
-        this.searchService.searchChanged$,
-        this.paginationService.paginationChanged$,
-    ).pipe(
-        tap(() => { this.fetchingOffers.next(true); }),
-        switchMap(() => this.listDataService.getOffersList(this.getValuesForParams())),
-        tap((offers) => { this.infoService.total.set(offers.totalCount); }),
-        tap(() => { this.fetchingOffers.next(false); }),
-        takeUntilDestroyed(this.destroyRef),
-    );
+    private offersInitialized = new Subject<void>();
+    offersInitialized$ = this.offersInitialized.asObservable();
 
-    initList(offers: PagedResults<Offer>): void {
-        this.initialOffers$ = of(offers);
-        this.offers$ = merge(this.initialOffers$, this.filteredOffers$);
+    private offers = new BehaviorSubject<PagedResults<Offer> | null>(null);
+    offers$ = this.offers.asObservable();
+
+    constructor() {
+        this.fetchData();
+    }
+
+    private fetchData(): void {
+        this._listDataService.getOffersList()
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe(offers => {
+                this.fetchingOffers.next(false);
+                this.offers.next(offers);
+
+                this.listenForCriteriaChange();
+
+                this.offersInitialized.next();
+                this.offersInitialized.complete();
+            });
+    }
+
+    private listenForCriteriaChange(): void {
+        merge(
+            this._filtersService.filtersChanged$,
+            this._sortService.sortChanged$,
+            this._searchService.searchChanged$,
+            this._paginationService.paginationChanged$,
+        ).pipe(
+            tap(() => { this.fetchingOffers.next(true); }),
+            switchMap(() => this._listDataService.getOffersList(this.getValuesForParams())),
+            tap((offers) => { this._infoService.total.set(offers.totalCount); }),
+            tap((offers) => { this.offers.next(offers); }),
+            tap(() => { this.fetchingOffers.next(false); }),
+            takeUntilDestroyed(this._destroyRef),
+        ).subscribe();
     }
 
     private getValuesForParams(): OffersListParams {
         return {
-            sortBy: this.sortService.getSortValue(),
-            searchPhrase: this.searchService.getSearchValue(),
-            ...this.paginationService.getPaginationParams(),
-            ...this.filtersService.getFilterParams(),
+            sortBy: this._sortService.getSortValue(),
+            searchPhrase: this._searchService.getSearchValue(),
+            ...this._paginationService.getPaginationParams(),
+            ...this._filtersService.getFilterParams(),
         };
     }
 }
