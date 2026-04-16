@@ -43,7 +43,8 @@ export class FiltersViewCompactComponent implements OnInit {
     }
 
     protected resetFilters(): void {
-        this.filtersFormService.form.reset();
+        this.filtersFormService.form.reset(undefined, {emitEvent: false});
+        this.filtersService.changeFilters();
     }
 
     private subscribeToFormChanges(): void {

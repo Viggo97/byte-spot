@@ -26,6 +26,7 @@ export class FiltersViewBroadComponent implements OnInit {
 
     protected resetFilters(): void {
         this.filtersFormService.form.reset(undefined, {emitEvent: false});
+        this.filtersService.changeFilters();
     }
 
     private subscribeToFormChanges(): void {
