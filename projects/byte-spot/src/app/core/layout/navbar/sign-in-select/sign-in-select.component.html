@@ -3,7 +3,7 @@
     #signIn
     cdkOverlayOrigin
     (click)="openSignIn()">
-    {{ 'global.signIn' | translate }}
+    {{ 'user.signIn' | translate }}
 </button>
 
 <ng-template
@@ -31,7 +31,7 @@
     (detach)="closeSignIn()">
     <div class="container" role="dialog" cdkTrapFocus cdkTrapFocusAutoCapture="true">
         <div class="title">{{'user.candidates' | translate}}</div>
-        <button class="primary">{{'global.signIn' | translate}}</button>
-        <button>{{'global.signUp' | translate}}</button>
+        <button class="primary">{{'user.signIn' | translate}}</button>
+        <button>{{'user.signUp' | translate}}</button>
     </div>
 </ng-template>
