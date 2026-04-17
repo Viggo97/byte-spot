@@ -1,6 +1,10 @@
 import { I18nLanguageCode } from './i18n-language-code.model';
 
 export const i18nGlobal: Record<string, I18nLanguageCode> = {
+    language: {
+        en: 'Language',
+        pl: 'Język',
+    },
     languageEN: {
         en: 'English',
         pl: 'Angielski',
@@ -13,21 +17,17 @@ export const i18nGlobal: Record<string, I18nLanguageCode> = {
         en: 'Change language',
         pl: 'Zmień język',
     },
+    theme: {
+        en: 'Theme',
+        pl: 'Motyw',
+    },
     changeTheme: {
-        en: 'Change motyw',
+        en: 'Change theme',
         pl: 'Zmień motyw',
     },
-    signUp: {
-        en: 'Sign Up',
-        pl: 'Zarejestruj się',
-    },
-    signIn: {
-        en: 'Sign In',
-        pl: 'Zaloguj się',
-    },
-    Logout: {
-        en: 'Logout',
-        pl: 'Wyloguj',
+    menu: {
+        en: 'Menu',
+        pl: 'Menu',
     },
     search: {
         en: 'Search',
