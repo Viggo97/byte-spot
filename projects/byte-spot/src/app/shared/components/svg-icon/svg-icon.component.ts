@@ -10,11 +10,12 @@ import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@a
             [attr.aria-label]="ariaLabel() ?? null"
             [attr.aria-hidden]="ariaLabel() ? null : true"
             role="img">
-            <use [attr.href]="'assets/svg-sprite.svg#' + id()" />
+            <use [attr.href]="'assets/svg-sprite.svg#' + name()" />
         </svg>
     `,
     styles: [`
         bsa-svg-icon {
+            display: flex;
             color: var(--bsl-textColor);
         }
     `],
@@ -22,7 +23,7 @@ import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@a
     encapsulation: ViewEncapsulation.None,
 })
 export class SvgIconComponent {
-    id = input.required<string>();
+    name = input.required<string>();
     size = input<string>('1rem');
     ariaLabel = input<string | null>(null);
 }
