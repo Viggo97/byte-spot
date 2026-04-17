@@ -38,6 +38,7 @@ export class ListService {
         this._listDataService.getOffersList()
             .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(offers => {
+                this._infoService.total.set(offers.totalCount);
                 this.fetchingOffers.next(false);
                 this.offers.next(offers);
 
