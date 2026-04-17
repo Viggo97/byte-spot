@@ -17,6 +17,18 @@ export const i18nGlobal: Record<string, I18nLanguageCode> = {
         en: 'Change motyw',
         pl: 'Zmień motyw',
     },
+    signUp: {
+        en: 'Sign Up',
+        pl: 'Zarejestruj się',
+    },
+    signIn: {
+        en: 'Sign In',
+        pl: 'Zaloguj się',
+    },
+    Logout: {
+        en: 'Logout',
+        pl: 'Wyloguj',
+    },
     search: {
         en: 'Search',
         pl: 'Wyszukaj',

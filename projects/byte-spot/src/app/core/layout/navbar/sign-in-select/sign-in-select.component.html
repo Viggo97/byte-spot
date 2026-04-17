@@ -1,0 +1,37 @@
+<button
+    class="primary"
+    #signIn
+    cdkOverlayOrigin
+    (click)="openSignIn()">
+    {{ 'global.signIn' | translate }}
+</button>
+
+<ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="signIn"
+    [cdkConnectedOverlayOpen]="signInOpen()"
+    [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
+    [cdkConnectedOverlayHasBackdrop]="true"
+    [cdkConnectedOverlayDisposeOnNavigation]="true"
+    [cdkConnectedOverlayPositions]="[
+        {
+            originX: 'end',
+            originY: 'bottom',
+            overlayX: 'end',
+            overlayY: 'top',
+        },
+        {
+            originX: 'center',
+            originY: 'bottom',
+            overlayX: 'center',
+            overlayY: 'top',
+        }
+    ]"
+    (overlayOutsideClick)="closeSignIn()"
+    (detach)="closeSignIn()">
+    <div class="container" role="dialog" cdkTrapFocus cdkTrapFocusAutoCapture="true">
+        <div class="title">{{'user.candidates' | translate}}</div>
+        <button class="primary">{{'global.signIn' | translate}}</button>
+        <button>{{'global.signUp' | translate}}</button>
+    </div>
+</ng-template>
