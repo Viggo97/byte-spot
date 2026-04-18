@@ -3,8 +3,8 @@
     [attr.aria-label]="'global.changeTheme' | translate"
     (click)="onSwitchTheme()">
     @if (theme() === Theme.DARK) {
-        <ngx-bsl-icon-moon></ngx-bsl-icon-moon>
+        <bsa-svg-icon name="icon-moon" size="1.25rem"></bsa-svg-icon>
     } @else {
-        <ngx-bsl-icon-sun></ngx-bsl-icon-sun>
+        <bsa-svg-icon name="icon-sun" size="1.25rem"></bsa-svg-icon>
     }
 </button>

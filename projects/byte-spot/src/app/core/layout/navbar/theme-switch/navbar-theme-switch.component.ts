@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { IconMoonComponent, IconSunComponent } from 'ngx-bsl';
+import { SvgIconComponent } from '@shared';
 import { ThemeService } from '../../../theme/theme.service';
 import { Theme } from '../../../theme/theme.enum';
 import { TranslatePipe } from '../../../translate/translate.pipe';
@@ -7,9 +7,8 @@ import { TranslatePipe } from '../../../translate/translate.pipe';
 @Component({
     selector: 'bsa-navbar-theme-switch',
     imports: [
-        IconMoonComponent,
-        IconSunComponent,
         TranslatePipe,
+        SvgIconComponent,
     ],
     templateUrl: './navbar-theme-switch.component.html',
 })
