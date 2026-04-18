@@ -4,10 +4,10 @@
     [(value)]="language"
     (valueChange)="onSelectLanguage()"
     [displayLabel]="'label'"
-    [iconMode]="true"
+    [iconMode]="!compactMode()"
     [customIcon]="true"
-    [dropdownWidth]="'8rem'">
-    <ngx-bsl-icon-language data-custom-icon></ngx-bsl-icon-language>
+    [dropdownWidth]="compactMode() ? undefined : '8rem'">
+    <bsa-svg-icon name="icon-globe" size="1.25rem" data-custom-icon></bsa-svg-icon>
         @for (option of languageOptions; track option.key) {
             <ngx-bsl-list-box-option
                 [id]="option.key"
