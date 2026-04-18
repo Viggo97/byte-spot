@@ -1,0 +1,20 @@
+:host {
+    display: block;
+    width: 320px;
+}
+
+h1 {
+    margin: 32px 0;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+input {
+    margin: 4px 0;
+    display: flex;
+}

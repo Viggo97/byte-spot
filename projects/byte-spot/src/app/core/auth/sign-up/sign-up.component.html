@@ -1,0 +1,89 @@
+<h1>{{ 'user.signUp' | translate }}</h1>
+<form [formGroup]="signUpForm">
+    @let email = signUpForm.controls.email;
+    @let password = signUpForm.controls.password;
+    @let firstName = signUpForm.controls.firstName;
+    @let lastName = signUpForm.controls.lastName;
+
+    <section>
+        <label for="sign-up-email">{{ 'user.email' | translate }}</label>
+        <input id="sign-up-email" type="text" formControlName="email">
+        @if (email.invalid && email.touched) {
+            <div class="validation-error">
+                @if (email.hasError('required')) {
+                    {{ 'user.emailRequired' | translate }}
+                }
+                @if (email.hasError('email')) {
+                    {{ 'user.emailInvalid' | translate }}
+                }
+                @if (email.hasError('minlength')) {
+                    {{ 'user.emailMinLength' | translate }}
+                }
+                @if (email.hasError('maxlength')) {
+                    {{ 'user.emailMaxLength' | translate }}
+                }
+            </div>
+        }
+    </section>
+
+    <section>
+        <label for="sign-up-password">{{ 'user.password' | translate }}</label>
+        <input id="sign-up-password" type="password" formControlName="password">
+        @if (password.invalid && password.touched) {
+            <div class="validation-error">
+                @if (password.hasError('required')) {
+                    {{ 'user.passwordRequired' | translate }}
+                }
+                @if (password.hasError('minlength')) {
+                    {{ 'user.passwordMinLength' | translate }}
+                }
+                @if (password.hasError('maxlength')) {
+                    {{ 'user.passwordMaxLength' | translate }}
+                }
+            </div>
+        }
+    </section>
+
+    <section>
+        <label for="sign-up-first-name">{{ 'user.firstName' | translate }}</label>
+        <input id="sign-up-first-name" type="text" formControlName="firstName">
+        @if (firstName.invalid && firstName.touched) {
+            <div class="validation-error">
+                @if (firstName.hasError('required')) {
+                    {{ 'user.firstNameRequired' | translate }}
+                }
+                @if (firstName.hasError('minlength')) {
+                    {{ 'user.firstNameMinLength' | translate }}
+                }
+                @if (firstName.hasError('maxlength')) {
+                    {{ 'user.firstNameMaxLength' | translate }}
+                }
+            </div>
+        }
+    </section>
+
+    <section>
+    <label for="sign-up-last-name">{{ 'user.lastName' | translate }}</label>
+    <input id="sign-up-last-name" type="text" formControlName="lastName">
+    @if (lastName.invalid && lastName.touched) {
+        <div class="validation-error">
+            @if (lastName.hasError('required')) {
+                {{ 'user.lastNameRequired' | translate }}
+            }
+            @if (lastName.hasError('minlength')) {
+                {{ 'user.lastNameMinLength' | translate }}
+            }
+            @if (lastName.hasError('maxlength')) {
+                {{ 'user.lastNameMaxLength' | translate }}
+            }
+        </div>
+    }
+    </section>
+
+    <button
+        type="submit"
+        [disabled]="signUpForm.invalid || submitDisabled()"
+        (click)="onSignUp()">
+        {{ 'user.signUp' | translate }}
+    </button>
+</form>
