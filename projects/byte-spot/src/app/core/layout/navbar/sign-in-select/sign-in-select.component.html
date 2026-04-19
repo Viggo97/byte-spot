@@ -31,7 +31,17 @@
     (detach)="closeSignIn()">
     <div class="container" role="dialog" cdkTrapFocus cdkTrapFocusAutoCapture="true">
         <div class="title">{{'user.candidates' | translate}}</div>
-        <button class="primary">{{'user.signIn' | translate}}</button>
-        <button>{{'user.signUp' | translate}}</button>
+        <button
+            role="link"
+            class="primary"
+            (click)="navigate('/sign-in')">
+            {{'user.signIn' | translate}}
+        </button>
+        <button
+            role="link"
+            (click)="navigate('/sign-up')">
+            {{'user.signUp' | translate}}
+        </button>
+
     </div>
 </ng-template>

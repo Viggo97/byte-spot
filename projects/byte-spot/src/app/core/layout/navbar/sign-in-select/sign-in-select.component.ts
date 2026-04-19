@@ -1,4 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay } from '@angular/cdk/overlay';
 import { TranslatePipe } from '../../../translate/translate.pipe';
@@ -17,6 +18,7 @@ import { TranslatePipe } from '../../../translate/translate.pipe';
 export class SignInSelectComponent {
     private readonly _overlay = inject(Overlay);
     protected readonly scrollStrategy = this._overlay.scrollStrategies.block();
+    private readonly _router = inject(Router);
 
     protected signInOpen = signal(false);
 
@@ -26,5 +28,10 @@ export class SignInSelectComponent {
 
     protected closeSignIn(): void {
         this.signInOpen.set(false);
+    }
+
+    protected navigate(route: string): void {
+        this.closeSignIn();
+        void this._router.navigate([route]);
     }
 }
