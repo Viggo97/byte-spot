@@ -1,0 +1,38 @@
+@use 'breakpoints' as breakpoints;
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+section {
+    padding-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    &:not(:last-child) {
+        border-bottom: 1px solid var(--bsl-borderColor);
+    }
+}
+
+.sign-up {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+
+    @include breakpoints.sm {
+        flex-direction: row;
+
+        button {
+            flex-basis: 50%;
+        }
+    }
+}
+
+.change-theme {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}

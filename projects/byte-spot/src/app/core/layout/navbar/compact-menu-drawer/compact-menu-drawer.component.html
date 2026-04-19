@@ -1,0 +1,55 @@
+<button
+    class="invisible bsl-button-icon"
+    #compactMenuDrawer
+    cdkOverlayOrigin
+    (click)="openDrawer()">
+    <bsa-svg-icon name="icon-burger" size="1.25rem"></bsa-svg-icon>
+</button>
+
+<ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="compactMenuDrawer"
+    [cdkConnectedOverlayOpen]="drawerOpen()"
+    [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
+    [cdkConnectedOverlayHasBackdrop]="true"
+    [cdkConnectedOverlayDisposeOnNavigation]="true"
+    (overlayOutsideClick)="closeDrawer()"
+    (detach)="closeDrawer()">
+    <ngx-bsl-drawer
+        [title]="'global.menu' | translate"
+        (closed)="closeDrawer()">
+        <div class="container">
+            @if (!isLoggedIn()) {
+                <section class="user-zone">
+                    <h3>{{'user.userZone' | translate}}</h3>
+                    <div class="sign-up">
+                        <button
+                            role="link"
+                            class="primary"
+                            (click)="navigate('/sign-in')">
+                            {{'user.signIn' | translate}}
+                        </button>
+                        <button
+                            role="link"
+                            (click)="navigate('/sign-up')">
+                            {{'user.signUp' | translate}}
+                        </button>
+                    </div>
+                </section>
+            }
+
+            <section>
+                <h3>{{'global.language' | translate}}</h3>
+                <bsa-navbar-language-switch></bsa-navbar-language-switch>
+            </section>
+
+            <section>
+                <h3>{{'global.theme' | translate}}</h3>
+                <div class="change-theme">
+                    <div>{{'global.changeTheme' | translate}}:</div>
+                    <bsa-navbar-theme-switch></bsa-navbar-theme-switch>
+                </div>
+            </section>
+        </div>
+    </ngx-bsl-drawer>
+</ng-template>
