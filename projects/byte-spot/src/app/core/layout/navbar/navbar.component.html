@@ -1,10 +1,17 @@
 <nav>
     <div class="logo">
-        <img src="assets/logo.svg" alt="logo">
+        <img ngSrc="assets/logo.svg" alt="logo" routerLink="/" height="30" width="135" priority>
     </div>
 
-    <div class="icons">
-        <bsa-navbar-theme-switch></bsa-navbar-theme-switch>
-        <bsa-navbar-language-switch></bsa-navbar-language-switch>
+    <div class="options">
+        @if (compactMode()) {
+            <bsa-compact-menu-drawer></bsa-compact-menu-drawer>
+        } @else {
+            @if (!isLoggedIn()) {
+                <bsa-sign-in-select></bsa-sign-in-select>
+            }
+            <bsa-navbar-theme-switch></bsa-navbar-theme-switch>
+            <bsa-navbar-language-switch [compactMode]="false"></bsa-navbar-language-switch>
+        }
     </div>
 </nav>

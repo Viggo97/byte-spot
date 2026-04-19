@@ -1,16 +1,15 @@
 nav {
-    padding: 4px 0;
+    padding: 8px 16px;
     border-bottom: 1px solid var(--bsl-borderColor);
     display: flex;
     align-items: center;
     justify-content: space-between;
 
     .logo {
-        margin-left: 20px;
+        cursor: pointer;
     }
 
-    .icons {
-        margin-right: 20px;
+    .options {
         display: flex;
         align-items: center;
         gap: 12px;
