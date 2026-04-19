@@ -1,3 +1,5 @@
+export * from './auth/auth.service';
+
 export * from './layout/navbar/navbar.component';
 
 export * from './translate/translate.service';
