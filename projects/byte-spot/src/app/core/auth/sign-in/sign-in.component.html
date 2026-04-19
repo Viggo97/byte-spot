@@ -1,0 +1,51 @@
+<h1>{{ 'user.signIn' | translate }}</h1>
+<form [formGroup]="signInForm">
+    @let email = signInForm.controls.email;
+    @let password = signInForm.controls.password;
+
+    <section>
+        <label for="sign-in-email">{{ 'user.email' | translate }}</label>
+        <input id="sign-in-email" type="text" formControlName="email">
+        @if (email.invalid && email.touched) {
+            <div class="validation-error">
+                @if (email.hasError('required')) {
+                    {{ 'user.emailRequired' | translate }}
+                }
+                @if (email.hasError('email')) {
+                    {{ 'user.emailInvalid' | translate }}
+                }
+                @if (email.hasError('minlength')) {
+                    {{ 'user.emailMinLength' | translate }}
+                }
+                @if (email.hasError('maxlength')) {
+                    {{ 'user.emailMaxLength' | translate }}
+                }
+            </div>
+        }
+    </section>
+
+    <section>
+        <label for="sign-in-password">{{ 'user.password' | translate }}</label>
+        <input id="sign-in-password" type="password" formControlName="password">
+        @if (password.invalid && password.touched) {
+            <div class="validation-error">
+                @if (password.hasError('required')) {
+                    {{ 'user.passwordRequired' | translate }}
+                }
+                @if (password.hasError('minlength')) {
+                    {{ 'user.passwordMinLength' | translate }}
+                }
+                @if (password.hasError('maxlength')) {
+                    {{ 'user.passwordMaxLength' | translate }}
+                }
+            </div>
+        }
+    </section>
+
+    <button
+        type="submit"
+        [disabled]="signInForm.invalid || submitDisabled()"
+        (click)="onSignIn()">
+        {{ 'user.signIn' | translate }}
+    </button>
+</form>
