@@ -5,7 +5,7 @@ import { provideRouter, withHashLocation } from '@angular/router';
 import { HttpClient, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { firstValueFrom, tap } from 'rxjs';
 
-import { languageInterceptor } from '@core';
+import { languageInterceptor , authInterceptor } from '@core';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -14,7 +14,7 @@ export const appConfig: ApplicationConfig = {
         provideAnimations(),
         provideHttpClient(
             withFetch(),
-            withInterceptors([languageInterceptor]),
+            withInterceptors([authInterceptor, languageInterceptor]),
         ),
         provideAppInitializer(loadSvgSprite),
     ],
