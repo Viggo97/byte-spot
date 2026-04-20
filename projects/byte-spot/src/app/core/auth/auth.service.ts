@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, tap } from 'rxjs';
-import { environment } from 'projects/byte-spot/src/environments/environment.development';
+import { environment } from 'projects/byte-spot/src/environments/environment';
 import { SignIn } from './models/sign-in.interface';
 import { SignUp } from './models/sign-up.interface';
 
