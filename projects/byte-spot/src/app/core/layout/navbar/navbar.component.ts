@@ -28,7 +28,7 @@ export class NavbarComponent {
     private readonly _authService = inject(AuthService);
 
     compactMode = signal(window.innerWidth < 960);
-    isLoggedIn = toSignal(this._authService.isLoggedIn$);
+    user = toSignal(this._authService.user$);
 
     constructor() {
         this.subscribeToBreakpointObserver();

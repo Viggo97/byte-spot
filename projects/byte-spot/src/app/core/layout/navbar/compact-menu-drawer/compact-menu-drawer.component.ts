@@ -30,7 +30,7 @@ class CompactMenuDrawerComponent {
 
     protected readonly scrollStrategy = this._overlay.scrollStrategies.block();
 
-    isLoggedIn = toSignal(this._authService.isLoggedIn$);
+    user = toSignal(this._authService.user$);
     protected drawerOpen = signal(false);
 
     protected openDrawer(): void {

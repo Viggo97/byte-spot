@@ -1,6 +1,6 @@
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { catchError, finalize, of } from 'rxjs';
 import { TranslatePipe } from '../../translate/translate.pipe';
@@ -18,6 +18,7 @@ import { AuthService } from '../auth.service';
 })
 export class SignInComponent {
     private readonly _destroyRef = inject(DestroyRef);
+    private readonly _route= inject(ActivatedRoute);
     private readonly _router = inject(Router);
     private readonly _formBuilder = inject(NonNullableFormBuilder);
     private readonly _authService = inject(AuthService);
@@ -38,7 +39,8 @@ export class SignInComponent {
                 catchError(() => of()),
                 finalize(() => {
                     this.submitDisabled.set(false);
-                    void this._router.navigate(['/']);
+                    const returnUrl = this._route.snapshot.queryParamMap.get('returnUrl') ?? '/';
+                    void this._router.navigateByUrl(returnUrl);
                 }),
                 takeUntilDestroyed(this._destroyRef),
             )

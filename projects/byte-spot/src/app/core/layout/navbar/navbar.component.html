@@ -7,7 +7,7 @@
         @if (compactMode()) {
             <bsa-compact-menu-drawer></bsa-compact-menu-drawer>
         } @else {
-            @if (!isLoggedIn()) {
+            @if (!user()) {
                 <bsa-sign-in-select></bsa-sign-in-select>
             }
             <bsa-navbar-theme-switch></bsa-navbar-theme-switch>

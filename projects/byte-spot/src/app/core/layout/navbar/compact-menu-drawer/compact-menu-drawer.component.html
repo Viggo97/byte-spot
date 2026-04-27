@@ -19,7 +19,7 @@
         [title]="'global.menu' | translate"
         (closed)="closeDrawer()">
         <div class="container">
-            @if (!isLoggedIn()) {
+            @if (!user()) {
                 <section class="user-zone">
                     <h3>{{'user.userZone' | translate}}</h3>
                     <div class="sign-up">
