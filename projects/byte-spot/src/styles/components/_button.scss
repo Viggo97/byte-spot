@@ -1,25 +1,25 @@
 button {
     &.primary {
-        background-color: var(--bsa-primary-backgroundColor);
-        color: var(--bsa-primary-textColor);
+        background-color: var(--bsa-accent-backgroundColor);
+        color: var(--bsa-accent-textColor-primary);
         border-color: transparent;
 
         &:hover {
-            background-color: var(--bsa-primary-backgroundColor-hover);
+            background-color: var(--bsa-accent-backgroundColor-hover);
         }
 
         &:active {
-            background-color: var(--bsa-primary-backgroundColor-active);
+            filter: brightness(0.92) saturate(1.1);
         }
 
         &.invisible {
-            color: var(--bsa-danger-textColor-invisible);
+            color: var(--bsa-accent-textColor-secondary);
         }
     }
 
     &.danger {
         background-color: var(--bsa-danger-backgroundColor);
-        color: var(--bsa-danger-textColor);
+        color: var(--bsa-danger-textColor-primary);
         border-color: transparent;
 
         &:hover {
@@ -27,24 +27,25 @@ button {
         }
 
         &:active {
-            background-color: var(--bsa-danger-backgroundColor-active);
+            filter: brightness(0.92) saturate(1.1);
         }
 
         &.invisible {
-            color: var(--bsa-danger-textColor-invisible);
+            color: var(--bsa-danger-textColor-secondary);
         }
     }
 
     &.invisible {
         background-color: transparent;
+        color: var(--bsa-neutral-textColor);
         border-color: transparent;
 
         &:hover {
-            background-color: var(--bsl-button-backgroundColor-hover);
+            background-color: var(--bsa-neutral-backgroundColor-hover);
         }
 
         &:active {
-            background-color: var(--bsl-button-backgroundColor-active);
+            filter: brightness(0.92) saturate(1.1);
         }
     }
 }

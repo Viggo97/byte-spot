@@ -13,7 +13,7 @@ section {
     gap: 16px;
 
     &:not(:last-child) {
-        border-bottom: 1px solid var(--bsl-borderColor);
+        border-bottom: 1px solid var(--bsa-borderColor-primary);
     }
 }
 

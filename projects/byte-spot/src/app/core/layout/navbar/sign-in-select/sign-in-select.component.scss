@@ -1,19 +1,15 @@
-:host {
-    color: var(--bsl-textColor-muted);
-}
-
 .container {
     padding: 16px;
     display: flex;
     flex-direction: column;
     gap: 16px;
-    background-color: var(--bsl-backgroundColor-emphasis);
-    border: 1px solid var(--bsl-borderColor-emphasis);
+    background-color: var(--bsa-backgroundColor-primary);
+    border: 1px solid var(--bsa-borderColor-primary);
     border-radius: 8px;
     width: 250px;
 }
 
 .title {
     padding-bottom: 8px;
-    border-bottom: 1px solid var(--bsl-borderColor-muted);
+    border-bottom: 1px solid var(--bsa-borderColor-primary);
 }

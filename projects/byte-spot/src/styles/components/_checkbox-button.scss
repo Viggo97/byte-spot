@@ -3,7 +3,7 @@
     border-radius: .5rem;
 
     &[aria-checked=true] {
-        color: var(--bsa-primary-textColor);
+        color: var(--bsa-accent-textColor-primary);
         border-color: var(--bsl-checkbox-button-backgroundColor-checked);
     }
 }

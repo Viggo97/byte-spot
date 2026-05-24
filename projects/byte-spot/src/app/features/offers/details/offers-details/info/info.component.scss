@@ -7,7 +7,7 @@
     align-items: center;
     gap: 24px;
     padding: 16px;
-    border: 1px solid var(--bsl-borderColor);
+    border: 1px solid var(--bsa-borderColor-primary);
     border-radius: 8px;
     box-shadow: var(--bsa-box-shadow-primary);
 
@@ -20,7 +20,7 @@ section {
     height: 100%;
     width: 100%;
     padding: 16px;
-    border: 1px solid var(--bsl-borderColor);
+    border: 1px solid var(--bsa-borderColor-primary);
     border-radius: 8px;
 
     @include breakpoints.md {
@@ -56,7 +56,7 @@ h2 {
 
 .offer-info-secondary-value {
     font: var(--bsa-font-sm);
-    color: var(--bsa-primary-textColor-disabled);
+    color: var(--bsa-textColor-secondary);
 
     &:not(:last-child) {
         margin-bottom: 12px;

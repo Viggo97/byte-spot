@@ -3,21 +3,21 @@
     flex-direction: column;
     gap: 8px;
     padding: 16px;
-    border: 1px solid var(--bsl-borderColor);
+    border: 1px solid var(--bsa-borderColor-primary);
     border-radius: 8px;
     box-shadow: var(--bsa-box-shadow-primary);
 }
 
 .offer-deadline-description {
     font: var(--bsa-font-sm);
-    color: var(--bsa-primary-textColor-disabled);
+    color: var(--bsa-textColor-secondary);
 }
 
 .offer-deadline-bar {
     width: 100%;
     height: 8px;
     border-radius: 4px;
-    background-color: var(--bsl-backgroundColor-emphasis);
+    background-color: var(--bsa-backgroundColor-secondary);
     overflow: hidden;
 }
 

@@ -12,8 +12,9 @@ html {
 
 html, body {
     height: 100%;
-    background-color: var(--bsl-backgroundColor);
-    color: var(--bsl-textColor);
+    color-scheme: light dark;
+    background-color: var(--bsa-body-backgroundColor);
+    color: var(--bsa-textColor-primary);
 }
 
 body {

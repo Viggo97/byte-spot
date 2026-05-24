@@ -16,7 +16,7 @@ import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@a
     styles: [`
         bsa-svg-icon {
             display: flex;
-            color: var(--bsl-textColor);
+            color: var(--bsa-textColor-primary);
         }
     `],
     changeDetection: ChangeDetectionStrategy.OnPush,

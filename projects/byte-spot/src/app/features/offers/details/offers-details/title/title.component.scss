@@ -3,7 +3,7 @@
     align-items: center;
     gap: 24px;
     padding: 16px;
-    border: 1px solid var(--bsl-borderColor);
+    border: 1px solid var(--bsa-borderColor-primary);
     border-radius: 8px;
     box-shadow: var(--bsa-box-shadow-primary);
 }
@@ -26,5 +26,5 @@
 }
 
 .company {
-    color: var(--bsl-primary-textColor-muted);
+    color: var(--bsa-textColor-secondary);
 }

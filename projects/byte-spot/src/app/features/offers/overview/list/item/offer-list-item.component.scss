@@ -4,15 +4,15 @@
 a {
     padding: 16px;
     display: flex;
-    border: 1px solid var(--bsl-borderColor);
+    border: 1px solid var(--bsa-borderColor-primary);
     border-radius: 8px;
-    color: var(--bsl-textColor);
+    color: var(--bsa-textColor-primary);
     box-shadow: var(--bsa-box-shadow-primary);
     cursor: pointer;
     overflow: hidden;
 
     &:hover {
-        background-color: var(--bsl-backgroundColor-muted);
+        border-color: var(--bsa-borderColor-highlight);
     }
 }
 
@@ -47,7 +47,7 @@ section {
         justify-content: center;
         align-items: center;
         border-radius: 8px;
-        background-color: var(--bsl-backgroundColor-emphasis);
+        background-color: var(--bsa-backgroundColor-secondary);
         font: var(--bsa-font-4xl);
         color: var(--bsa-textColor-highlight);
     }
@@ -102,7 +102,7 @@ section {
         border-radius: 4px;
         font: var(--bsa-font-sm);
         white-space: nowrap;
-        background-color: var(--bsl-backgroundColor-emphasis);
+        background-color: var(--bsa-backgroundColor-secondary);
     }
 }
 
