@@ -21,6 +21,9 @@
       "resolveJsonModule": true,
       "baseUrl": "./",
       "paths": {
+          "@byte-spot-lib": [
+              "projects/byte-spot-lib/src/public-api.ts"
+          ],
         "@app/*": [
           "projects/byte-spot/src/app/*"
         ],
@@ -29,7 +32,7 @@
         ],
         "@shared": [
           "projects/byte-spot/src/app/shared/index.ts"
-        ]
+        ],
       }
     },
     "angularCompilerOptions": {
@@ -37,5 +40,13 @@
         "strictInjectionParameters": true,
         "strictInputAccessModifiers": true,
         "strictTemplates": true
-    }
+    },
+    "references": [
+      {
+        "path": "./projects/byte-spot-lib/tsconfig.lib.json"
+      },
+      {
+        "path": "./projects/byte-spot-lib/tsconfig.spec.json"
+      }
+    ]
 }
