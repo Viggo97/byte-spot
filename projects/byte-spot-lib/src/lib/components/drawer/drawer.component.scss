@@ -1,0 +1,49 @@
+@use '../../../styles/add-variables' as *;
+
+@include add-variables((
+    bsl-drawer-backgroundColor: var(--bsl-color-neutral-50),
+    bsl-drawer-borderColor: var(--bsl-color-neutral-400),
+));
+
+@include add-variables((
+    bsl-drawer-backgroundColor: var(--bsl-color-neutral-950),
+    bsl-drawer-borderColor: var(--bsl-color-neutral-600),
+), 'dark');
+
+bsl-drawer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: 95vh;
+    height: 100%;
+    transform: translateY(0);
+    transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
+
+    &.bsl-drawer-closed {
+        transform: translateY(100%);
+    }
+}
+
+.bsl-drawer-container {
+    height: 100%;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bsl-drawer-backgroundColor);
+    border: 1px solid var(--bsl-drawer-borderColor);
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+.bsl-drawer-header {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+}
+
+.bsl-drawer-content {
+    overflow-y: auto;
+    height: 100%;
+}
