@@ -114,7 +114,7 @@ export default defineConfig(
                 'error',
                 {
                     'type': 'attribute',
-                    'prefix': 'bsa-lib',
+                    'prefix': 'bsl',
                     'style': 'camelCase',
                 },
             ],
@@ -122,7 +122,7 @@ export default defineConfig(
                 'error',
                 {
                     'type': 'element',
-                    'prefix': 'bsa-lib',
+                    'prefix': 'bsl',
                     'style': 'kebab-case',
                 },
             ],

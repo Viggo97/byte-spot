@@ -117,7 +117,7 @@
       "projectType": "library",
       "root": "projects/byte-spot-lib",
       "sourceRoot": "projects/byte-spot-lib/src",
-      "prefix": "bsa-lib",
+      "prefix": "bsl",
       "architect": {
         "build": {
           "builder": "@angular/build:ng-packagr",
