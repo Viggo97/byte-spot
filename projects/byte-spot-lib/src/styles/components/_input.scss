@@ -1,0 +1,54 @@
+@use '../add-variables' as *;
+
+@include add-variables((
+    bsl-input-backgroundColor: var(--bsl-color-neutral-100),
+    bsl-input-borderColor: var(--bsl-color-neutral-300),
+    bsl-input-textColor: var(--bsl-textColor-primary),
+    bsl-input-textColor-placeholder: var(--bsl-color-neutral-400),
+));
+
+@include add-variables((
+    bsl-input-backgroundColor: var(--bsl-color-neutral-900),
+    bsl-input-borderColor: var(--bsl-color-neutral-700),
+    bsl-input-textColor: var(--bsl-textColor-primary),
+    bsl-input-textColor-placeholder: var(--bsl-color-neutral-400),
+), 'dark');
+
+input[type="email"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="url"] {
+    width: 100%;
+    padding: .5rem .75rem;
+    background-color: var(--bsl-input-backgroundColor);
+    border: 1px solid var(--bsl-input-borderColor);
+    border-radius: 6px;
+    color: var(bsl-input-textColor);
+    font: var(--bsl-font-sm);
+    line-height: var(--bsl-line-height-sm);
+
+    &:disabled {
+        opacity: .65;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+
+    &::placeholder {
+        color: var(--bsl-input-textColor-placeholder);
+    }
+}
+
+/* Remove arrows Chrome */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Remove arrows Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
