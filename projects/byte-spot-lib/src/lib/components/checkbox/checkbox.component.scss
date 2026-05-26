@@ -1,0 +1,49 @@
+@use '../../../styles/add-variables' as *;
+
+@include add-variables((
+    bsl-checkbox-backgroundColor: var(--bsl-color-neutral-100),
+    bsl-checkbox-borderColor: var(--bsl-color-neutral-300),
+    bsl-checkbox-borderColor-hover: var(--bsl-color-neutral-400),
+    bsl-checkbox-textColor: var(--bsl-textColor-primary),
+));
+
+@include add-variables((
+    bsl-checkbox-backgroundColor: var(--bsl-color-neutral-900),
+    bsl-checkbox-borderColor: var(--bsl-color-neutral-800),
+    bsl-checkbox-borderColor-hover: var(--bsl-color-neutral-700),
+    bsl-checkbox-textColor: var(--bsl-textColor-primary),
+), 'dark');
+
+bsl-checkbox {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font: var(--bsl-font-sm);
+    cursor: default;
+}
+
+.bsl-checkbox {
+    width: 1rem;
+    height: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bsl-checkbox-backgroundColor);
+    border: 1px solid var(--bsl-checkbox-borderColor);
+    color: var(--bsl-checkbox-textColor);
+
+    &:focus-visible {
+        outline-offset: 2px;
+    }
+
+    &:hover {
+        border-color: var(--bsl-checkbox-borderColor-hover);
+    }
+
+    &.disabled {
+        opacity: .65;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+}

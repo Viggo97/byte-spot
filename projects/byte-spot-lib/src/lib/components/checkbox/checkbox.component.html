@@ -1,0 +1,19 @@
+<span role="checkbox"
+      [attr.aria-checked]="checked()"
+      [attr.aria-disabled]="disabled()"
+      [attr.aria-labelledby]="id() + '-label'"
+      [id]="id()"
+      [tabindex]="disabled() ? -1 : 0"
+      [class.disabled]="disabled()"
+      class="bsl-checkbox">
+    @if (checked()) {
+        <svg id="icon-check" viewBox="0 0 24 24">
+        <path d="M4 12.6111L8.92308 17.5L20 6.5" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    }
+</span>
+
+<span [id]="id() + '-label'">
+    <ng-content></ng-content>
+</span>
