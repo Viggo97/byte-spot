@@ -1,0 +1,54 @@
+<button
+    type="button"
+    role="combobox"
+    #selectButton
+    class="bsl-select-button"
+    cdkOverlayOrigin
+    [attr.aria-expanded]="open()"
+    [attr.aria-controls]="listBox.listBoxId() || id() + '-list-box'"
+    [attr.aria-label]="ariaLabel()"
+    [attr.aria-labelledby]="ariaLabelledBy()"
+    [attr.aria-activedescendant]="ariaActiveDescendant()"
+    [class.bsl-button-icon]="iconMode()"
+    (click)="onClick()"
+    (keydown.enter)="onKeydown($any($event))"
+    (keydown.space)="onKeydown($any($event))"
+    (keydown.arrowUp)="onKeydown($any($event))"
+    (keydown.arrowDown)="onKeydown($any($event))"
+    (keydown.escape)="hideListBox()">
+    @if (iconMode()) {
+        <ng-content select="[data-custom-icon]"></ng-content>
+    } @else {
+        <span>{{ displayValue() }}</span>
+
+        @if (customIcon()) {
+            <ng-content select="[data-custom-icon]"></ng-content>
+        } @else {
+            <svg viewBox="0 0 24 24">
+                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M4 8 L12 16 L20 8" />
+            </svg>
+        }
+    }
+</button>
+<ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="selectButton"
+    [cdkConnectedOverlayOpen]="open()"
+    [cdkConnectedOverlayWidth]="dropdownWidth() || selectButton.offsetWidth"
+    (overlayOutsideClick)="hideListBox()">
+    <!-- eslint-disable-next-line
+    @angular-eslint/template/interactive-supports-focus,
+    @angular-eslint/template/click-events-have-key-events -->
+    <div
+        role="listbox"
+        class="bsl-list-box"
+        [id]="listBox.listBoxId() || id() + '-list-box'"
+        [attr.aria-label]="listBox.listBoxAriaLabel()"
+        [attr.aria-labelledby]="listBox.listBoxAriaLabelledby()"
+        [attr.aria-activedescendant]="listBox.ariaActiveDescendant()"
+        (click)="onListBoxClick($event)"
+    >
+        <ng-content></ng-content>
+    </div>
+</ng-template>

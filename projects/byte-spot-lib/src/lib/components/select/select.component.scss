@@ -1,0 +1,16 @@
+@use '../../styles/mixins';
+
+ngx-bsl-select {
+    display: block;
+}
+
+.ngx-bsl-select-button {
+    width: 100%;
+    justify-content: space-between;
+    gap: .5rem;
+
+    span {
+        min-height: var(--bsl-line-height-sm);
+        @include mixins.ellipsis;
+    }
+}

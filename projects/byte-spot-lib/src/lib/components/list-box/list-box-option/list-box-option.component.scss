@@ -1,0 +1,40 @@
+@use '../../../../styles/mixins';
+@use '../../../../styles/add-variables' as *;
+
+@include add-variables((
+    bsl-list-box-backgroundColor-hover: var(--bsl-color-neutral-200),
+));
+
+@include add-variables((
+    bsl-list-box-backgroundColor-hover: var(--bsl-color-neutral-800),
+), 'dark');
+
+ngx-bsl-list-box-option {
+    position: relative;
+    padding: .375rem 1.25rem .375rem 1rem;
+    border-radius: 4px;
+    font: var(--bsl-font-sm);
+    color: var(--bsl-textColor-primary);
+    cursor: pointer;
+    @include mixins.ellipsis;
+
+    &:hover,
+    &.visual-focus {
+        background-color: var(--bsl-list-box-backgroundColor-hover);
+    }
+
+    &[aria-selected="true"] {
+        svg {
+            display: inline;
+            visibility: visible;
+        }
+    }
+
+    svg {
+        display: none;
+        visibility: hidden;
+        position: absolute;
+        right: 0;
+        color: var(--bsl-textColor--primary);
+    }
+}

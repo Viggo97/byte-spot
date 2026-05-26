@@ -1,0 +1,42 @@
+<input
+    type="text"
+    role="combobox"
+    #comboboxInput
+    cdkOverlayOrigin
+    [value]="value()"
+    [attr.aria-expanded]="open()"
+    [attr.aria-controls]="listBox.listBoxId() || id() + '-list-box'"
+    [attr.aria-label]="ariaLabel()"
+    [attr.aria-labelledby]="ariaLabelledBy()"
+    [attr.aria-activedescendant]="ariaActiveDescendant()"
+    [placeholder]="placeholder()"
+    (input)="onInputChange($any($event))"
+    (blur)="onBlur()"
+    (click)="onClick()"
+    (keydown.enter)="onKeydown($any($event))"
+    (keydown.arrowUp)="onKeydown($any($event))"
+    (keydown.arrowDown)="onKeydown($any($event))"
+    (keydown.escape)="hideListBox()"
+>
+<ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="comboboxInput"
+    [cdkConnectedOverlayOpen]="open()"
+    [cdkConnectedOverlayWidth]="comboboxInput.offsetWidth"
+    (overlayOutsideClick)="hideListBox()">
+    <!-- eslint-disable-next-line
+    @angular-eslint/template/interactive-supports-focus,
+    @angular-eslint/template/click-events-have-key-events -->
+    <div
+        role="listbox"
+        class="bsl-list-box"
+        [id]="listBox.listBoxId() || id() + '-list-box'"
+        [attr.aria-label]="listBox.listBoxAriaLabel()"
+        [attr.aria-labelledby]="listBox.listBoxAriaLabelledby()"
+        [attr.aria-activedescendant]="listBox.ariaActiveDescendant()"
+        (pointerdown)="onListBoxPointerDown($event)"
+        (click)="onListBoxClick($event)"
+    >
+        <ng-content></ng-content>
+    </div>
+</ng-template>
