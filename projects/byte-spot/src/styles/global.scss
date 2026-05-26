@@ -1,5 +1,3 @@
-@use 'ngx-bsl/styles/index';
-
 * {
     margin: 0;
     padding: 0;
@@ -15,14 +13,6 @@ html, body {
     color-scheme: light dark;
     background-color: var(--bsa-body-backgroundColor);
     color: var(--bsa-textColor-primary);
-}
-
-body {
-    @include index.light-theme;
-
-    &.dark-theme {
-        @include index.dark-theme;
-    }
 }
 
 *:focus-visible {

@@ -1,0 +1,21 @@
+:root {
+  --bsl-font-xs: 0.75rem/1rem var(--bsl-font-family, sans-serif);
+  --bsl-font-sm: 0.875rem/1.25rem var(--bsl-font-family, sans-serif);
+  --bsl-font-md: 1rem/1.5rem var(--bsl-font-family, sans-serif);
+  --bsl-font-lg: 1.125rem/1.75rem var(--bsl-font-family, sans-serif);
+  --bsl-font-xl: 1.25rem/1.75rem var(--bsl-font-family, sans-serif);
+  --bsl-font-2xl: 1.5rem/2rem var(--bsl-font-family, sans-serif);
+  --bsl-font-3xl: 1.75rem/2rem var(--bsl-font-family, sans-serif);
+  --bsl-font-4xl: 1.875rem/2.25rem var(--bsl-font-family, sans-serif);
+  --bsl-font-5xl: 2.25rem/2.5rem var(--bsl-font-family, sans-serif);
+
+  --bsl-line-height-xs: 1rem;
+  --bsl-line-height-sm: 1.25rem;
+  --bsl-line-height-md: 1.5rem;
+  --bsl-line-height-lg: 1.75rem;
+  --bsl-line-height-xl: 1.75rem;
+  --bsl-line-height-2xl: 2rem;
+  --bsl-line-height-3xl: 2rem;
+  --bsl-line-height-4xl: 2.25rem;
+  --bsl-line-height-5xl: 2.5rem;
+}

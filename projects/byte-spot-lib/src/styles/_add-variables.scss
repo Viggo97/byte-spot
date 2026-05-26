@@ -1,0 +1,9 @@
+@mixin add-variables($variables, $theme: null) {
+    $selector: if(sass($theme): ":root[data-theme='#{$theme}']"; else: ":root");
+
+    #{$selector} {
+        @each $name, $value in $variables {
+            --#{$name}: #{$value};
+        }
+    }
+}

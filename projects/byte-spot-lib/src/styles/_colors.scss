@@ -1,0 +1,25 @@
+@use 'add-variables' as *;
+
+:root {
+    --bsl-color-neutral-50: oklch(98.4% .003 247.858);
+    --bsl-color-neutral-100: oklch(96.8% .007 247.896);
+    --bsl-color-neutral-200: oklch(92.9% .013 255.508);
+    --bsl-color-neutral-300: oklch(86.9% .022 252.894);
+    --bsl-color-neutral-400: oklch(70.4% .04 256.788);
+    --bsl-color-neutral-500: oklch(55.4% .046 257.417);
+    --bsl-color-neutral-600: oklch(44.6% .043 257.281);
+    --bsl-color-neutral-700: oklch(37.2% .044 257.287);
+    --bsl-color-neutral-800: oklch(27.9% .041 260.031);
+    --bsl-color-neutral-900: oklch(20.8% .042 265.755);
+    --bsl-color-neutral-950: oklch(12.9% .042 264.695);
+}
+
+@include add-variables((
+    bsl-textColor-primary: var(--bsl-color-neutral-900),
+    bsl-textColor-secondary: var(--bsl-color-neutral-800),
+));
+
+@include add-variables((
+    bsl-textColor-primary: var(--bsl-color-neutral-200),
+    bsl-textColor-secondary: var(--bsl-color-neutral-300),
+), 'dark');

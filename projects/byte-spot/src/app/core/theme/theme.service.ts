@@ -23,17 +23,17 @@ export class ThemeService {
         }
 
         this._theme = theme;
-        this.setThemeClass(theme);
+        this.setThemeView(theme);
     }
 
     setTheme(theme: Theme): void {
         this._theme = theme;
-        this.setThemeClass(theme);
+        this.setThemeView(theme);
         this.saveThemeToLocalStorage(theme);
     }
 
-    private setThemeClass(theme: Theme): void {
-        document.body.classList.toggle('dark-theme', theme === Theme.DARK);
+    private setThemeView(theme: Theme): void {
+        document.documentElement.setAttribute('data-theme', theme);
     }
 
     private saveThemeToLocalStorage(theme: Theme): void {
