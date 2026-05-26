@@ -1,0 +1,58 @@
+<div class="bsl-range-container">
+    <!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus, @angular-eslint/template/click-events-have-key-events -->
+    <div class="bsl-range-rail"
+         [class.disabled]="disabled()"
+         (click)="onRailClick($event)">
+    </div>
+
+    <div class="bsl-range-tracker"
+         [class.disabled]="disabled()"
+         [style.left]="trackerLeft()"
+         [style.right]="trackerRight()">
+    </div>
+
+    <bsl-range-thumb
+        #thumbFrom
+        role="slider"
+        [attr.aria-valuemin]="minValue()"
+        [attr.aria-valuemax]="value().to"
+        [attr.aria-valuenow]="value().from"
+        [attr.aria-valuetext]="value().from + ' - ' + value().to"
+        [attr.aria-label]="ariaLabel()"
+        [attr.aria-labelledby]="ariaLabelledBy()"
+        [tabindex]="disabled() ? -1 : 0"
+        [class.disabled]="disabled()"
+        [style.left]="thumbFromPosition() + 'px'"
+        [style.z-index]="overlappingThumb() === 'from' ? 1 : 0"
+        [value]="value().from"
+        [ratio]="this.ratio()"
+        [showLabel]="showThumbLabels()"
+        (focus)="overlappingThumb.set(Thumb.FROM)"
+        (positionChanged)="onPositionChangedThumbFrom($event)">
+    </bsl-range-thumb>
+
+    <bsl-range-thumb
+        #thumbTo
+        role="slider"
+        [attr.aria-valuemin]="value().from"
+        [attr.aria-valuemax]="maxValue()"
+        [attr.aria-valuenow]="value().to"
+        [attr.aria-valuetext]="value().from + ' - ' + value().to"
+        [attr.aria-label]="ariaLabel()"
+        [attr.aria-labelledby]="ariaLabelledBy()"
+        [tabindex]="disabled() ? -1 : 0"
+        [class.disabled]="disabled()"
+        [style.left]="thumbToPosition() + 'px'"
+        [style.z-index]="overlappingThumb() === 'to' ? 1 : 0"
+        [value]="value().to"
+        [ratio]="this.ratio()"
+        [showLabel]="showThumbLabels()"
+        (focus)="overlappingThumb.set(Thumb.TO)"
+        (positionChanged)="onPositionChangedThumbTo($event)">
+    </bsl-range-thumb>
+</div>
+
+<div class="bsl-range-limits">
+    <span>{{ minValue() }}</span>
+    <span>{{ maxValue() }}</span>
+</div>

@@ -1,0 +1,25 @@
+$thumb-size: .75rem;
+
+bsl-range-thumb {
+    position: absolute;
+    width: $thumb-size;
+    height: $thumb-size;
+    border-radius: calc($thumb-size / 2);
+    background-color: var(--bsl-range-thumb-backgroundColor);
+    cursor: pointer;
+    touch-action: none;
+
+    &.disabled {
+        opacity: .65;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+}
+
+.bsl-range-thumb-label {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    font: var(--bsl-font-sm);
+}

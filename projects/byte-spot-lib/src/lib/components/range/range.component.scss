@@ -1,0 +1,49 @@
+$rail-height: .25rem;
+
+bsl-range {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.bsl-range-container {
+    position: relative;
+    height: .75rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.bsl-range-rail {
+    height: $rail-height;
+    width: 100%;
+    border-radius: calc($rail-height / 2);
+    background-color: var(--bsl-range-rail-backgroundColor);
+    cursor: pointer;
+
+    &.disabled {
+        opacity: .65;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+}
+
+.bsl-range-tracker {
+    position: absolute;
+    height: $rail-height;
+    background-color: var(--bsl-range-tracker-backgroundColor);
+    pointer-events: none;
+
+    &.disabled {
+        opacity: .65;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+}
+
+.bsl-range-limits {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font: var(--bsl-font-sm);
+}
