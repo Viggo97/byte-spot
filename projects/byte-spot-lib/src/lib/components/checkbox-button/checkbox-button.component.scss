@@ -8,7 +8,7 @@
     bsl-checkbox-button-backgroundColor-checked-textColor: var(--bsl-color-neutral-700),
 ), 'dark');
 
-.bsl-checkbox-button {
+bsl-checkbox-button {
     &[aria-checked=true] {
         background-color: var(--bsl-checkbox-button-backgroundColor-checked);
 

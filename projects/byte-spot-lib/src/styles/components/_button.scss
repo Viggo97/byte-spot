@@ -24,7 +24,6 @@ button {
     gap: .25rem;
     background-color: var(--bsl-button-backgroundColor);
     border: 1px solid var(--bsl-button-borderColor);
-    border-radius: 6px;
     color: var(--bsl-button-textColor);
     font: var(--bsl-font-sm);
     font-weight: 500;
@@ -57,6 +56,11 @@ button {
             display: block;
             min-width: 1.125rem; //equal to line-height
             line-height: inherit;
+        }
+
+        svg {
+            width: 1rem;
+            height: 1rem;
         }
     }
 
