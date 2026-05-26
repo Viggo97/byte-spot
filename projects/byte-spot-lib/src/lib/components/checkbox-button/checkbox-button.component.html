@@ -1,0 +1,17 @@
+<button role="checkbox"
+        [attr.aria-checked]="checked()"
+        [attr.aria-disabled]="disabled()"
+        [attr.aria-labelledby]="id() + '-label'"
+        [id]="id()"
+        [tabindex]="disabled() ? -1 : 0"
+        [disabled]="disabled()"
+        [class.disabled]="disabled()"
+        class="bsl-checkbox-button"
+        (click)="onSelect()"
+        (keydown.enter)="onKeydown($event)"
+        (keydown.space)="onKeydown($event)"
+        (keyup.enter)="onSelect()"
+        (keyup.space)="onSelect()">
+    <ng-content></ng-content>
+</button>
+
