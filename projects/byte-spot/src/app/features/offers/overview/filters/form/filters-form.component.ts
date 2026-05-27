@@ -1,9 +1,9 @@
 import { Component, inject, signal } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormField } from '@angular/forms/signals';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { CheckboxButtonComponent, CheckboxComponent, RangeComponent } from 'ngx-bsl';
-import { TranslatePipe } from '@core';
+import { CheckboxButtonComponent, CheckboxComponent, RangeComponent } from '@byte-spot-lib';
 import { LookupItem } from '@shared';
+import { TranslatePipe } from '@core';
 import { FiltersFormService } from './filters-form.service';
 import { FiltersService } from '../filters.service';
 import { Technology } from '../models/technology.interface';
@@ -15,10 +15,13 @@ interface SanitizedTechnology extends LookupItem {
 @Component({
     selector: 'bsa-offers-overview-filters-form',
     imports: [
-        ReactiveFormsModule,
         CheckboxComponent,
         RangeComponent,
         TranslatePipe,
+        CheckboxButtonComponent,
+        CheckboxComponent,
+        FormField,
+        RangeComponent,
         CheckboxButtonComponent,
     ],
     templateUrl: './filters-form.component.html',
@@ -29,7 +32,7 @@ export class FiltersFormComponent {
     protected _filterFormService = inject(FiltersFormService);
     protected _filtersService = inject(FiltersService);
 
-    protected form = this._filterFormService.form;
+    protected filtersForm = this._filterFormService.filtersForm;
     protected technologies = signal<SanitizedTechnology[]>(this.sanitizeSvgIcons(this._filtersService.technologies));
     protected locations = signal([...this._filtersService.locations]);
     protected workModes = signal([...this._filtersService.workModes]);

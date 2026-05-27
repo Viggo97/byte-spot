@@ -1,6 +1,6 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { debounceTime, merge } from 'rxjs';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { debounceTime, filter, skip } from 'rxjs';
 import { TranslatePipe } from '@core';
 import { FiltersService } from '../filters.service';
 import { FiltersFormService } from '../form/filters-form.service';
@@ -20,31 +20,34 @@ export class FiltersViewBroadComponent implements OnInit {
     private filtersFormService = inject(FiltersFormService);
     private destroyRef = inject(DestroyRef);
 
+    private salaryFilterChange = toObservable(this.filtersFormService.salaryFilter)
+        .pipe(
+            skip(1),
+            filter(() => !this.filtersService.preventFormValueChange),
+            debounceTime(300),
+            takeUntilDestroyed(this.destroyRef),
+        );
+    private collectionFiltersChange = toObservable(this.filtersFormService.collectionFilters)
+        .pipe(
+            skip(1),
+            filter(() => !this.filtersService.preventFormValueChange),
+            takeUntilDestroyed(this.destroyRef),
+        );
+
     ngOnInit(): void {
         this.subscribeToFormChanges();
     }
 
     protected resetFilters(): void {
-        this.filtersFormService.form.reset(undefined, {emitEvent: false});
-        this.filtersService.changeFilters();
+        this.filtersService.resetFiltersForm();
     }
 
     private subscribeToFormChanges(): void {
-        this.filtersFormService.form.controls.salary.valueChanges
-            .pipe(
-                debounceTime(300),
-                takeUntilDestroyed(this.destroyRef))
+        this.salaryFilterChange
             .subscribe(() => {
                 this.filtersService.changeFilters();
             });
-        merge(
-            this.filtersFormService.form.controls.technologies.valueChanges,
-            this.filtersFormService.form.controls.locations.valueChanges,
-            this.filtersFormService.form.controls.workModes.valueChanges,
-            this.filtersFormService.form.controls.employmentTypes.valueChanges,
-            this.filtersFormService.form.controls.experienceLevels.valueChanges,
-        )
-            .pipe(takeUntilDestroyed(this.destroyRef))
+        this.collectionFiltersChange
             .subscribe(() => {
                 this.filtersService.changeFilters();
             });

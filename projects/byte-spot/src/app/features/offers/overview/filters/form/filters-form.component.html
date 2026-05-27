@@ -1,94 +1,91 @@
-<ng-container [formGroup]="form">
+<section>
+    <h3>{{ 'offer.salary' | translate }}</h3>
+
+    <bsl-range
+        [minValue]="0"
+        [maxValue]="50000"
+        [step]="1000"
+        [aria-label]="'offer.salary' | translate"
+        [showThumbLabels]="true"
+        [formField]="filtersForm.salary">
+    </bsl-range>
+</section>
+
+@if (technologies().length) {
     <section>
-        <h3>{{ 'offer.salary' | translate }}</h3>
-
-        <ngx-bsl-range
-            [min]="0"
-            [max]="50000"
-            [step]="1000"
-            [aria-label]="'offer.salary' | translate"
-            [showThumbLabels]="true"
-            formControlName="salary">
-        </ngx-bsl-range>
+        <h3>{{ 'offer.technologies' | translate }}</h3>
+        <div class="filters-group filters-technologies">
+            @for (technology of technologies(); track technology.id; let i = $index) {
+                <bsl-checkbox-button
+                    [id]="'filter-technology-' + i"
+                    [formField]="filtersForm.technologies[i]">
+                    <div class="icon-container" [innerHTML]="technology.iconCode"></div>
+                    {{ technology.name }}
+                </bsl-checkbox-button>
+            }
+        </div>
     </section>
+}
 
-    @if (technologies().length) {
-        <section>
-            <h3>{{ 'offer.technologies' | translate }}</h3>
-            <div class="filters-group filters-technologies" formArrayName="technologies">
-                @for (technology of technologies(); track technology.id; let i = $index) {
-                    <ngx-bsl-checkbox-button
-                        [id]="'filter-technology-' + i"
-                        [formControlName]="i">
-                        <div class="icon-container" [innerHTML]="technology.iconCode"></div>
-                        {{ technology.name }}
-                    </ngx-bsl-checkbox-button>
-                }
-            </div>
-        </section>
-    }
+@if (workModes().length) {
+    <section>
+        <h3>{{ 'offer.workMode' | translate }}</h3>
+        <div class="filters-group">
+            @for (workMode of workModes(); track workMode.id; let i = $index) {
+                <bsl-checkbox
+                    [id]="'filter-workMode-' + i"
+                    [formField]="filtersForm.workModes[i]">
+                    {{ workMode.name }}
+                </bsl-checkbox>
+            }
+        </div>
+    </section>
+}
 
-    @if (workModes().length) {
-        <section>
-            <h3>{{ 'offer.workMode' | translate }}</h3>
-            <div class="filters-group" formArrayName="workModes">
-                @for (workMode of workModes(); track workMode.id; let i = $index) {
-                    <ngx-bsl-checkbox
-                        [id]="'filter-workMode-' + i"
-                        [formControlName]="i">
-                        {{ workMode.name }}
-                    </ngx-bsl-checkbox>
-                }
-            </div>
-        </section>
-    }
+@if (locations().length) {
+    <section>
+        <h3>{{ 'offer.locations' | translate }}</h3>
 
-    @if (locations().length) {
-        <section formArrayName="locations">
-            <h3>{{ 'offer.locations' | translate }}</h3>
+        <div class="filters-group">
+            @for (location of locations(); track location.id; let i = $index) {
+                <bsl-checkbox
+                    [id]="'filter-location-' + i"
+                    [formField]="filtersForm.locations[i]">
+                    {{ location.name }}
+                </bsl-checkbox>
+            }
+        </div>
+    </section>
+}
 
-            <div class="filters-group">
-                @for (location of locations(); track location.id; let i = $index) {
-                    <ngx-bsl-checkbox
-                        [id]="'filter-location-' + i"
-                        [formControlName]="i">
-                        {{ location.name }}
-                    </ngx-bsl-checkbox>
-                }
-            </div>
-        </section>
-    }
+@if (experienceLevels().length) {
+    <section>
+        <h3>{{ 'offer.experienceLevel' | translate }}</h3>
 
-    @if (experienceLevels().length) {
-        <section formArrayName="experienceLevels">
-            <h3>{{ 'offer.experienceLevel' | translate }}</h3>
+        <div class="filters-group">
+            @for (experienceLevel of experienceLevels(); track experienceLevel.id; let i = $index) {
+                <bsl-checkbox
+                    [id]="'filter-experience-level-' + i"
+                    [formField]="filtersForm.experienceLevels[i]">
+                    {{ experienceLevel.name }}
+                </bsl-checkbox>
+            }
+        </div>
+    </section>
+}
 
-            <div class="filters-group">
-                @for (experienceLevel of experienceLevels(); track experienceLevel.id; let i = $index) {
-                    <ngx-bsl-checkbox
-                        [id]="'filter-experience-level-' + i"
-                        [formControlName]="i">
-                        {{ experienceLevel.name }}
-                    </ngx-bsl-checkbox>
-                }
-            </div>
-        </section>
-    }
+@if (employmentTypes().length) {
+    <section>
+        <h3>{{ 'offer.employmentType' | translate }}</h3>
 
-    @if (employmentTypes().length) {
-        <section formArrayName="employmentTypes">
-            <h3>{{ 'offer.employmentType' | translate }}</h3>
-
-            <div class="filters-group">
-                @for (employmentType of employmentTypes(); track employmentType.id; let i = $index) {
-                    <ngx-bsl-checkbox
-                        [id]="'filter-employment-type-' + i"
-                        [formControlName]="i">
-                        {{ employmentType.name }}
-                    </ngx-bsl-checkbox>
-                }
-            </div>
-        </section>
-    }
-
-</ng-container>
+        <div class="filters-group">
+            @for (employmentType of employmentTypes(); track employmentType.id; let i = $index) {
+                <bsl-checkbox
+                    [id]="'filter-employment-type-' + i"
+                    [formField]="filtersForm.employmentTypes[i]">
+                    {{ employmentType.name }}
+                </bsl-checkbox>
+            }
+        </div>
+    </section>
+}

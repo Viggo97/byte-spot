@@ -1,8 +1,9 @@
 import { DestroyRef, inject, Injectable } from '@angular/core';
-import { FormArray } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { catchError, forkJoin, of, Subject } from 'rxjs';
-import { LookupItem } from '@app/shared/models/lookup-item.interface';
+import { StrictOmit } from '@byte-spot-lib';
+import { LookupItem } from '@shared';
+import { Filters } from './models/filters.model';
 import { Technology } from './models/technology.interface';
 import { FilterParams } from './models/filter-params.interface';
 import { FiltersFormService } from './form/filters-form.service';
@@ -25,6 +26,8 @@ export class FiltersService {
 
     private filtersChanged = new Subject<void>();
     filtersChanged$ = this.filtersChanged.asObservable();
+
+    preventFormValueChange = false;
 
     constructor() {
         this.fetchData();
@@ -54,11 +57,19 @@ export class FiltersService {
     }
 
     private initFiltersForm(): void {
-        this._filtersFormService.initLookupFiltersForm(this.technologies, 'technologies');
-        this._filtersFormService.initLookupFiltersForm(this.locations, 'locations');
-        this._filtersFormService.initLookupFiltersForm(this.workModes, 'workModes');
-        this._filtersFormService.initLookupFiltersForm(this.experienceLevels, 'experienceLevels');
-        this._filtersFormService.initLookupFiltersForm(this.employmentTypes, 'employmentTypes');
+        this._filtersFormService.fillCollectionFiltersForm(this.technologies, 'technologies');
+        this._filtersFormService.fillCollectionFiltersForm(this.locations, 'locations');
+        this._filtersFormService.fillCollectionFiltersForm(this.workModes, 'workModes');
+        this._filtersFormService.fillCollectionFiltersForm(this.experienceLevels, 'experienceLevels');
+        this._filtersFormService.fillCollectionFiltersForm(this.employmentTypes, 'employmentTypes');
+    }
+
+    resetFiltersForm(): void {
+        this.preventFormValueChange = true;
+        this._filtersFormService.filtersModel.set(Filters.default());
+        this.initFiltersForm();
+        this.changeFilters();
+        setTimeout(() => this.preventFormValueChange = false);
     }
 
     changeFilters(): void {
@@ -67,11 +78,9 @@ export class FiltersService {
 
     getFilterParams(): FilterParams {
         const form = this._filtersFormService.getFormValue();
-        const defaultSalaryFrom = this._filtersFormService.form.controls.salary.defaultValue.from;
-        const defaultSalaryTo = this._filtersFormService.form.controls.salary.defaultValue.to;
         return {
-            salaryMin: form.salary.from !== defaultSalaryFrom ? form.salary.from : undefined,
-            salaryMax: form.salary.to !== defaultSalaryTo ? form.salary.to : undefined,
+            salaryMin: form.salary.from !== Filters.SalaryFrom ? form.salary.from : undefined,
+            salaryMax: form.salary.to !== Filters.SalaryFrom ? form.salary.to : undefined,
             technologyId: this.getFiltersFromCollection(this.technologies, 'technologies'),
             locationId: this.getFiltersFromCollection(this.locations, 'locations'),
             workModeId: this.getFiltersFromCollection(this.workModes, 'workModes'),
@@ -80,17 +89,14 @@ export class FiltersService {
         };
     }
 
-    private getFiltersFromCollection(collection: LookupItem[], controlName: string): string[] {
-        const controls = this._filtersFormService.form.controls;
-        if (controlName in controls) {
-            const formControl = controls[controlName as keyof typeof controls];
-            if (formControl instanceof FormArray) {
-                return collection
-                    .filter((_value, index) => formControl.at(index).getRawValue())
-                    .map(value => value.id);
+    private getFiltersFromCollection(collection: LookupItem[], filterName: keyof StrictOmit<Filters, 'salary'>)
+        : string[] {
+        const filter = this._filtersFormService.filtersModel()[filterName];
+        return filter.reduce<string[]>((accumulator, currentValue, index) => {
+            if (currentValue) {
+                accumulator.push(collection[index].id);
             }
-            return [];
-        }
-        return [];
+            return accumulator;
+        }, []);
     }
 }

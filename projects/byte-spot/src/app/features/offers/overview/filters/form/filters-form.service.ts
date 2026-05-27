@@ -1,35 +1,34 @@
-import { inject, Injectable } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
-import { Exact } from '@shared';
-import { Salary } from '../models/salary.interface';
-import { Filters } from '../models/filters.interface';
-import { LookupItem } from '@app/shared/models/lookup-item.interface';
+import { computed, Injectable, signal } from '@angular/core';
+import { form } from '@angular/forms/signals';
+import { StrictOmit } from '@byte-spot-lib';
+import { LookupItem } from '@shared';
+import { Filters } from '../models/filters.model';
 
 @Injectable()
 export class FiltersFormService {
-    private _formBuilder = inject(FormBuilder);
+    filtersModel = signal(Filters.default());
+    filtersForm = form(this.filtersModel);
 
-    form = this._formBuilder.nonNullable.group({
-        salary: this._formBuilder.nonNullable.control<Salary>({ from: 0, to: 50_000 }),
-        technologies: this._formBuilder.nonNullable.array<boolean>([]),
-        locations: this._formBuilder.nonNullable.array<boolean>([]),
-        workModes: this._formBuilder.nonNullable.array<boolean>([]),
-        experienceLevels: this._formBuilder.nonNullable.array<boolean>([]),
-        employmentTypes: this._formBuilder.nonNullable.array<boolean>([]),
-    });
+    salaryFilter = computed(() => this.filtersModel().salary);
+    private locationsFilter = computed(() => this.filtersModel().locations);
+    private technologiesFilter = computed(() => this.filtersModel().technologies);
+    private workModesFilter = computed(() => this.filtersModel().workModes);
+    private experienceLevelsFilter = computed(() => this.filtersModel().experienceLevels);
+    private employmentTypes = computed(() => this.filtersModel().employmentTypes);
+    collectionFilters = computed(() => ({
+        locations: this.locationsFilter(),
+        technologies: this.technologiesFilter(),
+        workModes: this.workModesFilter(),
+        experienceLevels: this.experienceLevelsFilter(),
+        employmentTypes: this.employmentTypes(),
+    }));
 
-    initLookupFiltersForm(items: LookupItem[], formGroupName: string): void {
-        if (formGroupName in this.form.controls) {
-            const formGroup = this.form.controls[formGroupName as keyof typeof this.form.controls];
-            if (formGroup instanceof FormArray) {
-                items.forEach(() => {
-                    formGroup.push(this._formBuilder.nonNullable.control(false), {emitEvent: false});
-                });
-            }
-        }
+    fillCollectionFiltersForm(items: LookupItem[], filterName: keyof StrictOmit<Filters, 'salary'>): void {
+        const cleanArray = new Array<boolean>(items.length).fill(false);
+        this.filtersForm[filterName]().value.set(cleanArray);
     }
 
     getFormValue(): Filters {
-        return this.form.getRawValue() satisfies Exact<ReturnType<typeof this.form.getRawValue>, Filters>;
+        return this.filtersForm().value();
     }
 }
