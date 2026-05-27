@@ -70,7 +70,6 @@ export class RangeComponent implements FormValueControl<Range>, OnInit, OnDestro
 
     constructor() {
         effect(() => {
-            console.log('range');
             this.value();
             this.computeFromThumbPosition();
             this.computeToThumbPosition();
