@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy,
     Component,
-    computed,
+    computed, effect,
     ElementRef,
     inject,
     input,
@@ -67,6 +67,15 @@ export class RangeComponent implements FormValueControl<Range>, OnInit, OnDestro
 
     protected readonly Thumb = Thumb;
     private resizeObserver!: ResizeObserver;
+
+    constructor() {
+        effect(() => {
+            console.log('range');
+            this.value();
+            this.computeFromThumbPosition();
+            this.computeToThumbPosition();
+        });
+    }
 
     ngOnInit(): void {
         this.validateRange();
@@ -150,7 +159,6 @@ export class RangeComponent implements FormValueControl<Range>, OnInit, OnDestro
         const diff = direction === RangeMoveDirection.BACKWARD ? -this._step() : this._step();
         const newFrom = this.value().from + diff;
         this.value.update((value) => new Range(round(newFrom, this.stepDigits()), value.to));
-        this.computeFromThumbPosition();
         this.overlappingThumb.set(Thumb.FROM);
     }
 
@@ -166,7 +174,6 @@ export class RangeComponent implements FormValueControl<Range>, OnInit, OnDestro
         const diff = direction === RangeMoveDirection.BACKWARD ? -this._step() : this._step();
         const newTo = this.value().to + diff;
         this.value.update((value) => new Range(value.from, round(newTo, this.stepDigits())));
-        this.computeToThumbPosition();
         this.overlappingThumb.set(Thumb.TO);
     }
 
@@ -196,10 +203,8 @@ export class RangeComponent implements FormValueControl<Range>, OnInit, OnDestro
         const thumb = this.selectThumbToMove(pointerPosition);
         if (thumb === Thumb.FROM) {
             this.value.update((value) => new Range(newValue, value.to));
-            this.computeFromThumbPosition();
         } else {
             this.value.update((value) => new Range(value.from, newValue));
-            this.computeToThumbPosition();
         }
     }
 
