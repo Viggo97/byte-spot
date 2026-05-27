@@ -12,3 +12,5 @@ export * from './lib/components/range/range.model';
 export * from './lib/components/skeleton/skeleton.component';
 export * from './lib/components/select/select.component';
 export * from './lib/components/tooltip/tooltip.directive';
+
+export * from './lib/utils/strict-omit.type';
