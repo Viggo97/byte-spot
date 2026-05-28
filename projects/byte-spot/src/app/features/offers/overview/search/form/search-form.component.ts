@@ -1,7 +1,7 @@
 import { Component, inject, output, Signal } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormField } from '@angular/forms/signals';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ComboboxComponent, ListBoxGroupComponent, ListBoxOptionComponent, ListBoxSeparatorComponent } from 'ngx-bsl';
+import { ComboboxComponent, ListBoxGroupComponent, ListBoxOptionComponent, ListBoxSeparatorComponent } from '@byte-spot-lib';
 import { TranslatePipe } from '@core';
 import { SearchService } from '../search.service';
 import { Suggestion } from '../models/suggestion.interface';
@@ -11,12 +11,12 @@ import { suggestionCategoryLangMap } from '../models/suggestion-category-lang-ma
 @Component({
     selector: 'bsa-offers-overview-search-form',
     imports: [
-        ReactiveFormsModule,
         ComboboxComponent,
         ListBoxGroupComponent,
         ListBoxOptionComponent,
         ListBoxSeparatorComponent,
         TranslatePipe,
+        FormField,
     ],
     templateUrl: './search-form.component.html',
 })

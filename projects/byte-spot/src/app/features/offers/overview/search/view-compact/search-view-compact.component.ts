@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormField } from '@angular/forms/signals';
 import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay } from '@angular/cdk/overlay';
-import { DrawerComponent } from 'ngx-bsl';
+import { DrawerComponent } from '@byte-spot-lib';
 import { TranslatePipe } from '@core';
 import { SearchService } from '../search.service';
 import { SearchFormComponent } from '../form/search-form.component';
@@ -9,12 +9,12 @@ import { SearchFormComponent } from '../form/search-form.component';
 @Component({
     selector: 'bsa-offers-overview-search-view-compact',
     imports: [
-        ReactiveFormsModule,
         CdkOverlayOrigin,
         CdkConnectedOverlay,
         TranslatePipe,
         DrawerComponent,
         SearchFormComponent,
+        FormField,
     ],
     templateUrl: './search-view-compact.component.html',
     styleUrl: './search-view-compact.component.scss',
@@ -25,7 +25,7 @@ export class SearchViewCompactComponent {
 
     readonly scrollStrategy = this.overlay.scrollStrategies.block();
 
-    protected searchValue = signal(this.searchService.searchForm);
+    protected searchPhrase = this.searchService.searchForm.phrase;
     protected drawerOpen = signal(false);
 
     protected onInputClick(event?: KeyboardEvent): void {
@@ -51,7 +51,7 @@ export class SearchViewCompactComponent {
 
     protected focusCombobox(): void {
         setTimeout(() => {
-            const input = document.querySelector('ngx-bsl-combobox input');
+            const input = document.querySelector('bsl-combobox input');
             if (input) {
                 (input as HTMLInputElement).focus();
             }

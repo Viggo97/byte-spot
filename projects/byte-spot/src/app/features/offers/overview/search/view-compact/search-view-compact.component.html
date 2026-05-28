@@ -1,9 +1,8 @@
 <input
     type="text"
-    readonly
     #searchCompact
     cdkOverlayOrigin
-    [value]="searchValue().value"
+    [formField]="searchPhrase"
     [placeholder]="'offer.searchPlaceholder' | translate"
     (click)="onInputClick()"
     (keydown)="onInputClick($event)"
@@ -19,7 +18,7 @@
     (overlayOutsideClick)="closeDrawer()"
     (attach)="focusCombobox()"
     (detach)="closeDrawer()">
-            <ngx-bsl-drawer
+            <bsl-drawer
                 [title]="'Search'"
                 (closed)="closeDrawer()">
                 <div class="drawer-wrapper">
@@ -30,5 +29,5 @@
                         {{ 'global.search' | translate }}
                     </button>
                 </div>
-            </ngx-bsl-drawer>
+            </bsl-drawer>
 </ng-template>

@@ -1,6 +1,6 @@
-import { DestroyRef, inject, Injectable } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DestroyRef, inject, Injectable, signal } from '@angular/core';
+import { form } from '@angular/forms/signals';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged, iif, map, of, Subject, switchMap } from 'rxjs';
 import { SearchDataService } from './data/search-data.service';
 import { SuggestionCategoryGroup } from './models/suggestion-category-group.interface';
@@ -14,8 +14,10 @@ export class SearchService {
     private searchChanged = new Subject<void>();
     searchChanged$ = this.searchChanged.asObservable();
 
-    searchForm = new FormControl('', {nonNullable: true});
-    options$ = this.searchForm.valueChanges
+    searchModel = signal({phrase: ''});
+    searchForm = form(this.searchModel);
+
+    options$ = toObservable(this.searchForm.phrase().value)
         .pipe(
             debounceTime(300),
             distinctUntilChanged(),
@@ -49,6 +51,6 @@ export class SearchService {
     }
 
     getSearchValue(): string {
-        return this.searchForm.getRawValue();
+        return this.searchForm().value().phrase;
     }
 }
