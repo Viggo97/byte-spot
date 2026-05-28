@@ -34,7 +34,8 @@
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "projects/byte-spot/src/styles"
+                "projects/byte-spot/src/styles",
+                "projects/byte-spot-lib/src/styles"
               ]
             },
             "scripts": []
