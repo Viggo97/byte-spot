@@ -1,10 +1,10 @@
 @use '../../../styles/mixins';
 
-ngx-bsl-select {
+bsl-select {
     display: block;
 }
 
-.ngx-bsl-select-button {
+.bsl-select-button {
     width: 100%;
     justify-content: space-between;
     gap: .5rem;
@@ -12,5 +12,10 @@ ngx-bsl-select {
     span {
         min-height: var(--bsl-line-height-sm);
         @include mixins.ellipsis;
+    }
+
+    svg {
+        width: 1rem;
+        height: 1rem;
     }
 }
