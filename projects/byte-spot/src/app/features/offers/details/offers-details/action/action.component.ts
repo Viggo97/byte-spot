@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { IconBookmarkComponent } from 'ngx-bsl';
 import { TranslatePipe } from '@core';
+import { SvgIconComponent } from '@shared';
 
 @Component({
     selector: 'bsa-offers-details-action',
     imports: [
-        IconBookmarkComponent,
         TranslatePipe,
+        SvgIconComponent,
     ],
     templateUrl: './action.component.html',
     styleUrl: './action.component.scss',
