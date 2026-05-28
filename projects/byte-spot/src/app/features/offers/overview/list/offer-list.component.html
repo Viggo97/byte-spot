@@ -12,9 +12,9 @@
     <p class="no-offers">{{ 'offer.noResultsFound' | translate }}</p>
 }
 
-<ngx-bsl-pagination
+<bsl-pagination
     [(page)]="page"
     [total]="total()"
     [size]="limit"
     (pageChange)="onPageChange()">
-</ngx-bsl-pagination>
+</bsl-pagination>

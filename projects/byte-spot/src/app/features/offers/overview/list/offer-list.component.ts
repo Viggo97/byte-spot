@@ -1,7 +1,7 @@
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { PaginationComponent } from '@byte-spot-lib';
 import { TranslatePipe } from '@core';
-import { PaginationComponent } from 'ngx-bsl';
 import { ListService } from './list.service';
 import { PaginationService } from './pagination.service';
 import { Offer } from './models/offer.interface';

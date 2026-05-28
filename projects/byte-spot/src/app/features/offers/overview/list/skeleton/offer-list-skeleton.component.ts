@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { SkeletonComponent } from 'ngx-bsl';
+import { SkeletonComponent } from '@byte-spot-lib';
 
 @Component({
     selector: 'bsa-offer-list-skeleton',
     imports: [
-        SkeletonComponent,
         SkeletonComponent,
     ],
     templateUrl: './offer-list-skeleton.component.html',
