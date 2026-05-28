@@ -1,0 +1,23 @@
+@use '../add-variables' as *;
+
+@include add-variables((
+    bsl-list-box-backgroundColor: var(--bsl-color-neutral-50),
+    bsl-list-box-backgroundColor-hover: var(--bsl-color-neutral-200),
+    bsl-list-box-borderColor: var(--bsl-color-neutral-300),
+));
+
+@include add-variables((
+    bsl-list-box-backgroundColor: var(--bsl-color-neutral-950),
+    bsl-list-box-backgroundColor-hover: var(--bsl-color-neutral-800),
+    bsl-list-box-borderColor: var(--bsl-color-neutral-700),
+), 'dark');
+
+.bsl-list-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+    border: 1px solid var(--bsl-list-box-borderColor);
+    background-color: var(--bsl-list-box-backgroundColor);
+    overflow: hidden;
+}
