@@ -1,14 +1,14 @@
-<ngx-bsl-select
+<bsl-select
     [id]="'offers-sort'"
     [displayLabel]="'label'"
     [ariaLabel]="'global.sortBy' | translate"
     [(value)]="sortBy"
     (valueChange)="onSortByChange()">
         @for (option of options(); track option.key) {
-            <ngx-bsl-list-box-option
+            <bsl-list-box-option
                 [id]="option.key"
                 [value]="option">
                 {{option.label}}
-            </ngx-bsl-list-box-option>
+            </bsl-list-box-option>
         }
-</ngx-bsl-select>
+</bsl-select>
