@@ -10,7 +10,7 @@ import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@a
             [attr.aria-label]="ariaLabel() ?? null"
             [attr.aria-hidden]="ariaLabel() ? null : true"
             role="img">
-            <use [attr.href]="'assets/svg-sprite.svg#' + name()" />
+            <use [attr.href]="'#' + name()" />
         </svg>
     `,
     styles: [`
