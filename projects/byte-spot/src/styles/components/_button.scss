@@ -2,14 +2,15 @@ button {
     &.primary {
         background-color: var(--bsa-accent-backgroundColor);
         color: var(--bsa-accent-textColor-primary);
-        border-color: transparent;
+        border: none;
 
-        &:hover {
+        &:not(:disabled):hover {
             background-color: var(--bsa-accent-backgroundColor-hover);
         }
 
-        &:active {
+        &:not(:disabled):active {
             filter: brightness(0.92) saturate(1.1);
+            background-color: var(--bsa-accent-backgroundColor-hover);
         }
 
         &.invisible {
@@ -20,14 +21,15 @@ button {
     &.danger {
         background-color: var(--bsa-danger-backgroundColor);
         color: var(--bsa-danger-textColor-primary);
-        border-color: transparent;
+        border: none;
 
-        &:hover {
+        &:not(:disabled):hover {
             background-color: var(--bsa-danger-backgroundColor-hover);
         }
 
-        &:active {
+        &:not(:disabled):active {
             filter: brightness(0.92) saturate(1.1);
+            background-color: var(--bsa-danger-backgroundColor-hover);
         }
 
         &.invisible {
@@ -38,14 +40,15 @@ button {
     &.invisible {
         background-color: transparent;
         color: var(--bsa-neutral-textColor);
-        border-color: transparent;
+        border: none;
 
-        &:hover {
+        &:not(:disabled):hover {
             background-color: var(--bsa-neutral-backgroundColor-hover);
         }
 
-        &:active {
+        &:not(:disabled):active {
             filter: brightness(0.92) saturate(1.1);
+            background-color: var(--bsa-neutral-backgroundColor-hover);
         }
     }
 }
