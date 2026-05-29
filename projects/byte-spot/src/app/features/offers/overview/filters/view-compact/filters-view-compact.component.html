@@ -15,7 +15,7 @@
     [cdkConnectedOverlayDisposeOnNavigation]="true"
     (overlayOutsideClick)="closeDrawer()"
     (detach)="closeDrawer()">
-    <ngx-bsl-drawer
+    <bsl-drawer
         [title]="'global.filters' | translate"
         (closed)="closeDrawer()">
         <div class="filters-form-container">
@@ -33,5 +33,5 @@
                 </button>
             </div>
         </div>
-    </ngx-bsl-drawer>
+    </bsl-drawer>
 </ng-template>

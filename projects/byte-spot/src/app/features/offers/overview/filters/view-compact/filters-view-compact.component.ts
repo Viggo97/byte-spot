@@ -2,7 +2,7 @@ import { Component, inject, signal, OnInit, DestroyRef } from '@angular/core';
 import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay } from '@angular/cdk/overlay';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { debounceTime, skip } from 'rxjs';
-import { DrawerComponent } from 'ngx-bsl';
+import { DrawerComponent } from '@byte-spot-lib';
 import { TranslatePipe } from '@core';
 import { FiltersService } from '../filters.service';
 import { FiltersFormComponent } from '../form/filters-form.component';
@@ -16,6 +16,7 @@ import { FiltersFormService } from '../form/filters-form.service';
         DrawerComponent,
         TranslatePipe,
         FiltersFormComponent,
+        DrawerComponent,
     ],
     templateUrl: './filters-view-compact.component.html',
     styleUrl: './filters-view-compact.component.scss',
