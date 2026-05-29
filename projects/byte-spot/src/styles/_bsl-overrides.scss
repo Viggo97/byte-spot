@@ -1,0 +1,82 @@
+@use 'add-variables' as *;
+
+@include add-variables((
+    bsl-button-backgroundColor: var(--bsa-color-gray-1),
+    bsl-button-backgroundColor-hover: var(--bsa-color-gray-4),
+    bsl-button-backgroundColor-active: var(--bsa-color-gray-5),
+    bsl-button-borderColor: var(--bsa-color-gray-7),
+    bsl-button-textColor: var(--bsa-textColor-primary),
+
+    bsl-input-backgroundColor: var(--bsa-color-gray-1),
+    bsl-input-borderColor: var(--bsa-color-gray-7),
+    bsl-input-textColor: var(--bsa-textColor-primary),
+    bsl-input-textColor-placeholder: var(--bsa-color-gray-10),
+
+    bsl-list-box-backgroundColor: var(--bsa-color-gray-1),
+    bsl-list-box-backgroundColor-hover: var(--bsa-color-gray-4),
+    bsl-list-box-borderColor: var(--bsa-color-gray-7),
+
+    bsl-checkbox-backgroundColor: var(--bsa-color-gray-1),
+    bsl-checkbox-borderColor: var(--bsa-color-gray-7),
+    bsl-checkbox-borderColor-hover: var(--bsa-color-yellow-8),
+    bsl-checkbox-textColor: var(--bsa-textColor-primary),
+    bsl-checkbox-backgroundColor-checked: var(--bsa-color-yellow-10),
+    bsl-checkbox-borderColor-checked: var(--bsa-color-yellow-10),
+    bsl-checkbox-textColor-checked: var(--bsa-color-gray-12),
+
+    bsl-checkbox-button-backgroundColor-checked: var(--bsa-color-yellow-10),
+
+    bsl-drawer-backgroundColor: var(--bsa-color-gray-2),
+    bsl-drawer-borderColor: var(--bsa-color-gray-6),
+
+    bsl-range-rail-backgroundColor: var(--bsa-color-gray-3),
+    bsl-range-tracker-backgroundColor: var(--bsa-color-yellow-10),
+    bsl-range-thumb-backgroundColor: var(--bsa-color-yellow-10),
+
+    bsl-skeleton-backgroundColor-primary: var(--bsa-color-gray-3),
+    bsl-skeleton-backgroundColor-secondary: var(--bsa-color-gray-5),
+
+    bsl-tooltip-backgroundColor: var(--bsa-color-gray-12),
+    bsl-tooltip-textColor: var(--bsa-color-gray-1),
+));
+
+@include add-variables((
+    bsl-button-backgroundColor: var(--bsa-color-gray-dark-1),
+    bsl-button-backgroundColor-hover: var(--bsa-color-gray-dark-4),
+    bsl-button-backgroundColor-active: var(--bsa-color-gray-dark-5),
+    bsl-button-borderColor: var(--bsa-color-gray-dark-7),
+    bsl-button-textColor: var(--bsa-textColor-primary),
+
+    bsl-input-backgroundColor: var(--bsa-color-gray-dark-1),
+    bsl-input-borderColor: var(--bsa-color-gray-dark-7),
+    bsl-input-textColor: var(--bsa-textColor-primary),
+    bsl-input-textColor-placeholder: var(--bsa-color-gray-dark-10),
+
+    bsl-list-box-backgroundColor: var(--bsa-color-gray-dark-1),
+    bsl-list-box-backgroundColor-hover: var(--bsa-color-gray-dark-4),
+    bsl-list-box-borderColor: var(--bsa-color-gray-dark-7),
+
+    bsl-checkbox-backgroundColor: var(--bsa-color-gray-dark-1),
+    bsl-checkbox-borderColor: var(--bsa-color-gray-dark-7),
+    bsl-checkbox-borderColor-hover: var(--bsa-color-yellow-dark-8),
+    bsl-checkbox-textColor: var(--bsa-textColor-primary),
+    bsl-checkbox-backgroundColor-checked: var(--bsa-color-yellow-dark-10),
+    bsl-checkbox-borderColor-checked: var(--bsa-color-yellow-dark-10),
+    bsl-checkbox-textColor-checked: var(--bsa-color-gray-dark-1),
+
+    bsl-checkbox-button-backgroundColor-checked: var(--bsa-color-yellow-dark-10),
+
+    bsl-drawer-backgroundColor: var(--bsa-color-gray-dark-1),
+    bsl-drawer-borderColor: var(--bsa-color-gray-dark-6),
+
+    bsl-range-rail-backgroundColor: var(--bsa-color-gray-dark-3),
+    bsl-range-tracker-backgroundColor: var(--bsa-color-yellow-dark-10),
+    bsl-range-thumb-backgroundColor: var(--bsa-color-yellow-dark-10),
+
+    bsl-skeleton-backgroundColor-primary: var(--bsa-color-gray-dark-3),
+    bsl-skeleton-backgroundColor-secondary: var(--bsa-color-gray-dark-5),
+
+    bsl-tooltip-backgroundColor: var(--bsa-color-gray-dark-12),
+    bsl-tooltip-textColor: var(--bsa-color-gray-dark-1),
+
+), 'dark');
