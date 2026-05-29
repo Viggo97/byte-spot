@@ -1,5 +1,5 @@
 services:
-  ngx-bsl-dev:
+  bsl-dev:
     build:
       context: .
     image: byte-spot-app
