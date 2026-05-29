@@ -1,11 +1,11 @@
 import { Component, inject, signal, OnInit, input } from '@angular/core';
-import { ListBoxOptionComponent, SelectComponent } from 'ngx-bsl';
 import { LanguageService} from '../../../language/language.service';
 import { Language } from '../../../language/language.enum';
 import { LanguageOption } from './navbar-language-switch-option.interface';
 import { TranslateService } from '../../../translate/translate.service';
 import { TranslatePipe } from '../../../translate/translate.pipe';
 import { SvgIconComponent } from '@shared';
+import { ListBoxOptionComponent, SelectComponent } from '@byte-spot-lib';
 
 @Component({
     selector: 'bsa-navbar-language-switch',
@@ -14,6 +14,8 @@ import { SvgIconComponent } from '@shared';
         ListBoxOptionComponent,
         TranslatePipe,
         SvgIconComponent,
+        ListBoxOptionComponent,
+        SelectComponent,
     ],
     templateUrl: './navbar-language-switch.component.html',
 })

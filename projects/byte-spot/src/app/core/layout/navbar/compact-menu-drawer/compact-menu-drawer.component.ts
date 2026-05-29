@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay } from '@angular/cdk/overlay';
-import { DrawerComponent } from 'ngx-bsl';
+import { DrawerComponent } from '@byte-spot-lib';
 import { SvgIconComponent } from '@shared';
 import { TranslatePipe } from '../../../translate/translate.pipe';
 import { NavbarLanguageSwitchComponent } from '../language-switch/navbar-language-switch.component';

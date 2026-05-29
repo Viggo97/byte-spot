@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideAppInitializer } from '@angular/core';
+import { ApplicationConfig, inject, provideAppInitializer, provideEnvironmentInitializer } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withHashLocation } from '@angular/router';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
@@ -7,6 +7,7 @@ import { languageInterceptor, authInterceptor } from '@core';
 import { routes } from './app.routes';
 import { loadSvgSprite } from '@app/core/initializers/load-svg-sprite';
 import { signIn } from '@app/core/initializers/refresh-token';
+import { ThemeService } from '@app/core/theme/theme.service';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -18,5 +19,6 @@ export const appConfig: ApplicationConfig = {
         ),
         provideAppInitializer(loadSvgSprite),
         provideAppInitializer(signIn),
+        provideEnvironmentInitializer(() => inject(ThemeService)),
     ],
 };
