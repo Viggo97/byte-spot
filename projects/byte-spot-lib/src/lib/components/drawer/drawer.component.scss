@@ -1,14 +1,16 @@
 @use '../../../styles/add-variables' as *;
 
-@include add-variables((
-    bsl-drawer-backgroundColor: var(--bsl-color-neutral-50),
-    bsl-drawer-borderColor: var(--bsl-color-neutral-400),
-));
+@layer bsl {
+    @include add-variables((
+        bsl-drawer-backgroundColor: var(--bsl-color-neutral-50),
+        bsl-drawer-borderColor: var(--bsl-color-neutral-400),
+    ));
 
-@include add-variables((
-    bsl-drawer-backgroundColor: var(--bsl-color-neutral-950),
-    bsl-drawer-borderColor: var(--bsl-color-neutral-600),
-), 'dark');
+    @include add-variables((
+        bsl-drawer-backgroundColor: var(--bsl-color-neutral-950),
+        bsl-drawer-borderColor: var(--bsl-color-neutral-600),
+    ), 'dark');
+}
 
 bsl-drawer {
     position: fixed;

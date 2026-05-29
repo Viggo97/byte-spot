@@ -1,19 +1,21 @@
 @use '../../../styles/add-variables' as *;
 
-@include add-variables((
-    bsl-checkbox-button-backgroundColor-checked: var(--bsl-color-neutral-300),
-));
+@layer bsl {
+    @include add-variables((
+        bsl-checkbox-button-backgroundColor-checked: var(--bsl-color-neutral-300),
+    ));
 
-@include add-variables((
-    bsl-checkbox-button-backgroundColor-checked-textColor: var(--bsl-color-neutral-700),
-), 'dark');
+    @include add-variables((
+        bsl-checkbox-button-backgroundColor-checked: var(--bsl-color-neutral-700),
+    ), 'dark');
+}
 
 bsl-checkbox-button {
-    &[aria-checked=true] {
+    [aria-checked="true"] {
         background-color: var(--bsl-checkbox-button-backgroundColor-checked);
 
-        &:hover,
-        &:active{
+        &:not(:disabled):hover,
+        &:not(:disabled):active {
             background-color: var(--bsl-checkbox-button-backgroundColor-checked);
         }
     }

@@ -1,14 +1,16 @@
 @use '../../../styles/add-variables' as *;
 
-@include add-variables((
-    bsl-skeleton-backgroundColor-primary: var(--bsl-color-neutral-200),
-    bsl-skeleton-backgroundColor-secondary: var(--bsl-color-neutral-300),
-));
+@layer bsl {
+    @include add-variables((
+        bsl-skeleton-backgroundColor-primary: var(--bsl-color-neutral-200),
+        bsl-skeleton-backgroundColor-secondary: var(--bsl-color-neutral-300),
+    ));
 
-@include add-variables((
-    bsl-skeleton-backgroundColor-primary: var(--bsl-color-neutral-700),
-    bsl-skeleton-backgroundColor-secondary: var(--bsl-color-neutral-600),
-), 'dark');
+    @include add-variables((
+        bsl-skeleton-backgroundColor-primary: var(--bsl-color-neutral-700),
+        bsl-skeleton-backgroundColor-secondary: var(--bsl-color-neutral-600),
+    ), 'dark');
+}
 
 bsl-skeleton {
     display: block;

@@ -1,14 +1,16 @@
 @use '../../../styles/add-variables' as *;
 
-@include add-variables((
-    bsl-tooltip-backgroundColor: var(--bsl-color-neutral-800),
-    bsl-tooltip-textColor: var(--bsl-color-neutral-200),
-));
+@layer bsl {
+    @include add-variables((
+        bsl-tooltip-backgroundColor: var(--bsl-color-neutral-800),
+        bsl-tooltip-textColor: var(--bsl-color-neutral-200),
+    ));
 
-@include add-variables((
-    bsl-tooltip-backgroundColor: var(--bsl-color-neutral-200),
-    bsl-tooltip-textColor: var(--bsl-color-neutral-800),
-), 'dark');
+    @include add-variables((
+        bsl-tooltip-backgroundColor: var(--bsl-color-neutral-200),
+        bsl-tooltip-textColor: var(--bsl-color-neutral-800),
+    ), 'dark');
+}
 
 bsl-tooltip {
     padding: 4px 8px;

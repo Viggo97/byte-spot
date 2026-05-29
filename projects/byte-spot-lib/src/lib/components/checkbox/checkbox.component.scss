@@ -1,18 +1,26 @@
 @use '../../../styles/add-variables' as *;
 
-@include add-variables((
-    bsl-checkbox-backgroundColor: var(--bsl-color-neutral-100),
-    bsl-checkbox-borderColor: var(--bsl-color-neutral-300),
-    bsl-checkbox-borderColor-hover: var(--bsl-color-neutral-400),
-    bsl-checkbox-textColor: var(--bsl-textColor-primary),
-));
+@layer bsl {
+    @include add-variables((
+        bsl-checkbox-backgroundColor: var(--bsl-color-neutral-100),
+        bsl-checkbox-borderColor: var(--bsl-color-neutral-300),
+        bsl-checkbox-borderColor-hover: var(--bsl-color-neutral-400),
+        bsl-checkbox-textColor: var(--bsl-textColor-primary),
+        bsl-checkbox-backgroundColor-checked: var(--bsl-color-neutral-400),
+        bsl-checkbox-borderColor-checked: var(--bsl-color-neutral-400),
+        bsl-checkbox-textColor-checked: var(--bsl-color-neutral-50),
+    ));
 
-@include add-variables((
-    bsl-checkbox-backgroundColor: var(--bsl-color-neutral-900),
-    bsl-checkbox-borderColor: var(--bsl-color-neutral-800),
-    bsl-checkbox-borderColor-hover: var(--bsl-color-neutral-700),
-    bsl-checkbox-textColor: var(--bsl-textColor-primary),
-), 'dark');
+    @include add-variables((
+        bsl-checkbox-backgroundColor: var(--bsl-color-neutral-900),
+        bsl-checkbox-borderColor: var(--bsl-color-neutral-800),
+        bsl-checkbox-borderColor-hover: var(--bsl-color-neutral-700),
+        bsl-checkbox-textColor: var(--bsl-textColor-primary),
+        bsl-checkbox-backgroundColor-checked: var(--bsl-color-neutral-700),
+        bsl-checkbox-borderColor-checked: var(--bsl-color-neutral-700),
+        bsl-checkbox-textColor-checked: var(--bsl-color-neutral-50),
+    ), 'dark');
+}
 
 bsl-checkbox {
     width: fit-content;
@@ -45,5 +53,11 @@ bsl-checkbox {
         opacity: .65;
         cursor: not-allowed;
         pointer-events: none;
+    }
+
+    &[aria-checked="true"] {
+        background-color: var(--bsl-checkbox-backgroundColor-checked);
+        border-color: var(--bsl-checkbox-borderColor-checked);
+        color: var(--bsl-checkbox-textColor-checked);
     }
 }

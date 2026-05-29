@@ -1,16 +1,18 @@
 @use '../../../styles/add-variables' as *;
 
-@include add-variables((
-    bsl-range-rail-backgroundColor: var(--bsl-color-neutral-200),
-    bsl-range-tracker-backgroundColor: var(--bsl-color-neutral-400),
-    bsl-range-thumb-backgroundColor: var(--bsl-color-neutral-800),
-));
+@layer bsl {
+    @include add-variables((
+        bsl-range-rail-backgroundColor: var(--bsl-color-neutral-200),
+        bsl-range-tracker-backgroundColor: var(--bsl-color-neutral-400),
+        bsl-range-thumb-backgroundColor: var(--bsl-color-neutral-800),
+    ));
 
-@include add-variables((
-    bsl-range-rail-backgroundColor: var(--bsl-color-neutral-800),
-    bsl-range-tracker-backgroundColor: var(--bsl-color-neutral-600),
-    bsl-range-thumb-backgroundColor: var(--bsl-color-neutral-200),
-), 'dark');
+    @include add-variables((
+        bsl-range-rail-backgroundColor: var(--bsl-color-neutral-800),
+        bsl-range-tracker-backgroundColor: var(--bsl-color-neutral-600),
+        bsl-range-thumb-backgroundColor: var(--bsl-color-neutral-200),
+    ), 'dark');
+}
 
 $rail-height: .25rem;
 

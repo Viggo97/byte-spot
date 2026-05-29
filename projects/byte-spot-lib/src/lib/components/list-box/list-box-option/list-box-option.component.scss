@@ -1,13 +1,4 @@
 @use '../../../../styles/mixins';
-@use '../../../../styles/add-variables' as *;
-
-@include add-variables((
-    bsl-list-box-backgroundColor-hover: var(--bsl-color-neutral-200),
-));
-
-@include add-variables((
-    bsl-list-box-backgroundColor-hover: var(--bsl-color-neutral-800),
-), 'dark');
 
 bsl-list-box-option {
     position: relative;

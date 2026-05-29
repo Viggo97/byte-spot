@@ -1,13 +1,5 @@
 @use '../../../../styles/add-variables' as *;
 
-@include add-variables((
-    bsl-list-box-borderColor: var(--bsl-color-neutral-300),
-));
-
-@include add-variables((
-    bsl-list-box-borderColor: var(--bsl-color-neutral-700),
-), 'dark');
-
 bsl-list-box-separator {
     display: block;
     height: 1px;
