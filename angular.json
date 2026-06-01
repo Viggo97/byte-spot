@@ -20,9 +20,6 @@
             "outputPath": "dist/byte-spot",
             "index": "projects/byte-spot/src/index.html",
             "browser": "projects/byte-spot/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
             "tsConfig": "projects/byte-spot/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
