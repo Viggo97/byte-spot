@@ -1,34 +1,64 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { form } from '@angular/forms/signals';
-import { StrictOmit } from '@byte-spot-lib';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { debounceTime, filter, Subject } from 'rxjs';
 import { LookupItem } from '@shared';
-import { Filters } from '../models/filters.model';
+import { Salary } from '../models/salary.model';
+import { DynamicFilters } from '../models/dynamic-filters.model';
 
 @Injectable()
 export class FiltersFormService {
-    filtersModel = signal(Filters.default());
-    filtersForm = form(this.filtersModel);
+    salaryFilterModel = signal(Salary.default());
+    dynamicFiltersModel = signal(DynamicFilters.default());
 
-    salaryFilter = computed(() => this.filtersModel().salary);
-    private locationsFilter = computed(() => this.filtersModel().locations);
-    private technologiesFilter = computed(() => this.filtersModel().technologies);
-    private workModesFilter = computed(() => this.filtersModel().workModes);
-    private experienceLevelsFilter = computed(() => this.filtersModel().experienceLevels);
-    private employmentTypes = computed(() => this.filtersModel().employmentTypes);
-    collectionFilters = computed(() => ({
-        locations: this.locationsFilter(),
-        technologies: this.technologiesFilter(),
-        workModes: this.workModesFilter(),
-        experienceLevels: this.experienceLevelsFilter(),
-        employmentTypes: this.employmentTypes(),
-    }));
+    salaryFilterForm = form(this.salaryFilterModel);
+    dynamicFiltersForm = form(this.dynamicFiltersModel);
 
-    fillCollectionFiltersForm(items: LookupItem[], filterName: keyof StrictOmit<Filters, 'salary'>): void {
-        const cleanArray = new Array<boolean>(items.length).fill(false);
-        this.filtersForm[filterName]().value.set(cleanArray);
+    salaryFilterChange = computed(() => this.salaryFilterModel());
+    salaryFilterChange$ = toObservable(this.salaryFilterChange);
+    dynamicFiltersChange = computed(() => this.dynamicFiltersModel());
+    dynamicFiltersChange$ = toObservable(this.dynamicFiltersChange);
+
+    private trackValueChange = false;
+    private filtersChanged = new Subject<void>();
+    filtersChanged$ = this.filtersChanged.asObservable();
+
+    constructor() {
+        this.salaryFilterChange$
+            .pipe(
+                filter(() => this.trackValueChange),
+                debounceTime(300),
+                takeUntilDestroyed(),
+            )
+            .subscribe(() => {
+                this.changeFilters();
+            });
+        this.dynamicFiltersChange$
+            .pipe(
+                filter(() => this.trackValueChange),
+                takeUntilDestroyed(),
+            )
+            .subscribe(() => {
+                this.changeFilters();
+            });
     }
 
-    getFormValue(): Filters {
-        return this.filtersForm().value();
+    fillDynamicFiltersForm(items: LookupItem[], filterName: keyof DynamicFilters): void {
+        const cleanArray = new Array<boolean>(items.length).fill(false);
+        this.dynamicFiltersForm[filterName]().value.set(cleanArray);
+    }
+
+    startTrackingValueChange(): void {
+        setTimeout(() => {
+            this.trackValueChange = true;
+        });
+    }
+
+    stopTrackingValueChange(): void {
+        this.trackValueChange = false;
+    }
+
+    changeFilters(): void {
+        this.filtersChanged.next();
     }
 }

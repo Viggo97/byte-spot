@@ -8,5 +8,17 @@ main {
     margin: 0 auto;
     padding: 24px 16px;
     max-width: 1600px;
+    width: 100%;
     flex-grow: 1;
+}
+
+.loader {
+    margin-top: 5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .warning {
+        font: var(--bsa-font-sm);
+    }
 }

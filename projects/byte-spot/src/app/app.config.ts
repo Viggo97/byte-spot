@@ -6,7 +6,6 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { languageInterceptor, authInterceptor } from '@core';
 import { routes } from './app.routes';
 import { loadSvgSprite } from '@app/core/initializers/load-svg-sprite';
-import { signIn } from '@app/core/initializers/refresh-token';
 import { ThemeService } from '@app/core/theme/theme.service';
 
 export const appConfig: ApplicationConfig = {
@@ -18,7 +17,6 @@ export const appConfig: ApplicationConfig = {
             withInterceptors([authInterceptor, languageInterceptor]),
         ),
         provideAppInitializer(loadSvgSprite),
-        provideAppInitializer(signIn),
         provideEnvironmentInitializer(() => inject(ThemeService)),
     ],
 };

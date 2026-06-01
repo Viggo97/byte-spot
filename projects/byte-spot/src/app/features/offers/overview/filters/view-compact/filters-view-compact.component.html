@@ -2,6 +2,7 @@
     #filters
     class="filters-button"
     cdkOverlayOrigin
+    [disabled]="!filtersInitialized()"
     (click)="openDrawer()">
     {{ 'global.filters' | translate }}
 </button>

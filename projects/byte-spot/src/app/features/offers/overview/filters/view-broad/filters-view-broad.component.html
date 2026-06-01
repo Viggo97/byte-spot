@@ -3,9 +3,21 @@
     <button
         type="button"
         class="danger invisible"
+        [disabled]="!filtersInitialized()"
         (click)="resetFilters()">
         {{ 'offer.clearAll' | translate }}
     </button>
 </header>
 
-<bsa-offers-overview-filters-form></bsa-offers-overview-filters-form>
+@if (filtersInitialized()) {
+    <bsa-offers-overview-filters-form></bsa-offers-overview-filters-form>
+} @else {
+    <div class="skeletons">
+        <bsl-skeleton width="60%"></bsl-skeleton>
+        <bsl-skeleton width="40%"></bsl-skeleton>
+        <bsl-skeleton width="80%"></bsl-skeleton>
+        <bsl-skeleton></bsl-skeleton>
+        <bsl-skeleton width="30%"></bsl-skeleton>
+        <bsl-skeleton width="60%"></bsl-skeleton>
+    </div>
+}

@@ -1,4 +1,14 @@
-<bsa-navbar></bsa-navbar>
-<main>
-    <router-outlet></router-outlet>
-</main>
+@defer (when !loading()) {
+    <bsa-navbar></bsa-navbar>
+    <main>
+        <router-outlet></router-outlet>
+    </main>
+}
+@placeholder (minimum 500ms) {
+    <div class="loader">
+        <bsa-loader>
+            <div>{{ 'offer.loading' | translate }}</div>
+            <div class="warning">{{ 'offer.loadingWarning' | translate }}</div>
+        </bsa-loader>
+    </div>
+}

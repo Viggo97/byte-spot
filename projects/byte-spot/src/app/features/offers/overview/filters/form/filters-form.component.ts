@@ -32,7 +32,8 @@ export class FiltersFormComponent {
     protected _filterFormService = inject(FiltersFormService);
     protected _filtersService = inject(FiltersService);
 
-    protected filtersForm = this._filterFormService.filtersForm;
+    protected salaryFilterForm = this._filterFormService.salaryFilterForm;
+    protected dynamicFiltersForm = this._filterFormService.dynamicFiltersForm;
     protected technologies = signal<SanitizedTechnology[]>(this.sanitizeSvgIcons(this._filtersService.technologies));
     protected locations = signal([...this._filtersService.locations]);
     protected workModes = signal([...this._filtersService.workModes]);

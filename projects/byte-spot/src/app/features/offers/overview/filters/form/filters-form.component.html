@@ -7,7 +7,7 @@
         [step]="1000"
         [aria-label]="'offer.salary' | translate"
         [showThumbLabels]="true"
-        [formField]="filtersForm.salary">
+        [formField]="salaryFilterForm">
     </bsl-range>
 </section>
 
@@ -18,7 +18,7 @@
             @for (technology of technologies(); track technology.id; let i = $index) {
                 <bsl-checkbox-button
                     [id]="'filter-technology-' + i"
-                    [formField]="filtersForm.technologies[i]">
+                    [formField]="dynamicFiltersForm.technologies[i]">
                     <div class="icon-container" [innerHTML]="technology.iconCode"></div>
                     {{ technology.name }}
                 </bsl-checkbox-button>
@@ -34,7 +34,7 @@
             @for (workMode of workModes(); track workMode.id; let i = $index) {
                 <bsl-checkbox
                     [id]="'filter-workMode-' + i"
-                    [formField]="filtersForm.workModes[i]">
+                    [formField]="dynamicFiltersForm.workModes[i]">
                     {{ workMode.name }}
                 </bsl-checkbox>
             }
@@ -50,7 +50,7 @@
             @for (location of locations(); track location.id; let i = $index) {
                 <bsl-checkbox
                     [id]="'filter-location-' + i"
-                    [formField]="filtersForm.locations[i]">
+                    [formField]="dynamicFiltersForm.locations[i]">
                     {{ location.name }}
                 </bsl-checkbox>
             }
@@ -66,7 +66,7 @@
             @for (experienceLevel of experienceLevels(); track experienceLevel.id; let i = $index) {
                 <bsl-checkbox
                     [id]="'filter-experience-level-' + i"
-                    [formField]="filtersForm.experienceLevels[i]">
+                    [formField]="dynamicFiltersForm.experienceLevels[i]">
                     {{ experienceLevel.name }}
                 </bsl-checkbox>
             }
@@ -82,7 +82,7 @@
             @for (employmentType of employmentTypes(); track employmentType.id; let i = $index) {
                 <bsl-checkbox
                     [id]="'filter-employment-type-' + i"
-                    [formField]="filtersForm.employmentTypes[i]">
+                    [formField]="dynamicFiltersForm.employmentTypes[i]">
                     {{ employmentType.name }}
                 </bsl-checkbox>
             }

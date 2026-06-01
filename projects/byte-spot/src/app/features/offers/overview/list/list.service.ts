@@ -1,6 +1,6 @@
 import { DestroyRef, inject, Injectable } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, merge, Subject, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, merge, switchMap, tap } from 'rxjs';
 import { PagedResults } from '@shared';
 import { ListDataService } from './data/list.data.service';
 import { FiltersService } from '../filters/filters.service';
@@ -24,9 +24,6 @@ export class ListService {
     private fetchingOffers = new BehaviorSubject(true);
     fetchingOffers$ = this.fetchingOffers.asObservable();
 
-    private offersInitialized = new Subject<void>();
-    offersInitialized$ = this.offersInitialized.asObservable();
-
     private offers = new BehaviorSubject<PagedResults<Offer> | null>(null);
     offers$ = this.offers.asObservable();
 
@@ -43,9 +40,6 @@ export class ListService {
                 this.offers.next(offers);
 
                 this.listenForCriteriaChange();
-
-                this.offersInitialized.next();
-                this.offersInitialized.complete();
             });
     }
 
