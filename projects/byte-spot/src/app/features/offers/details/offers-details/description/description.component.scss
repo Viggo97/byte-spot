@@ -1,3 +1,5 @@
+@use 'mixins';
+
 :host {
     display: flex;
     flex-direction: column;
@@ -6,6 +8,10 @@
     border: 1px solid var(--bsa-borderColor-primary);
     border-radius: 8px;
     box-shadow: var(--bsa-box-shadow-primary);
+
+    @include mixins.dark-theme {
+        box-shadow: none;
+    }
 }
 
 .offer-description-technologies {
@@ -14,14 +20,11 @@
     gap: 16px;
 }
 
-.offer-description-technologies-container {
+.offer-description-tags-container {
     display: flex;
     gap: 16px;
-}
 
-.offer-description-technology {
-    padding: .25rem .5rem;
-    border-radius: 8px;
-    //background-color: var(--bsa-accent-backgroundColor-muted);
-    color: var(--bsa-accent-textColor-secondary);
+    .tag {
+        font: var(--bsa-font-xl);
+    }
 }

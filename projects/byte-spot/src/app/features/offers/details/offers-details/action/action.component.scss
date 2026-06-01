@@ -1,4 +1,5 @@
 @use 'breakpoints' as breakpoints;
+@use 'mixins';
 
 :host {
     padding: 16px;
@@ -9,6 +10,10 @@
     border: 1px solid var(--bsa-borderColor-primary);
     border-radius: 8px;
     box-shadow: var(--bsa-box-shadow-primary);
+
+    @include mixins.dark-theme {
+        box-shadow: none;
+    }
 
     @include breakpoints.md {
         flex-direction: column;

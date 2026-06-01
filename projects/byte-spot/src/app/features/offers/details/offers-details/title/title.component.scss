@@ -1,3 +1,5 @@
+@use 'mixins';
+
 :host {
     display: flex;
     align-items: center;
@@ -6,6 +8,10 @@
     border: 1px solid var(--bsa-borderColor-primary);
     border-radius: 8px;
     box-shadow: var(--bsa-box-shadow-primary);
+
+    @include mixins.dark-theme {
+        box-shadow: none;
+    }
 }
 
 .logo {
