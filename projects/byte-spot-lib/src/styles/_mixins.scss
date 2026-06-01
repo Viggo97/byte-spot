@@ -13,3 +13,15 @@
   line-height: $line-height;
   max-height: calc(#{$line-height} * #{$lines});
 }
+
+@mixin light-theme {
+    :host-context([data-theme="light"]) & {
+        @content;
+    }
+}
+
+@mixin dark-theme {
+    :host-context([data-theme="dark"]) & {
+        @content;
+    }
+}
