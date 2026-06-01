@@ -14,6 +14,10 @@ a {
     &:hover {
         border-color: var(--bsa-borderColor-highlight);
     }
+
+    @include mixins.dark-theme {
+        box-shadow: none;
+    }
 }
 
 section {
@@ -94,16 +98,6 @@ section {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
-
-    .tag {
-        display: flex;
-        padding: 0 12px;
-        width: fit-content;
-        border-radius: 4px;
-        font: var(--bsa-font-sm);
-        white-space: nowrap;
-        background-color: var(--bsa-backgroundColor-secondary);
-    }
 }
 
 .locations, .company, .salary {

@@ -11,6 +11,10 @@
     border-radius: 8px;
     box-shadow: var(--bsa-box-shadow-primary);
 
+    @include mixins.dark-theme {
+        box-shadow: none;
+    }
+
     @include breakpoints.md {
         flex-direction: row;
     }
