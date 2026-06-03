@@ -14,3 +14,5 @@ export * from './lib/components/select/select.component';
 export * from './lib/components/tooltip/tooltip.directive';
 
 export * from './lib/utils/strict-omit.type';
+export * from './lib/utils/number.util';
+export * from './lib/utils/compare-arrays.util';
