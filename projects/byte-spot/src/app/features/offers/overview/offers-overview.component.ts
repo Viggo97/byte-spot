@@ -17,6 +17,7 @@ import { ListDataService } from './list/data/list.data.service';
 import { ListService } from './list/list.service';
 import { OfferListComponent } from './list/offer-list.component';
 import { PaginationService } from './list/pagination.service';
+import { OfferListQueryService } from './list/offer-list-query.service';
 import { InfoService } from './info/info.service';
 
 @Component({
@@ -42,6 +43,7 @@ import { InfoService } from './info/info.service';
         ListService,
         PaginationService,
         InfoService,
+        OfferListQueryService,
     ],
 })
 export class OffersOverviewComponent {

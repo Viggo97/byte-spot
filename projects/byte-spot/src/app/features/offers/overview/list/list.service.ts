@@ -1,6 +1,6 @@
 import { DestroyRef, inject, Injectable } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, merge, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, switchMap, tap } from 'rxjs';
 import { PagedResults } from '@shared';
 import { ListDataService } from './data/list.data.service';
 import { FiltersService } from '../filters/filters.service';
@@ -10,6 +10,7 @@ import { InfoService } from '../info/info.service';
 import { PaginationService } from './pagination.service';
 import { OffersListParams } from './models/offers-list-params.interface';
 import { Offer } from './models/offer.interface';
+import { OfferListQueryService } from 'projects/byte-spot/src/app/features/offers/overview/list/offer-list-query.service';
 
 @Injectable()
 export class ListService {
@@ -20,6 +21,7 @@ export class ListService {
     private readonly _searchService = inject(SearchService);
     private readonly _paginationService = inject(PaginationService);
     private readonly _infoService = inject(InfoService);
+    private readonly _queryParamsService = inject(OfferListQueryService);
 
     private fetchingOffers = new BehaviorSubject(true);
     fetchingOffers$ = this.fetchingOffers.asObservable();
@@ -32,7 +34,7 @@ export class ListService {
     }
 
     private fetchData(): void {
-        this._listDataService.getOffersList()
+        this._listDataService.getOffersList(this.getValuesForParams())
             .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(offers => {
                 this._infoService.total.set(offers.totalCount);
@@ -44,12 +46,7 @@ export class ListService {
     }
 
     private listenForCriteriaChange(): void {
-        merge(
-            this._filtersService.filtersChanged$,
-            this._sortService.sortChanged$,
-            this._searchService.searchChanged$,
-            this._paginationService.paginationChanged$,
-        ).pipe(
+        this._queryParamsService.paramsChanged$.pipe(
             tap(() => { this.fetchingOffers.next(true); }),
             switchMap(() => this._listDataService.getOffersList(this.getValuesForParams())),
             tap((offers) => { this._infoService.total.set(offers.totalCount); }),

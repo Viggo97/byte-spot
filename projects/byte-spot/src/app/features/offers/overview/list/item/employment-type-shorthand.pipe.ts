@@ -7,7 +7,7 @@ export class EmploymentTypeShorthandPipe implements PipeTransform {
 
     private readonly _translateService = inject(TranslateService);
 
-    transform(value: EmploymentType | string): string {
+    transform(value: EmploymentType): string {
         let shorthand: string;
         if (value === EmploymentType.EmploymentContract)
             shorthand = 'offer.employmentOfContractShort';
@@ -17,6 +17,7 @@ export class EmploymentTypeShorthandPipe implements PipeTransform {
             shorthand = 'offer.mandateContractShort';
         else if (value === EmploymentType.SpecificTaskContract)
             shorthand = 'offer.specificTaskContractShort';
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         else if (value === EmploymentType.Internship)
             shorthand = 'offer.internshipShort';
         else

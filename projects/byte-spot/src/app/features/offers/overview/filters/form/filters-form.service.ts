@@ -2,7 +2,6 @@ import { computed, Injectable, signal } from '@angular/core';
 import { form } from '@angular/forms/signals';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { debounceTime, filter, Subject } from 'rxjs';
-import { LookupItem } from '@shared';
 import { Salary } from '../models/salary.model';
 import { DynamicFilters } from '../models/dynamic-filters.model';
 
@@ -31,7 +30,7 @@ export class FiltersFormService {
                 takeUntilDestroyed(),
             )
             .subscribe(() => {
-                this.changeFilters();
+                this.filtersChanged.next();
             });
         this.dynamicFiltersChange$
             .pipe(
@@ -39,13 +38,17 @@ export class FiltersFormService {
                 takeUntilDestroyed(),
             )
             .subscribe(() => {
-                this.changeFilters();
+                this.filtersChanged.next();
             });
     }
 
-    fillDynamicFiltersForm(items: LookupItem[], filterName: keyof DynamicFilters): void {
-        const cleanArray = new Array<boolean>(items.length).fill(false);
-        this.dynamicFiltersForm[filterName]().value.set(cleanArray);
+    setDynamicFilterValues(filterName: keyof DynamicFilters, values: boolean[]): void {
+        this.dynamicFiltersForm[filterName]().value.set(values);
+    }
+
+    resetDynamicFilterValues(filterName: keyof DynamicFilters, numberOfItems: number): void {
+        const pureArray = new Array<boolean>(numberOfItems).fill(false);
+        this.dynamicFiltersForm[filterName]().value.set(pureArray);
     }
 
     startTrackingValueChange(): void {
@@ -56,9 +59,5 @@ export class FiltersFormService {
 
     stopTrackingValueChange(): void {
         this.trackValueChange = false;
-    }
-
-    changeFilters(): void {
-        this.filtersChanged.next();
     }
 }
