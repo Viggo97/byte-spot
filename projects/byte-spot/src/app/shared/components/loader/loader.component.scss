@@ -18,7 +18,7 @@
 .loader-icon {
     width: 1.5rem;
     height: 1.5rem;
-    color: var(--bsa-color-violet-500);
+    color: var(--bsa-color-yellow-10);
     animation: loader-breathe 2s ease-in-out infinite;
 }
 
@@ -26,7 +26,7 @@
     position: absolute;
     border-radius: 50%;
     border: 2px solid transparent;
-    border-top-color: var(--bsa-color-violet-700);
+    border-top-color: var(--bsa-color-yellow-10);
 }
 
 .loader-ring:nth-child(1) {
@@ -37,13 +37,13 @@
 
 .loader-ring:nth-child(2) {
     inset: .5rem;
-    border-top-color: var(--bsa-color-violet-500);
+    border-top-color: var(--bsa-color-yellow-10);
     animation: loader-spin 1.8s linear infinite reverse;
 }
 
 .loader-ring:nth-child(3) {
     inset: 1rem;
-    border-top-color: var(--bsa-color-violet-300);
+    border-top-color: var(--bsa-color-yellow-8);
     animation: loader-spin 2.4s linear infinite;
 }
 
