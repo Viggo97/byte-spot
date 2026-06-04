@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AuthService, NavbarComponent, TranslatePipe } from '@core';
 import { LoaderComponent } from '@shared';
+import { delay } from 'rxjs';
 
 @Component({
     selector: 'bsa-root',
@@ -17,8 +18,10 @@ export class AppComponent implements OnInit {
     protected loading = signal(true);
 
     ngOnInit(): void {
-        this.authService.refreshToken().subscribe(() => {
-            this.loading.set(false);
-        });
+        this.authService.refreshToken()
+            .pipe(delay(250))
+            .subscribe(() => {
+                this.loading.set(false);
+            });
     }
 }

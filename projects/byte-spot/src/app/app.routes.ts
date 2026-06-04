@@ -1,18 +1,18 @@
 import { Routes } from '@angular/router';
 import { ErrorPageComponent } from '@app/core/pages/error-page/error-page.component';
-import { OffersOverviewComponent } from '@app/features/offers/overview/offers-overview.component';
-import { OffersDetailsComponent } from '@app/features/offers/details/offers-details/offers-details.component';
 import { SignUpComponent } from '@app/core/auth/sign-up/sign-up.component';
 import { SignInComponent } from '@app/core/auth/sign-in/sign-in.component';
 
 export const routes: Routes = [
     {
         path: 'offers',
-        component: OffersOverviewComponent,
+        loadComponent: () => import('./features/offers/overview/offers-overview.component')
+            .then(m => m.OffersOverviewComponent),
     },
     {
         path: 'offers/:id',
-        component: OffersDetailsComponent,
+        loadComponent: () => import('./features/offers/details/offers-details/offers-details.component')
+            .then(m => m.OffersDetailsComponent),
     },
     {
         path: 'sign-up',
