@@ -1,4 +1,8 @@
 nav {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--bsa-backgroundColor-primary);
     padding: 8px 16px;
     border-bottom: 1px solid var(--bsa-borderColor-primary);
     display: flex;
