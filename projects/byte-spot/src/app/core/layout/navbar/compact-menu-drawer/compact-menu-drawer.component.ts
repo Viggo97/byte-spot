@@ -23,7 +23,7 @@ import { AuthService } from '../../../auth/auth.service';
     templateUrl: './compact-menu-drawer.component.html',
     styleUrl: './compact-menu-drawer.component.scss',
 })
-class CompactMenuDrawerComponent {
+export class CompactMenuDrawerComponent {
     private readonly _router = inject(Router);
     private readonly _overlay = inject(Overlay);
     private readonly _authService = inject(AuthService);
@@ -46,5 +46,3 @@ class CompactMenuDrawerComponent {
         void this._router.navigate([route]);
     }
 }
-
-export default CompactMenuDrawerComponent;
