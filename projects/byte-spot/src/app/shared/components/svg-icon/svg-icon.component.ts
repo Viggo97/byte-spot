@@ -16,6 +16,8 @@ import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@a
     styles: [`
         bsa-svg-icon {
             display: flex;
+            height: fit-content;
+            width: fit-content;
             color: var(--bsa-textColor-primary);
         }
     `],
