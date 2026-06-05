@@ -1,0 +1,29 @@
+@use '../../../styles/add-variables' as *;
+
+@layer bsl {
+    @include add-variables((
+        bsl-menu-backgroundColor: var(--bsl-color-neutral-50),
+        bsl-menu-backgroundColor-hover: var(--bsl-color-neutral-200),
+        bsl-menu-borderColor: var(--bsl-color-neutral-300),
+    ));
+
+    @include add-variables((
+        bsl-menu-backgroundColor: var(--bsl-color-neutral-950),
+        bsl-menu-backgroundColor-hover: var(--bsl-color-neutral-800),
+        bsl-menu-borderColor: var(--bsl-color-neutral-700),
+    ), 'dark');
+}
+
+:host {
+    display: none;
+}
+
+.bsl-menu-dropdown {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 4px;
+    border: 1px solid var(--bsl-menu-borderColor);
+    background-color: var(--bsl-menu-backgroundColor);
+    overflow: hidden;
+}

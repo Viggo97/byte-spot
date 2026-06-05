@@ -1,0 +1,16 @@
+<ng-template #menuTemplate
+    let-id="id"
+    let-ariaLabelledBy="ariaLabelledBy"
+>
+    <div
+        role="menu"
+        class="bsl-menu-dropdown"
+        tabindex="1"
+        [attr.id]="id"
+        [attr.aria-labelledby]="ariaLabelledBy"
+        (click)="onClick($event)"
+        (keydown)="onKeydown($event)"
+    >
+        <ng-content></ng-content>
+    </div>
+</ng-template>
