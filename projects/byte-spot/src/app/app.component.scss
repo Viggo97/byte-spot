@@ -9,7 +9,8 @@ main {
     padding: 24px 16px;
     max-width: 1600px;
     width: 100%;
-    flex-grow: 1;
+    display: flex;
+    justify-content: center;
 }
 
 .loader {
