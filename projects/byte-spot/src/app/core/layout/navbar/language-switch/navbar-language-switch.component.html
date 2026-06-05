@@ -5,7 +5,7 @@
     (valueChange)="onSelectLanguage()"
     [displayLabel]="'label'"
     [iconMode]="!compactMode()"
-    [customIcon]="true"
+    [customIcon]="false"
     [dropdownWidth]="compactMode() ? undefined : '8rem'">
     <bsa-svg-icon name="icon-globe" size="1.25rem" data-custom-icon></bsa-svg-icon>
         @for (option of languageOptions; track option.key) {
