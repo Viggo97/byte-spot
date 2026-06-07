@@ -12,6 +12,7 @@ import { MenuComponent } from './menu.component';
         '[attr.aria-haspopup]': '"true"',
         '[attr.aria-expanded]': 'isOpen()',
         '[attr.aria-controls]': 'menuId()',
+        '[class.bsl-menu-button-open-state]': 'isOpen()',
         '(click)': 'toggleMenu()',
     },
 })
