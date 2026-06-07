@@ -39,16 +39,6 @@ button {
 
     &.invisible {
         background-color: transparent;
-        color: var(--bsa-neutral-textColor);
         border: none;
-
-        &:not(:disabled):hover {
-            background-color: var(--bsa-neutral-backgroundColor-hover);
-        }
-
-        &:not(:disabled):active {
-            filter: brightness(0.92) saturate(1.1);
-            background-color: var(--bsa-neutral-backgroundColor-hover);
-        }
     }
 }
