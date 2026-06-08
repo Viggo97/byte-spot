@@ -1,14 +1,14 @@
 import { Component, inject, signal, OnInit, input } from '@angular/core';
-import { LanguageService} from '../../../language/language.service';
-import { Language } from '../../../language/language.enum';
-import { LanguageOption } from './navbar-language-switch-option.interface';
-import { TranslateService } from '../../../translate/translate.service';
-import { TranslatePipe } from '../../../translate/translate.pipe';
-import { SvgIconComponent } from '@shared';
 import { ListBoxOptionComponent, SelectComponent } from '@byte-spot-lib';
+import { SvgIconComponent } from '@shared';
+import { TranslateService } from '../../translate/translate.service';
+import { TranslatePipe } from '../../translate/translate.pipe';
+import { LanguageService} from '../../language/language.service';
+import { Language } from '../../language/language.enum';
+import { LanguageOption } from './language-switch-option.interface';
 
 @Component({
-    selector: 'bsa-navbar-language-switch',
+    selector: 'bsa-language-switch',
     imports: [
         SelectComponent,
         ListBoxOptionComponent,
@@ -17,9 +17,9 @@ import { ListBoxOptionComponent, SelectComponent } from '@byte-spot-lib';
         ListBoxOptionComponent,
         SelectComponent,
     ],
-    templateUrl: './navbar-language-switch.component.html',
+    templateUrl: './language-switch.component.html',
 })
-export class NavbarLanguageSwitchComponent implements OnInit {
+export class LanguageSwitchComponent implements OnInit {
     private languageService = inject(LanguageService);
     private translateService = inject(TranslateService);
 

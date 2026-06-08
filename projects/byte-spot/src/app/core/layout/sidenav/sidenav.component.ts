@@ -4,26 +4,26 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay } from '@angular/cdk/overlay';
 import { DrawerComponent } from '@byte-spot-lib';
 import { SvgIconComponent } from '@shared';
-import { TranslatePipe } from '../../../translate/translate.pipe';
-import { NavbarLanguageSwitchComponent } from '../language-switch/navbar-language-switch.component';
-import { NavbarThemeSwitchComponent } from '../theme-switch/navbar-theme-switch.component';
-import { AuthService } from '../../../auth/auth.service';
+import { TranslatePipe } from '../../translate/translate.pipe';
+import { LanguageSwitchComponent } from '../language-switch/language-switch.component';
+import { ThemeSwitchComponent } from '../theme-switch/theme-switch.component';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
-    selector: 'bsa-compact-menu-drawer',
+    selector: 'bsa-sidenav',
     imports: [
         CdkOverlayOrigin,
         CdkConnectedOverlay,
         TranslatePipe,
         DrawerComponent,
         SvgIconComponent,
-        NavbarLanguageSwitchComponent,
-        NavbarThemeSwitchComponent,
+        LanguageSwitchComponent,
+        ThemeSwitchComponent,
     ],
-    templateUrl: './compact-menu-drawer.component.html',
-    styleUrl: './compact-menu-drawer.component.scss',
+    templateUrl: './sidenav.component.html',
+    styleUrl: './sidenav.component.scss',
 })
-export class CompactMenuDrawerComponent {
+export class SidenavComponent {
     private readonly _router = inject(Router);
     private readonly _overlay = inject(Overlay);
     private readonly _authService = inject(AuthService);

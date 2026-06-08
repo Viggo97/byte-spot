@@ -3,20 +3,20 @@ import { RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { NavbarThemeSwitchComponent } from './theme-switch/navbar-theme-switch.component';
-import { NavbarLanguageSwitchComponent } from './language-switch/navbar-language-switch.component';
+import { ThemeSwitchComponent } from '../theme-switch/theme-switch.component';
+import { LanguageSwitchComponent } from '../language-switch/language-switch.component';
 import { SignInSelectComponent } from './sign-in-select/sign-in-select.component';
-import CompactMenuDrawerComponent from './compact-menu-drawer/compact-menu-drawer.component';
 import { AuthService } from '../../auth/auth.service';
+import { SidenavComponent } from '../sidenav/sidenav.component';
 
 @Component({
     selector: 'bsa-navbar',
     imports: [
         NgOptimizedImage,
         RouterLink,
-        CompactMenuDrawerComponent,
-        NavbarThemeSwitchComponent,
-        NavbarLanguageSwitchComponent,
+        SidenavComponent,
+        ThemeSwitchComponent,
+        LanguageSwitchComponent,
         SignInSelectComponent,
     ],
     templateUrl: './navbar.component.html',

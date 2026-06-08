@@ -5,13 +5,13 @@
 
     <div class="options">
         @if (compactMode()) {
-            <bsa-compact-menu-drawer></bsa-compact-menu-drawer>
+            <bsa-sidenav></bsa-sidenav>
         } @else {
             @if (!user()) {
                 <bsa-sign-in-select></bsa-sign-in-select>
             }
-            <bsa-navbar-theme-switch></bsa-navbar-theme-switch>
-            <bsa-navbar-language-switch [compactMode]="false"></bsa-navbar-language-switch>
+            <bsa-theme-switch></bsa-theme-switch>
+            <bsa-language-switch [compactMode]="false"></bsa-language-switch>
         }
     </div>
 </nav>
