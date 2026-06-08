@@ -8,6 +8,7 @@ export * from './lib/components/list-box/list-box-option/list-box-option.compone
 export * from './lib/components/list-box/list-box-separator/list-box-separator.component';
 export * from './lib/components/menu/menu.component';
 export * from './lib/components/menu/menu-trigger.directive';
+export * from './lib/components/menu/menu-item.directive';
 export * from './lib/components/pagination/pagination.component';
 export * from './lib/components/range/range.component';
 export * from './lib/components/range/range.model';
