@@ -75,6 +75,11 @@
         </g>
     </symbol>
 
+    <svg id="icon-exit" viewBox="0 0 24 24">
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8m4-9l-4-4m4 4l-4 4m4-4H9" />
+    </svg>
+
     <symbol id="icon-globe" viewBox="0 0 32 32">
         <ellipse style="stroke: currentColor; fill: none; stroke-width: 1.5;" cx="16" cy="16" rx="12" ry="12" />
         <ellipse style="stroke: currentColor; fill: none; stroke-width: 1.5;" cx="16" cy="16" rx="4.854" ry="11.903" />
