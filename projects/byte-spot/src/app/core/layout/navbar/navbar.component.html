@@ -7,7 +7,9 @@
         @if (compactMode()) {
             <bsa-sidenav></bsa-sidenav>
         } @else {
-            @if (!user()) {
+            @if (user()) {
+                <bsa-navbar-user-menu></bsa-navbar-user-menu>
+            } @else {
                 <bsa-sign-in-select></bsa-sign-in-select>
             }
             <bsa-theme-switch></bsa-theme-switch>

@@ -18,10 +18,12 @@
     <bsl-drawer
         [title]="'global.menu' | translate"
         (closed)="closeDrawer()">
-        <div class="container">
-            @if (!user()) {
-                <section class="user-zone">
-                    <h3>{{'user.userZone' | translate}}</h3>
+        <div class="sidenav-container">
+            <section class="user-zone">
+                <h3>{{'user.userZone' | translate}}</h3>
+                @if (user()) {
+                    <bsa-sidenav-user-menu (navigate)="closeDrawer()" />
+                } @else {
                     <div class="sign-up">
                         <button
                             role="link"
@@ -35,8 +37,8 @@
                             {{'user.signUp' | translate}}
                         </button>
                     </div>
-                </section>
-            }
+                }
+            </section>
 
             <section>
                 <h3>{{'global.language' | translate}}</h3>

@@ -1,6 +1,7 @@
 @use 'breakpoints' as breakpoints;
 
-.container {
+.sidenav-container {
+    padding: 0 4px;
     display: flex;
     flex-direction: column;
     gap: 16px;

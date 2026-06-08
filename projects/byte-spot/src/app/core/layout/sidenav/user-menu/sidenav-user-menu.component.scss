@@ -1,0 +1,12 @@
+[role="link"] {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--bsa-backgroundColor-secondary);
+    }
+}

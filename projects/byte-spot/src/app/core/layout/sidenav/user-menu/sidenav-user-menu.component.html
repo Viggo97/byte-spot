@@ -1,0 +1,18 @@
+<span
+    role="link"
+    tabindex="0"
+    (click)="onNavigate('/candidate/profile')"
+    (keydown.enter)="onNavigate('/candidate/profile')"
+>
+        <bsa-svg-icon name="icon-user" size="1.25rem"/>
+        <span>{{ 'user.myProfile' | translate }}</span>
+</span>
+<span
+    role="link"
+    tabindex="0"
+    (click)="onLogout()"
+    (keydown.enter)="onLogout()"
+>
+        <bsa-svg-icon name="icon-exit" size="1.25rem"/>
+        <span>{{ 'user.logout' | translate }}</span>
+</span>

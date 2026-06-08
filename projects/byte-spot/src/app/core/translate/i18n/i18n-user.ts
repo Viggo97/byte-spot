@@ -18,8 +18,8 @@ export const i18nUser: Record<string, I18nLanguageCode> = {
         pl: 'Zaloguj się',
     },
     logout: {
-        en: 'Logout',
-        pl: 'Wyloguj',
+        en: 'Log out',
+        pl: 'Wyloguj się',
     },
     email: {
         en: 'E-mail',
@@ -88,5 +88,9 @@ export const i18nUser: Record<string, I18nLanguageCode> = {
     lastNameMaxLength: {
         en: 'Last name must not have more than 64 characters.',
         pl: 'Nazwisko nie może mieć więcej niż 64 znaki.',
+    },
+    myProfile: {
+        en: 'My profile',
+        pl: 'Mój profil',
     },
 };

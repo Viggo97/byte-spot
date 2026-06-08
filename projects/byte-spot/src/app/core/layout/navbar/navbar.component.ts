@@ -8,6 +8,7 @@ import { LanguageSwitchComponent } from '../language-switch/language-switch.comp
 import { SignInSelectComponent } from './sign-in-select/sign-in-select.component';
 import { AuthService } from '../../auth/auth.service';
 import { SidenavComponent } from '../sidenav/sidenav.component';
+import { NavbarUserMenuComponent } from './user-menu/navbar-user-menu.component';
 
 @Component({
     selector: 'bsa-navbar',
@@ -18,6 +19,7 @@ import { SidenavComponent } from '../sidenav/sidenav.component';
         ThemeSwitchComponent,
         LanguageSwitchComponent,
         SignInSelectComponent,
+        NavbarUserMenuComponent,
     ],
     templateUrl: './navbar.component.html',
     styleUrl: './navbar.component.scss',

@@ -1,0 +1,27 @@
+@use 'mixins' as mixins;
+
+:host {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#user-profile {
+    padding: 0.375rem .5rem;
+}
+
+.user-name {
+    font: var(--bsa-font-md);
+}
+
+[bslMenuItem] {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--bsa-backgroundColor-secondary);
+    }
+}

@@ -8,6 +8,7 @@ import { TranslatePipe } from '../../translate/translate.pipe';
 import { LanguageSwitchComponent } from '../language-switch/language-switch.component';
 import { ThemeSwitchComponent } from '../theme-switch/theme-switch.component';
 import { AuthService } from '../../auth/auth.service';
+import { SidenavUserMenuComponent } from './user-menu/sidenav-user-menu.component';
 
 @Component({
     selector: 'bsa-sidenav',
@@ -19,6 +20,7 @@ import { AuthService } from '../../auth/auth.service';
         SvgIconComponent,
         LanguageSwitchComponent,
         ThemeSwitchComponent,
+        SidenavUserMenuComponent,
     ],
     templateUrl: './sidenav.component.html',
     styleUrl: './sidenav.component.scss',
