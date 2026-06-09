@@ -45,13 +45,13 @@ export const i18nGlobal: Record<string, I18nLanguageCode> = {
         en: 'System error',
         pl: 'Błąd systemu',
     },
-    pageNotExist: {
-        en: 'Page does not exist',
-        pl: 'Strona nie istnieje',
+    unknownProblem: {
+        en: 'Unknown problem occurred.',
+        pl: 'Wystąpił nieznany problem.',
     },
-    pageErrorDesc: {
-        en: 'It looks like this page has been moved, deleted, or never existed.',
-        pl: 'Wygląda na to, że ta strona została przeniesiona, usunięta lub nigdy nie istniała.',
+    pageNotExist: {
+        en: 'Page does not exist.',
+        pl: 'Strona nie istnieje.',
     },
     goHomePage: {
         en: 'Go back to the home page',
