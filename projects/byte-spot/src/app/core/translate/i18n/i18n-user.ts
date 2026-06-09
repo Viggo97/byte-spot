@@ -47,7 +47,7 @@ export const i18nUser: Record<string, I18nLanguageCode> = {
     },
     emailMinLength: {
         en: 'E-mail must have at least 4 characters.',
-        pl: 'E-mail musi mieć conajmniej 4 znaki.',
+        pl: 'E-mail musi mieć co najmniej 4 znaki.',
     },
     emailMaxLength: {
         en: 'E-mail must not have more than 64 characters.',
@@ -59,7 +59,7 @@ export const i18nUser: Record<string, I18nLanguageCode> = {
     },
     passwordMinLength: {
         en: 'Password must contain at least 8 characters.',
-        pl: 'Hasło musi zawierać conajmniej 8 znaków.',
+        pl: 'Hasło musi zawierać co najmniej 8 znaków.',
     },
     passwordMaxLength: {
         en: 'Password must not have more than 100 characters.',
@@ -71,7 +71,7 @@ export const i18nUser: Record<string, I18nLanguageCode> = {
     },
     firstNameMinLength: {
         en: 'First name must have at least 2 characters.',
-        pl: 'Imię musi mieć conajmniej 2 znaki.',
+        pl: 'Imię musi mieć co najmniej 2 znaki.',
     },
     firstNameMaxLength: {
         en: 'First name must not have more than 32 characters.',
@@ -83,7 +83,7 @@ export const i18nUser: Record<string, I18nLanguageCode> = {
     },
     lastNameMinLength: {
         en: 'Last name must have at least 3 characters.',
-        pl: 'Nazwisko musi mieć conajmniej 3 znaki.',
+        pl: 'Nazwisko musi mieć co najmniej 3 znaki.',
     },
     lastNameMaxLength: {
         en: 'Last name must not have more than 64 characters.',
