@@ -19,20 +19,22 @@
       "module": "ES2022",
       "useDefineForClassFields": false,
       "resolveJsonModule": true,
-      "baseUrl": "./",
       "paths": {
-          "@byte-spot-lib": [
-              "projects/byte-spot-lib/src/public-api.ts"
-          ],
+        "@byte-spot-lib": [
+          "./projects/byte-spot-lib/src/public-api.ts"
+        ],
         "@app/*": [
-          "projects/byte-spot/src/app/*"
+          "./projects/byte-spot/src/app/*"
         ],
         "@core": [
-          "projects/byte-spot/src/app/core/index.ts"
+          "./projects/byte-spot/src/app/core/index.ts"
         ],
         "@shared": [
-          "projects/byte-spot/src/app/shared/index.ts"
+          "./projects/byte-spot/src/app/shared/index.ts"
         ],
+        "projects/*": [
+            "./projects/*"
+        ]
       }
     },
     "angularCompilerOptions": {

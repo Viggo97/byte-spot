@@ -63,6 +63,20 @@
                   "with": "projects/byte-spot/src/environments/environment.development.ts"
                 }
               ]
+            },
+            "testing": {
+              "aot": false,
+              "optimization": false,
+              "extractLicenses": false,
+              "polyfills": [
+                "zone.js",
+                "zone.js/testing"
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "projects/byte-spot/src/styles"
+                ]
+              }
             }
           },
           "defaultConfiguration": "production"
@@ -86,18 +100,11 @@
           }
         },
         "test": {
-          "builder": "@angular/build:karma",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
             "tsConfig": "projects/byte-spot/tsconfig.spec.json",
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "projects/byte-spot/src/styles"
-              ]
-            }
+            "buildTarget": ":build:testing",
+            "runner": "vitest"
           }
         },
         "lint": {
