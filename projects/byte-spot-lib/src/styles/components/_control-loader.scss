@@ -1,0 +1,41 @@
+@use '../add-variables' as *;
+
+@include add-variables((
+    bsl-control-loader-backgroundColor: var(--bsl-color-neutral-300),
+    bsl-control-loader-borderColor: var(--bsl-color-neutral-900),
+));
+
+@include add-variables((
+    bsl-control-loader-backgroundColor: var(--bsl-color-neutral-700),
+    bsl-control-loader-borderColor: var(--bsl-color-neutral-100),
+), 'dark');
+
+.bsl-control-loader-base {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.bsl-control-loader {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--bsl-control-loader-backgroundColor);
+    border-top-color: var(--bsl-control-loader-borderColor);
+    border-radius: 50%;
+    animation: control-loader 0.7s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes control-loader {
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
+
+input[bslControlLoader] {
+    padding-right: 2rem;
+}
