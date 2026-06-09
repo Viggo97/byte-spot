@@ -6,6 +6,7 @@ export * from './directvies/resize-observer.directive';
 export * from './models/lookup-item.interface';
 export * from './models/paged-results.interface';
 export * from './models/pagination-params.interface';
+export * from './models/server-error.model';
 
 export * from './pipes/number-formatter.pipe';
 
