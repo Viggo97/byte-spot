@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, catchError, EMPTY, Observable, of, tap } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { BehaviorSubject, catchError, EMPTY, map, Observable, of, switchMap, tap } from 'rxjs';
 import { environment } from 'projects/byte-spot/src/environments/environment';
 import { SignIn } from './models/sign-in.interface';
 import { SignUp } from './models/sign-up.interface';
@@ -18,12 +18,12 @@ export class AuthService {
 
     signUp(signUp: SignUp): Observable<object> {
         const url = this.URL + '/sign-up';
-        return this._http.post(url, signUp, {withCredentials: true});
+        return this._http.post(url, signUp);
     }
 
     signIn(signIn: SignIn): Observable<UserDto> {
         const url = this.URL + '/sign-in';
-        return this._http.post<UserDto>(url, signIn, {withCredentials: true})
+        return this._http.post<UserDto>(url, signIn)
             .pipe(tap((user) => {
                 this.user.next(new User(user.id, user.firstName, user.lastName, user.role));
             }));
@@ -33,14 +33,15 @@ export class AuthService {
         if (!this.user.getValue()) {
             return of(EMPTY);
         }
+        this.user.next(null);
+
         const url = this.URL + '/logout';
-        return this._http.post(url, null, {withCredentials: true})
-            .pipe(tap(() => { this.user.next(null); }));
+        return this._http.post(url, null);
     }
 
     refreshToken(): Observable<UserDto | null> {
         const url = this.URL + '/refresh-token';
-        return this._http.post<UserDto>(url, null, {withCredentials: true})
+        return this._http.post<UserDto>(url, null)
             .pipe(
                 tap((user) => {
                     if (!this.user.getValue()) {
@@ -49,8 +50,18 @@ export class AuthService {
                 }),
                 catchError(() => {
                     this.user.next(null);
-                    return of(null);
+                    return of(null)
+                        .pipe(
+                            switchMap(() => this.logout()),
+                            map(() => null),
+                        );
                 }),
             );
+    }
+
+    validateEmail(email: string): Observable<boolean> {
+        const url = this.URL + '/validate-email';
+        const params = new HttpParams().set('email', email);
+        return this._http.get<boolean>(url, {params});
     }
 }

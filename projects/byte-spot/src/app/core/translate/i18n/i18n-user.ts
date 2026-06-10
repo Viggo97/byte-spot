@@ -53,6 +53,10 @@ export const i18nUser: Record<string, I18nLanguageCode> = {
         en: 'E-mail must not have more than 64 characters.',
         pl: 'E-mail nie może mieć więcej niż 64 znaki.',
     },
+    emailInUse: {
+        en: 'This e-mail is already in use. Please choose another one.',
+        pl: 'Ten e-mail jest już używany. Wybierz inny.',
+    },
     passwordRequired: {
         en: 'Password is required.',
         pl: 'Hasło jest wymagane.',

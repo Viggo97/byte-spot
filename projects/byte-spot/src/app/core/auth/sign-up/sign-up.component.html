@@ -1,89 +1,66 @@
 <h1>{{ 'user.signUp' | translate }}</h1>
-<form [formGroup]="signUpForm">
-    @let email = signUpForm.controls.email;
-    @let password = signUpForm.controls.password;
-    @let firstName = signUpForm.controls.firstName;
-    @let lastName = signUpForm.controls.lastName;
+<form [formRoot]="signUpForm">
+    @let email = signUpForm.email;
+    @let password = signUpForm.password;
+    @let firstName = signUpForm.firstName;
+    @let lastName = signUpForm.lastName;
 
     <section>
         <label for="sign-up-email">{{ 'user.email' | translate }}</label>
-        <input id="sign-up-email" type="text" formControlName="email">
-        @if (email.invalid && email.touched) {
-            <div class="validation-error">
-                @if (email.hasError('required')) {
-                    {{ 'user.emailRequired' | translate }}
+        <input id="sign-up-email" type="text" [formField]="email" [bslControlLoader]="email().pending()">
+
+        <div class="validation-error">
+            @if (email().invalid() && email().touched()) {
+                @for (error of email().errors(); track error.kind) {
+                    <span>{{ error.message! | translate }} </span>
                 }
-                @if (email.hasError('email')) {
-                    {{ 'user.emailInvalid' | translate }}
-                }
-                @if (email.hasError('minlength')) {
-                    {{ 'user.emailMinLength' | translate }}
-                }
-                @if (email.hasError('maxlength')) {
-                    {{ 'user.emailMaxLength' | translate }}
-                }
-            </div>
-        }
+            }
+        </div>
     </section>
 
     <section>
         <label for="sign-up-password">{{ 'user.password' | translate }}</label>
-        <input id="sign-up-password" type="password" formControlName="password">
-        @if (password.invalid && password.touched) {
-            <div class="validation-error">
-                @if (password.hasError('required')) {
-                    {{ 'user.passwordRequired' | translate }}
+        <input id="sign-up-password" type="password" [formField]="password">
+
+        <div class="validation-error">
+            @if (password().invalid() && password().touched()) {
+                @for (error of password().errors(); track error.kind) {
+                    <span>{{ error.message! | translate }} </span>
                 }
-                @if (password.hasError('minlength')) {
-                    {{ 'user.passwordMinLength' | translate }}
-                }
-                @if (password.hasError('maxlength')) {
-                    {{ 'user.passwordMaxLength' | translate }}
-                }
-            </div>
-        }
+            }
+        </div>
     </section>
 
     <section>
         <label for="sign-up-first-name">{{ 'user.firstName' | translate }}</label>
-        <input id="sign-up-first-name" type="text" formControlName="firstName">
-        @if (firstName.invalid && firstName.touched) {
-            <div class="validation-error">
-                @if (firstName.hasError('required')) {
-                    {{ 'user.firstNameRequired' | translate }}
+        <input id="sign-up-first-name" type="text" [formField]="firstName">
+
+        <div class="validation-error">
+            @if (firstName().invalid() && firstName().touched()) {
+                @for (error of firstName().errors(); track error.kind) {
+                    <span>{{ error.message! | translate }} </span>
                 }
-                @if (firstName.hasError('minlength')) {
-                    {{ 'user.firstNameMinLength' | translate }}
-                }
-                @if (firstName.hasError('maxlength')) {
-                    {{ 'user.firstNameMaxLength' | translate }}
-                }
-            </div>
-        }
+            }
+        </div>
     </section>
 
     <section>
-    <label for="sign-up-last-name">{{ 'user.lastName' | translate }}</label>
-    <input id="sign-up-last-name" type="text" formControlName="lastName">
-    @if (lastName.invalid && lastName.touched) {
+        <label for="sign-up-last-name">{{ 'user.lastName' | translate }}</label>
+        <input id="sign-up-last-name" type="text" [formField]="lastName">
+
         <div class="validation-error">
-            @if (lastName.hasError('required')) {
-                {{ 'user.lastNameRequired' | translate }}
-            }
-            @if (lastName.hasError('minlength')) {
-                {{ 'user.lastNameMinLength' | translate }}
-            }
-            @if (lastName.hasError('maxlength')) {
-                {{ 'user.lastNameMaxLength' | translate }}
+            @if (lastName().invalid() && lastName().touched()) {
+                @for (error of lastName().errors(); track error.kind) {
+                    <span>{{ error.message! | translate }} </span>
+                }
             }
         </div>
-    }
     </section>
 
     <button
         type="submit"
-        [disabled]="signUpForm.invalid || submitDisabled()"
-        (click)="onSignUp()">
+        [disabled]="signUpForm().invalid() || signUpForm().pending() || signUpForm().submitting()"
+    >
         {{ 'user.signUp' | translate }}
     </button>
 </form>

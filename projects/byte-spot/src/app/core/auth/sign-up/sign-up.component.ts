@@ -1,51 +1,91 @@
-import { Component, DestroyRef, inject, signal } from '@angular/core';
-import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject, Signal, signal } from '@angular/core';
+import { email, form, FormField, FormRoot, maxLength, minLength, required, validateAsync } from '@angular/forms/signals';
 import { Router } from '@angular/router';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { catchError, finalize, of } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { firstValueFrom } from 'rxjs';
+import { ControlLoaderDirective } from '@byte-spot-lib';
+import { ServerError } from '@shared';
 import { TranslatePipe } from '../../translate/translate.pipe';
 import { AuthService } from '../auth.service';
 
-/* eslint-disable @typescript-eslint/unbound-method */
 @Component({
     selector: 'bsa-sign-up',
     imports: [
-        ReactiveFormsModule,
+        FormField,
+        FormRoot,
         TranslatePipe,
+        ControlLoaderDirective,
     ],
     templateUrl: './sign-up.component.html',
     styleUrl: './sign-up.component.scss',
 })
 export class SignUpComponent {
-    private readonly _destroyRef = inject(DestroyRef);
     private readonly _router = inject(Router);
-    private readonly _formBuilder = inject(NonNullableFormBuilder);
     private readonly _authService = inject(AuthService);
 
-    protected submitDisabled = signal(false);
-    protected signUpForm = this._formBuilder.group({
-        email: ['', [Validators.required, Validators.email, Validators.minLength(4), Validators.maxLength(64)]],
-        password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100)]],
-        firstName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(32)]],
-        lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(64)]],
+    protected signUpModel = signal({
+        email: '',
+        password: '',
+        firstName: '',
+        lastName: '',
     });
 
-    protected onSignUp(): void {
-        this.submitDisabled.set(true);
-        const email = this.signUpForm.controls.email.getRawValue();
-        const password = this.signUpForm.controls.password.getRawValue();
-        const firstName = this.signUpForm.controls.firstName.getRawValue();
-        const lastName = this.signUpForm.controls.lastName.getRawValue();
+    private createEmailResource = (emailSignal: Signal<string | undefined>) => {
+        return rxResource({
+            params: () => emailSignal(),
+            stream: ({params: email}) => this._authService.validateEmail(email),
+        });
+    };
 
-        this._authService.signUp({ email, password, firstName, lastName })
-            .pipe(
-                catchError(() => of()),
-                finalize(() => {
-                    this.submitDisabled.set(false);
-                    void this._router.navigate(['/sign-in']);
+    protected signUpForm = form(
+        this.signUpModel,
+        (schemaPath) => {
+            required(schemaPath.email, {message: 'user.emailRequired'});
+            email(schemaPath.email, {message: 'user.emailInvalid'});
+            minLength(schemaPath.email, 4, { message: 'user.emailMinLength'});
+            maxLength(schemaPath.email, 64, {message: 'user.emailMaxLength'});
+
+            required(schemaPath.password, {message: 'user.passwordRequired'});
+            minLength(schemaPath.password, 8, {message: 'user.passwordMinLength'});
+            maxLength(schemaPath.password, 100, {message: 'user.passwordMaxLength'});
+
+            required(schemaPath.firstName, {message: 'user.firstNameRequired'});
+            minLength(schemaPath.firstName, 2, {message: 'user.firstNameMinLength'});
+            maxLength(schemaPath.firstName, 32, {message: 'user.firstNameMaxLength'});
+
+            required(schemaPath.lastName, {message: 'user.lastNameRequired'});
+            minLength(schemaPath.lastName, 3, {message: 'user.lastNameMinLength'});
+            maxLength(schemaPath.lastName, 64, {message: 'user.lastNameMaxLength'});
+
+            validateAsync(schemaPath.email, {
+                params: ({value}) => value(),
+                debounce: 300,
+                factory: this.createEmailResource,
+                onSuccess: (result) =>
+                    result ? null : {kind: 'usernameTaken', message: 'user.emailInUse'},
+                onError: () => ({
+                    kind: 'serverError',
+                    message: 'global.unknownProblem',
                 }),
-                takeUntilDestroyed(this._destroyRef),
-            )
-            .subscribe();
-    }
+            });
+        },
+        {
+            submission: {
+                action: async () => {
+                    try {
+                        await firstValueFrom(this._authService.signUp(this.signUpModel()));
+                        await this._router.navigate(['/']);
+                    } catch (error: unknown) {
+                        const queryParams = {errorCode: 500, errorMessage: ''};
+
+                        if (error instanceof HttpErrorResponse) {
+                            const errorMessage = ServerError.tryParse(error.error);
+                            queryParams.errorMessage = errorMessage?.reason || '';
+                        }
+                        await this._router.navigate(['/error'], {queryParams});
+                    }
+                },
+            },
+        });
 }
