@@ -1,49 +1,61 @@
-import { Component, DestroyRef, inject, signal } from '@angular/core';
-import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { catchError, finalize, of } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { TranslatePipe } from '../../translate/translate.pipe';
 import { AuthService } from '../auth.service';
+import { email, form, FormField, FormRoot, maxLength, minLength, required } from '@angular/forms/signals';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ServerError } from '@shared';
 
-/* eslint-disable @typescript-eslint/unbound-method */
 @Component({
     selector: 'bsa-sign-in',
     imports: [
-        ReactiveFormsModule,
+        FormRoot,
+        FormField,
         TranslatePipe,
     ],
     templateUrl: './sign-in.component.html',
     styleUrl: './sign-in.component.scss',
 })
 export class SignInComponent {
-    private readonly _destroyRef = inject(DestroyRef);
     private readonly _route= inject(ActivatedRoute);
     private readonly _router = inject(Router);
-    private readonly _formBuilder = inject(NonNullableFormBuilder);
     private readonly _authService = inject(AuthService);
 
-    protected submitDisabled = signal(false);
-    protected signInForm = this._formBuilder.group({
-        email: ['', [Validators.required, Validators.email, Validators.minLength(4), Validators.maxLength(64)]],
-        password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100)]],
+    protected signInModel = signal({
+        email: '',
+        password: '',
     });
 
-    protected onSignIn(): void {
-        this.submitDisabled.set(true);
-        const email = this.signInForm.controls.email.getRawValue();
-        const password = this.signInForm.controls.password.getRawValue();
+    protected signInForm = form(
+        this.signInModel,
+        (schemaPath) => {
+            required(schemaPath.email, {message: 'user.emailRequired'});
+            email(schemaPath.email, {message: 'user.emailInvalid'});
+            minLength(schemaPath.email, 4, { message: 'user.emailMinLength'});
+            maxLength(schemaPath.email, 64, {message: 'user.emailMaxLength'});
 
-        this._authService.signIn({ email, password })
-            .pipe(
-                catchError(() => of()),
-                finalize(() => {
-                    this.submitDisabled.set(false);
-                    const returnUrl = this._route.snapshot.queryParamMap.get('returnUrl') ?? '/';
-                    void this._router.navigateByUrl(returnUrl);
-                }),
-                takeUntilDestroyed(this._destroyRef),
-            )
-            .subscribe();
-    }
+            required(schemaPath.password, {message: 'user.passwordRequired'});
+            minLength(schemaPath.password, 8, {message: 'user.passwordMinLength'});
+            maxLength(schemaPath.password, 100, {message: 'user.passwordMaxLength'});
+        },
+        {
+            submission: {
+                action: async () => {
+                    try {
+                        await firstValueFrom(this._authService.signIn(this.signInModel()));
+                        const returnUrl = this._route.snapshot.queryParamMap.get('returnUrl') ?? '/';
+                        await this._router.navigateByUrl(returnUrl);
+                    } catch (error: unknown) {
+                        const queryParams = {errorCode: 500, errorMessage: ''};
+
+                        if (error instanceof HttpErrorResponse) {
+                            const errorMessage = ServerError.tryParse(error.error);
+                            queryParams.errorMessage = errorMessage?.reason || '';
+                        }
+                        await this._router.navigate(['/error'], {queryParams});
+                    }
+                },
+            },
+        });
 }
