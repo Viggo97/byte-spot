@@ -61,4 +61,8 @@ export const i18nGlobal: Record<string, I18nLanguageCode> = {
         en: 'N/A',
         pl: 'nd.',
     },
+    save: {
+        en: 'Save',
+        pl: 'Zapisz',
+    },
 };
