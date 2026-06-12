@@ -1,1 +1,43 @@
-<p>candidate-profile works!</p>
+<h1>{{'user.myData' | translate}}</h1>
+
+<form [formRoot]="userProfileForm">
+    <section>
+        <label for="user-first-name">{{ 'user.firstName' | translate }}</label>
+        <input type="text" id="user-first-name" [formField]="userProfileForm.firstName">
+        <div class="validation-error">
+            @if (userProfileForm.firstName().invalid() && userProfileForm.firstName().touched()) {
+                @for (error of userProfileForm.firstName().errors(); track error.kind) {
+                    <span>{{ error.message! | translate }} </span>
+                }
+            }
+        </div>
+    </section>
+
+    <section>
+        <label for="user-last-name">{{ 'user.lastName' | translate }}</label>
+        <input type="text" id="user-last-name" [formField]="userProfileForm.lastName">
+
+        <div class="validation-error">
+            @if (userProfileForm.lastName().invalid() && userProfileForm.lastName().touched()) {
+                @for (error of userProfileForm.lastName().errors(); track error.kind) {
+                    <span>{{ error.message! | translate }} </span>
+                }
+            }
+        </div>
+    </section>
+
+    <section>
+        <label for="user-email">{{ 'user.email' | translate }}</label>
+        <input type="text" id="user-email" [formField]="userProfileForm.email">
+    </section>
+
+    <button
+        type="submit"
+        [disabled]="
+        userProfileForm().invalid()
+        || userProfileForm().pending()
+        || userProfileForm().submitting()|| submitButtonDisabled()"
+    >
+        {{ 'global.save' | translate }}
+    </button>
+</form>

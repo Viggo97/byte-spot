@@ -97,4 +97,8 @@ export const i18nUser: Record<string, I18nLanguageCode> = {
         en: 'My profile',
         pl: 'Mój profil',
     },
+    myData: {
+        en: 'My data',
+        pl: 'Moje dane',
+    },
 };

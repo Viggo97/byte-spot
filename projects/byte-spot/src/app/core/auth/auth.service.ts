@@ -6,6 +6,7 @@ import { SignIn } from './models/sign-in.interface';
 import { SignUp } from './models/sign-up.interface';
 import { UserDto } from './user/user-dto.interface';
 import { User } from './user/user.model';
+import { UserDataDto } from '@app/core/auth/user/user-data-dto.interface';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -25,7 +26,7 @@ export class AuthService {
         const url = this.URL + '/sign-in';
         return this._http.post<UserDto>(url, signIn)
             .pipe(tap((user) => {
-                this.user.next(new User(user.id, user.firstName, user.lastName, user.role));
+                this.user.next(new User(user.id, user.email, user.firstName, user.lastName, user.role));
             }));
     }
 
@@ -45,7 +46,7 @@ export class AuthService {
             .pipe(
                 tap((user) => {
                     if (!this.user.getValue()) {
-                        this.user.next(new User(user.id, user.firstName, user.lastName, user.role));
+                        this.user.next(new User(user.id, user.email, user.firstName, user.lastName, user.role));
                     }
                 }),
                 catchError(() => {
@@ -63,5 +64,10 @@ export class AuthService {
         const url = this.URL + '/validate-email';
         const params = new HttpParams().set('email', email);
         return this._http.get<boolean>(url, {params});
+    }
+
+    changeUserData(userData: UserDataDto): Observable<object> {
+        const url = this.URL + '/change-data';
+        return this._http.post(url, userData);
     }
 }
