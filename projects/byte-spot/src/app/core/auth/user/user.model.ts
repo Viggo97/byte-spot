@@ -1,3 +1,4 @@
+import { UserDto } from './user-dto.interface';
 import { Role } from './role.enum';
 
 export class User {
@@ -13,5 +14,9 @@ export class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
+    }
+
+    static fromDto(dto: UserDto): User {
+        return new User(dto.id, dto.email, dto.firstName, dto.lastName, dto.role);
     }
 }

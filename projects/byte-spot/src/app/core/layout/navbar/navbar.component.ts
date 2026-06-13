@@ -3,10 +3,10 @@ import { RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { UserService } from '@app/core';
 import { ThemeSwitchComponent } from '../theme-switch/theme-switch.component';
 import { LanguageSwitchComponent } from '../language-switch/language-switch.component';
 import { SignInSelectComponent } from './sign-in-select/sign-in-select.component';
-import { AuthService } from '../../auth/auth.service';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import { NavbarUserMenuComponent } from './user-menu/navbar-user-menu.component';
 
@@ -27,10 +27,10 @@ import { NavbarUserMenuComponent } from './user-menu/navbar-user-menu.component'
 export class NavbarComponent {
     private readonly _breakpointObserver = inject(BreakpointObserver);
     private readonly _destroyRef = inject(DestroyRef);
-    private readonly _authService = inject(AuthService);
+    private readonly _userService = inject(UserService);
 
     compactMode = signal(window.innerWidth < 960);
-    user = toSignal(this._authService.user$);
+    user = toSignal(this._userService.user$);
 
     constructor() {
         this.subscribeToBreakpointObserver();

@@ -6,6 +6,7 @@ import { MenuComponent, MenuTriggerDirective, MenuItemDirective } from '@byte-sp
 import { SvgIconComponent } from '@shared';
 import { TranslatePipe } from '../../../translate/translate.pipe';
 import { AuthService } from '../../../auth/auth.service';
+import { UserService } from '../../../auth/user/user.service';
 
 @Component({
     selector: 'bsa-navbar-user-menu',
@@ -23,7 +24,8 @@ export class NavbarUserMenuComponent {
     private readonly _destroyRef = inject(DestroyRef);
     private readonly _router = inject(Router);
     private readonly _authService = inject(AuthService);
-    protected userName = toSignal(this._authService.user$.pipe(map(u => u?.firstName)), {initialValue: null});
+    private readonly _userService = inject(UserService);
+    protected userName = toSignal(this._userService.user$.pipe(map(u => u?.firstName)), {initialValue: null});
 
     protected onNavigate(path: string): void {
         void this._router.navigate([path]);

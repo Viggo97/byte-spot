@@ -1,21 +1,27 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, catchError, EMPTY, map, Observable, of, switchMap, tap } from 'rxjs';
+import { catchError, EMPTY, map, Observable, of, ReplaySubject, switchMap, tap } from 'rxjs';
 import { environment } from 'projects/byte-spot/src/environments/environment';
 import { SignIn } from './models/sign-in.interface';
 import { SignUp } from './models/sign-up.interface';
 import { UserDto } from './user/user-dto.interface';
 import { User } from './user/user.model';
-import { UserDataDto } from '@app/core/auth/user/user-data-dto.interface';
+import { UserService } from './user/user.service';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
     private readonly _http = inject(HttpClient);
+    private readonly _userService = inject(UserService);
 
     private readonly URL = environment.apiUrl + '/users';
 
-    private readonly user = new BehaviorSubject<User | null>(null);
-    user$ = this.user.asObservable();
+    private readonly initialized = new ReplaySubject<boolean>(1);
+    initialized$ = this.initialized.asObservable();
+
+    private _isAuthenticated = false;
+    get isAuthenticated(): boolean {
+        return this._isAuthenticated;
+    }
 
     signUp(signUp: SignUp): Observable<object> {
         const url = this.URL + '/sign-up';
@@ -26,15 +32,19 @@ export class AuthService {
         const url = this.URL + '/sign-in';
         return this._http.post<UserDto>(url, signIn)
             .pipe(tap((user) => {
-                this.user.next(new User(user.id, user.email, user.firstName, user.lastName, user.role));
+                this._isAuthenticated = true;
+                this._userService.setUser(User.fromDto(user));
             }));
     }
 
     logout(): Observable<object> {
-        if (!this.user.getValue()) {
+        this._isAuthenticated = false;
+
+        if (!this._userService.getUser()) {
             return of(EMPTY);
         }
-        this.user.next(null);
+
+        this._userService.clearUser();
 
         const url = this.URL + '/logout';
         return this._http.post(url, null);
@@ -45,12 +55,15 @@ export class AuthService {
         return this._http.post<UserDto>(url, null)
             .pipe(
                 tap((user) => {
-                    if (!this.user.getValue()) {
-                        this.user.next(new User(user.id, user.email, user.firstName, user.lastName, user.role));
+                    this._isAuthenticated = true;
+                    this.initialized.next(true);
+                    if (!this._userService.getUser()) {
+                        this._userService.setUser(User.fromDto(user));
                     }
                 }),
                 catchError(() => {
-                    this.user.next(null);
+                    this.initialized.next(true);
+                    this._userService.clearUser();
                     return of(null)
                         .pipe(
                             switchMap(() => this.logout()),
@@ -64,10 +77,5 @@ export class AuthService {
         const url = this.URL + '/validate-email';
         const params = new HttpParams().set('email', email);
         return this._http.get<boolean>(url, {params});
-    }
-
-    changeUserData(userData: UserDataDto): Observable<object> {
-        const url = this.URL + '/change-data';
-        return this._http.post(url, userData);
     }
 }
