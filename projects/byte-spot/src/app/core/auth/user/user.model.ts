@@ -17,6 +17,6 @@ export class User {
     }
 
     static fromDto(dto: UserDto): User {
-        return new User(dto.id, 'aaa@aaaaa.com', dto.firstName, dto.lastName, dto.role);
+        return new User(dto.id, dto.email, dto.firstName, dto.lastName, dto.role);
     }
 }
