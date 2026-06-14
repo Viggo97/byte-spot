@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { UserService } from '@app/core';
+import { UserService } from '../../auth/user/user.service';
 import { ThemeSwitchComponent } from '../theme-switch/theme-switch.component';
 import { LanguageSwitchComponent } from '../language-switch/language-switch.component';
 import { SignInSelectComponent } from './sign-in-select/sign-in-select.component';

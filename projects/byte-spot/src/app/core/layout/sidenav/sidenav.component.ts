@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay } from '@angular/cdk/overlay';
 import { DrawerComponent } from '@byte-spot-lib';
-import { UserService } from '@core';
+import { UserService } from '../../auth/user/user.service';
 import { SvgIconComponent } from '@shared';
 import { TranslatePipe } from '../../translate/translate.pipe';
 import { LanguageSwitchComponent } from '../language-switch/language-switch.component';
