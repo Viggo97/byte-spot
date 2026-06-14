@@ -65,4 +65,8 @@ export const i18nGlobal: Record<string, I18nLanguageCode> = {
         en: 'Save',
         pl: 'Zapisz',
     },
+    dataSaved: {
+        en: 'Data was saved correctly.',
+        pl: 'Dane zostały zapisane poprawnie.',
+    },
 };

@@ -40,4 +40,8 @@
     >
         {{ 'global.save' | translate }}
     </button>
+
+    @if (showDataSaved()) {
+        <span>{{ 'global.dataSaved' | translate }}</span>
+    }
 </form>

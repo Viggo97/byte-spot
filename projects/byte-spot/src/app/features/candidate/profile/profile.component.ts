@@ -2,8 +2,8 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { disabled, form, FormField, FormRoot, maxLength, minLength, required } from '@angular/forms/signals';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { firstValueFrom } from 'rxjs';
-import { AuthService, TranslatePipe } from '@core';
-import { UserDataDto } from '@app/core/auth/user/user-data-dto.interface';
+import { TranslatePipe, UserService } from '@core';
+import { UserUpdateDto } from '@app/core/auth/user/user-update-dto.interface';
 
 @Component({
     selector: 'bsa-candidate-profile',
@@ -16,8 +16,8 @@ import { UserDataDto } from '@app/core/auth/user/user-data-dto.interface';
     styleUrl: './profile.component.scss',
 })
 export class ProfileComponent {
-    private readonly _authService = inject(AuthService);
-    private readonly _userData = toSignal(this._authService.user$);
+    private readonly _userService = inject(UserService);
+    private readonly _userData = toSignal(this._userService.user$);
 
     protected userProfileModel = signal({
         firstName: this._userData()?.firstName || '',
@@ -41,11 +41,15 @@ export class ProfileComponent {
         {
             submission: {
                 action: async () => {
-                    const userData: UserDataDto = {
+                    this.showDataSaved.set(false);
+                    const userData: UserUpdateDto = {
                         firstName: this.userProfileModel().firstName,
                         lastName: this.userProfileModel().lastName,
                     };
-                    await firstValueFrom(this._authService.changeUserData(userData));
+                    const userId = this._userData()?.id;
+                    if (!userId) { return ;}
+                    await firstValueFrom(this._userService.updateUser(userId, userData));
+                    this.showDataSaved.set(true);
                 },
             },
         });
@@ -53,4 +57,6 @@ export class ProfileComponent {
     protected submitButtonDisabled = computed(() =>
         this.userProfileModel().firstName === this._userData()?.firstName
         && this.userProfileModel().lastName === this._userData()?.lastName);
+
+    protected showDataSaved = signal(false);
 }
