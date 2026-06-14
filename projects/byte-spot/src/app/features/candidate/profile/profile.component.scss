@@ -1,21 +1,40 @@
+@use 'mixins';
+
 :host {
     display: flex;
     flex-direction: column;
+    gap: 32px;
+}
+
+.user-info {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 0 8px;
     align-items: center;
 }
 
-form {
+.user-avatar {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    width: 3rem;
+    height: 3rem;
     display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 100%;
-    max-width: 480px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: var(--bsa-accent-backgroundColor);
+    color: var(--bsa-accent-textColor-primary);
+    font: var(--bsa-font-xl);
+    font-weight: 700;
 }
 
-input {
-    margin-top: 8px;
+.user-name {
+    grid-column: 2;
+    font: var(--bsa-font-3xl);
+    @include mixins.ellipsis;
 }
 
-button {
-    margin-top: 16px;
+.user-email {
+    grid-column: 2;
+    @include mixins.ellipsis;
 }

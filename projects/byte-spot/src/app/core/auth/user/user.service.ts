@@ -42,4 +42,9 @@ export class UserService {
                 this.user.next(newUser);
             }));
     }
+
+    changePassword(data: { oldPassword: string, newPassword: string }): Observable<object> {
+        const url = `${this.URL}/change-password`;
+        return this._http.post(url, data);
+    }
 }

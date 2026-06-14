@@ -1,0 +1,57 @@
+<section>
+    <div class="title">
+        <bsa-svg-icon name="icon-user" size="1.5rem" />
+        {{'user.myData' | translate}}
+    </div>
+
+    <div class="title-note">
+        {{ 'user.myDataNote' | translate }}
+    </div>
+
+    <form [formRoot]="userProfileForm">
+        <div class="form-control">
+            <label for="user-first-name">{{ 'user.firstName' | translate }}</label>
+            <input type="text" id="user-first-name" [formField]="userProfileForm.firstName">
+            <div class="validation-error">
+                @if (userProfileForm.firstName().invalid() && userProfileForm.firstName().touched()) {
+                    @for (error of userProfileForm.firstName().errors(); track error.kind) {
+                        <span>{{ error.message! | translate }} </span>
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="form-control">
+            <label for="user-last-name">{{ 'user.lastName' | translate }}</label>
+            <input type="text" id="user-last-name" [formField]="userProfileForm.lastName">
+
+            <div class="validation-error">
+                @if (userProfileForm.lastName().invalid() && userProfileForm.lastName().touched()) {
+                    @for (error of userProfileForm.lastName().errors(); track error.kind) {
+                        <span>{{ error.message! | translate }} </span>
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="form-control">
+            <label for="user-email">{{ 'user.email' | translate }}</label>
+            <input type="text" id="user-email" [formField]="userProfileForm.email">
+        </div>
+
+        <button
+            type="submit"
+            class="primary"
+            [disabled]="
+        userProfileForm().invalid()
+        || userProfileForm().pending()
+        || userProfileForm().submitting()|| submitButtonDisabled()"
+        >
+            {{ 'global.save' | translate }}
+        </button>
+
+        @if (showDataSaved()) {
+            <span>{{ 'global.dataSaved' | translate }}</span>
+        }
+    </form>
+</section>

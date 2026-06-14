@@ -93,6 +93,10 @@ export const i18nUser: Record<string, I18nLanguageCode> = {
         en: 'Last name must not have more than 64 characters.',
         pl: 'Nazwisko nie może mieć więcej niż 64 znaki.',
     },
+    passwordAreSame: {
+        en: 'Passwords can\'t be the same.',
+        pl: 'Hasła nie mogą być takie same',
+    },
     myProfile: {
         en: 'My profile',
         pl: 'Mój profil',
@@ -100,5 +104,29 @@ export const i18nUser: Record<string, I18nLanguageCode> = {
     myData: {
         en: 'My data',
         pl: 'Moje dane',
+    },
+    myDataNote: {
+        en: 'Update your first and last name.',
+        pl: 'Zaktualizuj swoje imię i nazwisko.',
+    },
+    settings: {
+        en: 'Settings',
+        pl: 'Ustawienia',
+    },
+    changePassword: {
+        en: 'Change password',
+        pl: 'Zmnień hasło',
+    },
+    changePasswordNote: {
+        en: 'We recommend using a unique password of at least 8 characters.',
+        pl: 'Zalecamy używanie unikalnego hasła o długości co najmniej 8 znaków.',
+    },
+    currentPassword: {
+        en: 'Currnet password',
+        pl: 'Obecne hasło',
+    },
+    newPassword: {
+        en: 'New password',
+        pl: 'Nowe hasło',
     },
 };
