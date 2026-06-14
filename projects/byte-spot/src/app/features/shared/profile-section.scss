@@ -1,0 +1,40 @@
+section {
+    padding: 16px;
+    background-color: var(--bsa-backgroundColor-secondary);
+    border: 1px solid var(--bsa-borderColor-secondary);
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font: var(--bsa-font-lg);
+    font-weight: 600;
+
+    bsa-svg-icon {
+        color: var(--bsa-textColor-highlight);
+    }
+}
+
+.title-note {
+    margin-bottom: 16px;
+    font: var(--bsa-font-sm);
+    color: var(--bsa-textColor-secondary);
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-control {
+    input {
+        margin-top: 8px;
+    }
+}
+
+button[type="submit"] {
+    width: fit-content;
+    justify-self: end;
+}
