@@ -2,7 +2,7 @@ import { HttpErrorResponse, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, EMPTY, throwError } from 'rxjs';
-import { ServerError } from '@shared';
+import { ServerError } from './server-error.model';
 import { BYPASS_ERROR_INTERCEPTOR } from './bypass-error-interceptor.const';
 
 export const errorInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {

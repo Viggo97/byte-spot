@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
-import { authGuard } from '@core';
-import { ErrorPageComponent } from '@app/core/pages/error-page/error-page.component';
+import { authGuard, ErrorPageComponent } from '@core';
 import { SignUpComponent } from '@app/core/auth/sign-up/sign-up.component';
 import { SignInComponent } from '@app/core/auth/sign-in/sign-in.component';
 
