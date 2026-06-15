@@ -44,7 +44,8 @@ export class UserService {
     }
 
     changePassword(data: { oldPassword: string, newPassword: string }): Observable<object> {
-        const url = `${this.URL}/change-password`;
+        const userId = this.user.getValue()?.id;
+        const url = `${this.URL}/${userId}/change-password`;
         return this._http.post(url, data);
     }
 }
