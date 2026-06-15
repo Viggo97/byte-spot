@@ -4,6 +4,9 @@ export * from './auth/auth.guard';
 
 export * from './auth/user/user.service';
 
+export * from './errors/error.interceptor';
+export * from './errors/bypass-error-interceptor.const';
+
 export * from './initializers/load-svg-sprite';
 export * from './initializers/refresh-token';
 

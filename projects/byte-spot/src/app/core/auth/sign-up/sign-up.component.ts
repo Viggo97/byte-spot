@@ -1,11 +1,9 @@
 import { Component, inject, Signal, signal } from '@angular/core';
 import { email, form, FormField, FormRoot, maxLength, minLength, required, validateAsync } from '@angular/forms/signals';
 import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { firstValueFrom } from 'rxjs';
 import { ControlLoaderDirective } from '@byte-spot-lib';
-import { ServerError } from '@shared';
 import { TranslatePipe } from '../../translate/translate.pipe';
 import { AuthService } from '../auth.service';
 
@@ -73,18 +71,8 @@ export class SignUpComponent {
         {
             submission: {
                 action: async () => {
-                    try {
-                        await firstValueFrom(this._authService.signUp(this.signUpModel()));
-                        await this._router.navigate(['/']);
-                    } catch (error: unknown) {
-                        const queryParams = {errorCode: 500, errorMessage: ''};
-
-                        if (error instanceof HttpErrorResponse) {
-                            const errorMessage = ServerError.tryParse(error.error);
-                            queryParams.errorMessage = errorMessage?.reason || '';
-                        }
-                        await this._router.navigate(['/error'], {queryParams});
-                    }
+                    await firstValueFrom(this._authService.signUp(this.signUpModel()));
+                    await this._router.navigate(['/']);
                 },
             },
         });

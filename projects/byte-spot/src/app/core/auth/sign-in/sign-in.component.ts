@@ -4,8 +4,6 @@ import { firstValueFrom } from 'rxjs';
 import { TranslatePipe } from '../../translate/translate.pipe';
 import { AuthService } from '../auth.service';
 import { email, form, FormField, FormRoot, maxLength, minLength, required } from '@angular/forms/signals';
-import { HttpErrorResponse } from '@angular/common/http';
-import { ServerError } from '@shared';
 
 @Component({
     selector: 'bsa-sign-in',
@@ -42,19 +40,9 @@ export class SignInComponent {
         {
             submission: {
                 action: async () => {
-                    try {
-                        await firstValueFrom(this._authService.signIn(this.signInModel()));
-                        const returnUrl = this._route.snapshot.queryParamMap.get('returnUrl') ?? '/';
-                        await this._router.navigateByUrl(returnUrl);
-                    } catch (error: unknown) {
-                        const queryParams = {errorCode: 500, errorMessage: ''};
-
-                        if (error instanceof HttpErrorResponse) {
-                            const errorMessage = ServerError.tryParse(error.error);
-                            queryParams.errorMessage = errorMessage?.reason || '';
-                        }
-                        await this._router.navigate(['/error'], {queryParams});
-                    }
+                    await firstValueFrom(this._authService.signIn(this.signInModel()));
+                    const returnUrl = this._route.snapshot.queryParamMap.get('returnUrl') ?? '/';
+                    await this._router.navigateByUrl(returnUrl);
                 },
             },
         });

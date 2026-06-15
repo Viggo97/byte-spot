@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpParams } from '@angular/common/http';
 import { catchError, EMPTY, map, Observable, of, ReplaySubject, switchMap, tap } from 'rxjs';
 import { environment } from 'projects/byte-spot/src/environments/environment';
 import { SignIn } from './models/sign-in.interface';
@@ -7,6 +7,7 @@ import { SignUp } from './models/sign-up.interface';
 import { UserDto } from './user/user-dto.interface';
 import { User } from './user/user.model';
 import { UserService } from './user/user.service';
+import { BYPASS_ERROR_INTERCEPTOR } from '../errors/bypass-error-interceptor.const';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -52,7 +53,7 @@ export class AuthService {
 
     refreshToken(): Observable<UserDto | null> {
         const url = this.URL + '/refresh-token';
-        return this._http.post<UserDto>(url, null)
+        return this._http.post<UserDto>(url, null, {context: new HttpContext().set(BYPASS_ERROR_INTERCEPTOR, true)})
             .pipe(
                 tap((user) => {
                     this._isAuthenticated = true;

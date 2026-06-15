@@ -1,7 +1,6 @@
 import { Component, DestroyRef, inject, signal, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { catchError, of } from 'rxjs';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { LoaderComponent } from '@shared';
 import { ActionComponent } from './action/action.component';
@@ -54,13 +53,7 @@ export class OffersDetailsComponent implements OnInit {
         });
 
         this._detailsService.getOfferDetails(this.offerId as string)
-            .pipe(
-                catchError(() => {
-                    void this._router.navigate(['/error']);
-                    return of(null);
-                }),
-                takeUntilDestroyed(this._destroyRef),
-            )
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(offer => {
                 this.offer.set(offer);
             });
