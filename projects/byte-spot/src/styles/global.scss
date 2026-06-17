@@ -9,7 +9,10 @@ html {
 }
 
 html, body {
+    margin: 0;
+    padding: 0;
     height: 100%;
+    min-height: 100dvh;
     color-scheme: light dark;
     background-color: var(--bsa-body-backgroundColor);
     color: var(--bsa-textColor-primary);
@@ -20,6 +23,10 @@ html, body {
 }
 
 bsa-root {
+    height: 100%;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
     isolation: isolate;
 }
 
