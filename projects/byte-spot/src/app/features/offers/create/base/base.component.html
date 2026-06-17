@@ -1,0 +1,66 @@
+<section>
+    <div>
+        <h2 class="title">{{ 'offer.basicInformation' | translate }}</h2>
+        <div class="title-note">{{ 'offer.basicInformationNote' | translate }}</div>
+    </div>
+
+    <div class="form-control">
+        <h3 class="form-group-title">{{ 'offer.jobTitle' | translate }} *</h3>
+        <input
+            type="text"
+            id="user-first-name"
+            [attr.aria-label]="'offer.jobTitle' | translate"
+            [placeholder]="'offer.jobTitlePlaceholder' | translate"
+            [formField]="baseForm.title"
+        >
+        <div class="validation-error">
+            @if (baseForm.title().invalid() && baseForm.title().touched()) {
+                @for (error of baseForm.title().errors(); track error.kind) {
+                    <span>{{ error.message! | translate }} </span>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <h3 class="form-group-title">{{ 'offer.workMode' | translate }} *</h3>
+        <div class="work-modes">
+            @for (workMode of workModes(); track workMode.id; let i = $index) {
+                <bsl-checkbox
+                    [id]="'offer-create-work-mode-' + i"
+                    [formField]="baseForm.workModes[i]"
+                >
+                    {{ workMode.name }}
+                </bsl-checkbox>
+            }
+        </div>
+        <div class="validation-error">
+            @if (baseForm.workModes().invalid() && workModesTouched()) {
+                @for (error of baseForm.workModes().errors(); track error.kind) {
+                    <span>{{ error.message! | translate }} </span>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <h3 class="form-group-title">{{ 'offer.locations' | translate }} *</h3>
+        <div class="locations">
+            @for (location of locations(); track location.id; let i = $index) {
+                <bsl-checkbox
+                    [id]="'offer-create-location-' + i"
+                    [formField]="baseForm.locations[i]"
+                >
+                    {{ location.name }}
+                </bsl-checkbox>
+            }
+        </div>
+        <div class="validation-error">
+            @if (baseForm.locations().invalid() && locationsTouched()) {
+                @for (error of baseForm.locations().errors(); track error.kind) {
+                    <span>{{ error.message! | translate }} </span>
+                }
+            }
+        </div>
+    </div>
+</section>

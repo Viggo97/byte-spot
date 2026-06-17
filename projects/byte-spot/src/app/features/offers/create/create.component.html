@@ -1,0 +1,66 @@
+@if (loading()) {
+    <ng-container *ngTemplateOutlet="header"></ng-container>
+    @for (skeleton of skeletons(); track skeleton) {
+        <div class="skeletons-container">
+            <bsl-skeleton width="60%"></bsl-skeleton>
+            <bsl-skeleton width="40%"></bsl-skeleton>
+            <bsl-skeleton width="100%"></bsl-skeleton>
+            <bsl-skeleton width="80%"></bsl-skeleton>
+            <bsl-skeleton width="20%"></bsl-skeleton>
+        </div>
+    }
+} @else if (submitting()) {
+    <bsa-loader>
+        <div>{{ 'offer.proceedingNewOffer' | translate }}</div>
+    </bsa-loader>
+} @else if (added()) {
+    <div class="added-container">
+        <bsa-svg-icon name="icon-check-circle" size="4rem" />
+        <h1>{{ 'offer.offerAdded' | translate }}</h1>
+        <button
+            class="primary"
+            role="link"
+            routerLink="/offers"
+        >
+            {{'offer.viewOffers' | translate}}
+        </button>
+    </div>
+} @else {
+    <ng-container *ngTemplateOutlet="header"></ng-container>
+    <div class="form-sections-container">
+        <div class="form-section">
+            <bsa-offers-create-base></bsa-offers-create-base>
+        </div>
+
+        <div class="form-section">
+            <bsa-offers-create-competences></bsa-offers-create-competences>
+        </div>
+
+        <div class="form-section">
+            <bsa-offer-create-contract></bsa-offer-create-contract>
+        </div>
+
+        <div class="form-section">
+            <bsa-offer-create-description></bsa-offer-create-description>
+        </div>
+
+        <button
+            type="submit"
+            class="primary"
+            [disabled]="baseComponent().formInvalid() ||
+                    competencesComponent().formInvalid() ||
+                    contractsComponent().formInvalid() ||
+                    descriptionComponent().formInvalid()"
+            (click)="onSubmit()"
+        >
+            {{ 'global.save' | translate }}
+        </button>
+    </div>
+}
+
+<ng-template #header>
+    <div>
+        <h1>{{ 'offer.createJobTitle' | translate }}</h1>
+        <div class="title-note">{{ 'offer.createJobTitleNote' | translate }}</div>
+    </div>
+</ng-template>

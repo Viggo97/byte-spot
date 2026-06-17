@@ -1,0 +1,127 @@
+@for (contract of contractModel().contracts; track $index) {
+    <div class="contract-unit">
+        <div class="contract-title">{{contract.employmentTypeName}}</div>
+
+        <div class="contract-salaries">
+            <bsl-checkbox
+                id="offer-create-contract-has-fixed-salary"
+                [formField]="contractForm.contracts[$index].hasFixedSalary"
+            >
+                {{ 'offer.fixedSalary' | translate }}
+            </bsl-checkbox>
+
+            <div class="contract-salary">
+                <label for="offer-create-contract-salary-fixed">{{ 'offer.fixed' | translate }}</label>
+                <input
+                    type="number"
+                    id="offer-create-contract-salary-fixed"
+                    [formField]="contractForm.contracts[$index].salaryFixed"
+                >
+            </div>
+
+            <div class="contract-salary">
+                <label for="offer-create-contract-salary-min">{{ 'offer.min' | translate }}</label>
+                <input
+                    type="number"
+                    id="offer-create-contract-salary-min"
+                    [formField]="contractForm.contracts[$index].salaryMin"
+                >
+            </div>
+
+            <div class="contract-salary">
+                <label for="offer-create-contract-salary-max">{{ 'offer.max' | translate }}</label>
+                <input
+                    type="number"
+                    id="offer-create-contract-salary-max"
+                    [formField]="contractForm.contracts[$index].salaryMax"
+                >
+            </div>
+        </div>
+
+        <div class="contract-params">
+            <div class="contract-param">
+                <label for="offer-create-contract-salary-type-label">{{ 'offer.salaryType' | translate }}</label>
+                <bsl-select
+                    [ariaLabelledBy]="'offer-create-contract-salary-type-label'"
+                    [id]="'offer-create-contract-salary-type'"
+                    [displayLabel]="'name'"
+                    [formField]="contractForm.contracts[$index].salaryType"
+                >
+                    @for (salaryType of salaryTypes(); track salaryType.value) {
+                        <bsl-list-box-option
+                            [id]="salaryType.value"
+                            [value]="salaryType"
+                        >
+                            {{ salaryType.name }}
+                        </bsl-list-box-option>
+                    }
+                </bsl-select>
+            </div>
+
+            <div class="contract-param">
+                <label for="offer-create-contract-billing-unit-label">{{ 'offer.billingUnit' | translate }}</label>
+                <bsl-select
+                    [ariaLabelledBy]="'offer-create-contract-billing-unit-label'"
+                    [id]="'offer-create-contract-billing-unit'"
+                    [displayLabel]="'name'"
+                    [formField]="contractForm.contracts[$index].billingUnit"
+                >
+                    @for (billingUnit of billingUnits(); track billingUnit.value) {
+                        <bsl-list-box-option
+                            [id]="billingUnit.value"
+                            [value]="billingUnit"
+                        >
+                            {{ billingUnit.name }}
+                        </bsl-list-box-option>
+                    }
+                </bsl-select>
+            </div>
+
+            <div class="contract-param">
+                <label for="offer-create-contract-currency-code-label">{{ 'offer.currencyCode' | translate }}</label>
+                <bsl-select
+                    [ariaLabelledBy]="'offer-create-contract-currency-code-label'"
+                    [id]="'offer-create-contract-currency-code'"
+                    [displayLabel]="'name'"
+                    [formField]="contractForm.contracts[$index].currencyCode"
+                >
+                    @for (currencyCode of currencyCodes(); track currencyCode.value) {
+                        <bsl-list-box-option
+                            [id]="currencyCode.value"
+                            [value]="currencyCode"
+                        >
+                            {{ currencyCode.name }}
+                        </bsl-list-box-option>
+                    }
+                </bsl-select>
+            </div>
+        </div>
+
+        <div class="validation-error">
+            @if (contractForm.contracts[$index].salaryMax().invalid() && contractForm.contracts[$index].salaryMax().touched()) {
+                @for (error of contractForm.contracts[$index].salaryMax().errors(); track error.kind) {
+                    @if (error.message) {
+                        <span>{{ error.message | translate }} </span>
+                    }
+                }
+            }
+
+            @if (contractForm.contracts[$index].salaryMin().invalid() && contractForm.contracts[$index].salaryMin().touched()) {
+                @for (error of contractForm.contracts[$index].salaryMin().errors(); track error.kind) {
+                    @if (error.message) {
+                        <span>{{ error.message | translate }} </span>
+                    }
+                }
+            }
+
+            @if (contractForm.contracts[$index].salaryFixed().invalid() && contractForm.contracts[$index].salaryFixed().touched()) {
+                @for (error of contractForm.contracts[$index].salaryFixed().errors(); track error.kind) {
+                    @if (error.message) {
+                        <span>{{ error.message | translate }} </span>
+                    }
+                }
+            }
+        </div>
+    </div>
+
+}

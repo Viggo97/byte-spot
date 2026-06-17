@@ -1,0 +1,24 @@
+<section>
+    <div>
+        <h2 class="title">{{ 'offer.descriptionInformation' | translate }}</h2>
+        <div class="title-note">{{ 'offer.descriptionInformationNote' | translate }}</div>
+    </div>
+
+    <div class="form-group">
+        <h3 class="form-group-title">{{ 'offer.description' | translate }} *</h3>
+        <textarea
+            id="offer-create-description"
+            rows="10"
+            [placeholder]="'offer.descriptionPlaceholder' | translate"
+            [formField]="descriptionForm.description"
+        >
+        </textarea>
+        <div class="validation-error">
+            @if (descriptionForm.description().invalid() && descriptionForm.description().touched()) {
+                @for (error of descriptionForm.description().errors(); track error.kind) {
+                    <span>{{ error.message! | translate }} </span>
+                }
+            }
+        </div>
+    </div>
+</section>

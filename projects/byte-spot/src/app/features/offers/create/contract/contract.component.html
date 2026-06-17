@@ -1,0 +1,29 @@
+<section>
+    <div>
+        <h2 class="title">{{ 'offer.contractInformation' | translate }}</h2>
+        <div class="title-note">{{ 'offer.contractInformationNote' | translate }}</div>
+    </div>
+
+    <div class="form-group">
+        <h3 class="form-group-title">{{ 'offer.employmentType' | translate }} *</h3>
+        <div class="employment-types">
+            @for (employmentType of employmentTypes(); track employmentType.id; let i = $index) {
+                <bsl-checkbox
+                    [id]="'offer-create-employment-type-' + i"
+                    [formField]="employmentTypeForm.employmentTypes[i]"
+                >
+                    {{ employmentType.name }}
+                </bsl-checkbox>
+            }
+        </div>
+        <div class="validation-error">
+            @if (employmentTypeForm.employmentTypes().invalid() && employmentTypesTouched()) {
+                @for (error of employmentTypeForm.employmentTypes().errors(); track error.kind) {
+                    <span>{{ error.message! | translate }} </span>
+                }
+            }
+        </div>
+    </div>
+
+    <bsa-offer-create-contract-unit></bsa-offer-create-contract-unit>
+</section>

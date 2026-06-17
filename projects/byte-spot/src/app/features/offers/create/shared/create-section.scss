@@ -1,0 +1,32 @@
+section {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background-color: var(--bsa-backgroundColor-secondary);
+    border: 1px solid var(--bsa-borderColor-secondary);
+    overflow: hidden;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    bsa-svg-icon {
+        color: var(--bsa-textColor-highlight);
+    }
+}
+
+.title-note {
+    font: var(--bsa-font-sm);
+    color: var(--bsa-textColor-secondary);
+}
+
+.form-group-title {
+    margin-bottom: 4px;
+}
+
+.validation-error {
+    margin-top: 8px;
+}

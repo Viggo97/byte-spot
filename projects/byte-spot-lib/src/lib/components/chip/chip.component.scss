@@ -1,0 +1,57 @@
+@use '../../../styles/add-variables' as *;
+
+@layer bsl {
+    @include add-variables((
+        bsl-chip-backgroundColor: var(--bsl-color-neutral-50),
+        bsl-chip-borderColor: var(--bsl-color-neutral-300),
+        bsl-chip-backgroundColor-hover: var(--bsl-color-neutral-100),
+        bsl-chip-backgroundColor-active: var(--bsl-color-neutral-200),
+        bsl-chip-textColor: var(--bsl-textColor-primary),
+    ));
+
+    @include add-variables((
+        bsl-chip-backgroundColor: var(--bsl-color-neutral-950),
+        bsl-chip-borderColor: var(--bsl-color-neutral-700),
+        bsl-chip-backgroundColor-hover: var(--bsl-color-neutral-900),
+        bsl-chip-backgroundColor-active: var(--bsl-color-neutral-800),
+        bsl-chip-textColor: var(--bsl-textColor-primary),
+    ), 'dark');
+}
+
+bsl-chip {
+    padding: 4px 12px;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background-color: var(--bsl-chip-backgroundColor);
+    border: 1px solid var(--bsl-chip-borderColor);
+    font: var(--bsa-font-sm);
+    white-space: nowrap;
+    color: var(--bsl-chip-textColor);
+
+    [role="button"] {
+        width: 1rem;
+        height: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        outline-offset: 1px;
+        cursor: pointer;
+        border-radius: 50%;
+
+        &:hover {
+            background-color: var(--bsl-chip-backgroundColor-hover);
+        }
+
+        &:active {
+            background-color: var(--bsl-chip-backgroundColor-active);
+        }
+
+        svg {
+            width: .625rem;
+            height: .625rem;
+        }
+    }
+}
+

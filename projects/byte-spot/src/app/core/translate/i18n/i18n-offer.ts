@@ -127,15 +127,15 @@ export const i18nOffer: Record<string, I18nLanguageCode> = {
     },
     perHour: {
         en: 'per hour',
-        pl: 'godz.',
+        pl: 'za godzinę',
     },
     perDay: {
         en: 'per day',
-        pl: 'dzień',
+        pl: 'za dzień',
     },
     perMonth: {
         en: 'per month',
-        pl: 'miesiąc',
+        pl: 'za miesiąc',
     },
     employmentOfContractShort: {
         en: 'EC',
@@ -156,5 +156,185 @@ export const i18nOffer: Record<string, I18nLanguageCode> = {
     internshipShort: {
         en: 'Intern',
         pl: 'Staż',
+    },
+    createJobTitle: {
+        en: 'Add a new job offer',
+        pl: 'Dodaj nową ofertę pracy',
+    },
+    createJobTitleNote: {
+        en: 'Fill in the details below. Sections marked with * are required.',
+        pl: 'Wypełnij szczegóły oferty poniżej. Sekcje oznaczone * są wymagane.',
+    },
+    basicInformation: {
+        en: 'Basic information',
+        pl: 'Podstawowe informacje',
+    },
+    basicInformationNote: {
+        en: 'Core information about the offer.',
+        pl: 'Kluczowe informacje o ofercie.',
+    },
+    jobTitle: {
+        en: 'Job title',
+        pl: 'Stanowisko',
+    },
+    jobTitlePlaceholder: {
+        en: 'e.g. Software Engineer',
+        pl: 'np. Inżynier oprogramowania',
+    },
+    titleRequired: {
+        en: 'Title is required.',
+        pl: 'Tytuł jest wymagany.',
+    },
+    titleMinLength: {
+        en: 'Title must have at least 8 characters.',
+        pl: 'Tytuł musi mieć co najmniej 8 znaków.',
+    },
+    titleMaxLength: {
+        en: 'Title must not have more than 128 characters.',
+        pl: 'Tytuł nie może mieć więcej niż 128 znaków.',
+    },
+    atLeastOneWorkModeRequired: {
+        en: 'At least one work mode is required.',
+        pl: 'Wymagany jest co najmniej jeden tryb pracy.',
+    },
+    atLeastOneLocationRequired: {
+        en: 'At least one location is required.',
+        pl: 'Wymagana jest co najmniej jedna lokalizacja.',
+    },
+    competencesInformation: {
+        en: 'Technologies and experience',
+        pl: 'Technologie i doświadczenie',
+    },
+    competencesInformationNote: {
+        en: 'Point out the required technologies and experience of the candidate.',
+        pl: 'Wskaż wymagane technologie i doświadczenie kandydata.',
+    },
+    atLeastOneExperienceLevelRequired: {
+        en: 'At least one experience level is required.',
+        pl: 'Wymagany jest co najmniej jeden poziom doświadczenia.',
+    },
+    atLeastOneTechnologyRequired: {
+        en: 'At least one technology is required.',
+        pl: 'Wymagana jest co najmniej jedna technologia.',
+    },
+    contractInformation: {
+        en: 'Contracts and salary',
+        pl: 'Umowy i wynagrodzenie',
+    },
+    contractInformationNote: {
+        en: 'Choose accepted contract types and provide salary ranges for each.',
+        pl: 'Wybierz akceptowane rodzaje umów oraz określ wynagrodzenia.',
+    },
+    atLeastOneEmploymentTypeRequired: {
+        en: 'At least one employment type is required.',
+        pl: 'Wymagany jest co najmniej jedna forma zatrudnienia.',
+    },
+    fixed: {
+        en: 'Fixed',
+        pl: 'Stałe',
+    },
+    min: {
+        en: 'Min',
+        pl: 'Min',
+    },
+    max: {
+        en: 'Max',
+        pl: 'Max',
+    },
+    fixedSalary: {
+        en: 'Fixed salary',
+        pl: 'Stałe wynagrodzenie',
+    },
+    salaryType: {
+        en: 'Salary type',
+        pl: 'Rodzaj wynagrodzenia',
+    },
+    billingUnit: {
+        en: 'Billing unit',
+        pl: 'Jednostka pracy',
+    },
+    currencyCode: {
+        en: 'Currency',
+        pl: 'Waluta',
+    },
+    salaryMinRequired: {
+        en: 'Minimum salary is required',
+        pl: 'Minimalne wynagrodzenie jest wymagane.',
+    },
+    salaryMaxRequired: {
+        en: 'Maximum salary is required',
+        pl: 'Maksymalne wynagrodzenie jest wymagane.',
+    },
+    salaryFixedRequired: {
+        en: 'Fixed salary is required',
+        pl: 'Stałe wynagrodzenie jest wymagane.',
+    },
+    salaryMinMin: {
+        en: 'Minimum salary cannot be less than 1',
+        pl: 'Minimalne wynagrodzenie nie może być mniejsze niż 1',
+    },
+    salaryMinMax: {
+        en: 'Minimum salary cannot be greater than 49 999',
+        pl: 'Minimalne wynagrodzenie nie może być większe niż 49 999',
+    },
+    salaryMaxMin: {
+        en: 'Maximum salary cannot be less than 2',
+        pl: 'Maksymalne wynagrodzenie nie może być mniejsze niż 2',
+    },
+    salaryMaxMax: {
+        en: 'Maximum salary cannot be greater than 50 000',
+        pl: 'Minimalne wynagrodzenie nie może być większe niż 50 000',
+    },
+    salaryMismatch: {
+        en: 'Minimum salary cannot be greater than maximum salary.',
+        pl: 'Minimalne wynagrodzenie nie może być większe niż maksymalne wynagrodzenie.',
+    },
+    salaryFixedMin: {
+        en: 'Fixed salary cannot be less than 1',
+        pl: 'Stałe wynagrodzenie nie może być mniejsze niż 1',
+    },
+    salaryFixedMax: {
+        en: 'Fixed salary cannot be greater than 50 000',
+        pl: 'Stałe wynagrodzenie nie może być większe niż 50 000',
+    },
+    description: {
+        en: 'Description',
+        pl: 'Opis',
+    },
+    descriptionInformation: {
+        en: 'Offer details',
+        pl: 'Szczegóły oferty',
+    },
+    descriptionInformationNote: {
+        en: 'Briefly describe requirements, responsibilities and team.',
+        pl: 'Krótko opisz wymagania, obowiązki i zespół.',
+    },
+    descriptionPlaceholder: {
+        en: 'Put description here...',
+        pl: 'Dodaj opis...',
+    },
+    descriptionRequired: {
+        en: 'Description is required.',
+        pl: 'Opis jest wymagany.',
+    },
+    descriptionMinLength: {
+        en: 'Description must have at least 32 characters.',
+        pl: 'Opis musi mieć co najmniej 32 znaki.',
+    },
+    descriptionMaxLength: {
+        en: 'Description must not have more than 1200 characters.',
+        pl: 'Opis nie może mieć więcej niż 1200 znaków.',
+    },
+    proceedingNewOffer: {
+        en: 'Your offer is being processed and will be added soon.',
+        pl: 'Twoja oferta jest przetwarzana i niebawem zostanie dodana.',
+    },
+    offerAdded: {
+        en: 'Your offer has been added.',
+        pl: 'Twoja oferta została dodana.',
+    },
+    viewOffers: {
+        en: 'Wyświetl oferty',
+        pl: 'Wyświetl oferty',
     },
 };

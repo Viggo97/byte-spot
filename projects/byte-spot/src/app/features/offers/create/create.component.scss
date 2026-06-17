@@ -1,0 +1,52 @@
+:host {
+    padding: 32px;
+    width: 100%;
+    max-width: 800px;
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid var(--bsa-borderColor-primary);
+}
+
+h1 {
+    font: var(--bsa-font-4xl);
+    font-weight: 700;
+}
+
+.title-note {
+    margin-bottom: 16px;
+    font: var(--bsa-font-sm);
+    color: var(--bsa-textColor-secondary);
+}
+
+.skeletons-container {
+    margin-bottom: 32px;
+}
+
+bsl-skeleton {
+    margin-bottom: 16px;
+}
+
+.form-sections-container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+button[type="submit"] {
+    width: fit-content;
+    align-self: end;
+}
+
+.added-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+
+    bsa-svg-icon {
+        color: var(--bsa-textColor-highlight);
+    }
+}

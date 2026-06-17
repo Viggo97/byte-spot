@@ -1,0 +1,20 @@
+@use 'breakpoints' as breakpoints;
+
+.experience-levels,
+.technologies {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px 16px;
+
+    @include breakpoints.sm {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include breakpoints.md {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include breakpoints.lg {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

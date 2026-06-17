@@ -1,0 +1,43 @@
+.contract-unit {
+    margin-bottom: 16px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border: 1px solid var(--bsa-borderColor-secondary);
+}
+
+.contract-title {
+    margin-bottom: 8px;
+    font: var(--bsa-font-md);
+    font-weight: 600;
+}
+
+label {
+    font: var(--bsl-font-sm);
+}
+
+.contract-salaries {
+    margin-bottom: 8px;
+    display: flex;
+    gap: 16px;
+}
+
+.contract-salary {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contract-params {
+    display: flex;
+    gap: 16px;
+}
+
+.contract-param {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

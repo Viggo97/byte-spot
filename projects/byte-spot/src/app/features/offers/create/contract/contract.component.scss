@@ -1,0 +1,26 @@
+@use 'breakpoints' as breakpoints;
+
+.employment-types {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px 16px;
+
+    @include breakpoints.md {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include breakpoints.lg {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.form-group {
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--bsa-borderColor-secondary);
+}
+
+bsa-offer-create-contract-unit {
+    padding-top: 8px;
+}
+
+

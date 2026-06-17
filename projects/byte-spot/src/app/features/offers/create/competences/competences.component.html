@@ -1,0 +1,48 @@
+<section>
+    <div>
+        <h2 class="title">{{ 'offer.competencesInformation' | translate }}</h2>
+        <div class="title-note">{{ 'offer.competencesInformationNote' | translate }}</div>
+    </div>
+
+    <div class="form-group">
+        <h3 class="form-group-title">{{ 'offer.experienceLevel' | translate }} *</h3>
+        <div class="experience-levels">
+            @for (experienceLevel of experienceLevels(); track experienceLevel.id; let i = $index) {
+                <bsl-checkbox
+                    [id]="'offer-create-experience-level-' + i"
+                    [formField]="competenceForm.experienceLevels[i]"
+                >
+                    {{ experienceLevel.name }}
+                </bsl-checkbox>
+            }
+        </div>
+        <div class="validation-error">
+            @if (competenceForm.experienceLevels().invalid() && experienceLevelsTouched()) {
+                @for (error of competenceForm.experienceLevels().errors(); track error.kind) {
+                    <span>{{ error.message! | translate }} </span>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <h3 class="form-group-title">{{ 'offer.technologies' | translate }} *</h3>
+        <div class="technologies">
+            @for (technology of technologies(); track technology.id; let i = $index) {
+                <bsl-checkbox
+                    [id]="'offer-create-technology-' + i"
+                    [formField]="competenceForm.technologies[i]"
+                >
+                    {{ technology.name }}
+                </bsl-checkbox>
+            }
+        </div>
+        <div class="validation-error">
+            @if (competenceForm.technologies().invalid() && technologiesTouched()) {
+                @for (error of competenceForm.technologies().errors(); track error.kind) {
+                    <span>{{ error.message! | translate }} </span>
+                }
+            }
+        </div>
+    </div>
+</section>
