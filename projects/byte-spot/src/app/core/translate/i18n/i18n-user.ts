@@ -129,4 +129,24 @@ export const i18nUser: Record<string, I18nLanguageCode> = {
         en: 'New password',
         pl: 'Nowe hasło',
     },
+    companyName: {
+        en: 'Company name',
+        pl: 'Nazwa firmy',
+    },
+    signUpAsCompany: {
+        en: 'Sign up as company',
+        pl: 'Zarejestruj się jako firma',
+    },
+    companyNameRequired: {
+        en: 'Company name is required.',
+        pl: 'Nazwa firmy jest wymagana.',
+    },
+    companyNameMinLength: {
+        en: 'Company name must have at least 1 character.',
+        pl: 'Nazwa firmy musi mieć co najmniej 1 znak.',
+    },
+    companyNameMaxLength: {
+        en: 'Company name must not have more than 128 characters.',
+        pl: 'Nazwa firmy nie może mieć więcej niż 128 znaków.',
+    },
 };

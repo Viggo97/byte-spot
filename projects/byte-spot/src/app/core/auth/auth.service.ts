@@ -4,6 +4,7 @@ import { catchError, EMPTY, map, Observable, of, ReplaySubject, switchMap, tap }
 import { environment } from 'projects/byte-spot/src/environments/environment';
 import { SignIn } from './models/sign-in.interface';
 import { SignUp } from './models/sign-up.interface';
+import { SignUpCompany } from './models/sign-up-company.interface';
 import { UserDto } from './user/user-dto.interface';
 import { User } from './user/user.model';
 import { UserService } from './user/user.service';
@@ -27,6 +28,11 @@ export class AuthService {
     signUp(signUp: SignUp): Observable<object> {
         const url = this.URL + '/sign-up';
         return this._http.post(url, signUp);
+    }
+
+    signUpCompany(signUpCompany: SignUpCompany): Observable<object> {
+        const url = environment.apiUrl + '/companies';
+        return this._http.post(url, signUpCompany);
     }
 
     signIn(signIn: SignIn): Observable<UserDto> {

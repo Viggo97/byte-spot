@@ -3,7 +3,7 @@ import { email, form, FormField, FormRoot, maxLength, minLength, required, valid
 import { Router } from '@angular/router';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { firstValueFrom } from 'rxjs';
-import { ControlLoaderDirective } from '@byte-spot-lib';
+import { CheckboxComponent, ControlLoaderDirective } from '@byte-spot-lib';
 import { TranslatePipe } from '../../translate/translate.pipe';
 import { AuthService } from '../auth.service';
 
@@ -14,6 +14,7 @@ import { AuthService } from '../auth.service';
         FormRoot,
         TranslatePipe,
         ControlLoaderDirective,
+        CheckboxComponent,
     ],
     templateUrl: './sign-up.component.html',
     styleUrl: './sign-up.component.scss',
@@ -27,6 +28,8 @@ export class SignUpComponent {
         password: '',
         firstName: '',
         lastName: '',
+        isCompany: false,
+        company: '',
     });
 
     private createEmailResource = (emailSignal: Signal<string | undefined>) => {
@@ -56,6 +59,22 @@ export class SignUpComponent {
             minLength(schemaPath.lastName, 3, {message: 'user.lastNameMinLength'});
             maxLength(schemaPath.lastName, 64, {message: 'user.lastNameMaxLength'});
 
+            required(schemaPath.company, {
+                // eslint-disable-next-line @typescript-eslint/unbound-method
+                when: ({valueOf}) => valueOf(schemaPath.isCompany),
+                message: 'user.companyNameRequired',
+            });
+            minLength(schemaPath.company, 1, {
+                // eslint-disable-next-line @typescript-eslint/unbound-method
+                when: ({valueOf}) => valueOf(schemaPath.isCompany),
+                message: 'user.companyNameMinLength',
+            });
+            maxLength(schemaPath.company, 128, {
+                // eslint-disable-next-line @typescript-eslint/unbound-method
+                when: ({valueOf}) => valueOf(schemaPath.isCompany),
+                message: 'user.companyNameMaxLength',
+            });
+
             validateAsync(schemaPath.email, {
                 params: ({value}) => value(),
                 debounce: 300,
@@ -71,7 +90,18 @@ export class SignUpComponent {
         {
             submission: {
                 action: async () => {
-                    await firstValueFrom(this._authService.signUp(this.signUpModel()));
+                    if (this.signUpModel().isCompany) {
+                        const formData = this.signUpModel();
+                        await firstValueFrom(this._authService.signUpCompany({
+                            email: formData.email,
+                            password: formData.password,
+                            userFirstName: formData.firstName,
+                            userLastName: formData.lastName,
+                            name: formData.company,
+                        }));
+                    } else {
+                        await firstValueFrom(this._authService.signUp(this.signUpModel()));
+                    }
                     await this._router.navigate(['/']);
                 },
             },

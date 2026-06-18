@@ -4,6 +4,8 @@
     @let password = signUpForm.password;
     @let firstName = signUpForm.firstName;
     @let lastName = signUpForm.lastName;
+    @let isCompany = signUpForm.isCompany;
+    @let company = signUpForm.company;
 
     <section>
         <label for="sign-up-email">{{ 'user.email' | translate }}</label>
@@ -56,6 +58,30 @@
             }
         </div>
     </section>
+
+    <section>
+        <bsl-checkbox
+            [id]="'sign-up-is-company'"
+            [formField]="isCompany"
+        >
+           {{ 'user.signUpAsCompany' | translate }}
+        </bsl-checkbox>
+    </section>
+
+    @if (signUpModel().isCompany){
+        <section>
+            <label for="sign-up-company-name">{{ 'user.companyName' | translate }}</label>
+            <input id="sign-up-company-name" type="text" [formField]="company">
+
+            <div class="validation-error">
+                @if (company().invalid() && company().touched()) {
+                    @for (error of company().errors(); track error.kind) {
+                        <span>{{ error.message! | translate }} </span>
+                    }
+                }
+            </div>
+        </section>
+    }
 
     <button
         type="submit"
