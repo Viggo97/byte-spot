@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from 'projects/byte-spot/src/environments/environment';
 import { User } from './user.model';
-import { UserUpdateDto } from '@app/core/auth/user/user-update-dto.interface';
+import { UserUpdateDto } from './user-update-dto.interface';
 
 @Injectable({providedIn: 'root'})
 export class UserService {
