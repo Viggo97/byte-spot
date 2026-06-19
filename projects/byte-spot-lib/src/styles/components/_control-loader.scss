@@ -10,32 +10,36 @@
     bsl-control-loader-borderColor: var(--bsl-color-neutral-100),
 ), 'dark');
 
-.bsl-control-loader-base {
-    position: relative;
-    display: inline-block;
-    width: 100%;
-}
-
 .bsl-control-loader {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 16px;
-    height: 16px;
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
     border: 2px solid var(--bsl-control-loader-backgroundColor);
     border-top-color: var(--bsl-control-loader-borderColor);
     border-radius: 50%;
-    animation: control-loader 0.7s linear infinite;
+    animation: bsl-control-loader 0.7s linear infinite;
     pointer-events: none;
-}
 
-@keyframes control-loader {
-    to {
-        transform: translateY(-50%) rotate(360deg);
+    &.vertical-center {
+        transform: translateY(-50%);
+        animation: bsl-control-loader-vertical-center 0.7s linear infinite;
     }
 }
 
-input[bslControlLoader] {
-    padding-right: 2rem;
+@keyframes bsl-control-loader {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform:  rotate(360deg);
+    }
+}
+
+@keyframes bsl-control-loader-vertical-center {
+    0% {
+        transform: translateY(-50%) rotate(0deg);
+    }
+    100% {
+        transform: translateY(-50%) rotate(360deg);
+    }
 }
