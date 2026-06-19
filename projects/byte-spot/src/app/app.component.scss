@@ -1,12 +1,12 @@
 :host {
     display: flex;
     flex-direction: column;
-    height: 100%;
 }
 
 main {
     margin: 0 auto;
     padding: 24px 16px;
+    flex: 1;
     max-width: 1600px;
     width: 100%;
     display: flex;
