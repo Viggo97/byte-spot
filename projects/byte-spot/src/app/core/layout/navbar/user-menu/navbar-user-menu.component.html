@@ -4,10 +4,21 @@
     class="invisible"
 >
     <bsa-svg-icon name="icon-user" [size]="'1.5rem'" />
-    <span class="user-name">{{ userName() }}</span>
-
+    <span class="user-name">{{ user()?.firstName }}</span>
 </button>
+
 <bsl-menu #menu>
+    @if (isEmployer()) {
+        <!--eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->
+        <span
+            bslMenuItem
+            (click)="onNavigate('/offers/create')"
+            (keydown.enter)="onNavigate('/offers/create')"
+        >
+        <bsa-svg-icon name="icon-post-document" size="1.25rem"/>
+        <span>{{ 'offer.postJob' | translate }}</span>
+    </span>
+    }
     <!--eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->
     <span
         bslMenuItem

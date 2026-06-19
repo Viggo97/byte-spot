@@ -1,12 +1,12 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import { Component, computed, DestroyRef, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
 import { MenuComponent, MenuTriggerDirective, MenuItemDirective } from '@byte-spot-lib';
 import { SvgIconComponent } from '@shared';
 import { TranslatePipe } from '../../../translate/translate.pipe';
 import { AuthService } from '../../../auth/auth.service';
 import { UserService } from '../../../auth/user/user.service';
+import { Roles } from '@app/core/auth/user/role.enum';
 
 @Component({
     selector: 'bsa-navbar-user-menu',
@@ -25,7 +25,8 @@ export class NavbarUserMenuComponent {
     private readonly _router = inject(Router);
     private readonly _authService = inject(AuthService);
     private readonly _userService = inject(UserService);
-    protected userName = toSignal(this._userService.user$.pipe(map(u => u?.firstName)), {initialValue: null});
+    protected user = toSignal(this._userService.user$);
+    protected isEmployer = computed(() => this.user()?.role === Roles.Employer);
 
     protected onNavigate(path: string): void {
         void this._router.navigate([path]);

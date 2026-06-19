@@ -1,14 +1,14 @@
 import { UserDto } from './user-dto.interface';
-import { Role } from './role.enum';
+import { Roles } from './role.enum';
 
 export class User {
     readonly id: string;
     readonly email: string;
     readonly firstName: string;
     readonly lastName: string;
-    readonly role: Role;
+    readonly role: Roles;
 
-    constructor(id: string, email: string, firstName: string, lastName: string, role: Role) {
+    constructor(id: string, email: string, firstName: string, lastName: string, role: Roles) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;

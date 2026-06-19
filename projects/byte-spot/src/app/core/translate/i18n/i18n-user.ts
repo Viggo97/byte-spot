@@ -25,6 +25,10 @@ export const i18nUser: Record<string, I18nLanguageCode> = {
         en: 'Log out',
         pl: 'Wyloguj się',
     },
+    notAllowed: {
+        en: 'You are not allowed to access this page.',
+        pl: 'Nie masz uprawnień do tej strony.',
+    },
     email: {
         en: 'E-mail',
         pl: 'E-mail',

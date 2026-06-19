@@ -157,6 +157,10 @@ export const i18nOffer: Record<string, I18nLanguageCode> = {
         en: 'Intern',
         pl: 'Staż',
     },
+    postJob: {
+        en: 'Post a job',
+        pl: 'Opublikuj',
+    },
     createJobTitle: {
         en: 'Add a new job offer',
         pl: 'Dodaj nową ofertę pracy',

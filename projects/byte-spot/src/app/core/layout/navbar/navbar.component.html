@@ -9,6 +9,16 @@
         } @else {
             @if (user()) {
                 <bsa-navbar-user-menu></bsa-navbar-user-menu>
+
+                @if (isEmployer()) {
+                    <button
+                        role="link"
+                        class="primary"
+                        routerLink="/offers/create"
+                    >
+                        {{'offer.postJob' | translate}}
+                    </button>
+                }
             } @else {
                 <bsa-sign-in-select></bsa-sign-in-select>
             }
