@@ -12,6 +12,7 @@ import { OfferCreateContractComponent } from './contract/contract.component';
 import { OfferCreateDescriptionComponent } from './description/description.component';
 import { OfferCreateSaveService } from '@app/features/offers/create/create-save.service';
 import { CreateOfferDto } from '@app/features/offers/create/create-offer-dto.model';
+import { filter } from 'rxjs';
 
 @Component({
     selector: 'bsa-offers-create',
@@ -48,7 +49,10 @@ export class OffersCreateComponent implements OnInit {
 
     ngOnInit(): void {
         this._createService.fetchedCompleted$
-            .pipe(takeUntilDestroyed(this._destroyRef))
+            .pipe(
+                filter(fetched => fetched),
+                takeUntilDestroyed(this._destroyRef),
+            )
             .subscribe(() => {
                 this.loading.set(false);
             });

@@ -1,6 +1,6 @@
 import { DestroyRef, inject, Injectable } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { forkJoin, Subject } from 'rxjs';
+import { BehaviorSubject, forkJoin } from 'rxjs';
 import { LookupItem } from '@shared';
 import { OfferAttributesService } from '@app/features/offers/shared/offer-attributes.service';
 import { Technology } from '@app/features/offers/overview/filters/models/technology.interface';
@@ -41,7 +41,7 @@ export class OfferCreateService {
         return [...this._employmentTypes];
     }
 
-    private fetchedCompleted = new Subject<void>();
+    private fetchedCompleted = new BehaviorSubject<boolean>(false);
     fetchedCompleted$ = this.fetchedCompleted.asObservable();
 
     constructor() {
@@ -63,8 +63,7 @@ export class OfferCreateService {
                 this._workModes = workModes;
                 this._experienceLevels = experienceLevels;
                 this._employmentTypes = employmentTypes;
-                this.fetchedCompleted.next();
-                this.fetchedCompleted.complete();
+                this.fetchedCompleted.next(true);
             });
     }
 }
