@@ -20,7 +20,8 @@ footer {
 }
 
 .loader {
-    margin-top: 5rem;
+    flex: 1;
+    margin-top: -5rem;
     width: 100%;
     display: flex;
     justify-content: center;
