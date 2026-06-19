@@ -13,6 +13,10 @@ export const i18nUser: Record<string, I18nLanguageCode> = {
         en: 'Sign Up',
         pl: 'Zarejestruj się',
     },
+    signUpConfirmation: {
+        en: 'Thank you for account creation. You will be redirected to the login page shortly.',
+        pl: 'Dziękujemy za założenie konta w serwisie. Za chwilę nastąpi przekierowanie na stronę logowania.',
+    },
     signIn: {
         en: 'Sign In',
         pl: 'Zaloguj się',

@@ -1,6 +1,9 @@
 :host {
+    width: 100%;
+    max-width: 400px;
+    padding: 32px;
+    border: 1px solid var(--bsa-borderColor-primary);
     display: block;
-    width: 320px;
 }
 
 h1 {

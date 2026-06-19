@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { authGuard, ErrorPageComponent } from '@core';
+import { authGuard, ErrorPageComponent, loggedInGuard } from '@core';
 import { SignUpComponent } from '@app/core/auth/sign-up/sign-up.component';
 import { SignInComponent } from '@app/core/auth/sign-in/sign-in.component';
 
@@ -27,10 +27,12 @@ export const routes: Routes = [
     },
     {
         path: 'sign-up',
+        canActivate: [loggedInGuard],
         component: SignUpComponent,
     },
     {
         path: 'sign-in',
+        canActivate: [loggedInGuard],
         component: SignInComponent,
     },
     {

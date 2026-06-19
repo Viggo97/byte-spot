@@ -3,7 +3,7 @@
     @let email = signInForm.email;
     @let password = signInForm.password;
 
-    <section>
+    <div>
         <label for="sign-in-email">{{ 'user.email' | translate }}</label>
         <input id="sign-in-email" type="text" [formField]="email">
 
@@ -14,9 +14,9 @@
                 }
             }
         </div>
-    </section>
+    </div>
 
-    <section>
+    <div>
         <label for="sign-in-password">{{ 'user.password' | translate }}</label>
         <input id="sign-in-password" type="password" [formField]="password">
         <div class="validation-error">
@@ -26,12 +26,15 @@
                 }
             }
         </div>
-    </section>
+    </div>
 
     <button
         type="submit"
         [disabled]="signInForm().invalid() || signInForm().submitting()"
     >
-        {{ 'user.signIn' | translate }}
+        <span>{{ 'user.signIn' | translate }}</span>
+        @if (signInForm().submitting()) {
+            <span class="bsl-control-loader"></span>
+        }
     </button>
 </form>

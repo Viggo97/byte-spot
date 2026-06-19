@@ -1,11 +1,13 @@
-import { Component, inject, Signal, signal } from '@angular/core';
-import { email, form, FormField, FormRoot, maxLength, minLength, required, validateAsync } from '@angular/forms/signals';
-import { Router } from '@angular/router';
+import { Component, inject, OnDestroy, Signal, signal } from '@angular/core';
+import { form, FormField, FormRoot, maxLength, minLength, pattern, required, validateAsync } from '@angular/forms/signals';
+import { Router, RouterLink } from '@angular/router';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { firstValueFrom } from 'rxjs';
-import { CheckboxComponent, ControlLoaderDirective } from '@byte-spot-lib';
+import { CheckboxComponent } from '@byte-spot-lib';
 import { TranslatePipe } from '../../translate/translate.pipe';
 import { AuthService } from '../auth.service';
+import { SvgIconComponent } from '@shared';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'bsa-sign-up',
@@ -13,13 +15,14 @@ import { AuthService } from '../auth.service';
         FormField,
         FormRoot,
         TranslatePipe,
-        ControlLoaderDirective,
         CheckboxComponent,
+        RouterLink,
+        SvgIconComponent,
     ],
     templateUrl: './sign-up.component.html',
     styleUrl: './sign-up.component.scss',
 })
-export class SignUpComponent {
+export class SignUpComponent implements OnDestroy {
     private readonly _router = inject(Router);
     private readonly _authService = inject(AuthService);
 
@@ -43,7 +46,8 @@ export class SignUpComponent {
         this.signUpModel,
         (schemaPath) => {
             required(schemaPath.email, {message: 'user.emailRequired'});
-            email(schemaPath.email, {message: 'user.emailInvalid'});
+            pattern(schemaPath.email, /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                {message: 'user.emailInvalid'});
             minLength(schemaPath.email, 4, { message: 'user.emailMinLength'});
             maxLength(schemaPath.email, 64, {message: 'user.emailMaxLength'});
 
@@ -79,12 +83,13 @@ export class SignUpComponent {
                 params: ({value}) => value(),
                 debounce: 300,
                 factory: this.createEmailResource,
-                onSuccess: (result) =>
-                    result ? null : {kind: 'usernameTaken', message: 'user.emailInUse'},
-                onError: () => ({
-                    kind: 'serverError',
-                    message: 'global.unknownProblem',
-                }),
+                onSuccess: () => null,
+                onError: (error) => {
+                    if (error instanceof HttpErrorResponse && error.status === 409) {
+                        return { kind: 'usernameTaken', message: 'user.emailInUse' };
+                    }
+                    return { kind: 'serverError', message: 'global.unknownProblem' };
+                },
             });
         },
         {
@@ -102,8 +107,19 @@ export class SignUpComponent {
                     } else {
                         await firstValueFrom(this._authService.signUp(this.signUpModel()));
                     }
-                    await this._router.navigate(['/']);
+                    this.redirectTimeoutRef = setTimeout(() => {
+                        void this._router.navigate(['/sign-in']);
+                    }, 3000);
                 },
             },
         });
+
+    private redirectTimeoutRef?: number;
+    protected submitted = signal(false);
+
+    ngOnDestroy(): void {
+        if (this.redirectTimeoutRef) {
+            clearTimeout(this.redirectTimeoutRef);
+        }
+    }
 }

@@ -1,92 +1,115 @@
 <h1>{{ 'user.signUp' | translate }}</h1>
-<form [formRoot]="signUpForm">
-    @let email = signUpForm.email;
-    @let password = signUpForm.password;
-    @let firstName = signUpForm.firstName;
-    @let lastName = signUpForm.lastName;
-    @let isCompany = signUpForm.isCompany;
-    @let company = signUpForm.company;
 
-    <section>
-        <label for="sign-up-email">{{ 'user.email' | translate }}</label>
-        <input id="sign-up-email" type="text" [formField]="email" [bslControlLoader]="email().pending()">
+@if (!submitted()) {
+    <form [formRoot]="signUpForm">
+        @let email = signUpForm.email;
+        @let password = signUpForm.password;
+        @let firstName = signUpForm.firstName;
+        @let lastName = signUpForm.lastName;
+        @let isCompany = signUpForm.isCompany;
+        @let company = signUpForm.company;
 
-        <div class="validation-error">
-            @if (email().invalid() && email().touched()) {
-                @for (error of email().errors(); track error.kind) {
-                    <span>{{ error.message! | translate }} </span>
+        <div>
+            <label for="sign-up-email">{{ 'user.email' | translate }}</label>
+            <div class="sign-up-email">
+                <input id="sign-up-email" type="email" [formField]="email">
+                @if (email().pending()) {
+                    <span class="bsl-control-loader vertical-center"></span>
                 }
-            }
-        </div>
-    </section>
-
-    <section>
-        <label for="sign-up-password">{{ 'user.password' | translate }}</label>
-        <input id="sign-up-password" type="password" [formField]="password">
-
-        <div class="validation-error">
-            @if (password().invalid() && password().touched()) {
-                @for (error of password().errors(); track error.kind) {
-                    <span>{{ error.message! | translate }} </span>
-                }
-            }
-        </div>
-    </section>
-
-    <section>
-        <label for="sign-up-first-name">{{ 'user.firstName' | translate }}</label>
-        <input id="sign-up-first-name" type="text" [formField]="firstName">
-
-        <div class="validation-error">
-            @if (firstName().invalid() && firstName().touched()) {
-                @for (error of firstName().errors(); track error.kind) {
-                    <span>{{ error.message! | translate }} </span>
-                }
-            }
-        </div>
-    </section>
-
-    <section>
-        <label for="sign-up-last-name">{{ 'user.lastName' | translate }}</label>
-        <input id="sign-up-last-name" type="text" [formField]="lastName">
-
-        <div class="validation-error">
-            @if (lastName().invalid() && lastName().touched()) {
-                @for (error of lastName().errors(); track error.kind) {
-                    <span>{{ error.message! | translate }} </span>
-                }
-            }
-        </div>
-    </section>
-
-    <section>
-        <bsl-checkbox
-            [id]="'sign-up-is-company'"
-            [formField]="isCompany"
-        >
-           {{ 'user.signUpAsCompany' | translate }}
-        </bsl-checkbox>
-    </section>
-
-    @if (signUpModel().isCompany){
-        <section>
-            <label for="sign-up-company-name">{{ 'user.companyName' | translate }}</label>
-            <input id="sign-up-company-name" type="text" [formField]="company">
+            </div>
 
             <div class="validation-error">
-                @if (company().invalid() && company().touched()) {
-                    @for (error of company().errors(); track error.kind) {
+                @if (email().invalid() && email().touched()) {
+                    @for (error of email().errors(); track error.kind) {
                         <span>{{ error.message! | translate }} </span>
                     }
                 }
             </div>
-        </section>
-    }
+        </div>
 
-    <button
-        type="submit"
-        [disabled]="signUpForm().invalid() || signUpForm().pending() || signUpForm().submitting()"
-    >
-        {{ 'user.signUp' | translate }}
-    </button>
-</form>
+        <div>
+            <label for="sign-up-password">{{ 'user.password' | translate }}</label>
+            <input id="sign-up-password" type="password" [formField]="password">
+
+            <div class="validation-error">
+                @if (password().invalid() && password().touched()) {
+                    @for (error of password().errors(); track error.kind) {
+                        <span>{{ error.message! | translate }} </span>
+                    }
+                }
+            </div>
+        </div>
+
+        <div>
+            <label for="sign-up-first-name">{{ 'user.firstName' | translate }}</label>
+            <input id="sign-up-first-name" type="text" [formField]="firstName">
+
+            <div class="validation-error">
+                @if (firstName().invalid() && firstName().touched()) {
+                    @for (error of firstName().errors(); track error.kind) {
+                        <span>{{ error.message! | translate }} </span>
+                    }
+                }
+            </div>
+        </div>
+
+        <div>
+            <label for="sign-up-last-name">{{ 'user.lastName' | translate }}</label>
+            <input id="sign-up-last-name" type="text" [formField]="lastName">
+
+            <div class="validation-error">
+                @if (lastName().invalid() && lastName().touched()) {
+                    @for (error of lastName().errors(); track error.kind) {
+                        <span>{{ error.message! | translate }} </span>
+                    }
+                }
+            </div>
+        </div>
+
+        <div>
+            <bsl-checkbox
+                [id]="'sign-up-is-company'"
+                [formField]="isCompany"
+            >
+                {{ 'user.signUpAsCompany' | translate }}
+            </bsl-checkbox>
+        </div>
+
+        @if (signUpModel().isCompany){
+            <div>
+                <label for="sign-up-company-name">{{ 'user.companyName' | translate }}</label>
+                <input id="sign-up-company-name" type="text" [formField]="company">
+
+                <div class="validation-error">
+                    @if (company().invalid() && company().touched()) {
+                        @for (error of company().errors(); track error.kind) {
+                            <span>{{ error.message! | translate }} </span>
+                        }
+                    }
+                </div>
+            </div>
+        }
+
+        <button
+            type="submit"
+            [disabled]="signUpForm().invalid() || signUpForm().pending() || signUpForm().submitting()"
+        >
+            <span>{{ 'user.signUp' | translate }}</span>
+            @if (signUpForm().submitting()) {
+                <span class="bsl-control-loader"></span>
+            }
+        </button>
+    </form>
+} @else {
+    <div class="sign-up-confirmation">
+        <bsa-svg-icon name="icon-check-circle" size="4rem" />
+        <h1>{{ 'user.signUpConfirmation' | translate }}</h1>
+        <button
+            class="primary"
+            role="link"
+            routerLink="/sign-in"
+        >
+            {{'user.signIn' | translate}}
+        </button>
+    </div>
+}

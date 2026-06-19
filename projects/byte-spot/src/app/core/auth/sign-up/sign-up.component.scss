@@ -1,6 +1,9 @@
 :host {
+    width: 100%;
+    max-width: 400px;
+    padding: 32px;
+    border: 1px solid var(--bsa-borderColor-primary);
     display: block;
-    width: 320px;
 }
 
 h1 {
@@ -17,4 +20,33 @@ form {
 input {
     margin: 4px 0;
     display: flex;
+}
+.sign-up-email {
+    position: relative;
+
+    input {
+        padding-right: 2rem;
+    }
+
+    .bsl-control-loader {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+    }
+}
+
+button[type="submit"] .bsl-control-loader {
+    margin-left: 8px;
+}
+
+.sign-up-confirmation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+
+    bsa-svg-icon {
+        color: var(--bsa-textColor-highlight);
+    }
 }
