@@ -2,13 +2,47 @@
 @use 'mixins' as mixins;
 
 :host {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+    margin: -24px -16px 0;
+    padding: 24px 16px 0;
+    width: calc(100% + 32px);
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 16px;
+    background: linear-gradient(0deg,rgba(255, 255, 255, 0) 95%, var(--bsa-backgroundColor-highlight-secondary) 100%);
 
     @include breakpoints.md {
-        flex-direction: row;
+        grid-template-columns: 1fr 3fr;
+    }
+}
+
+header {
+    margin: 24px 0;
+    grid-column: 1 / span 2;
+
+    h1 {
+        display: block;
+        font: 3rem/3.5rem Space Grotesk;
+        font-weight: 700;
+
+        .highlight-primary {
+            padding: 0 4px;
+            color: var(--bsa-textColor-primary);
+            background-color: var(--bsa-backgroundColor-highlight-primary);
+
+            @include mixins.dark-theme {
+                color: var(--bsa-textColor-tertiary);
+            }
+        }
+    }
+
+    .subtitle {
+        max-width: 75%;
+        font: var(--bsa-font-lg);
+        color: var(--bsa-textColor-secondary);
+
+        @include breakpoints.lg {
+            max-width: 50%;
+        }
     }
 }
 
@@ -25,15 +59,19 @@ aside {
 
     @include breakpoints.md {
         display: block;
-        flex-basis: 25%;
+        grid-column: 1 / 1;
     }
 }
 
 main {
-    flex-basis: 75%;
+    grid-column: 1 / 1;
     display: flex;
     flex-direction: column;
     gap: 16px;
+
+    @include breakpoints.md {
+        grid-column: 2 / 2;
+    }
 }
 
 .settings {

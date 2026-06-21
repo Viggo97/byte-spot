@@ -93,6 +93,19 @@ export const i18nOffer: Record<string, I18nLanguageCode> = {
         en: 'This app uses free services that have limited resources. Loading may take up to 60 seconds.',
         pl: 'Ta aplikacja korzysta z darmowych serwisów, które mają limitowane zasoby. Ładowanie może potrwać do 60s.',
     },
+    mainHeader: {
+        en: 'Find a job you\'ll',
+        pl: 'Znajdź pracę, którą',
+    },
+    mainHeaderHighlight: {
+        en: 'love.',
+        pl: 'pokochasz.',
+    },
+    mainHeaderSubtitle: {
+        en: 'Curated roles across engineering, design, data, and more. Search by role, company, or skill.',
+        // eslint-disable-next-line max-len
+        pl: 'Wyselekcjonowane oferty pracy z dziedzin takich jak inżynieria, projektowanie, analiza danych i nie tylko. Wyszukuj według stanowiska, firmy lub umiejętności.',
+    },
     apply: {
         en: 'Apply',
         pl: 'Aplikuj',

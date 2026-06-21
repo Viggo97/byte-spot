@@ -19,6 +19,7 @@ import { OfferListComponent } from './list/offer-list.component';
 import { PaginationService } from './list/pagination.service';
 import { OfferListQueryService } from './list/offer-list-query.service';
 import { InfoService } from './info/info.service';
+import { TranslatePipe } from '@core';
 
 @Component({
     selector: 'bsa-offers-overview',
@@ -30,6 +31,7 @@ import { InfoService } from './info/info.service';
         SearchViewBroadComponent,
         SearchViewCompactComponent,
         OfferListComponent,
+        TranslatePipe,
     ],
     templateUrl: './offers-overview.component.html',
     styleUrl: './offers-overview.component.scss',

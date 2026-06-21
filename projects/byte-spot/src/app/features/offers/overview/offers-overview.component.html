@@ -1,3 +1,11 @@
+<header>
+    <h1>
+        {{'offer.mainHeader' | translate}}
+        <span class="highlight-primary">{{'offer.mainHeaderHighlight' | translate}}</span>
+    </h1>
+    <div class="subtitle">{{ 'offer.mainHeaderSubtitle' | translate }}</div>
+</header>
+
 @if (!compactMode()) {
     <aside>
         <bsa-offers-overview-filters-view-broad></bsa-offers-overview-filters-view-broad>
