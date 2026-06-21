@@ -10,7 +10,7 @@ import { LanguageSwitchComponent } from '../language-switch/language-switch.comp
 import { SignInSelectComponent } from './sign-in-select/sign-in-select.component';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import { NavbarUserMenuComponent } from './user-menu/navbar-user-menu.component';
-import { Roles } from '@app/core/auth/user/role.enum';
+import { Role } from '@app/core/auth/user/role.enum';
 
 @Component({
     selector: 'bsa-navbar',
@@ -34,7 +34,7 @@ export class NavbarComponent {
 
     compactMode = signal(window.innerWidth < 960);
     protected user = toSignal(this._userService.user$);
-    protected isEmployer = computed(() => this.user()?.role === Roles.Employer);
+    protected isEmployer = computed(() => this.user()?.role === Role.Employer);
 
     constructor() {
         this.subscribeToBreakpointObserver();

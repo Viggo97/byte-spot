@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { authGuard, ErrorPageComponent, loggedInGuard, roleGuard } from '@core';
 import { SignUpComponent } from '@app/core/auth/sign-up/sign-up.component';
 import { SignInComponent } from '@app/core/auth/sign-in/sign-in.component';
-import { Roles } from '@app/core/auth/user/role.enum';
+import { Role } from '@app/core/auth/user/role.enum';
 
 export const routes: Routes = [
     {
@@ -15,7 +15,7 @@ export const routes: Routes = [
         canActivate: [authGuard, roleGuard],
         loadComponent: () => import('./features/offers/create/create.component')
             .then(m => m.OffersCreateComponent),
-        data: {roles: [Roles.Employer]},
+        data: {roles: [Role.Employer]},
     },
     {
         path: 'offers/:id',

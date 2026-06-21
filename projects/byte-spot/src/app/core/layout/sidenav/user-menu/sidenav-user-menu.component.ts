@@ -4,7 +4,7 @@ import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { SvgIconComponent } from '@shared';
 import { TranslatePipe } from '../../../translate/translate.pipe';
 import { AuthService } from '../../../auth/auth.service';
-import { Roles } from '@app/core/auth/user/role.enum';
+import { Role } from '@app/core/auth/user/role.enum';
 import { UserService } from '../../../auth/user/user.service';
 
 @Component({
@@ -23,7 +23,7 @@ export class SidenavUserMenuComponent {
     private readonly _userService = inject(UserService);
 
     protected user = toSignal(this._userService.user$);
-    protected isEmployer = computed(() => this.user()?.role === Roles.Employer);
+    protected isEmployer = computed(() => this.user()?.role === Role.Employer);
 
     navigate = output();
 

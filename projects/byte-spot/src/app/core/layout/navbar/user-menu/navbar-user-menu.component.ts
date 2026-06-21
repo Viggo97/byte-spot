@@ -6,7 +6,7 @@ import { SvgIconComponent } from '@shared';
 import { TranslatePipe } from '../../../translate/translate.pipe';
 import { AuthService } from '../../../auth/auth.service';
 import { UserService } from '../../../auth/user/user.service';
-import { Roles } from '@app/core/auth/user/role.enum';
+import { Role } from '@app/core/auth/user/role.enum';
 
 @Component({
     selector: 'bsa-navbar-user-menu',
@@ -26,7 +26,7 @@ export class NavbarUserMenuComponent {
     private readonly _authService = inject(AuthService);
     private readonly _userService = inject(UserService);
     protected user = toSignal(this._userService.user$);
-    protected isEmployer = computed(() => this.user()?.role === Roles.Employer);
+    protected isEmployer = computed(() => this.user()?.role === Role.Employer);
 
     protected onNavigate(path: string): void {
         void this._router.navigate([path]);
