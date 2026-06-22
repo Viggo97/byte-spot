@@ -12,9 +12,9 @@ export class ApplicationDataService {
     sendApplication(applicationDto: SendApplicationDto): Observable<object> {
         const formData = new FormData();
         formData.append('offerId', applicationDto.offerId);
-        formData.append('firstName', applicationDto.firstName);
-        formData.append('lastName', applicationDto.lastName);
-        formData.append('email', applicationDto.email);
+        formData.append('candidateFirstName', applicationDto.candidateFirstName);
+        formData.append('candidateLastName', applicationDto.candidateLastName);
+        formData.append('candidateEmail', applicationDto.candidateEmail);
         formData.append('resume', applicationDto.resume);
 
         return this._http.post<object>(this._url, formData);

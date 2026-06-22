@@ -1,7 +1,7 @@
 export interface SendApplicationDto {
     offerId: string;
-    firstName: string;
-    lastName: string;
-    email: string;
+    candidateFirstName: string;
+    candidateLastName: string;
+    candidateEmail: string;
     resume: File;
 }

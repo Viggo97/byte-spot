@@ -71,9 +71,9 @@ export class ApplicationApplyComponent {
                     }
                     const applicationDto: SendApplicationDto = {
                         offerId: this.offerId,
-                        firstName: this.applyModel().firstName,
-                        lastName: this.applyModel().lastName,
-                        email: this.applyModel().email,
+                        candidateFirstName: this.applyModel().firstName,
+                        candidateLastName: this.applyModel().lastName,
+                        candidateEmail: this.applyModel().email,
                         resume: resume,
                     };
                     await firstValueFrom(this._applicationDataService.sendApplication(applicationDto));
