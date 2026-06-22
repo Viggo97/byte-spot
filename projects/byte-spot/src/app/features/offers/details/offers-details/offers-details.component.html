@@ -16,7 +16,9 @@
         [technologies]="offer()!.technologies"
         [description]="offer()!.description" />
 
-    <bsa-offers-details-action />
+    <bsa-offers-details-action
+        [offerId]="offerId!"
+    />
 
     <bsa-offers-details-deadline
         [validFrom]="offer()!.validFrom"

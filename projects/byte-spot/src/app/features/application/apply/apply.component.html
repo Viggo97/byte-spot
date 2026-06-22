@@ -1,0 +1,96 @@
+@if (applyForm().submitting()) {
+    <bsa-loader>
+        <div>{{ 'application.proceedingApplication' | translate }}</div>
+    </bsa-loader>
+} @else if (saved()) {
+    <div class="saved-container">
+        <bsa-svg-icon name="icon-check-circle" size="4rem" />
+        <h1>{{ 'application.applicationSaved' | translate }}</h1>
+        <button
+            class="primary"
+            role="link"
+            routerLink="/offers"
+        >
+            {{'offer.viewOffers' | translate}}
+        </button>
+    </div>
+} @else {
+    <div>
+        <h1>{{ 'application.applyForPositionTitle' | translate }}</h1>
+        <div class="title-note">{{ 'application.applyForPositionTitleNote' | translate }}</div>
+    </div>
+    <section>
+        <div class="title">
+            <bsa-svg-icon name="icon-user" size="1.5rem" />
+            {{ 'application.yourData' | translate }}
+        </div>
+
+        <div class="title-note">
+            {{ 'application.yourDataNote' | translate }}
+        </div>
+
+        <form [formRoot]="applyForm">
+            <div class="form-control">
+                <label for="apply-first-name">{{ 'user.firstName' | translate }}</label>
+                <input type="text" id="apply-first-name" [formField]="applyForm.firstName">
+                <div class="validation-error">
+                    @if (applyForm.firstName().invalid() && applyForm.firstName().touched()) {
+                        @for (error of applyForm.firstName().errors(); track error.kind) {
+                            <span>{{ error.message! | translate }} </span>
+                        }
+                    }
+                </div>
+            </div>
+
+            <div class="form-control">
+                <label for="apply-last-name">{{ 'user.lastName' | translate }}</label>
+                <input type="text" id="apply-last-name" [formField]="applyForm.lastName">
+
+                <div class="validation-error">
+                    @if (applyForm.lastName().invalid() && applyForm.lastName().touched()) {
+                        @for (error of applyForm.lastName().errors(); track error.kind) {
+                            <span>{{ error.message! | translate }} </span>
+                        }
+                    }
+                </div>
+            </div>
+
+            <div class="form-control">
+                <label for="apply-email">{{ 'user.email' | translate }}</label>
+                <input type="text" id="apply-email" [formField]="applyForm.email">
+            </div>
+
+            <div class="form-control">
+                <label for="apply-resume">{{ 'application.resume' | translate }}</label>
+                <bsl-file-upload
+                    [formField]="applyForm.resume"
+                    [id]="'apply-resume'"
+                    [ariaLabelSelect]="'application.selectPdf' | translate"
+                    [ariaLabelChange]="'application.changeFile' | translate"
+                    [dropzoneHint]="'application.dropzoneHint' | translate"
+                    [maxSizeLabel]="'application.maxSize' | translate"
+                    [removeButtonLabel]="'application.removeFile' | translate"
+                    [invalidTypeMessage]="'application.invalidFileType' | translate"
+                    [invalidSizeMessage]="'application.invalidFileSize' | translate"
+                >
+                </bsl-file-upload>
+
+                <div class="validation-error">
+                    @if (applyForm.resume().invalid() && applyForm.resume().touched()) {
+                        @for (error of applyForm.resume().errors(); track error.kind) {
+                            <span>{{ error.message! | translate }} </span>
+                        }
+                    }
+                </div>
+            </div>
+
+            <button
+                type="submit"
+                class="primary"
+                [disabled]="applyForm().invalid() || applyForm().pending()|| applyForm().submitting()"
+            >
+                {{ 'global.save' | translate }}
+            </button>
+        </form>
+    </section>
+}

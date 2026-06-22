@@ -23,6 +23,11 @@ export const routes: Routes = [
             .then(m => m.OffersDetailsComponent),
     },
     {
+        path: 'offers/:id/apply',
+        loadComponent: () => import('./features/application/apply/apply.component')
+            .then(m => m.ApplicationApplyComponent),
+    },
+    {
         path: 'candidate',
         canActivate: [authGuard],
         loadChildren: () => import('./features/candidate/candidate.routes')

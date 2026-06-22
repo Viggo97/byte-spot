@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@core';
 import { SvgIconComponent } from '@shared';
 
@@ -7,9 +8,11 @@ import { SvgIconComponent } from '@shared';
     imports: [
         TranslatePipe,
         SvgIconComponent,
+        RouterLink,
     ],
     templateUrl: './action.component.html',
     styleUrl: './action.component.scss',
 })
-// eslint-disable-next-line @typescript-eslint/no-extraneous-class
-export class ActionComponent {}
+export class ActionComponent {
+    offerId = input.required<string>();
+}

@@ -1,0 +1,108 @@
+@use 'breakpoints' as breakpoints;
+
+:host {
+    padding: 32px;
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--bsa-borderColor-primary);
+}
+
+section {
+    padding: 16px;
+    background-color: var(--bsa-backgroundColor-secondary);
+    border: 1px solid var(--bsa-borderColor-secondary);
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font: var(--bsa-font-lg);
+    font-weight: 600;
+
+    bsa-svg-icon {
+        color: var(--bsa-textColor-highlight);
+    }
+}
+
+.title-note {
+    margin-bottom: 16px;
+    font: var(--bsa-font-sm);
+    color: var(--bsa-textColor-secondary);
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-control {
+    input {
+        margin-top: 8px;
+    }
+}
+
+.form-control {
+    &:nth-child(1) {
+        grid-column: 1 / span 2;
+    }
+
+    &:nth-child(2) {
+        grid-column: 1 / span 2;
+    }
+
+    &:nth-child(3) {
+        grid-column: 1 / span 2;
+    }
+
+    &:nth-child(4) {
+        grid-column: 1 / span 2;
+    }
+
+    @include breakpoints.sm {
+        &:nth-child(1) {
+            grid-column: 1;
+        }
+
+        &:nth-child(2) {
+            grid-column: 2;
+        }
+
+        &:nth-child(3) {
+            grid-column: 1 / span 2;
+        }
+
+        &:nth-child(4) {
+            grid-column: 1 / span 2;
+        }
+    }
+}
+
+bsl-file-upload {
+    margin-top: 8px;
+}
+
+button[type="submit"] {
+    grid-column: 2 / 2;
+    width: fit-content;
+    justify-self: end;
+}
+
+.saved-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+
+    bsa-svg-icon {
+        color: var(--bsa-textColor-highlight);
+    }
+}
+
+.saved-container, bsa-loader {
+    margin: auto 0;
+}

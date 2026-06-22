@@ -36,7 +36,7 @@ export class OffersDetailsComponent implements OnInit {
 
     protected compactMode = signal(window.innerWidth < 960);
 
-    private offerId?: string;
+    protected offerId?: string;
     protected offer = signal<OfferDetails | null>(null);
 
     constructor() {

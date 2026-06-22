@@ -1,4 +1,10 @@
-<button class="primary">{{'offer.apply' | translate}}</button>
+<button
+    class="primary"
+    role="link"
+    [routerLink]="'/offers/' + offerId() + '/apply'"
+>
+    {{'offer.apply' | translate}}
+</button>
 <button class="offer-save-button">
     <bsa-svg-icon name="icon-bookmark" />
     <span>{{'offer.save' | translate}}</span>
