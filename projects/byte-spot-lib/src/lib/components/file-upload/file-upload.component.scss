@@ -1,0 +1,98 @@
+@use '../../../styles/add-variables' as *;
+
+@layer bsl {
+    @include add-variables((
+        bsl-file-upload-backgroundColor: var(--bsl-color-neutral-100),
+        bsl-file-upload-backgroundColor-hover: var(--bsl-color-neutral-300),
+        bsl-file-upload-backgroundColor-filled: var(--bsl-color-neutral-300),
+        bsl-file-upload-borderColor: var(--bsl-color-neutral-300),
+        bsl-file-upload-borderColor-hover: var(--bsl-color-neutral-400),
+        bsl-file-upload-icon: var(--bsl-color-neutral-400),
+        bsl-file-upload-textColor: var(--bsl-textColor-secondary),
+        bsl-file-upload-error: oklch(0.577 0.245 27.325),
+    ));
+
+    @include add-variables((
+        bsl-file-upload-backgroundColor: var(--bsl-color-neutral-900),
+        bsl-file-upload-backgroundColor-hover: var(--bsl-color-neutral-600),
+        bsl-file-upload-backgroundColor-filled: var(--bsl-color-neutral-600),
+        bsl-file-upload-borderColor: var(--bsl-color-neutral-800),
+        bsl-file-upload-borderColor-hover: var(--bsl-color-neutral-700),
+        bsl-file-upload-icon: var(--bsl-color-neutral-500),
+        bsl-file-upload-textColor: var(--bsl-textColor-secondary),
+        bsl-file-upload-error: oklch(0.637 0.237 25.331),
+    ), 'dark');
+}
+
+bsl-file-upload {
+    display: flex;
+    flex-direction: column;
+}
+
+.bsl-file-upload-dropzone {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 12px;
+    border: 2px dashed var(--bsl-file-upload-borderColor);
+    background-color: var(--bsl-file-upload-backgroundColor);
+    cursor: pointer;
+    text-align: center;
+
+    &:hover {
+        border-color: var(--bsl-file-upload-borderColor-hover);
+    }
+
+    &.bsl-dropzone-dragging {
+        border-color: var(--bsl-file-upload-borderColor-hover);
+        background: var(--bsl-file-upload-backgroundColor-hover);
+    }
+
+    &.bsl-dropzone-filled {
+        border-style: solid;
+        border-color: var(--bsl-file-upload-backgroundColor-filled);
+    }
+
+    &.bsl-dropzone-error {
+        border-color: var(--bsl-file-upload-error);
+    }
+}
+
+.bsl-file-upload-dropzone-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--bsl-file-upload-icon);
+}
+
+.bsl-file-upload-dropzone-title {
+    font: var(--bsl-font-sm);
+    font-weight: 500;
+    color: var(--bsl-file-upload-textColor);
+
+    .bsl-file-upload-dropzone-title-filename {
+        word-break: break-all;
+    }
+}
+
+.bsl-file-upload-dropzone-hint {
+    font: var(--bsl-font-sm);
+    color: var(--bsl-file-upload-textColor);
+}
+
+.bsl-file-upload-remove-button {
+    margin-top: 8px;
+    color: var(--bsl-file-upload-error);
+    background: transparent;
+    border: 1px solid var(--bsl-file-upload-error);
+}
+
+.bsl-file-upload-error-message {
+    font: var(--bsl-font-sm);
+    color: var(--bsl-file-upload-error);
+}
+
+bsl-file-upload input[type="file"] {
+    display: none;
+}

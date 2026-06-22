@@ -2,6 +2,7 @@ export * from './lib/components/checkbox/checkbox.component';
 export * from './lib/components/checkbox-button/checkbox-button.component';
 export * from './lib/components/combobox/combobox.component';
 export * from './lib/components/drawer/drawer.component';
+export * from './lib/components/file-upload/file-upload.component';
 export * from './lib/components/list-box/list-box.directive';
 export * from './lib/components/list-box/list-box-group/list-box-group.component';
 export * from './lib/components/list-box/list-box-option/list-box-option.component';

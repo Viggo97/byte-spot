@@ -1,0 +1,62 @@
+<div
+    class="bsl-file-upload-dropzone"
+    [class.bsl-dropzone-dragging]="isDragging()"
+    [class.bsl-dropzone-error]="errorMessage()"
+    [class.bsl-dropzone-filled]="selectedFile()"
+    tabindex="0"
+    role="button"
+    [attr.aria-label]="selectedFile() ? ariaLabelChange() : ariaLabelSelect()"
+    (click)="setTouchState(); fileInput.click()"
+    (keydown.enter)="setTouchState(); fileInput.click()"
+    (keydown.space)="setTouchState(); fileInput.click()"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
+>
+    <input
+        #fileInput
+        type="file"
+        accept="application/pdf,.pdf"
+        tabindex="-1"
+        [id]="id()"
+        (change)="onFileInputChange($event)"
+    />
+
+    @if (!selectedFile()) {
+        <svg class="bsl-file-upload-dropzone-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+                d="M12 4v12m0-12 4 4m-4-4-4 4M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+        </svg>
+        <p class="bsl-file-upload-dropzone-title">{{ dropzoneHint() }}</p>
+        <p class="bsl-file-upload-dropzone-hint">{{ maxSizeLabel() }}: {{ maxSizeValueLabel() }}</p>
+    } @else {
+        <svg class="bsl-file-upload-dropzone-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+                d="M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linejoin="round"
+            />
+            <path d="M14 3v4h4" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+        </svg>
+        <p class="bsl-file-upload-dropzone-title bsl-file-upload-dropzone-title-filename">{{ selectedFile()!.name }}</p>
+        <p class="bsl-file-upload-dropzone-hint">{{ fileSize() }}</p>
+
+        <button
+            type="button"
+            class="bsl-file-upload-remove-button"
+            (click)="clearFile($event)"
+        >
+            {{ removeButtonLabel() }}
+        </button>
+    }
+</div>
+
+@if (errorMessage()) {
+    <p class="bsl-file-upload-error-message" role="alert">{{ errorMessage() }}</p>
+}
