@@ -63,10 +63,10 @@ export class AuthService {
             .pipe(
                 tap((user) => {
                     this._isAuthenticated = true;
-                    this.initialized.next(true);
                     if (!this._userService.getUser()) {
                         this._userService.setUser(User.fromDto(user));
                     }
+                    this.initialized.next(true);
                 }),
                 catchError(() => {
                     this.initialized.next(true);
