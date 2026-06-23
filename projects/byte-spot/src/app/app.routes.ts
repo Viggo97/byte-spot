@@ -34,6 +34,13 @@ export const routes: Routes = [
             .then(m => m.routes),
     },
     {
+        path: 'employer',
+        canActivate: [authGuard, roleGuard],
+        loadChildren: () => import('./features/employer/employer.routes')
+            .then(m => m.routes),
+        data: {roles: [Role.Employer]},
+    },
+    {
         path: 'sign-up',
         canActivate: [loggedInGuard],
         component: SignUpComponent,

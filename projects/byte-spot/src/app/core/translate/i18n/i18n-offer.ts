@@ -81,9 +81,17 @@ export const i18nOffer: Record<string, I18nLanguageCode> = {
         en: 'Keyword',
         pl: 'Słowo klucz',
     },
+    title: {
+        en: 'Offer title',
+        pl: 'Tytuł oferty',
+    },
     noResultsFound: {
         en: 'No offers found matching selected criteria',
         pl: 'Nie znaleziono żadnych ofert spełniających kryteria',
+    },
+    notActiveFound: {
+        en: 'No active offers found.',
+        pl: 'Nie znaleziono żadnych aktywnych ofert.',
     },
     loading: {
         en: 'We\'re preparing offers for you.',
@@ -121,6 +129,10 @@ export const i18nOffer: Record<string, I18nLanguageCode> = {
     expires: {
         en: 'Offers expires in',
         pl: 'Oferta wygasa za',
+    },
+    expiresAt: {
+        en: 'Expires',
+        pl: 'Wygasa',
     },
     days: {
         en: 'days',

@@ -1,0 +1,43 @@
+@use 'breakpoints' as breakpoints;
+
+:host {
+    padding: 32px;
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid var(--bsa-borderColor-primary);
+
+    @include breakpoints.md {
+        min-width: 480px;
+    }
+}
+
+.title-note {
+    margin-bottom: 32px;
+}
+
+.title-note-highlight {
+    color: var(--bsa-textColor-highlight);
+}
+
+table {
+    border: 1px solid var(--bsa-borderColor-primary);
+    border-collapse: collapse;
+
+    thead {
+        tr {
+            border-bottom: 2px solid var(--bsa-borderColor-primary);
+
+            th {
+                text-align: left;
+            }
+        }
+    }
+
+    th, td {
+        padding: 8px 16px;
+        border-right: 1px solid var(--bsa-borderColor-primary);
+    }
+}

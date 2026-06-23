@@ -1,0 +1,31 @@
+<h1>{{ 'application.employerOffers' | translate }}</h1>
+<div class="title-note">{{ 'application.employerOffersNote' | translate }}</div>
+
+@if (loading()) {
+    <div class="skeletons-container">
+        <bsl-skeleton width="60%"></bsl-skeleton>
+        <bsl-skeleton width="40%"></bsl-skeleton>
+        <bsl-skeleton width="100%"></bsl-skeleton>
+        <bsl-skeleton width="80%"></bsl-skeleton>
+        <bsl-skeleton width="20%"></bsl-skeleton>
+    </div>
+} @else if (offers().length === 0) {
+    <div class="no-offers">
+        {{ 'offer.notActiveFound' | translate }}
+    </div>
+} @else {
+    @for (offer of offers(); track offer.id) {
+        <a class="offer" [routerLink]="'../applications/' + offer.id">
+            <div class="offer-details">
+                <bsa-svg-icon name="icon-suitcase" [size]="'1.5rem'" />
+                {{ offer.title }}
+            </div>
+            <div class="offer-details">
+                <bsa-svg-icon name="icon-clock" [size]="'1.5rem'" />
+                {{ 'offer.expiresAt' | translate }} : {{ offer.expires }}
+            </div>
+        </a>
+    }
+}
+
+

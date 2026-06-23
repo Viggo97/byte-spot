@@ -61,4 +61,20 @@ export const i18nApplication: Record<string, I18nLanguageCode> = {
         en: 'Your application was sent.',
         pl: 'Twoja aplikacja została wysłana',
     },
+    employerOffers: {
+        en: 'Your offers',
+        pl: 'Twoje oferty',
+    },
+    employerOffersNote: {
+        en: 'Preview your current offers.',
+        pl: 'Przeglądaj swoje bieżące oferty.',
+    },
+    applicationsTitle: {
+        en: 'Applications',
+        pl: 'Aplikacje',
+    },
+    applicationsTitleNote: {
+        en: 'Browse applications submitted for ',
+        pl: 'Przeglądaj aplikacje przesłane na stanowisko ',
+    },
 };

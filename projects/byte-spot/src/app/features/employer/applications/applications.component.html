@@ -1,0 +1,38 @@
+<h1>{{ 'application.applicationsTitle' | translate }}</h1>
+<div class="title-note">
+    {{ 'application.applicationsTitleNote' | translate }}
+    <span class="title-note-highlight">{{ offer()!.title }}</span>
+</div>
+
+@if (loading()) {
+    <div class="skeletons-container">
+        <bsl-skeleton width="60%"></bsl-skeleton>
+        <bsl-skeleton width="40%"></bsl-skeleton>
+        <bsl-skeleton width="100%"></bsl-skeleton>
+        <bsl-skeleton width="80%"></bsl-skeleton>
+        <bsl-skeleton width="20%"></bsl-skeleton>
+    </div>
+} @else if (applications().length === 0) {
+    <div class="no-offers">
+        {{ 'offer.notActiveFound' | translate }}
+    </div>
+} @else {
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (application of applications(); track application.id) {
+                <tr>
+                    <td>{{ application.candidateFirstName }}</td>
+                    <td>{{ application.candidateLastName }}</td>
+                    <td>{{ application.candidateEmail }}</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,55 @@
+@use 'breakpoints' as breakpoints;
+
+:host {
+    padding: 32px;
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid var(--bsa-borderColor-primary);
+
+    @include breakpoints.md {
+        min-width: 480px;
+    }
+}
+
+.title-note {
+    margin-bottom: 32px;
+}
+
+.offer {
+    padding: 12px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    justify-content: center;
+    border: 1px solid var(--bsa-borderColor-primary);
+
+    &:hover {
+        background-color: var(--bsa-backgroundColor-secondary);
+    }
+
+    @include breakpoints.md {
+        min-width: 480px;
+        flex-direction: row;
+        justify-content: start;
+    }
+}
+
+.offer-details {
+    display: flex;
+    gap: 8px;
+}
+
+.skeletons-container {
+    margin-bottom: 32px;
+}
+
+bsl-skeleton {
+    margin-bottom: 16px;
+}
+
+bsa-svg-icon {
+    color: var(--bsa-textColor-highlight);
+}
