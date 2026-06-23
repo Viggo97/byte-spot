@@ -15,9 +15,18 @@
             (click)="onNavigate('/offers/create')"
             (keydown.enter)="onNavigate('/offers/create')"
         >
-        <bsa-svg-icon name="icon-post-document" size="1.25rem"/>
-        <span>{{ 'offer.postJob' | translate }}</span>
-    </span>
+            <bsa-svg-icon name="icon-post-document" size="1.25rem" />
+            <span>{{ 'offer.postJob' | translate }}</span>
+        </span>
+        <!--eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->
+        <span
+            bslMenuItem
+            (click)="onNavigate('/employer/offers')"
+            (keydown.enter)="onNavigate('/employer/offers')"
+        >
+            <bsa-svg-icon name="icon-suitcase" size="1.25rem" />
+            <span>{{ 'offer.browseOffers' | translate }}</span>
+        </span>
     }
     <!--eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->
     <span
@@ -25,7 +34,7 @@
         (click)="onNavigate('/candidate/profile')"
         (keydown.enter)="onNavigate('/candidate/profile')"
     >
-        <bsa-svg-icon name="icon-user" size="1.25rem"/>
+        <bsa-svg-icon name="icon-user" size="1.25rem" />
         <span>{{ 'user.myProfile' | translate }}</span>
     </span>
     <!--eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->
@@ -34,7 +43,7 @@
         (click)="onLogout()"
         (keydown.enter)="onLogout()"
     >
-        <bsa-svg-icon name="icon-exit" size="1.25rem"/>
+        <bsa-svg-icon name="icon-exit" size="1.25rem" />
         <span>{{ 'user.logout' | translate }}</span>
     </span>
 </bsl-menu>

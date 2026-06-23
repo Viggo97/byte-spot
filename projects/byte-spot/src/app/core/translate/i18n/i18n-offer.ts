@@ -366,4 +366,8 @@ export const i18nOffer: Record<string, I18nLanguageCode> = {
         en: 'Wyświetl oferty',
         pl: 'Wyświetl oferty',
     },
+    browseOffers: {
+        en: 'Browse offers',
+        pl: 'Przeglądaj oferty',
+    },
 };
