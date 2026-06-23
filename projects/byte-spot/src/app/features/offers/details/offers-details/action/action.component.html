@@ -1,11 +1,15 @@
 <button
     class="primary"
     role="link"
+    [disabled]="expired()"
     [routerLink]="'/offers/' + offerId() + '/apply'"
 >
     {{'offer.apply' | translate}}
 </button>
-<button class="offer-save-button">
+<button
+    class="offer-save-button"
+    [disabled]="expired()"
+>
     <bsa-svg-icon name="icon-bookmark" />
     <span>{{'offer.save' | translate}}</span>
 </button>

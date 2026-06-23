@@ -12,6 +12,7 @@ import { TranslatePipe } from '@core';
 export class DeadlineComponent {
     validFrom = input.required<number>();
     validTo = input.required<number>();
+    expired = input(false);
     protected expires = computed(() => new Date(this.validTo()).toLocaleDateString());
     protected leftDays = computed(() => {
         const leftTimestamp = this.validTo() - Date.now();

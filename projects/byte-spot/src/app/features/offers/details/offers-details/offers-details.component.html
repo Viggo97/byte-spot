@@ -18,11 +18,13 @@
 
     <bsa-offers-details-action
         [offerId]="offerId!"
+        [expired]="expired()"
     />
 
     <bsa-offers-details-deadline
         [validFrom]="offer()!.validFrom"
         [validTo]="offer()!.validTo"
+        [expired]="expired()"
     />
 }
 @else {

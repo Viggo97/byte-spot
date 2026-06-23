@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, signal, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, signal, OnInit, computed } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BreakpointObserver } from '@angular/cdk/layout';
@@ -38,6 +38,11 @@ export class OffersDetailsComponent implements OnInit {
 
     protected offerId?: string;
     protected offer = signal<OfferDetails | null>(null);
+    protected expired = computed(() => {
+        const validTo = this.offer()?.validTo;
+        if (!validTo) return false;
+        return new Date(validTo) < new Date();
+    });
 
     constructor() {
         this.subscribeToBreakpointObserver();

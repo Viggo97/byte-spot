@@ -134,6 +134,10 @@ export const i18nOffer: Record<string, I18nLanguageCode> = {
         en: 'Expires',
         pl: 'Wygasa',
     },
+    expired: {
+        en: 'Offers expired',
+        pl: 'Oferta wygasła',
+    },
     days: {
         en: 'days',
         pl: 'dni',

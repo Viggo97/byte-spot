@@ -15,4 +15,5 @@ import { SvgIconComponent } from '@shared';
 })
 export class ActionComponent {
     offerId = input.required<string>();
+    expired = input(false);
 }
